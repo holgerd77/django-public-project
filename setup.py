@@ -3,12 +3,12 @@ from setuptools import setup
 import os
 
 setup(
-    name='django-big-projects-watch',
+    name='django-public-project',
     version='0.4.0',
     description='CMS for building an information website around big projects',
     author='Holger Drewes',
     author_email='Holger.Drewes@googlemail.com',
-    url='https://github.com/holgerd77/django-big-projects-watch',
+    url='https://github.com/holgerd77/django-public-project',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     packages=[
         'public_project',

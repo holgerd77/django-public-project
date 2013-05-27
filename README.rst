@@ -1,5 +1,5 @@
 =========================
-django-big-projects-watch
+django-public-project
 =========================
 
 Django Public Project (DPP) is a content management system tailored to represent and expose the various
@@ -22,4 +22,4 @@ Documentation
 =============
 Read more about DPP in the ReadTheDocs documentation:
 
-* http://django-big-projects-watch.readthedocs.org/
+* http://django-public-project.readthedocs.org/

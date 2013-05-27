@@ -40,14 +40,14 @@ Installation with Pip
 ``DPP`` is now on the ``Python Package Index`` and you can install the software with all dependencies
 with::
 
-	pip install django-big-projects-watch
+	pip install django-public-project
 
 Manual Installation
 -------------------
 If you want to have the latest version of ``DPP``, you can install the sources manually 
 with ``PIP`` (or directly clone the GitHub repository)::
 
-	pip install -e git+https://github.com/holgerd77/django-big-projects-watch.git@master#egg=django-big-projects-watch
+	pip install -e git+https://github.com/holgerd77/django-public-project.git@master#egg=django-public-project
 
 Then install the requirements above. There is a ``requirements.txt`` file in the main directory
 of the repository you can use::
@@ -222,7 +222,7 @@ wide. So if you have got some time, speak English as a base language and another
 French,... you are very welcome to help out (you don't need to be a developer for this task)!
 
 You find the basic english language file called ``django.po`` on the 
-`DPP GitHub Page <https://github.com/holgerd77/django-big-projects-watch>`_
+`DPP GitHub Page <https://github.com/holgerd77/django-public-project>`_
 in the following folder::
 	
 	public_project/locale/en/LC_MESSAGES/
@@ -302,7 +302,7 @@ Release Notes
 
 **Changes in version 0.5-alpha (Renaming Release)** (2013-05-27)
 This release is just for renaming the Django app. Due to the development of the software it came up,
-that the focus of the software is broader than actually thought, so the name ``django-big-projects-watch`` (DPP)
+that the focus of the software is broader than actually thought, so the name ``django-public-project`` (DPP)
 is misleading and the software was renamed to ``django-public-project`` (DPP). This comes with a lot of
 hassle and won't happen again in the lifecyle of this software, but I felt, that in this early stage
 of the software, it is the only chance to make such a step.
