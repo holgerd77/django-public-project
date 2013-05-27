@@ -1,0 +1,9 @@
+include LICENSE
+include MANIFEST.in
+include README.rst
+include requirements.txt
+recursive-include public_project/locale *
+recursive-include public_project/static *
+recursive-include public_project/templates *
+recursive-include docs *
+prune docs/_build

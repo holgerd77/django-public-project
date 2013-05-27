@@ -1,0 +1,71 @@
+{% load i18n %}
+
+  <div class="section">
+  
+    <div class="info_box">
+      {% if comment_list %}
+        <div class="info_box_content">
+          
+          {% for comment in comment_list %}
+          <div style="clear:both;" class="{% if comment.page %}page_comment comment_page_{{ comment.page }}{% endif %}">
+            <div style="border:1px solid #ddd;margin-bottom:3px;font-size:12px;">
+              <div style="padding:7px 12px 7px 12px;background-color: #f9f9f9;" class="comment_header">
+                <div style="float:right;">
+                  <a href="{{ comment.get_twitter_url }}" target="_blank" style="font-size:18px;color:#929292;text-decoration: none;"><i class="icon-twitter-sign"></i></a>&nbsp;
+                  <a href="{{ comment.get_facebook_url }}" target="_blank" style="font-size:18px;color:#929292;text-decoration: none;"><i class="icon-facebook-sign"></i></a>&nbsp;
+                  <a href="{{ comment.get_google_plus_url }}" target="_blank" style="font-size:18px;color:#929292;text-decoration: none;"><i class="icon-google-plus-sign"></i></a>&nbsp;
+                  <a href="{{ comment.get_app_net_url }}" target="_blank" style="color:#929292;text-decoration: none;">
+                    <img src="/static/img/icon-app-net.png" width="16" height="17" style="vertical-align:top;margin-top:1px;">
+                  </a>&nbsp;
+                </div>
+                
+                {% if comment.page %}
+                <a class="comment_page" href="javascript:PDFViewer.renderPage({{ comment.page }});" style="display:inline-block;background-color:#ddd;font-weight:bold;padding:2px 8px;color:#555;margin-right:6px;text-decoration:none;">
+                  {{ comment.page }}
+                </a>
+                {% endif %}
+                <a href="{{ comment.get_absolute_url }}" style="color:inherit;">  
+                  <i class="icon-comment"></i> 
+                  {% trans "Comment by" %} 
+                  <span style="font-weight:bold;">{{ comment.username }}</span>, 
+                  {{ comment.date_added|date:"d.m.Y H:i" }}
+                </a>
+              </div>
+              <div style="border-top:1px solid #ddd;padding:7px 12px 7px 12px;font-size:11px;" class="comment_relations">
+                {% for cr in comment.commentrelation_set.all %}
+                  <div>
+                    <a href="{{ cr.content_object.get_absolute_url }}{% if cr.page %}?page={{ cr.page }}{% endif %}">
+                    <i class="{{ cr.content_object.get_icon_class }}"></i>
+                    {{ cr.content_object }}{% if cr.page %}, {% trans "Page" %} {{ cr.page }}{% endif %}
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+              <div style="border-top:1px solid #ddd;padding:12px;font-size:11px;" class="comment_text">
+                {{ comment.comment|linebreaksbr }}
+              </div>
+              
+            </div>
+          </div>
+          {% endfor %}
+          
+          {% if comment_list|length < num_total_comments %}
+          <div style="margin-top:3px;padding-left:12px;">
+            <a href="{% trans 'comments_url' %}" style="font-size:11px;">
+              {% trans "All Comments" %} ({{ num_total_comments }}) <i class="icon-arrow-right"></i> 
+            </a>
+          </div>
+          {% endif %}
+          
+        </div>
+        
+        
+      {% else %}
+        <span style="font-size:12px;">
+        {% trans "No comments yet." %}
+        </span>
+      {% endif %}
+    </div>
+    
+  </div>
+  

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {% trans "Search" %}{% endblock %}
+
+{% block content %}
+
+{% trans "Search for" as ch_title %}
+{% trans "Search" as ch_bc1 %}
+{% with ch_icon="icon-search" ch_title=ch_title|add:' "'|add:q|add:'"' ch_bc1=ch_bc1 %}
+{% include "layout_elements/category_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+<div class="span6">
+  
+  {% trans "Subject Areas" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-cogs" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% include "info_box/project_parts.html" with with_detail_page_url="yes" %}
+  
+  
+  {% trans "Participants" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-group" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+    <div class="info_box">
+      {% include "info_box/participants.html" %}
+    </div>
+  </div>
+  
+  {% trans "Questions" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-question-sign" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% include "info_box/questions.html" %}
+  
+  
+  {% trans "Events" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-time" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% include "info_box/events.html" %}
+  
+</div>
+
+<div class="span6">
+  {% trans "Documents" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% include "info_box/documents.html" %}
+  
+</div>
+
+{% endblock %}

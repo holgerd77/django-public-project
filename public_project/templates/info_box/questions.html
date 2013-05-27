@@ -1,0 +1,79 @@
+{% load i18n %}
+
+
+    <div class="section">
+    
+    {% if question_list %}
+    <div class="accordion" id="accordion{{ id_addon }}">
+    
+    {% for q in question_list %}
+      
+        <div class="accordion-group">
+          <div class="accordion-heading"  style="background-color:#f6f6f6;">
+            <a class="accordion-toggle" style="float:right;padding:5px 15px;display:inline-block;text-decoration: none;font-size:16px;" data-toggle="collapse" data-parent="#accordion{{ id_addon }}" href="#collapse{{ id_addon }}_{{ forloop.counter }}">
+              {% if q.answered %}<span style="color:#0D9434;font-size:16px;"><i class="icon-ok"></i>&nbsp;&nbsp;</span>{% endif %}
+              <i class="icon-circle-arrow-down"></i></a>
+            
+            <a href="{{ q.get_absolute_url}}" style="padding:5px 15px;display:inline-block;color:inherit;">
+              {{ q.title }}
+              <i class="icon-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div id="collapse{{ id_addon }}_{{ forloop.counter }}" class="accordion-body collapse">
+          <div class="accordion-inner" style="background-color:#fdfdfd;">
+              <p style="background-color:#ebebeb;padding:15px;">
+              {{ q.description|linebreaksbr }}
+              </p>
+              {% with project_part_list=q.project_parts.all %}
+              {% if project_part_list %}
+                <p style="font-size:12px;">
+                  {% for pp in project_part_list %}
+                    <i class="icon-cogs"></i> 
+                    <a href="{{ pp.get_absolute_url}}">{{ pp }}</a><br>
+                  {% endfor %}
+                </p>
+              {% endif %}
+              {% endwith %}  
+              
+              {% with participant_list=q.participants.all %}
+              {% if participant_list %}
+                <p style="font-size:12px;">
+                  {% for p in participant_list %}
+                    <i class="icon-group"></i> 
+                    <a href="{{ p.get_absolute_url}}">{{ p }}</a><br>
+                  {% endfor %}
+                </p>
+              {% endif %}
+              {% endwith %}
+              
+              {% with event_list=q.events.all %}
+              {% if event_list %}
+                <p style="font-size:12px;">
+                  {% for e in event_list %}
+                    <i class="icon-time"></i> 
+                    <a href="{{ e.get_absolute_url}}">{{ e }}</a><br>
+                  {% endfor %}
+                </p>
+              {% endif %}
+              {% endwith %}
+          </div>
+        </div> 
+      
+      {% endfor %}
+      </div>
+      
+      {% else %}
+      <div class="info_box">
+        <div class="info_box_content">
+          <p>
+            <span style="font-size:12px;">
+            {% trans "No questions available." %}
+            </span>
+          </p>
+        </div>
+      </div>
+      {% endif %}
+      
+    </div>

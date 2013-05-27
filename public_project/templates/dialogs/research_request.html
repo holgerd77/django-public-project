@@ -1,0 +1,139 @@
+{% load i18n %}
+{% load bpw %}
+
+{% if research_request_form_status == 'SENT' %}
+  {% trans "The research request was saved." as confirm_text %}
+  {% include "dialogs/generic_confirm.html" %}   
+{% endif %}
+{% if research_request_form_status == 'FAILED' %}
+  {% trans "There was an error and the research request could not be safed. Sorry! :-/" as confirm_text %}
+  {% include "dialogs/generic_confirm.html" %}   
+{% endif %}
+
+<div class="modal hide fade" id="ResearchRequestModal" style="position:absolute;width:800px;margin-left:-400px;">
+  
+  <div class="modal-header" style="background-color:#f9f9f9;">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>{% trans "Research Request" %}</h3>
+    <h4><i class="{{ commented_object1.get_icon_class }}"></i> {{ commented_object1 }}<span id="co1_header_page"></span></h4>
+  </div>
+  
+  <form enctype="multipart/form-data" class="form-horizontal" action="." method="post">
+    <input type="hidden" id="id_co1_content_type" name="co1_content_type" value="{{ commented_object1|modelname }}">
+    <input type="hidden" id="id_co1_id" name="co1_id" value="{{ commented_object1.id }}">
+    {% with commented_object1|modelname as modelname %}
+    {% if modelname == 'document' %}
+       <input type="hidden" id="id_co1_page" name="co1_page" value="">
+    {% endif %}
+    {% endwith %}
+  {% csrf_token %}
+  <div class="modal-body" style="max-height:inherit;">
+    <div style="margin-top:10px;">
+      <div style="float:left;margin-right:20px;">
+      <textarea id="id_description" style="width: 400px;height: 160px;" rows="10" cols="40" name="description"></textarea>
+      </div>
+      <div>
+        <fieldset>
+          
+        <div style="margin-bottom:10px;clear:both;">
+          <div style="float:left;font-size:12px;">
+            Nr
+          </div>
+          <div style="float:right;width:280px;">
+            <input id="id_nr" type="text" style="width:50px;" name="nr" maxlength="8"><br>
+            <span style="font-size:12px;">
+              ({% trans 'Give a unique number to your request so that people can reference it (e.g. "R1", "R2",...)' %})</span>
+          </div>
+        </div>
+        
+        <div style="clear:both;height:15px;">
+          <div style="float:left;font-size:12px;">
+            Title
+          </div>
+          <div style="float:right;width:280px;">
+            <textarea id="id_title" rows="3" cols="50" name="title"></textarea>
+          </div>
+        </div>
+        
+        <div style="clear:both;"></div>
+        
+        </fieldset>
+      </div>
+    </div>
+    <div style="clear:both;height:20px;"></div>
+    
+    {% with dialog="ResearchRequestModal" %}
+    {% include "dialogs/more_cos_input.html" %}
+    {% endwith %}
+       
+  </div>
+  
+  <div class="modal-footer">
+    <div style="text-align:left;float:left;" id="error_msg_box">
+    </div>
+    <div style="text-align:left;float:right;">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Close" %}</button>
+    <input id="research_request_form_submit_btn" name="research_request_form" type="submit" class="btn btn-primary" value="{% trans "Save Research Request" %}" />
+    </div>
+  </div>
+  </form>
+  
+</div>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+      $('#ResearchRequestModal').modal({
+         keyboard: false,
+         {% if form.is_bound %}show: true{% else %}show: false{% endif %}
+      })
+   });
+   
+   $('#ResearchRequestModal').on('shown', function() {
+      if($('#ResearchRequestModal #id_co1_page').length != 0) {
+        $('#ResearchRequestModal #co1_header_page').html(', {% trans "Page" %} ' + PDFViewer.pageNum);
+        $('#ResearchRequestModal #id_co1_page').val(PDFViewer.pageNum);
+      };
+   });
+   
+   $('#research_request_form_submit_btn').click(function(event) {
+      if ($('#ResearchRequestModal #id_description').val() == '') {
+         $('#ResearchRequestModal #error_msg_box').html('<div class="alert alert-error">{% trans "Field is mandatory." %}</div>');
+         $('#ResearchRequestModal #id_description').focus();
+         event.preventDefault();
+         return false;
+      }
+      if ($('#ResearchRequestModal #id_title').val() == '') {
+         $('#ResearchRequestModal #error_msg_box').html('<div class="alert alert-error">{% trans "Field is mandatory." %}</div>');
+         $('#ResearchRequestModal #id_title').focus();
+         event.preventDefault();
+         return false;
+      }
+      if ($('#ResearchRequestModal #id_nr').val() == '') {
+         $('#ResearchRequestModal #error_msg_box').html('<div class="alert alert-error">{% trans "Field is mandatory." %}</div>');
+         $('#ResearchRequestModal #id_nr').focus();
+         event.preventDefault();
+         return false;
+      }
+      
+      for (var num_id=2;num_id<=counter_more_cos+1;num_id++) {
+        var id = '#ResearchRequestModal #id_co' + num_id + '_page';
+        if($(id).length != 0) {
+          if($(id).val() == '') {
+             $('#ResearchRequestModal #error_msg_box').html('<div class="alert alert-error">{% trans "Please provide a page number." %}</div>');
+             $(id).focus();
+             event.preventDefault();
+             return false;
+          }
+          var regex = /^[0-9]+$/;
+          if (!regex.test($(id).val())) {
+             $('#ResearchRequestModal #error_msg_box').html('<div class="alert alert-error">{% trans "Invalid page number." %}</div>');
+             $(id).focus();
+             event.preventDefault();
+             return false;
+          }
+        }
+      }
+      
+   });
+   
+</script>

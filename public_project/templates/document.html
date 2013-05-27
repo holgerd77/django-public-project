@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {{ document }}{% endblock %}
+
+{% block content %}
+
+{% trans "Documents" as ph_bc1 %}
+{% trans "documents_url" as ph_bc1_url %}
+{% trans "Document" as ph_bc2 %}
+{% with ph_icon="icon-inbox" ph_title=document.title ph_bc1=ph_bc1 ph_bc1_url=ph_bc1_url ph_bc2=ph_bc2 %}
+{% include "layout_elements/page_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+
+<div class="span8">
+  
+  <div class="section">
+    {% include "info_box/document_detail.html" %}  
+  </div>
+  
+  {% if site_config.pdf_viewer %}
+  
+    {% if query_string %}
+      <div class="alert alert-info">
+        <b>{% trans "Results for" %} "{{ query_string }}" {% trans "on the following pages"%}:</b> 
+        {% for page in found_pages %}
+          <a href="javascript:PDFViewer.renderPage({{ page.number }});">{{ page.number }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  
+    {% if site_config.pdf_viewer == 'STANDARD' %}
+    {% include "info_box/pdf_viewer.html" %}
+    {% else%}
+      {% if document.pdf_images_generated %}
+        {% include "info_box/pdf_viewer.html" %}
+      {% else %}
+      <div class="alert alert-warn">
+        {% trans "This document was just uploaded and is processed for presentation right now. This procedure can take a few minutes." %}
+      </div>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+ 
+</div>
+
+<div class="span4">
+  {% if site_config.browser = 'MSIE' %}
+    <div class="alert alert-error">
+      {% trans "The Internet Explorer is supporting only a basic version of the pdf viewer. Please use one of the following browsers for full functionality: Firefox, Chrome, Safari, Opera" %}
+    </div>
+  {% endif %}
+  
+  <div class="alert alert-info" style="margin-bottom: 10px;">
+    {% trans "Click on the tags for searching the document." %}
+  </div>
+  
+  <div id="tag_cloud" style="border:1px solid #ddd;margin-bottom: 5px;height:140px;">
+  </div>
+  <div style="margin-bottom:20px;">
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', {{ document.id }}, null, '{{ document.get_absolute_url }}', 140);">{% trans "All" %}</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', {{ document.id }}, 'projectpart', '{{ document.get_absolute_url }}', 140);" style="background-color:#0d9434;">&nbsp;&nbsp;&nbsp;</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', {{ document.id }}, 'participant', '{{ document.get_absolute_url }}', 140);" style="background-color:#3e3ec7;">&nbsp;&nbsp;&nbsp;</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', {{ document.id }}, 'event', '{{ document.get_absolute_url }}', 140);" style="background-color:#c91a1a;">&nbsp;&nbsp;&nbsp;</a>
+  </div>
+  
+  
+<script>
+  $(document).ready(function() {
+    load_tag_cloud('#tag_cloud', {{ document.id }}, null, '{{ document.get_absolute_url }}', 140);
+  });
+</script>
+  
+  
+  
+  
+  <div class="alert alert-info">
+    {% trans "If different page numbers are referring to the declaration in the PDF viewer and not the declaration inside the document itself."%}
+  </div>
+  
+  {% trans "Comments" as sh_title %}
+  {% trans "New" as sh_url_title %}
+  {% trans "comments_url" as comments_url %}
+  {% with sh_title=sh_title sh_icon="icon-comments" sh_url_title=sh_url_title sh_url="#CommentModal" modal_url="yes" rss_url=comments_url|add:"rss/" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  {% with form=comment_form form_valid=comment_form_valid commented_object1=document %}
+  {% include "dialogs/comment.html" %}
+  {% endwith %}
+  
+  {% include "info_box/comments.html" %}
+  
+</div>
+
+{% endblock %}

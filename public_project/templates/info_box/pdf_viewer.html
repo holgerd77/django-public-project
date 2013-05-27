@@ -1,0 +1,57 @@
+{% load i18n %}
+
+<script type="text/javascript" src="/static/js/lib/compatibility.js"></script>
+<script type="text/javascript" src="/static/js/lib/pdf.js"></script>
+<script type="text/javascript" src="/static/js/lib/pdfjs_viewer.js"></script>
+<script type="text/javascript" src="/static/js/lib/jquery.highlight.js"></script>
+
+
+<div id="documentCarousel" class="carousel slide">
+  
+  <div class="carousel-inner" style="border:1px solid #ddd;">
+    <div style="padding:200px;" id="pdf_load_warning">
+      <p style="margin-bottom:30px;">
+        {% trans "For very large pdf documents it can take up to several minutes till the document is loaded, depending on your network connection." %}
+      </p>
+      <p style="font-weight:bold;">{% trans "Please be patient..." %}</p>
+    </div>
+    {% if site_config.pdf_viewer == 'STANDARD' %}
+    <div class="item active" id="pdf-outer-div">
+      <div style="position:relative;">
+        <canvas id="the-canvas"></canvas>
+        <div id="text-layer" style="position:absolute;top:0px;right:0px;left:0px;">
+        </div>
+      </div>
+    </div>
+    {% else %}
+      {% for page in document.page_set.all %}
+        <div class="item {% if forloop.first %}active{% endif %}">
+          <img src="{{ MEDIA_URL }}documents/document_{{ document.id }}/page-{{ forloop.counter0 }}.png" style="width:100%"/>
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% include "info_box/pdf_navi.html" %}
+  </div>
+  
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#documentCarousel" id="pdf_navi_left" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#documentCarousel" id="pdf_navi_right" data-slide="next">&rsaquo;</a>
+</div>
+
+
+<script>
+$(document).ready(function() {
+  {% if site_config.pdf_viewer == 'STANDARD' %}
+    var pdfViewer = 'STANDARD';
+  {% else %}
+    var pdfViewer = 'LEGACY'
+  {% endif %}
+  
+  {% if found_pages %}
+    {% with found_pages|first as first_page %}var searchPageNum = {{ first_page.number }};{% endwith %}
+  {% else %}
+    var searchPageNum = 0;
+  {% endif %}
+  PDFViewer.loadPage(pdfViewer, '/media/{{ document.document }}', '{{ request.GET.q|addslashes }}', searchPageNum);
+});
+</script>

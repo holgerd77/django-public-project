@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {% trans "Process" %}{% endblock %}
+
+{% block rss_url %}
+<link rel="alternate" type="application/rss+xml"
+   title="RSS" href="{{ request.get_full_path}}rss/" />
+{% endblock %}
+
+{% block content %}
+
+{% trans "Process" as ch_title %}
+{% with ch_icon="icon-time" ch_title=ch_title ch_bc1=ch_title %}
+{% include "layout_elements/category_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+
+<div class="span6">
+  
+  <div class="section">
+    
+    {% with ib_content=project.desc_process %}
+    {% include "info_box/generic.html"%}
+    {% endwith %}
+  
+  </div>
+  
+  {% trans "Chronology" as sh_title %}
+  {% with sh_title=sh_title %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">  
+    <div class="info_box">
+      <div class="info_box_content">
+        {% with event_list=chronology_list %}
+        {% include "info_box/events.html" %}
+        {% endwith %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="span6">
+  {% trans "New Events" as sh_title %}
+  {% with sh_title=sh_title rss_url="rss/" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+    {% with ed_with_header="yes" %}
+    {% for event in latest_event_list %}
+      <div style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
+      {% include "info_box/event_detail.html" %}
+      </div>
+    {% endfor %}
+    {% endwith %}
+  </div>
+  
+</div>
+
+{% endblock %}

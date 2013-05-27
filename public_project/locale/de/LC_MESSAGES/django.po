@@ -1,0 +1,1258 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-30 15:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: admin.py:48 admin.py:79
+#, python-format
+msgid "The following associations with \"%s\" will be deleted"
+msgstr "Die folgenden Verknüpfungen mit \"%s\" werden gelöscht"
+
+#: feeds.py:16 models.py:265 models.py:316 models.py:420
+#: templates/project.html:50 templates/search.html:19
+msgid "Subject Areas"
+msgstr "Themenbereiche"
+
+#: feeds.py:17
+#, fuzzy, python-format
+msgid "Feed with new subject areas from %s."
+msgstr "Feed mit neuen Themenbereichen von %s."
+
+#: feeds.py:19 templates/base.html:65 templates/comments.html:20
+#: templates/event.html:33 templates/participant.html:41
+#: templates/project_part.html:46 templates/question.html:8
+#: templates/questions.html:4 templates/questions.html.py:13
+#: templates/research_requests.html:14 templates/search.html:38
+msgid "Questions"
+msgstr "Fragen"
+
+#: feeds.py:20
+#, python-format
+msgid "Feed with new questions from %s."
+msgstr "Feed mit neuen Fragen von %s."
+
+#: feeds.py:22 models.py:259 models.py:322 models.py:414
+#: templates/base.html:66 templates/comments.html:26
+#: templates/participant.html:8 templates/participants.html:4
+#: templates/participants.html.py:13 templates/search.html:27
+msgid "Participants"
+msgstr "Beteiligte"
+
+#: feeds.py:23
+#, python-format
+msgid "Feed with new participants from %s."
+msgstr "Feed mit neuen Beteiligten von %s."
+
+#: feeds.py:25 models.py:328 models.py:426 templates/participant.html:28
+#: templates/project_part.html:33 templates/search.html:46
+msgid "Events"
+msgstr "Ereignisse"
+
+#: feeds.py:26
+#, python-format
+msgid "Feed with new events from %s."
+msgstr "Feed mit neuen Ereignissen von %s."
+
+#: feeds.py:28 templates/comments.html:38 templates/document.html:8
+#: templates/documents.html:4 templates/documents.html.py:13
+#: templates/event.html:42 templates/participant.html:50
+#: templates/project_part.html:56 templates/question.html:48
+#: templates/search.html:56
+msgid "Documents"
+msgstr "Dokumente"
+
+#: feeds.py:29
+#, python-format
+msgid "Feed with new documents from %s."
+msgstr "Feed mit neuen Dokumenten von %s."
+
+#: feeds.py:31
+msgid "Activities"
+msgstr "Aktivitäten"
+
+#: feeds.py:32
+#, python-format
+msgid "General feed with all activities from %s."
+msgstr "Allgemeiner Feed mit allen Aktivitäten von %s."
+
+#: feeds.py:76 urls.py:21 urls.py:22 urls.py:24 urls.py:25
+#: templates/question.html:66 templates/info_box/research_requests.html:48
+msgid "research_requests_url"
+msgstr "rechercheauftraege/"
+
+#: feeds.py:77
+msgid "Research Requests on"
+msgstr "Rechercheaufträge zu"
+
+#: feeds.py:78
+msgid "Feed with new research requests on {object} on {title}."
+msgstr "Feed mit neuen Rechercheaufträgen zu {object} auf {title}."
+
+#: feeds.py:104 urls.py:12 urls.py:13 urls.py:18 urls.py:19 urls.py:27
+#: urls.py:28 urls.py:32 urls.py:33 urls.py:37 urls.py:38 urls.py:42
+#: urls.py:43 templates/document.html:87 templates/event.html:52
+#: templates/participant.html:60 templates/project_part.html:66
+#: templates/question.html:87 templates/info_box/comments.html:54
+msgid "comments_url"
+msgstr "kommentare/"
+
+#: feeds.py:105
+msgid "Comments on"
+msgstr "Kommentare zu"
+
+#: feeds.py:106
+msgid "Feed with new comments on {object} on {title}."
+msgstr "Feed mit neuen Kommentaren zu {object} auf {title}."
+
+#: models.py:36
+msgid ""
+"Short linked html attribution snippet to the original image source or "
+"alternatively something like 'Own image'."
+msgstr ""
+"Kurzes, verlinktes HTML Snippet mit Attribution der Urheberschaft des Bildes "
+"oder alternativ etwas wie 'Eigenes Bild'."
+
+#: models.py:48
+msgid "Main title, shown in the header navi."
+msgstr "Titel der Seite, angezeigt in der Navigationsleiste."
+
+#: models.py:49
+msgid "Project Website Title"
+msgstr "ProjectWatch"
+
+#: models.py:51
+msgid "Short version of the title, used e.g. in emails."
+msgstr "Kurze Variante des Titels, wird z.B. in E-Mails genutzt."
+
+#: models.py:52
+msgid "Project Website Short Title"
+msgstr "ProjectWatch"
+
+#: models.py:54
+msgid "Color for the page title (Format: '#990000')."
+msgstr "Farbe des Seitentitels (Format: '#990000')."
+
+#: models.py:56
+msgid "Subtitle of the page."
+msgstr "Untertitel der Webseite."
+
+#: models.py:57
+msgid "Project Website Subtitle"
+msgstr "Projekt Webseite Untertitel"
+
+#: models.py:59
+msgid "Color for the page subtitle (Format: '#990000')."
+msgstr "Farbe des Untertitels (Format: '#990000')."
+
+#: models.py:61
+msgid ""
+"Short intro text to describe your page (HTML possible), not too long, use "
+"about text for detailed information."
+msgstr ""
+"Kurzer Intro Text zur Beschreibung der Seite (HTML möglich), nicht zu lang, "
+"About Text (s.u.) ist für längere Beschreibung."
+
+#: models.py:62
+msgid "This is a project watch website."
+msgstr "Dies ist eine Info-Webseite über ein (Groß-)Projekt."
+
+#: models.py:64
+msgid ""
+"Optional header image shown at the end of intro box on first page (Width: "
+"450px Height: your choice, something around 175px is a good fit)."
+msgstr ""
+"Optionales Header Bild am Ende der Intro-Box auf der ersten Seite (Breite: "
+"450px Höhe: frei wählbar, irgendetwas um 175px passt recht gut)."
+
+#: models.py:67
+msgid "Background color for the header (Format: '#990000')."
+msgstr "Hintergrundfarbe des Seitenheaders (Format: '#990000')."
+
+#: models.py:69
+msgid "Color of the navi links (Format: '#990000')."
+msgstr "Farbe der Navigations-Links (Format: '#990000')."
+
+#: models.py:71
+msgid "Background color for the navigation (Format: '#990000')."
+msgstr "Hintergrundfarbe der Navigationsleiste (Format: '#990000')."
+
+#: models.py:73
+msgid ""
+"Background color to mark important elements on various parts of the site, "
+"font color will be white, so use something slightly darker."
+msgstr ""
+"Hintergrundfarbe zum Markieren wichtiger Elemente an unterschiedlichen "
+"Stellen auf der Seite, zugehörige Schriftfarbe ist weiß, also eher dunklere "
+"Farbe wählen."
+
+#: models.py:76
+msgid ""
+"Short intro text about this site, what is the purpose, who is running it."
+msgstr "Kurzer Text über diese Seite, was ist der Zweck, wer betreibt sie."
+
+#: models.py:78
+msgid ""
+"Some html text you want to use in the footer of the page, you can e.g. "
+"provide a link to your email adress or associated social media sites."
+msgstr ""
+"HTML text für den Footer der Seite, z.B. mit einer Kontaktmöglichkeit oder "
+"Links zu assoziierten Social-Media Seiten."
+
+#: models.py:80
+msgid "Footer HTML Default"
+msgstr "Dieser Text erscheint im Footer der Seite."
+
+#: models.py:81
+msgid ""
+"Html to be displayed on the contact page, provide at least an adress there "
+"and some contact information."
+msgstr ""
+"HTML text, der auf der Kontaktseite angezeigt wird, hier sollte mindestens "
+"eine Adresse und Kontaktmöglichkeit angegeben werden."
+
+#: models.py:83
+msgid "Contact HTML Default"
+msgstr "Dieser Text wird auf der Kontaktseite angezeigt."
+
+#: models.py:109 templates/participants.html:55
+msgid "Administration"
+msgstr "Verwaltung"
+
+#: models.py:110 templates/participants.html:70
+msgid "Politics / Party / Parliament"
+msgstr "Politik / Partei / Parlament"
+
+#: models.py:111 templates/participants.html:120
+msgid "Citizens"
+msgstr "Bürger / Initiative / NGO"
+
+#: models.py:112 templates/participants.html:105
+msgid "Company"
+msgstr "Unternehmen"
+
+#: models.py:113 models.py:227 templates/participants.html:135
+msgid "Miscellaneous"
+msgstr "Sonstige"
+
+#: models.py:122
+msgid ""
+"Person, group or institution acting in some way in the context of the "
+"project or being affected by the process or the result of the project "
+"execution."
+msgstr ""
+"Eine Person, Gruppe oder Institution die im Projekt handelnd tätig ist oder "
+"von Durchführung oder Ausgang des Projektes betroffen ist."
+
+#: models.py:126
+msgid ""
+"Role/tasks as well as interests/goals of the participant regarding the "
+"project."
+msgstr "Rolle/Aufgabe sowie Interessen/Ziele des Beteiligten im Projekt."
+
+#: models.py:141 urls.py:34 urls.py:35 urls.py:36 urls.py:37 urls.py:38
+#: templates/base.html:66 templates/comments.html:27
+#: templates/participant.html:9
+msgid "participants_url"
+msgstr "beteiligte/"
+
+#: models.py:159
+msgid "Name of the project."
+msgstr "Bezeichnung des Projektes."
+
+#: models.py:163
+msgid ""
+"General description of the project, what is it about, what is being done?"
+msgstr "Generelle Beschreibung des Projektes, worum geht es, was wird gemacht?"
+
+#: models.py:165
+msgid "What are the important parts of the project?"
+msgstr "Was sind die wichtigen Bereiche des Projektes?"
+
+#: models.py:167
+msgid "What questions regarding the project should be answered?"
+msgstr ""
+
+#: models.py:169
+msgid "Who has initiated the project, what societal groups are involved?"
+msgstr ""
+"Wer hat das Projekt initiiert, welche (gesellschaftlichen) Gruppen sind "
+"beteiligt?"
+
+#: models.py:171
+msgid "What goals does the project target, what conditions should be met?"
+msgstr ""
+"Welche Ziele verfolgt das Projekt, welche Rahmenbedingungen sollen "
+"eingehalten werden?"
+
+#: models.py:173
+msgid "What is the general process of the project development?"
+msgstr "Wie soll der Ablauf des Projektes von Statten gehen?"
+
+#: models.py:175
+msgid "What project documents are collected/provided?"
+msgstr "Welche Dokumente aus dem/zum Projekt werden bereitgestellt?"
+
+#: models.py:186
+msgid "Structural parts of the project being stable over time."
+msgstr ""
+"Strukturelle (Planungs-)Einheiten des Projektes, die über die Zeit stabil "
+"sind, z.B. 'Terminals', 'Rollfelder', 'Flugsicherung', 'Öffentliche "
+"Verkehrsanbindung', nicht zu viele (< 10), oft auch sinnvoll: einen Eintrag "
+"für Gesamtprojekt."
+
+#: models.py:188 models.py:381
+msgid "Use integer numbers for ordering (e.g. '100', '200', '300')."
+msgstr "Reihenfolge der Anzeige über Zifferngröße (z.B. '100', '200', '300')."
+
+#: models.py:191
+msgid "Website (if existant)."
+msgstr "Webauftritt/Informationsseite (falls vorhanden)."
+
+#: models.py:206 urls.py:17 urls.py:18 urls.py:19
+msgid "project_parts_url"
+msgstr "projektbereich/"
+
+#: models.py:222
+msgid "Meeting / Gathering / Session"
+msgstr "Meeting / Treffen / Sitzung"
+
+#: models.py:223
+msgid "New Information / Decision / Statement"
+msgstr "Neue Information / Entscheidung / Statement"
+
+#: models.py:224
+msgid "Project Progress / Execution / Milestone"
+msgstr "Projektfortschritt / Durchführung / Meilenstein"
+
+#: models.py:225
+msgid "Action by Civil Society"
+msgstr "Zivilgesellschaftliche Aktion"
+
+#: models.py:226
+msgid "Unplanned Event"
+msgstr "Ungeplantes Ereignis"
+
+#: models.py:239
+msgid "Event being of central importance for the project."
+msgstr "Event von zentraler Bedeutung für Projekt."
+
+#: models.py:272 urls.py:31 urls.py:32 urls.py:33
+msgid "events_url"
+msgstr "ereignisse/"
+
+#: models.py:293
+msgid ""
+"Title/short version of the question. Use prefix (e.g. 1,2,3 or A1,A2,A3) to "
+"sort questions"
+msgstr ""
+"Titel/Kurze Version der Frage. Für Sortierung Prefix benutzen (z.B. 1,2,3 "
+"oder A1,A2,A3)."
+
+#: models.py:296
+msgid "Description/long version of the question."
+msgstr "Beschreibung/Lange Version der Frage."
+
+#: models.py:301
+msgid "Optional explanations or remarks around the question"
+msgstr "Optionale Erläuterungen oder Bemerkungen rund um die Frage"
+
+#: models.py:303
+msgid "Optional answer (summary) of a question"
+msgstr "Optionale Antwort (Zusammenfassung) einer Frage"
+
+#: models.py:335 urls.py:20 urls.py:21 urls.py:22 urls.py:23 urls.py:24
+#: urls.py:25 urls.py:26 urls.py:27 urls.py:28 templates/base.html:65
+#: templates/comments.html:21 templates/index.html:116
+#: templates/question.html:9 templates/research_requests.html:15
+msgid "questions_url"
+msgstr "fragen/"
+
+#: models.py:359
+msgid "Group of project goals being determined at a certain point in time."
+msgstr ""
+"Eine Gruppe von Projektzielen, die zu einem bestimmten Zeitpunkt beschlossen "
+"wurde."
+
+#: models.py:362
+msgid "Description of the group of project goals."
+msgstr "Beschreibung der Projektzielgruppe."
+
+#: models.py:376
+msgid "Name, e.g. 'Project budget', 'Target date', 'Noise level'"
+msgstr "Name, z.B. 'Gesamtbudget', 'Termin Fertigstellung', 'Lärmbelastung'."
+
+#: models.py:379
+msgid ""
+"Single performance figure describing the project goal, e.g. '1.000.000 "
+"Euro', 'January 25th 2020', ..."
+msgstr ""
+"Kennzahl, die das Projektziel zusammenfasst, z.B. '1.000.000 Euro', "
+"'15.12.2015', ...)"
+
+#: models.py:392
+msgid ""
+"Unique and descriptive title (if PublicDocs is used: PDF live view is shown, "
+"if document title is the same)"
+msgstr ""
+"Eindeutiger und beschreibender Titel (wenn PublicDocs benutzt wird: PDF Live-"
+"Ansicht wird angezeigt, wenn Dokumententitel jeweils gleich ist)"
+
+#: models.py:396
+msgid "Short description."
+msgstr "Kurze Beschreibung."
+
+#: models.py:433 urls.py:39 urls.py:40 urls.py:41 urls.py:42 urls.py:43
+#: templates/base.html:68 templates/comments.html:39 templates/document.html:9
+#: templates/index.html:42
+msgid "documents_url"
+msgstr "dokumente/"
+
+#: models.py:527
+msgid ""
+"Documents containing these search tags are shown on the detail page of this "
+"object."
+msgstr ""
+"Dokumente, die diese Tags enhalten werden auf der Detailseite dieses "
+"Objektes angezeigt."
+
+#: models.py:569 models.py:664
+msgid ""
+"Type of the related object (ProjectPart, Question, Participant, Event, "
+"Document)."
+msgstr ""
+"Typ des verbundenen Objekts (Projektbereich, Frage, Beteiligter, Ereignis "
+"oder Dokument)"
+
+#: models.py:572 models.py:667
+msgid ""
+"The id of the related object (you can find the id of an object in the url of "
+"the object change form in the admin)."
+msgstr ""
+"Die ID des verbundenen Objektes (die ID findet man u.a. in der URL des "
+"Änderungsformulars eines Objektes im Admin-Bereich)"
+
+#: models.py:576 models.py:671
+msgid "Page number in document"
+msgstr ""
+
+#: models.py:584 templates/dialogs/research_request.html:45
+msgid ""
+"Give a unique number to your request so that people can reference it (e.g. "
+"\"R1\", \"R2\",...)"
+msgstr ""
+"Gib dem Auftrag eine eindeutige Nummer, so dass Leute ihn referenzieren "
+"können (z.B. \"R1\", \"R2\",...)"
+
+#: models.py:598
+msgid "Request on the following contents"
+msgstr "Anfrage zu den folgenden Inhalten"
+
+#: models.py:630 models.py:763 templates/base.html:104
+#: templates/dialogs/research_request.html:17
+msgid "Research Request"
+msgstr "Rechercheauftrag"
+
+#: models.py:681
+#, fuzzy
+msgid "User has given permission to get in contact vi."
+msgstr "Der Nutzer hat die Erlaubnis gegeben, Rückfragen per Email zu stellen."
+
+#: models.py:684
+#, fuzzy
+msgid "Comment is only shown on page if published is true."
+msgstr ""
+"Verbindung wird nur auf der Webseite angezeigt wenn published Checkbox "
+"aktiviert ist."
+
+#: models.py:697
+msgid "Commented contents"
+msgstr "Kommentierte Inhalte"
+
+#: models.py:723
+#, python-format
+msgid "Comment on %s on"
+msgstr "Kommentar auf %s zu"
+
+#: models.py:758
+msgid "New Subject Area"
+msgstr "Neuer Themenbereich"
+
+#: models.py:759
+msgid "New Question"
+msgstr "Neue Frage"
+
+#: models.py:760
+msgid "New Participant"
+msgstr "Neuer Beteiligter"
+
+#: models.py:761 templates/comments.html:34 templates/event.html:10
+msgid "Event"
+msgstr "Ereignis"
+
+#: models.py:762
+msgid "New Document"
+msgstr "Neues Dokument"
+
+#: models.py:764 views.py:184 templates/base.html:134
+msgid "Comment"
+msgstr "Kommentar"
+
+#: urls.py:15 urls.py:16 templates/base.html:64 templates/comments.html:15
+#: templates/index.html:28 templates/project_part.html:9
+msgid "project_url"
+msgstr "projekt/"
+
+#: urls.py:29 urls.py:30 templates/base.html:67 templates/comments.html:33
+#: templates/event.html:9 templates/index.html:83
+msgid "process_url"
+msgstr "verlauf/"
+
+#: urls.py:44 templates/base.html:71
+msgid "search_url"
+msgstr "suche/"
+
+#: urls.py:45 templates/base.html:91
+msgid "contact_url"
+msgstr "kontakt/"
+
+#: urls.py:46 views.py:197
+msgid "activate_comment_url"
+msgstr "kommentar_aktivieren/"
+
+#: views.py:24
+msgid ""
+"Creation of (exactly) one SiteConfig object in the Django admin with the "
+"general config params and non-dynamical contents."
+msgstr ""
+"Erstellen (genau) eines SiteConfig Objekts im Django-Adminbereich mit den "
+"allgemeinen Konfigurationsparametern für Darstellung und nicht dynamische "
+"Inhalte."
+
+#: views.py:28
+msgid ""
+"Creation of (exactly) one Project object in the Django admin with general "
+"information about the project."
+msgstr ""
+"Erstellen (genau) eines Project Objekts im Django-Adminbereich mit "
+"grundlegenden Informationen zum Projekt."
+
+#: views.py:31
+msgid ""
+"Creation of at least one ProjectGoalGroup object in the Django admin "
+"containing at least one ProjectGoal."
+msgstr ""
+"Erstellen mindestens eines ProjectGoalGroup Objektes im Django-Adminbereich "
+"mit mindestens einem ProjectGoal Objekt."
+
+#: views.py:172
+msgid "NEW_COMMENT_EMAIL_SUBJECT"
+msgstr "Neuer Kommentar"
+
+#: views.py:174
+msgid "NEW_COMMENT_EMAIL_MESSAGE"
+msgstr "Neuer Kommentar eines Nutzers:"
+
+#: views.py:177 templates/dialogs/comment.html:39
+msgid "Name"
+msgstr "Name"
+
+#: views.py:178 templates/dialogs/comment.html:50
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: views.py:180
+msgid "yes"
+msgstr "ja"
+
+#: views.py:182
+msgid "no"
+msgstr "nein"
+
+#: views.py:183
+msgid "Questions via mail allowed"
+msgstr "Rückfragen per Mail gestattet"
+
+#: views.py:187
+msgid "Comment on"
+msgstr "Kommentar zu"
+
+#: views.py:195
+msgid "NEW_COMMENT_EMAIL_MESSAGE_ACTIVATION"
+msgstr "Kommentar für Veröffentlichung auf Webseite freischalten:"
+
+#: views.py:726
+msgid "The following comment was activated for publication on website:"
+msgstr ""
+"Der folgende Kommentar wurde für eine Veröffentlichung auf der Webseite "
+"freigeschaltet:"
+
+#: views.py:730
+#, python-format
+msgid "Your comment on %s was published"
+msgstr "Dein Kommentar auf %s wurde freigeschaltet"
+
+#: views.py:732
+#, python-format
+msgid "Hello %s,"
+msgstr "Hallo %s,"
+
+#: views.py:733
+msgid "thank you for your comment, which you can find under the following url:"
+msgstr "danke für Deinen Kommentar, Du findest diesen unter folgender URL:"
+
+#: views.py:736
+msgid "You can use the url above to tell others about your comment."
+msgstr ""
+"Du kannst die obige URL nutzen, um anderen von Deinem Kommentar zu erzählen."
+
+#: views.py:738
+msgid "If you want to share your comment on a social network,"
+msgstr "Wenn Du Deinen Kommentar über ein soziales Netzwerk teilen möchtest,"
+
+#: views.py:739
+msgid "you can use the following share urls as a staring point:"
+msgstr "kannst Du die folgenden Links als Ausgangspunkt verwenden:"
+
+#: views.py:746
+msgid "Greetings"
+msgstr "Viele Grüße"
+
+#: views.py:747
+#, python-format
+msgid "Your %s team"
+msgstr "Dein %s Team"
+
+#: views.py:757
+#, python-format
+msgid "Comment already activated by user %s."
+msgstr "Kommentar wurde schon freigeschaltet von Nutzer %s."
+
+#: templates/404.html:13
+msgid "The page you requested could not be found."
+msgstr "Die angefragte Seite konnte nicht gefunden werden."
+
+#: templates/base.html:49
+msgid "No tag cloud available."
+msgstr "Keine Tagcloud vorhanden."
+
+#: templates/base.html:50
+msgid "Error while loading the tag cloud."
+msgstr "Fehler beim Erstellen der Tagcloud."
+
+#: templates/base.html:64 templates/comments.html:14 templates/project.html:4
+#: templates/project.html.py:14 templates/project_part.html:8
+msgid "Project"
+msgstr "Projekt"
+
+#: templates/base.html:67 templates/comments.html:32 templates/event.html:8
+#: templates/process.html:4 templates/process.html.py:13
+msgid "Process"
+msgstr "Verlauf"
+
+#: templates/base.html:68
+#, fuzzy
+msgid "Dokumente"
+msgstr "Dokumente"
+
+#: templates/base.html:72 templates/search.html:4 templates/search.html.py:9
+#, fuzzy
+msgid "Search"
+msgstr "suche/"
+
+#: templates/base.html:91 templates/contact.html:4 templates/contact.html.py:8
+msgid "Contact"
+msgstr "Kontakt"
+
+#: templates/base.html:112 templates/base.html.py:142
+#: templates/dialogs/comment.html:82 templates/dialogs/generic_confirm.html:8
+#: templates/dialogs/research_request.html:75
+msgid "Close"
+msgstr "Schließen"
+
+#: templates/comments.html:4 templates/document.html:85
+#: templates/event.html:50 templates/participant.html:58
+#: templates/project_part.html:64 templates/question.html:85
+#: templates/research_requests.html:4 templates/info_box/documents.html:23
+#: templates/layout_elements/comments_header.html:13
+msgid "Comments"
+msgstr "Kommentare"
+
+#: templates/comments.html:16 templates/project_part.html:10
+msgid "Project Part"
+msgstr "Projektbereich"
+
+#: templates/comments.html:22 templates/question.html:10
+#: templates/research_requests.html:16
+msgid "Question"
+msgstr "Frage"
+
+#: templates/comments.html:28 templates/participant.html:10
+msgid "Participant"
+msgstr "Beteiligter"
+
+#: templates/comments.html:40 templates/document.html:10
+#: templates/info_box/documents.html:9
+msgid "Document"
+msgstr "Dokument"
+
+#: templates/comments.html:59 templates/info_box/comments.html:55
+msgid "All Comments"
+msgstr "Alle Kommentare"
+
+#: templates/config_prerequisits.html:40
+msgid "For the site to work the following configuration steps are necessary:"
+msgstr ""
+"Für ein Funktionieren der Seite sind noch folgende Konfigurationsschritte "
+"notwendig:"
+
+#: templates/contact.html:29
+msgid "Disclaimer"
+msgstr "Rechtlicher Hinweis"
+
+#: templates/contact.html:37
+msgid "disclaimer_text"
+msgstr ""
+"Trotz sorgfältiger Kontrolle übernimmt der Betreiber dieser Seite keine "
+"Haftung für die Inhalte externer Links. Für den Inhalt externer Links sind "
+"ausschließlich die Betreiber der jeweiligen Webseiten verantwortlich."
+
+#: templates/contact.html:46
+msgid "Credits"
+msgstr "Danksagung"
+
+#: templates/contact.html:54
+msgid "credits_opensource_text"
+msgstr ""
+"Das dieser Website zu Grunde liegende Content Management System nutzt "
+"folgende Open Source-Bibliotheken. Vielen Dank an die aktiv Beitragenden der "
+"entsprechenden Entwickler-Communities!"
+
+#: templates/contact.html:77
+msgid "Pictures"
+msgstr "Bilder"
+
+#: templates/contact.html:86
+msgid "credits_pictures_text"
+msgstr "Quellennachweis für auf der Website verwendete Bilder:"
+
+#: templates/document.html:29
+msgid "Results for"
+msgstr "Fundstellen für"
+
+#: templates/document.html:29
+msgid "on the following pages"
+msgstr "auf folgenden Seiten"
+
+#: templates/document.html:43
+msgid ""
+"This document was just uploaded and is processed for presentation right now. "
+"This procedure can take a few minutes."
+msgstr ""
+"Dieses Dokument wurde gerade hochgeladen und wird aktuell für die "
+"Darstellung aufbereitet. Dieser Vorgang kann einige Minuten dauern."
+
+#: templates/document.html:54
+msgid ""
+"The Internet Explorer is supporting only a basic version of the pdf viewer. "
+"Please use one of the following browsers for full functionality: Firefox, "
+"Chrome, Safari, Opera"
+msgstr ""
+"Der Internet Explorer unterstützt nur eine Basisversion des PDF Betrachters. "
+"Für die volle Funktionalität bitte einen der folgenden Browser benutzen: "
+"Firefox, Chrome, Safari, Opera"
+
+#: templates/document.html:59
+msgid "Click on the tags for searching the document."
+msgstr "Zum Suchen im Dokument auf die Tags klicken."
+
+#: templates/document.html:65 templates/index.html:133
+msgid "All"
+msgstr ""
+
+#: templates/document.html:82
+msgid ""
+"If different page numbers are referring to the declaration in the PDF viewer "
+"and not the declaration inside the document itself."
+msgstr ""
+"Seitenzahlen beziehen sich wenn unterschiedlich auf die Angaben des PDF-"
+"Betrachters und nicht auf die Angaben im Dokument selbst."
+
+#: templates/document.html:86 templates/event.html:51
+#: templates/participant.html:59 templates/project_part.html:65
+#: templates/question.html:69 templates/question.html.py:86
+msgid "New"
+msgstr "Neu"
+
+#: templates/documents.html:42
+msgid "New Documents"
+msgstr "Neue Dokumente"
+
+#: templates/index.html:26
+msgid "About the Project"
+msgstr "Über das Projekt"
+
+#: templates/index.html:27 templates/index.html.py:41 templates/index.html:82
+msgid "Go to page"
+msgstr "Zur Rubrik"
+
+#: templates/index.html:40
+msgid "Current Document"
+msgstr "Aktuelles Dokument"
+
+#: templates/index.html:59
+msgid "About this Site"
+msgstr "Über diese Seite"
+
+#: templates/index.html:77
+msgid ""
+"This software is using features not supported by Internet Explorer. Please "
+"use another browser if possible."
+msgstr ""
+"Diese Software ist nur eingeschränkt mit dem Internet Exporer nutzbar. Bitte "
+"verwende wenn möglich einen anderen Browser."
+
+#: templates/index.html:81
+msgid "Current Event"
+msgstr "Aktuelles Ereignis"
+
+#: templates/index.html:98
+msgid "Last Activities"
+msgstr "Letzte Aktivitäten"
+
+#: templates/index.html:111
+msgid "Current Research Request"
+msgstr "Aktueller Rechercheauftrag"
+
+#: templates/index.html:120
+msgid "Frequent Document Contents"
+msgstr "Häufige Dokumentinhalte"
+
+#: templates/index.html:127
+msgid "Click on the tags for searching for the term."
+msgstr "Zum Suchen nach einem Begriff auf die Tags klicken."
+
+#: templates/index.html:147
+msgid "Last Comment"
+msgstr "Letzter Kommentar"
+
+#: templates/participants.html:30
+msgid "Current project-responsible Actors"
+msgstr "Projektverantwortliche Akteure (aktuell)"
+
+#: templates/participants.html:43
+msgid "Former project-responsible Actors"
+msgstr "Projektverantwortliche Akteure (ehemals)"
+
+#: templates/participants.html:90
+msgid "New Participants"
+msgstr "Neue Beteiligte"
+
+#: templates/process.html:32
+msgid "Chronology"
+msgstr "Chronologie"
+
+#: templates/process.html:49
+msgid "New Events"
+msgstr "Neue Ereignisse"
+
+#: templates/project.html:35
+msgid "Project Goals"
+msgstr "Projektziele"
+
+#: templates/question.html:27
+msgid "Explanations"
+msgstr "Erläuterungen"
+
+#: templates/question.html:38
+msgid "Answer"
+msgstr "Antwort"
+
+#: templates/question.html:65
+#: templates/layout_elements/research_requests_header.html:13
+msgid "Research Requests"
+msgstr "Rechercheaufträge"
+
+#: templates/questions.html:44
+msgid "New Research Requests"
+msgstr "Neue Rechercheaufträge"
+
+#: templates/research_requests.html:35
+#: templates/info_box/research_requests.html:49
+msgid "All Research Requests"
+msgstr "Alle Rechercheaufträge"
+
+#: templates/search.html:8
+msgid "Search for"
+msgstr "Suche nach"
+
+#: templates/dialogs/comment.html:5
+msgid ""
+"Thank you for your comment. You will receive an email when the commented was "
+"published by an administrative user."
+msgstr ""
+"Danke für Deinen Kommentar. Du erhälst eine Email, wenn der Kommentar "
+"freigeschaltet wurde."
+
+#: templates/dialogs/comment.html:9
+msgid "There was an error and your comment could not be safed. Sorry! :-/"
+msgstr ""
+"Es ist ein Fehler aufgetreten und der Kommentar konnte nicht gespeichert "
+"werden. Sorry! :-/"
+
+#: templates/dialogs/comment.html:17
+msgid "My Comment on"
+msgstr "Mein Kommentar zu"
+
+#: templates/dialogs/comment.html:43 templates/dialogs/comment.html.py:54
+#: templates/dialogs/more_cos_input.html:85
+msgid "required"
+msgstr "erforderlich"
+
+#: templates/dialogs/comment.html:54
+msgid "will not be published"
+msgstr "wird nicht veröffentlicht"
+
+#: templates/dialogs/comment.html:64
+msgid ""
+"The operator of this website is allowed to inquire via email on questions "
+"about this comment"
+msgstr ""
+"Der Betreiber dieser Seite darf mich für Rückfragen per E-Mail kontaktieren"
+
+#: templates/dialogs/comment.html:83
+msgid "Send comment"
+msgstr "Kommentar abschicken"
+
+#: templates/dialogs/comment.html:100 templates/dialogs/more_cos_input.html:84
+#: templates/dialogs/research_request.html:93
+#: templates/info_box/comments.html:39
+#: templates/info_box/research_requests.html:33
+msgid "Page"
+msgstr "Seite"
+
+#: templates/dialogs/comment.html:107
+msgid "Please enter a comment."
+msgstr "Bitte gib einen Kommentar ein."
+
+#: templates/dialogs/comment.html:113
+#, python-format
+msgid "Comment too long (max. %(max_size)s chars)."
+msgstr "Kommentar zu lang (max. %(max_size)s Zeichen)."
+
+#: templates/dialogs/comment.html:119
+msgid "Please enter your name."
+msgstr "Bitte gib Deinen Namen ein."
+
+#: templates/dialogs/comment.html:125
+msgid "Please enter your email adress."
+msgstr "Bitte gib Deine Email-Adresse ein."
+
+#: templates/dialogs/comment.html:132
+msgid "The email adress you entered is invalid."
+msgstr "Die eingegebene Email-Adresse ist ungültig."
+
+#: templates/dialogs/comment.html:141
+#: templates/dialogs/research_request.html:122
+msgid "Please provide a page number."
+msgstr "Bitte gib eine Seitenzahl an."
+
+#: templates/dialogs/comment.html:148
+#: templates/dialogs/research_request.html:129
+msgid "Invalid page number."
+msgstr "Ungültige Seitenzahlangabe."
+
+#: templates/dialogs/more_cos_input.html:6
+msgid "Optional"
+msgstr "Optional"
+
+#: templates/dialogs/more_cos_input.html:6
+msgid "Relation to further project elements"
+msgstr "Bezug zu weiteren Projektelementen"
+
+#: templates/dialogs/more_cos_input.html:10
+msgid ""
+"Search via autocompletion (Project Part, Question, Participant, Event, "
+"Document)"
+msgstr ""
+"Suche per Autovervollständigung (Projektbereich, Frage, Beteiligter, "
+"Ereignis oder Dokument)"
+
+#: templates/dialogs/more_cos_input.html:15
+msgid "Nothing selected"
+msgstr "Keine Auswahl"
+
+#: templates/dialogs/more_cos_input.html:62
+msgid "Maximum number of additional project elements reached"
+msgstr "Maximale Anzahl zusätzlicher Projektelemente erreicht"
+
+#: templates/dialogs/research_request.html:5
+msgid "The research request was saved."
+msgstr "Der Rechercheauftrag wurde gespeichert."
+
+#: templates/dialogs/research_request.html:9
+msgid ""
+"There was an error and the research request could not be safed. Sorry! :-/"
+msgstr ""
+"Es ist ein Fehler aufgetreten und der Rechercheauftrag konnte nicht "
+"gespeichert werden. Sorry! :-/"
+
+#: templates/dialogs/research_request.html:76
+msgid "Save Research Request"
+msgstr "Rechercheauftrag speichern"
+
+#: templates/dialogs/research_request.html:100
+#: templates/dialogs/research_request.html:106
+#: templates/dialogs/research_request.html:112
+msgid "Field is mandatory."
+msgstr "Feld ist erforderlich."
+
+#: templates/info_box/activities.html:27 templates/info_box/events.html:27
+msgid "No events available."
+msgstr "Keine Ereignisse vorhanden."
+
+#: templates/info_box/comments.html:29
+msgid "Comment by"
+msgstr "Kommentar von"
+
+#: templates/info_box/comments.html:65
+msgid "No comments yet."
+msgstr "Noch keine Kommentare."
+
+#: templates/info_box/documents.html:10
+msgid "Added"
+msgstr "Hinzugefügt"
+
+#: templates/info_box/documents.html:23
+msgid "Pages"
+msgstr "Seiten"
+
+#: templates/info_box/documents.html:32
+msgid "No documents available."
+msgstr "Keine Dokumente vorhanden."
+
+#: templates/info_box/participant_detail.html:14
+msgid "Type"
+msgstr "Typ"
+
+#: templates/info_box/participants.html:16
+msgid "No participants available."
+msgstr "Keine Beteiligten vorhanden."
+
+#: templates/info_box/pdf_navi.html:10 templates/info_box/pdfjs_doc.html:27
+msgid "Go to first page"
+msgstr "Zur Startseite"
+
+#: templates/info_box/pdf_viewer.html:14
+msgid ""
+"For very large pdf documents it can take up to several minutes till the "
+"document is loaded, depending on your network connection."
+msgstr ""
+"Bei sehr großen PDF-Dokumenten kann es je nach Internetverbindung einige "
+"Minuten dauern, bis das Dokument geladen ist."
+
+#: templates/info_box/pdf_viewer.html:16
+msgid "Please be patient..."
+msgstr "Bitte um etwas Geduld..."
+
+#: templates/info_box/project_goal_group.html:17
+msgid "Agreement at"
+msgstr "Vereinbart"
+
+#: templates/info_box/project_parts.html:29
+msgid "No project parts available."
+msgstr "Keine Projektbereiche vorhanden."
+
+#: templates/info_box/questions.html:72
+msgid "No questions available."
+msgstr "Keine Fragen vorhanden."
+
+#: templates/info_box/research_requests.html:26
+msgid "done"
+msgstr "erledigt"
+
+#: templates/info_box/research_requests.html:59
+msgid "No research requests available."
+msgstr "Keine Rechercheaufträge vorhanden."
+
+#: templates/info_box/web_sources.html:3
+msgid "Web-Sources"
+msgstr "Web-Quellen"
+
+#: templates/info_box/web_sources.html:22
+msgid "No web sources available."
+msgstr "Keine Web-Quellen vorhanden."
+
+#~ msgid ""
+#~ "Comment is related to further project elements (will be shown there as "
+#~ "well then)"
+#~ msgstr ""
+#~ "Kommentar bezieht sich auf weitere Projektelemente (wird dort dann "
+#~ "ebenfalls angezeigt)"
+
+#~ msgid "Download as PDF"
+#~ msgstr "Download als PDF"
+
+#~ msgid "Subject Area added"
+#~ msgstr "Themenbereich hinzugefügt"
+
+#~ msgid "Participant added"
+#~ msgstr "Beteiligter hinzugefügt"
+
+#~ msgid "Project Parts"
+#~ msgstr "Projektbereiche"
+
+#~ msgid "and \"%s\""
+#~ msgstr "und \"%s\""
+
+#, fuzzy
+#~ msgid "My comment on %(str1) on \"%(str2)\""
+#~ msgstr "Mein Kommentar auf %(str1) zu \"%(str2)\""
+
+#~ msgid ""
+#~ "Thank you for your relation proposal. Your proposal still needs to be "
+#~ "activated."
+#~ msgstr ""
+#~ "Vielen Dank für den Vorschlag für eine neue Dokumentbeziehung. Der "
+#~ "Vorschlag muss noch freigeschaltet werden."
+
+#~ msgid "Propose Document Relation"
+#~ msgstr "Dokumentbeziehung vorschlagen"
+
+#~ msgid "Send proposal"
+#~ msgstr "Vorschlag abschicken"
+
+#~ msgid "Relation to object type, object"
+#~ msgstr "Beziehung zu Objekttyp, Objekt"
+
+#~ msgid "Description of the relation (displayed on page)"
+#~ msgstr "Beschreibung der Beziehung (öffentlich sichtbar)"
+
+#~ msgid ""
+#~ "Page number in document (only the number, e.g. '5', '126', please take "
+#~ "the page number from pdf viewer if different from page number inside the "
+#~ "document)."
+#~ msgstr ""
+#~ "Seite im Dokument (nur die Ziffer, z.B. '5', '126', bitte die "
+#~ "Seitenangabe des PDF-Betrachters nehmen, falls unterschiedlich zu "
+#~ "Seitenangabe im Dokument selbst)."
+
+#~ msgid "Additional comment (not publicly displayed)"
+#~ msgstr "Zusätzlicher Kommentar (nicht öffentlich sichtbar)"
+
+#~ msgid ""
+#~ "Thank you for your comment. Your comment still needs to be activated."
+#~ msgstr ""
+#~ "Vielen Dank für den Kommentar. Der Kommentar muss noch freigeschaltet "
+#~ "werden."
+
+#~ msgid ""
+#~ "Page number in document (only the number, e.g. '5', '126', please take "
+#~ "the page number from pdf viewer if different from page number inside the "
+#~ "document), or empty if referring to the whole document."
+#~ msgstr ""
+#~ "Seite im Dokument (nur die Ziffer, z.B. '5', '126', bitte die "
+#~ "Seitenangabe des PDF-Betrachters nehmen, falls unterschiedlich zu "
+#~ "Seitenangabe im Dokument selbst), oder leer lassen falls Bezugnahme auf "
+#~ "ganzes Dokument."
+
+#~ msgid "New Comment"
+#~ msgstr "Neuer Kommentar"
+
+#~ msgid "Document Relations"
+#~ msgstr "Dokumentbeziehungen"
+
+#~ msgid "New Comments"
+#~ msgstr "Neue Kommentare"
+
+#~ msgid "Entire document"
+#~ msgstr "Ganzes Dokument"
+
+#~ msgid "Content description"
+#~ msgstr "Inhaltsbeschreibung"
+
+#~ msgid "Annotation"
+#~ msgstr "Anmerkung"
+
+#~ msgid "The document having the relation."
+#~ msgstr "Dokument, in dem Verbindung gefunden wurde."
+
+#~ msgid "Relation is only shown on page if published is true."
+#~ msgstr ""
+#~ "Verbindung wird nur auf der Webseite angezeigt wenn published Checkbox "
+#~ "aktiviert ist."
+
+#~ msgid "activate_document_relation_url"
+#~ msgstr "dokumentbeziehung_aktivieren/"
+
+#~ msgid "NEW_DOCUMENT_RELATION_EMAIL_SUBJECT"
+#~ msgstr "Neuer Vorschlag Dokumentbeziehung: "
+
+#~ msgid "NEW_DOCUMENT_RELATION_EMAIL_MESSAGE"
+#~ msgstr ""
+#~ "Ein Nutzer hat einen Vorschlag für eine Dokumentbeziehung übermittelt:"
+
+#~ msgid "NEW_DOCUMENT_RELATION_EMAIL_MESSAGE_ACTIVATION"
+#~ msgstr "Dokumentbeziehung für Veröffentlichung auf Webseite freischalten:"
+
+#~ msgid ""
+#~ "The following document relation was activated for publication on website:"
+#~ msgstr ""
+#~ "Die folgende Dokumentbeziehung wurde für eine Veröffentlichung auf der "
+#~ "Webseite freigeschaltet:"
+
+#~ msgid "Document relation already activated by user %s."
+#~ msgstr "Dokumentbeziehung wurde schon freigeschaltet von Nutzer %s."
+
+#~ msgid "No relations defined."
+#~ msgstr "Keine Beziehungen definiert."
+
+#~ msgid "Current Project Goals"
+#~ msgstr "Aktuelle Projektziele"
+
+#~ msgid "New Document Relations"
+#~ msgstr "Neue Dokumentbeziehungen"
+
+#~ msgid "Results for the search for"
+#~ msgstr "Fundstellen für die Suche nach"
+
+#~ msgid "Even more Questions"
+#~ msgstr "Noch mehr Fragen"
+
+#~ msgid "Project-responsible Actors"
+#~ msgstr "Projektverantwortliche Akteure"
+
+#~ msgid "project"
+#~ msgstr "projekt"
+
+#~ msgid "Document Search"
+#~ msgstr "Dokumentensuche"
+
+#~ msgid "No documents found."
+#~ msgstr "Keine Dokumente gefunden."
+
+#~ msgid "Website"
+#~ msgstr "Webseite"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#~ msgid "Relation to"
+#~ msgstr "Beziehung zu"
+
+#~ msgid "No participants from this area."
+#~ msgstr "Keine Beteiligten aus diesem Bereich."

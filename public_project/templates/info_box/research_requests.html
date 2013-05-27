@@ -1,0 +1,65 @@
+{% load i18n %}
+
+  <div class="section">
+  
+    <div class="info_box">
+      {% if research_request_list %}
+        <div class="info_box_content">
+          
+          {% for rr in research_request_list %}
+          <div style="clear:both;">
+            <div style="border:1px solid #ddd;margin-bottom:3px;font-size:12px;">
+              <div style="padding:7px 12px 7px 12px;background-color: #ebebeb;" class="comment_header">
+                <div style="float:right;">
+                  <a href="{{ rr.get_twitter_url }}" target="_blank" style="font-size:18px;color:#929292;text-decoration: none;"><i class="icon-twitter-sign"></i></a>&nbsp;
+                  <a href="{{ rr.get_facebook_url }}" target="_blank" style="font-size:18px;color:#929292;text-decoration: none;"><i class="icon-facebook-sign"></i></a>&nbsp;
+                  <a href="{{ rr.get_google_plus_url }}" target="_blank" style="font-size:18px;color:#929292;text-decoration: none;"><i class="icon-google-plus-sign"></i></a>&nbsp;
+                  <a href="{{ rr.get_app_net_url }}" target="_blank" style="color:#929292;text-decoration: none;">
+                    <img src="/static/img/icon-app-net.png" width="16" height="17" style="vertical-align:top;margin-top:1px;">
+                  </a>&nbsp;
+                </div>
+                
+                <a href="{{ rr.get_absolute_url }}" style="color:inherit;font-weight:bold;">  
+                  <i class="{{ rr.get_icon_class }}"></i> 
+                  {{ rr }}
+                </a>
+                {% if not rr.open %}&nbsp;<span>({% trans "done" %}){% endif %}
+              </div>
+              <div style="border-top:1px solid #ddd;padding:7px 12px 7px 12px;font-size:11px;" class="comment_relations">
+                {% for rr_rel in rr.researchrequestrelation_set.all %}
+                  <div>
+                    <a href="{{ rr_rel.content_object.get_absolute_url }}{% if rr_rel.page %}?page={{ rr_rel.page }}{% endif %}">
+                    <i class="{{ rr_rel.content_object.get_icon_class }}"></i>
+                    {{ rr_rel.content_object }}{% if rr_rel.page %}, {% trans "Page" %} {{ rr_rel.page }}{% endif %}
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+              <div style="border-top:1px solid #ddd;padding:12px;font-size:11px;background-color:#f9f9f9;" class="comment_text">
+                {{ rr.description|linebreaksbr }}
+              </div>
+              
+            </div>
+          </div>
+          {% endfor %}
+          
+          {% if research_request_list|length < num_total_research_requests %}
+          <div style="margin-top:3px;padding-left:12px;">
+            <a href="{{ add_rr_url }}{% trans 'research_requests_url' %}" style="font-size:11px;">
+              {% trans "All Research Requests" %} ({{ num_total_research_requests }}) <i class="icon-arrow-right"></i> 
+            </a>
+          </div>
+          {% endif %}
+          
+        </div>
+        
+        
+      {% else %}
+        <span style="font-size:12px;">
+        {% trans "No research requests available." %}
+        </span>
+      {% endif %}
+    </div>
+    
+  </div>
+  

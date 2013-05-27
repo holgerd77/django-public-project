@@ -1,0 +1,158 @@
+{% load i18n %}
+{% load bpw %}
+
+{% if comment_form_status == 'SENT' %}
+  {% trans "Thank you for your comment. You will receive an email when the commented was published by an administrative user." as confirm_text %}
+  {% include "dialogs/generic_confirm.html" %}   
+{% endif %}
+{% if comment_form_status == 'FAILED' %}
+  {% trans "There was an error and your comment could not be safed. Sorry! :-/" as confirm_text %}
+  {% include "dialogs/generic_confirm.html" %}   
+{% endif %}
+
+<div class="modal hide fade" id="CommentModal" style="position:absolute;width:800px;margin-left:-400px;">
+  
+  <div class="modal-header" style="background-color:#f9f9f9;">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>{% trans "My Comment on" %}</h3>
+    <h4><i class="{{ commented_object1.get_icon_class }}"></i> {{ commented_object1 }}<span id="co1_header_page"></span></h4>
+  </div>
+  
+  <form enctype="multipart/form-data" class="form-horizontal" action="." method="post">
+    <input type="hidden" id="id_co1_content_type" name="co1_content_type" value="{{ commented_object1|modelname }}">
+    <input type="hidden" id="id_co1_id" name="co1_id" value="{{ commented_object1.id }}">
+    {% with commented_object1|modelname as modelname %}
+    {% if modelname == 'document' %}
+       <input type="hidden" id="id_co1_page" name="co1_page" value="">
+    {% endif %}
+    {% endwith %}
+  {% csrf_token %}
+  <div class="modal-body" style="max-height:inherit;">
+    <div style="margin-top:10px;">
+      <div style="float:left;margin-right:20px;">
+      <textarea id="id_comment" style="width: 400px;height: 160px;" rows="10" cols="40" name="comment"></textarea>
+      </div>
+      <div>
+        <fieldset>
+        <div style="clear:both;">
+          <div style="float:left;font-size:12px;">
+            {% trans "Name" %}
+          </div>
+          <div style="float:right;width:280px;">
+            <input id="id_username" type="text" name="username" maxlength="50">
+            <span style="font-size:12px;">({% trans "required" %})</span>
+          </div>
+        </div>
+        
+        <div style="clear:both;height:15px;"></div>
+        <div style="margin-bottom:10px;clear:both;">
+          <div style="float:left;font-size:12px;">
+            {% trans "E-Mail" %}
+          </div>
+          <div style="float:right;width:280px;">
+            <input id="id_email" type="text" name="email" maxlength="50">
+            <span style="font-size:12px;">({% trans "required" %}) ({% trans "will not be published" %})</span>
+          </div>
+        </div>
+        
+        <div style="clear:both;height:10px;"></div>
+        <div style="margin-bottom:10px;clear:both;">
+          <div style="float:left;">
+            <input type="checkbox" id="id_feedback_allowed" name="feedback_allowed">
+          </div>
+          <div style="float:right;width:280px;font-size:12px;">
+            {% trans "The operator of this website is allowed to inquire via email on questions about this comment" %}
+          </div>
+        
+        </fieldset>
+      </div>
+    </div>
+    <div style="clear:both;height:20px;"></div>
+    
+    {% with dialog="CommentModal" %}
+    {% include "dialogs/more_cos_input.html" %}
+    {% endwith %}
+       
+  </div>
+  
+  <div class="modal-footer">
+    <div style="text-align:left;float:left;" id="error_msg_box">
+    </div>
+    <div style="text-align:left;float:right;">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Close" %}</button>
+    <input id="comment_form_submit_btn" name="comment_form" type="submit" class="btn btn-primary" value="{% trans "Send comment" %}" />
+    </div>
+  </div>
+  </form>
+  
+</div>
+
+<script type="text/javascript">
+   $(document).ready(function() {
+      $('#CommentModal').modal({
+         keyboard: false,
+         {% if form.is_bound %}show: true{% else %}show: false{% endif %}
+      })
+   });
+   
+   $('#CommentModal').on('shown', function() {
+      if($('#CommentModal #id_co1_page').length != 0) {
+        $('#CommentModal #co1_header_page').html(', {% trans "Page" %} ' + PDFViewer.pageNum);
+        $('#CommentModal #id_co1_page').val(PDFViewer.pageNum);
+      };
+   });
+   
+   $('#comment_form_submit_btn').click(function(event) {
+      if ($('#CommentModal #id_comment').val() == '') {
+         $('#CommentModal #error_msg_box').html('<div class="alert alert-error">{% trans "Please enter a comment." %}</div>');
+         $('#CommentModal #id_comment').focus();
+         event.preventDefault();
+         return false;
+      }
+      if ($('#CommentModal #id_comment').val().length > 800) {
+         $('#CommentModal #error_msg_box').html('<div class="alert alert-error">{% blocktrans with 800 as max_size %}Comment too long (max. {{ max_size }} chars).{% endblocktrans %}</div>');
+         $('#CommentModal #id_comment').focus();
+         event.preventDefault();
+         return false;
+      }
+      if ($('#CommentModal #id_username').val() == '') {
+         $('#CommentModal #error_msg_box').html('<div class="alert alert-error">{% trans "Please enter your name." %}</div>');
+         $('#CommentModal #id_username').focus();
+         event.preventDefault();
+         return false;
+      }
+      if ($('#CommentModal #id_email').val() == '') {
+         $('#CommentModal #error_msg_box').html('<div class="alert alert-error">{% trans "Please enter your email adress." %}</div>');
+         $('#CommentModal #id_email').focus();
+         event.preventDefault();
+         return false;
+      }
+      var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!regex.test($('#CommentModal #id_email').val())) {
+         $('#CommentModal #error_msg_box').html('<div class="alert alert-error">{% trans "The email adress you entered is invalid." %}</div>');
+         $('#CommentModal #id_email').focus();
+         event.preventDefault();
+         return false;
+      }
+      for (var num_id=2;num_id<=counter_more_cos+1;num_id++) {
+        var id = '#CommentModal #id_co' + num_id + '_page';
+        if($(id).length != 0) {
+          if($(id).val() == '') {
+             $('#CommentModal #error_msg_box').html('<div class="alert alert-error">{% trans "Please provide a page number." %}</div>');
+             $(id).focus();
+             event.preventDefault();
+             return false;
+          }
+          var regex = /^[0-9]+$/;
+          if (!regex.test($(id).val())) {
+             $('#CommentModal #error_msg_box').html('<div class="alert alert-error">{% trans "Invalid page number." %}</div>');
+             $(id).focus();
+             event.preventDefault();
+             return false;
+          }
+        }
+      }
+      
+   });
+   
+</script>

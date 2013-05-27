@@ -1,0 +1,176 @@
+{% load i18n %}
+
+<script type="text/javascript" src="/static/js/lib/compatibility.js"></script>
+<script type="text/javascript" src="/static/js/lib/pdf.js"></script>
+<script type="text/javascript" src="/static/js/lib/pdfjs_viewer.js"></script>
+<script type="text/javascript" src="/static/js/lib/jquery.highlight.js"></script>
+
+<div id="documentCarousel" class="carousel slide">
+  
+  <!-- Carousel items -->
+  <div class="carousel-inner" style="border:1px solid #ddd;">
+    <div class="item active" id="pdf-outer-div">
+      
+      <div style="position:relative;">
+        <canvas id="the-canvas"></canvas>
+        <div id="text-layer" style="position:absolute;top:0px;right:0px;left:0px;">
+        </div>
+      </div>
+      
+      <div class="carousel-caption">
+        <div style="float:left">
+          <h4>Seite: <input type="text" id="page_num" style="margin:0;padding:0;width:30px;" maxlength="7"> / <span id="page_count"></span></h4>
+        </div>
+        <div style="float:right;">
+          <div style="line-height: 20px;">
+            <a href="javascript:renderPage(1)" style="color:#fff;text-decoration:none;">
+              {% trans "Go to first page" %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#documentCarousel" id="pdf_navi_left" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#documentCarousel" id="pdf_navi_right" data-slide="next">&rsaquo;</a>
+</div>
+
+
+<script>
+
+
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    vars[key] = value;
+  });
+  return vars;
+}
+
+var pageNum = 1;
+var page = getUrlVars()["page"];
+if (page){
+  pageNum = page; 
+} else {
+  {% if found_pages %}
+    {% with found_pages|first as first_page %}
+      pageNum = {{ first_page.number }};
+    {% endwith %}
+  {% endif %}
+}
+
+var pdfDoc = null,
+    scale = 1.0,
+    canvas = document.getElementById('the-canvas'),
+    ctx = canvas.getContext('2d');
+
+
+
+function renderPage(num) {
+  // Using promise to fetch the page
+  pdfDoc.getPage(num).then(function(page) {
+    var viewport = page.getViewport(1.0);
+    scale = $('#pdf-outer-div').width() / viewport.width;
+    viewport = page.getViewport(scale);
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    // Render PDF page into canvas context
+    var renderContext = {
+      canvasContext: ctx,
+      viewport: viewport,
+      textLayer: CustomTextLayer
+    };
+    
+    textDivs = [];
+    
+    page.render(renderContext).then(
+      function(data) {
+        page.getTextContent().then(
+          function textContentResolved(data) {
+            {% if request.GET.q %}
+            $('#text-layer').empty();
+            CustomTextLayer.insertDivContent(data);
+            CustomTextLayer.renderLayer();
+            search_str = "{{ request.GET.q|addslashes }}";
+            search_str = search_str.replace(/&quot;/g, '');
+            $('#text-layer > div').highlight(search_str);
+            {% endif %}
+          }
+        );
+      }
+    )
+  });
+
+  // Update page counters
+  pageNum = num;
+  $('#page_num').val(pageNum);
+  document.getElementById('page_count').textContent = pdfDoc.numPages;
+}
+
+
+$('#page_num').keypress(function(e) {
+   code= (e.keyCode ? e.keyCode : e.which);
+   if (code == 13) {
+      var num = parseInt($(this).val());
+      renderPage(num);
+      $(this).blur();
+      $(this).val(val);
+      e.preventDefault();
+   }
+});
+
+
+$('#pdf_navi_left').click(function() {
+  if (pageNum <= 1)
+    var num = pdfDoc.numPages;
+  else
+    var num = pageNum - 1;
+  renderPage(num);
+});
+  
+$('#pdf_navi_right').click(function() {
+  if (pageNum >= pdfDoc.numPages)
+    var num = 1;
+  else
+    var num = pageNum + 1;
+  renderPage(num);
+});
+
+
+$(document).ready(function() {
+    
+  $('#documentCarousel').carousel({ interval: false });
+  var url = '/media/{{ document.document }}';
+  PDFJS.disableWorker = true;
+  
+  PDFJS.getDocument(url).then(function getPdfHelloWorld(_pdfDoc) {
+    pdfDoc = _pdfDoc;
+    renderPage(pageNum);
+  });
+  
+  var rtime = new Date(1, 1, 2000, 12,00,00);
+  var timeout = false;
+  var delta = 200;
+  $(window).resize(function() {
+      rtime = new Date();
+      if (timeout === false) {
+          timeout = true;
+          setTimeout(resizeend, delta);
+      }
+  });
+  
+  function resizeend() {
+      if (new Date() - rtime < delta) {
+          setTimeout(resizeend, delta);
+      } else {
+          timeout = false;
+          renderPage(pageNum);
+      }               
+  }
+});
+
+
+</script>

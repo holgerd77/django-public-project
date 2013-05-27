@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block rss_url %}
+<link rel="alternate" type="application/rss+xml"
+   title="RSS" href="{{ request.get_full_path}}rss/" />
+{% endblock %}
+
+{% block content %}
+
+<div class="span6">
+
+      <div class="hero-unit" style="padding: 35px !important;">
+    <h4 style="color:{{ site_config.sub_title_color }};">{{ site_config.sub_title }}</h4>
+    <p style="font-size:16px !important; line-height:26px !important;">
+      {% autoescape off %}
+        {{ site_config.intro_text|linebreaksbr }}
+      {% endautoescape %}
+    </p>
+      
+      <img width="{{ site_config.header_image.image.width }}" height="{{ site_config.header_image.image.height }}" src="/media/{{ site_config.header_image.image }}">
+    </div>
+
+
+  {% trans "About the Project" as sh_title %}
+  {% trans "Go to page" as sh_url_title %}
+  {% trans "project_url" as sh_url %}
+  {% with sh_title=sh_title sh_icon="icon-cogs" sh_url_title=sh_url_title sh_url=sh_url %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+  {% with ib_content=project.desc_project %}
+  {% include "info_box/generic.html"%}
+  {% endwith %}
+  </div>
+  
+  
+  {% trans "Current Document" as sh_title %}
+  {% trans "Go to page" as sh_url_title %}
+  {% trans "documents_url" as sh_url %}
+  {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title=sh_url_title sh_url=sh_url %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+    
+    {% with document=latest_document dd_with_header="yes" %}
+    <div style="border: 1px solid #ddd;padding:10px;">
+      {% include "info_box/document_detail.html" %}
+    </div>
+    {% endwith %}
+    
+  </div>
+  
+  
+  
+  {% trans "About this Site" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-info-sign" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+  {% with ib_content=site_config.desc_about %}
+  {% include "info_box/generic.html"%}
+  {% endwith %}
+  </div>
+  
+</div>
+
+
+<div class="span6">
+  
+  {% if site_config.browser = 'MSIE' %}
+    <div class="alert alert-error">
+      {% trans "This software is using features not supported by Internet Explorer. Please use another browser if possible." %}
+    </div>
+  {% endif %}
+  
+  {% trans "Current Event" as sh_title %}
+  {% trans "Go to page" as sh_url_title %}
+  {% trans "process_url" as sh_url %}
+  {% with sh_title=sh_title sh_icon="icon-time" sh_url_title=sh_url_title sh_url=sh_url %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+  
+    {% with event=latest_event ed_with_header="yes" %}
+    <div style="border: 1px solid #ddd;padding:10px;">
+      {% include "info_box/event_detail.html" %}
+    </div>
+    {% endwith %}
+  
+  </div>
+  
+  {% trans "Last Activities" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-dashboard" sh_url_title="" rss_url="rss/" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">  
+    <div class="info_box">
+      <div class="info_box_content">
+        {% include "info_box/activities.html" %}
+      </div>
+    </div>
+  </div>
+  
+  {% trans "Current Research Request" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-eye-open" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% trans "questions_url" as add_rr_url %}
+  {% include "info_box/research_requests.html" %}
+  
+  
+  {% trans "Frequent Document Contents" as sh_title %}
+  {% with sh_title=sh_title sh_icon="" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  
+  <div class="alert alert-info" style="margin-bottom: 10px;">
+    {% trans "Click on the tags for searching for the term." %}
+  </div>
+  
+  <div id="tag_cloud" style="border:1px solid #ddd;margin-bottom: 5px;height:200px;">
+  </div>
+  <div style="margin-bottom:20px;">
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, null, '/suche/', 200);">{% trans "All" %}</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'projectpart', '/suche/', 200);" style="background-color:#0d9434;">&nbsp;&nbsp;&nbsp;</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'participant', '/suche/', 200);" style="background-color:#3e3ec7;">&nbsp;&nbsp;&nbsp;</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'event', '/suche/', 200);" style="background-color:#c91a1a;">&nbsp;&nbsp;&nbsp;</a>
+  </div>
+  
+<script>
+  $(document).ready(function() {
+    load_tag_cloud('#tag_cloud', null, null, '/suche/', 200);
+  });
+</script>
+
+  
+  
+  {% trans "Last Comment" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-comments" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% with show_commented_object="yes" %}
+  {% include "info_box/comments.html" %}
+  {% endwith %} 
+
+</div>
+
+{% endblock %}

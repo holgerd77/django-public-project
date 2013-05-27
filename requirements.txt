@@ -1,0 +1,5 @@
+Django>=1.5,<1.6
+pdfminer
+PIL
+django-tastypie>=0.9,<1.0
+South

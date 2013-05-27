@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {{ event }}{% endblock %}
+
+{% block content %}
+
+{% trans "Process" as ph_bc1 %}
+{% trans "process_url" as ph_bc1_url %}
+{% trans "Event" as ph_bc2 %}
+{% with ph_icon="icon-time" ph_title=event.title ph_bc1=ph_bc1 ph_bc1_url=ph_bc1_url ph_bc2=ph_bc2 %}
+{% include "layout_elements/page_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+
+<div class="span6">
+  
+  <div class="section">
+    {% include "info_box/event_detail.html" %}
+  </div>
+  
+  {% with web_source_list=event.web_sources.all %}
+  {% include "info_box/web_sources.html" %}
+  {% endwith %}
+ 
+</div>
+
+<div class="span6">
+  
+  {% trans "Questions" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-question-sign" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% with question_list=event.related_questions.all %}
+    {% include "info_box/questions.html" %}
+  {% endwith %}
+  
+  {% trans "Documents" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+    
+  {% include "info_box/documents.html" %}
+  
+  
+  {% trans "Comments" as sh_title %}
+  {% trans "New" as sh_url_title %}
+  {% trans "comments_url" as comments_url %}
+  {% with sh_title=sh_title sh_icon="icon-comments" sh_url_title=sh_url_title sh_url="#CommentModal" modal_url="yes" rss_url=comments_url|add:"rss/" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  {% with form=comment_form form_valid=comment_form_valid commented_object1=event %}
+  {% include "dialogs/comment.html" %}
+  {% endwith %}
+  
+  {% include "info_box/comments.html" %}
+  
+</div>
+
+{% endblock %}

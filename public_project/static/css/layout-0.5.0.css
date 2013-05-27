@@ -1,0 +1,102 @@
+
+h1 {
+	font-size: 24px;
+}
+
+a {
+	color: #119;
+}
+#header {
+	height: 100px;
+	margin: 15px 0 6px 0;
+	padding: 15px 15px 5px 15px;
+}
+#content {
+	margin-top:35px;
+}
+.icon-home {
+	color:#444 !important;
+}
+.icon-cogs {
+	color:#0d9434 !important;
+}
+.icon-question-sign {
+	color: #941bbf !important;
+}
+.icon-group {
+	color:#3e3ec7 !important;
+}
+.icon-time {
+	color:#c91a1a !important;
+}
+.icon-inbox {
+	color:#b88f00 !important;
+}
+.section_header {
+	margin-bottom: 5px;
+}
+.sh_title {
+	display: inline-block;
+	height: 14px;
+	background-color: #e0e0e0;
+	color: #555;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 8px 12px 8px 12px;
+}
+.sh_url {
+	float: right;
+	height: 14px;
+	background-color: #e0e0e0;
+	padding: 8px 12px 8px 12px;
+}
+.section {
+	clear: both;
+	margin-bottom: 30px;
+}
+.simple_box {
+	clear: both;
+}
+.info_box {
+	clear: both;
+	color: #555;
+	margin-bottom:5px;
+}
+.ib_text {
+	background-color:#f6f6f6;
+	padding:15px;
+}
+.info_box_header {
+	margin-bottom: 5px;
+	color: #555;
+	font-size: 14px;
+	font-weight: bold;
+}
+.info_box_header a {
+	font-size: 14px !important;
+	font-weight: bold;
+}
+.info_box_content {
+	
+}
+
+.info_box table {
+	width: 100%;
+	padding: 7px;
+	font-size: 12px;
+}
+.info_box td {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left:6px;
+	padding-right: 6px;
+}
+
+#footer {
+	font-size: 12px;
+	margin-top:20px;
+	border-top:1px solid #999;
+	padding-top:15px;
+	padding-bottom: 15px;
+	color: #666;
+}

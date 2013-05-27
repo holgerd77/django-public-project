@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {{ question }}{% endblock %}
+
+{% block content %}
+
+{% trans "Questions" as ph_bc1 %}
+{% trans "questions_url" as ph_bc1_url %}
+{% trans "Question" as ph_bc2 %}
+{% with ph_icon="icon-question-sign" ph_title=question.title ph_bc1=ph_bc1 ph_bc1_url=ph_bc1_url ph_bc2=ph_bc2 %}
+{% include "layout_elements/page_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+
+<div class="span6">
+  
+  <div class="section">
+    {% include "info_box/question_detail.html" %}
+  
+  {% if question.explanations %}
+  <div class="info_box ib_text"  style="margin-top:10px;background-color: #fff;border:3px solid #ebebeb;">
+    <div class="info_box_header">
+      {% trans "Explanations" %}
+    </div>
+    <div class="info_box_content" style="font-size:12px;">
+      <p>{{ question.explanations|linebreaksbr }}</p>
+    </div> 
+  </div>
+  {% endif %}
+  
+  {% if question.answer %}
+  <div class="info_box ib_text"  style="margin-top:10px;background-color: #ebebeb;">
+    <div class="info_box_header">
+      {% trans "Answer" %} 
+      {% if question.answered %}&nbsp;<span style="color:#0D9434;"><i class="icon-ok"></i></span>{% endif %}
+    </div>
+    <div class="info_box_content" style="font-size:12px;">
+      <p>{{ question.answer|linebreaksbr }}</p>
+    </div> 
+  </div>
+  {% endif %}
+  </div>
+  
+  {% trans "Documents" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+    
+  {% with document_list=question.documents.all %}
+  {% include "info_box/documents.html" %}
+  {% endwith %}
+
+  {% with web_source_list=question.web_sources.all %}
+  {% include "info_box/web_sources.html" %}
+  {% endwith %}
+ 
+</div>
+
+<div class="span6">  
+  
+  {% trans "Research Requests" as sh_title %}
+  {% trans "research_requests_url" as research_requests_url %}
+  
+  {% if perms.public_project.can_add_research_request %}
+  {% trans "New" as sh_url_title %}
+  {% with sh_title=sh_title sh_icon="icon-eye-open" sh_url_title=sh_url_title|add:" ("|add:user.username|add:")" sh_url="#ResearchRequestModal" modal_url="yes" rss_url=research_requests_url|add:"rss/" rss_btn_id=2 %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  {% else %}
+  {% with sh_title=sh_title sh_icon="icon-eye-open" rss_url=research_requests_url|add:"rss/" rss_btn_id=2 %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  {% endif %}
+  {% with commented_object1=question %}
+  {% include "dialogs/research_request.html" %}
+  {% endwith %}
+  
+  {% include "info_box/research_requests.html" %}
+  
+  
+  {% trans "Comments" as sh_title %}
+  {% trans "New" as sh_url_title %}
+  {% trans "comments_url" as comments_url %}
+  {% with sh_title=sh_title sh_icon="icon-comments" sh_url_title=sh_url_title sh_url="#CommentModal" modal_url="yes" rss_url=comments_url|add:"rss/" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  {% with commented_object1=question %}
+  {% include "dialogs/comment.html" %}
+  {% endwith %}
+  
+  {% include "info_box/comments.html" %}
+  
+</div>
+
+{% endblock %}

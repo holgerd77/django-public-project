@@ -1,0 +1,17 @@
+*.py[co]
+*.db
+*.sql
+*.gz
+*.zip
+*.tar
+*.log
+*.swp
+.DS_Store
+.project
+.settings
+.pydevproject
+settings_template.py
+dist
+docs/_build
+tests/bpw_tests/media/
+django_big_projects_watch.egg-info

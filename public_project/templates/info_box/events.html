@@ -1,0 +1,34 @@
+{% load i18n %}
+
+  <div class="section">
+  
+    <div class="info_box">
+      <div class="info_box_content">
+        <p>
+        {% if event_list %}
+          <table class="table table-striped">
+            {% for event in event_list %}
+            <tr>
+              <td 
+                style="width:72px;text-align:center;">
+                {{ event.date|date:"d.m.Y" }}
+              </td>
+              <td style="text-align: center; width:15px;">
+                <i class="{{ event.get_event_type_icon }}"></i>
+              </td>
+              <td>
+                <a href="{{ event.get_absolute_url }}" {% if event.important %}style="font-weight: bold;"{% endif %}>{{ event.title }}</a><br>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+        {% else %}
+          <span style="font-size:12px;">
+          {% trans "No events available." %}
+          </span>
+        {% endif %}
+        </p>
+      </div>
+    </div>
+  
+  </div>

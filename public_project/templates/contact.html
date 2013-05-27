@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {% trans "Contact" %}{% endblock %}
+
+{% block content %}
+
+{% trans "Contact" as ch_title %}
+{% with ch_icon="icon-pushpin" ch_title=ch_title ch_bc1=ch_title %}
+{% include "layout_elements/category_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+
+<div class="span6">
+  
+  <div class="section">
+    <div class="info_box">
+      <div class="info_box_content ib_text">
+        {% autoescape off %}
+          {{ site_config.contact_html|linebreaksbr }}  
+        {% endautoescape %}
+      </div>
+    </div>
+  </div>
+
+  {% trans "Disclaimer" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-warning-sign" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+    <div class="info_box ib_text">
+      <div class="info_box_content">
+        {% trans "disclaimer_text" %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="span6">
+
+  {% trans "Credits" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-heart" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+    <div class="info_box">
+      <div class="info_box_content ib_text">
+        {% trans "credits_opensource_text" %}
+        
+        <ul style="margin-top: 10px;">
+          <li>
+            <a href="http://djangoproject.com" target="_blank">Django (Web Framework)</a>
+          </li>
+          <li>
+            <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Twitter Bootstrap</a>
+          </li>
+          <li>
+            <a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome (Iconic Font Set)</a>
+          </li>
+          <li>
+            <a href="http://tastypieapi.org" target="_blank">Tastypie (API)</a>
+          </li>
+          <li>
+            <a href="http://mozilla.github.com/pdf.js/" target="_blank">Mozilla pdf.js (PDF rendering)</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  {% trans "Pictures" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-picture" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  <div class="section">
+    <div class="info_box">
+      <div class="info_box_content ib_text">   
+        <div style="margin-bottom: 10px;">
+        {% trans "credits_pictures_text" %}
+        </div>
+        
+        <table class="classic">
+          {% for image in image_list %}
+          <tr>
+            <td>{{ image.title }}</td>
+            <td>
+              {% autoescape off %}
+                {{ image.attribution_html }}
+              {% endautoescape %}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+{% endblock %}

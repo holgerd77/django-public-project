@@ -1,0 +1,20 @@
+{% load i18n %}
+
+
+    <div class="info_box" style="background-color: #f9f9f9;padding: 15px;">
+      <div class="info_box_content">
+        {% if pd_with_header %}
+        <p style="font-size:16px;font-weight: bold;margin-bottom:15px;">
+          <i class="icon-group"></i> &nbsp;
+          <a href="{{ participant.get_absolute_url}}" style="color:inherit;">{{ participant.name }} &nbsp;
+          <i class="icon-arrow-right"></i></a>
+        </p>
+        {% endif %}
+        <p style="font-size:12px;">
+          {% trans "Type" %}: {{ participant.get_participant_type_display }}
+        </p>
+        <p>
+          {{ participant.description }}
+        </p>
+      </div>
+    </div>

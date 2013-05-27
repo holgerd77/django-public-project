@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<div class="carousel-caption">
+  <div style="float:left">
+    <h4>Seite: <input type="text" id="page_num" style="margin:0;padding:0;width:30px;" maxlength="7"> / <span id="page_count"></span></h4>
+  </div>
+  <div style="float:right;">
+    <div style="line-height: 20px;">
+      <a href="javascript:PDFViewer.renderPage(1)" style="color:#fff;text-decoration:none;">
+         {% trans "Go to first page" %}
+      </a>
+    </div>
+  </div>
+</div>

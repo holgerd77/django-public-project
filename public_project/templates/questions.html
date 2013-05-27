@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {% trans "Questions" %}{% endblock %}
+
+{% block rss_url %}
+<link rel="alternate" type="application/rss+xml"
+   title="RSS" href="{{ request.get_full_path}}rss/" />
+{% endblock %}
+
+{% block content %}
+
+{% trans "Questions" as ch_title %}
+{% with ch_icon="icon-question-sign" ch_title=ch_title ch_bc1=ch_title %}
+{% include "layout_elements/category_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+
+<div class="span6">
+
+  <div class="section">
+    {% with ib_content=project.desc_questions %}
+    {% include "info_box/generic.html"%}
+    {% endwith %}
+  
+  </div>
+
+  {% for pp in project_part_list_left %}
+    {% with sh_title=pp.name sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
+    {% with question_list=pp.related_questions.all id_addon=pp.id %}
+      {% include "info_box/questions.html" %}
+    {% endwith %}
+  {% endfor %}
+
+</div>
+
+<div class="span6">
+  
+  {% trans "New Research Requests" as sh_title %}
+  {% trans "research_requests_url" as rr_url %}
+  {% with sh_title=sh_title sh_icon="icon-eye-open" sh_url_title="" rss_url=rr_url|add:"rss/" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% include "info_box/research_requests.html" %}
+  
+  
+  {% for pp in project_part_list_right %}
+    {% with sh_title=pp.name sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
+    {% with question_list=pp.related_questions.all id_addon=pp.id %}
+      {% include "info_box/questions.html" %}
+    {% endwith %}
+  {% endfor %}
+
+</div>
+
+{% endblock %}

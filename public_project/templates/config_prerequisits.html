@@ -1,0 +1,52 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+    <!--
+    body {
+      padding: 0px;
+      margin: 0px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #container {
+      width: 600px;
+      position: absolute;
+      left: 50%;
+      margin: 40px 0px 40px -300px;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+    }
+    #header {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    #content {
+      font-size: 14px;
+    }
+    ul { padding-left: 16px;}
+    li {
+      margin: 20px 0px 20px 0px;
+    }
+    -->
+  </style>
+</head>
+<body>
+  <div id="container">
+  <div id="header" class="config_prerequisites">
+    {% trans "For the site to work the following configuration steps are necessary:"%}
+  </div>
+  
+  <div id="content">
+    <ul>
+      {% for cp in missing_cps %}
+      <li>{{ cp }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+  </div>
+</body>

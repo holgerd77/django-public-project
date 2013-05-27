@@ -1,0 +1,32 @@
+{% load i18n %}
+
+  <div class="info_box">
+
+  <div class="info_box_content">
+    <div style="padding:15px;border:1px solid #ddd;">
+    <table>
+      {% for pg in pgg.projectgoal_set.all %}
+      <tr>
+        <td style="font-size:14px;font-weight: bold;{% if pgg.is_current %}color:#900;{% else %}color:#444;{% endif %}background-color:#f6f6f6;width:150px;">{{ pg.name }}</td>
+        <td style="font-size:14px;font-weight: bold;{% if pgg.is_current %}color:#900;{% else %}color:#444;{% endif %}background-color:#f6f6f6;">{{ pg.performance_figure }}</td>
+      </tr>
+      {% endfor %}
+      
+      {% if with_details %}
+          <tr>
+        <td style="padding-top:15px;">{% trans "Agreement at" %}</td>
+        <td style="padding-top:15px;"><a href="{{ pgg.event.get_absolute_url }}">{{ pgg.event.title }}</a> ({{ pgg.event.date }})</td>
+      </tr>
+    <tr>
+      <td colspan="2" style="padding-top:10px;">
+      {{ pgg.description }}
+      </td>
+    </tr>
+
+    {% endif %}
+    </table>
+    
+
+  </div>
+  </div>
+  </div>

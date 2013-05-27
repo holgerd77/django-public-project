@@ -1,0 +1,28 @@
+  
+  <ul class="nav nav-tabs">
+  <li class="active">
+    <a href="#" style="font-weight:bold;">
+    {% if sh_icon %}
+        <i class="{{ sh_icon }}"></i>
+      {% endif %}
+      {{ sh_title }}
+      {% if rss_url %}
+        &nbsp;<button class="btn btn-mini" id="rss_btn{{ rss_btn_id }}">RSS <i class="icon-rss"></i></button>
+        <script>
+          $('#rss_btn{{ rss_btn_id }}').click(function() {
+            location.href = '{{ rss_url }}';
+          });
+        </script>
+      {% endif %}
+      </a>
+      
+  </li>
+  {% if sh_url_title %}
+    <li style="float:right;">
+      <a href="{{ sh_url }}" {% if modal_url %}data-toggle="modal"{% endif %}>
+        {{ sh_url_title }} <i class="icon-arrow-right"></i>
+      </a>
+    </li>
+  {% endif %}
+</ul>
+

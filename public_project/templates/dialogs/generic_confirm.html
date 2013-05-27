@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<div class="modal hide fade" id="genericConfirm">
+  <div class="modal-body">
+    <p>{{ confirm_text }}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Close" %}</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#genericConfirm').modal({
+      keyboard: false,
+      show: true
+    })
+  });
+</script>
