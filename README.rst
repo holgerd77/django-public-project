@@ -1,6 +1,6 @@
-=========================
+=====================
 django-public-project
-=========================
+=====================
 
 Django Public Project (DPP) is a content management system tailored to represent and expose the various
 structural parts and participants in big projects and picture the inderdependencies between them.

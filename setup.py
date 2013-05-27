@@ -4,7 +4,7 @@ import os
 
 setup(
     name='django-public-project',
-    version='0.4.0',
+    version='0.5.0',
     description='CMS for building an information website around big projects',
     author='Holger Drewes',
     author_email='Holger.Drewes@googlemail.com',

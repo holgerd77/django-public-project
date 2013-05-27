@@ -301,6 +301,7 @@ Release Notes
 =============
 
 **Changes in version 0.5-alpha (Renaming Release)** (2013-05-27)
+
 This release is just for renaming the Django app. Due to the development of the software it came up,
 that the focus of the software is broader than actually thought, so the name ``django-public-project`` (DPP)
 is misleading and the software was renamed to ``django-public-project`` (DPP). This comes with a lot of
@@ -314,6 +315,7 @@ On ``GitHub`` the software moved to a new repository https://github.com/holgerd7
 with a new commit history. The ``South`` history has been restarted as well.
 
 Steps to manually upgrade:
+
 1. BACKUP YOUR DATABASE! BACKUP YOUR PROJECT FOLDER!
 2. Create a JSON dump of your project with the ``-n`` option for preserving natural keys, leave out
    the ``South`` tables: ``python manage.py dumpdata -n -e contenttypes -e auth.Permission -e south > bpw_dpp_dump.json``
