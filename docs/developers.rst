@@ -40,42 +40,42 @@ Installation with Pip
 ``DPP`` is now on the ``Python Package Index`` and you can install the software with all dependencies
 with::
 
-	pip install django-public-project
+    pip install django-public-project
 
 Manual Installation
 -------------------
 If you want to have the latest version of ``DPP``, you can install the sources manually 
 with ``PIP`` (or directly clone the GitHub repository)::
 
-	pip install -e git+https://github.com/holgerd77/django-public-project.git@master#egg=django-public-project
+    pip install -e git+https://github.com/holgerd77/django-public-project.git@master#egg=django-public-project
 
 Then install the requirements above. There is a ``requirements.txt`` file in the main directory
 of the repository you can use::
 
-	pip install -r requirements.txt
+    pip install -r requirements.txt
 
 Project Creation
 ---------------- 
 Create your ``Django`` project::
 
-	django-admin.py startproject myprojectwatch
+    django-admin.py startproject myprojectwatch
 
 Add the Django apps installed to your ``settings.py`` file (of course you also need the admin app which
 is essential for DPP)::
 
-	INSTALLED_APPS = (
-	    ...
-	    'django.contrib.admin',
-	    'tastypie',
-	    'public_project',
-	    'south',
-	)
+    INSTALLED_APPS = (
+        ...
+        'django.contrib.admin',
+        'tastypie',
+        'public_project',
+        'south',
+    )
 
 Sync your database respectively use migrations for DPP::
 
-	python manage.py syncdb (due to database dependencies, don't create a superuser yet)
-	python manage.py migrate
-	python manage.py createsuperuser
+    python manage.py syncdb (due to database dependencies, don't create a superuser yet)
+    python manage.py migrate
+    python manage.py createsuperuser
 
 Configuration
 =============
@@ -90,16 +90,16 @@ The urlpatterns for your project are completely coming from DPP, with an excepti
 which should be adoptable for security reasons. So your minimal urls.py should look similar to this,
 importing the main url patterns from ``public_project.urls``::
 
-	from django.conf.urls import patterns, include, url
+    from django.conf.urls import patterns, include, url
 
-	from django.contrib import admin
-	admin.autodiscover()
-	
-	from public_project.urls import urlpatterns
-	
-	urlpatterns += patterns('',
-	    url(r'^admin/', include(admin.site.urls)),
-	)
+    from django.contrib import admin
+    admin.autodiscover()
+    
+    from public_project.urls import urlpatterns
+    
+    urlpatterns += patterns('',
+        url(r'^admin/', include(admin.site.urls)),
+    )
 
 Now you should be able to enter the admin view when you start a dev server. The site itself is not yet
 ready for prime time at this moment.
@@ -118,23 +118,23 @@ you should use the following ``STATIC_URL`` and ``MEDIA_URL`` settings::
 For being able to get email notifications about comments and document relations, you need to configure
 the Django email settings properly::
 
-	EMAIL_FROM = 'admin@yourmailaccount.com'
-	EMAIL_HOST = 'smtp.yoursmtpserver.com'
-	EMAIL_HOST_USER =  'YOURUSERNAME'
-	EMAIL_HOST_PASSWORD = 'YOURSECUREPASSWORD'
+    EMAIL_FROM = 'admin@yourmailaccount.com'
+    EMAIL_HOST = 'smtp.yoursmtpserver.com'
+    EMAIL_HOST_USER =  'YOURUSERNAME'
+    EMAIL_HOST_PASSWORD = 'YOURSECUREPASSWORD'
    
 
 DPP uses the request template context processor in its views, so add it to the ``settings.py`` file::
    
    TEMPLATE_CONTEXT_PROCESSORS = (
-	    "django.contrib.auth.context_processors.auth",
-	    "django.core.context_processors.debug",
-	    "django.core.context_processors.i18n",
-	    "django.core.context_processors.media",
-	    "django.core.context_processors.static",
-	    "django.core.context_processors.tz",
-	    "django.contrib.messages.context_processors.messages",
-	    "django.core.context_processors.request", #this line!
+        "django.contrib.auth.context_processors.auth",
+        "django.core.context_processors.debug",
+        "django.core.context_processors.i18n",
+        "django.core.context_processors.media",
+        "django.core.context_processors.static",
+        "django.core.context_processors.tz",
+        "django.contrib.messages.context_processors.messages",
+        "django.core.context_processors.request", #this line!
    )
 
 And finally you need to enter a correct domain name (no leading ``http://``) for your Site app in the
@@ -149,7 +149,7 @@ At the moment DPP supports the following languages:
 
 The language is chosen depending on the ``LANGUAGE_CODE`` param in the ``settings.py`` module, e.g.::
 
-	LANGUAGE_CODE = 'de-de'
+    LANGUAGE_CODE = 'de-de'
 
 
 Document upload/viewer
@@ -167,7 +167,7 @@ Since this approach can take a lot of disk space for large documents and root ac
 needed, you have to activate IE compatible pdf viewer usage with the following setting in your 
 ``settings.py`` file::
 
-	DPP_IE_COMPATIBLE_PDF_VIEWER = True
+    DPP_IE_COMPATIBLE_PDF_VIEWER = True
 
 If this setting is set to false (default) a warning message will be shown on the document page for IE
 users, prompting them to use an alternative browser.
@@ -197,69 +197,37 @@ system, leaving out internal comments and user comments. The API supports no aut
 yet and will be accessible by everyone without limitation. To activate the API, add the following to 
 your ``settings.py`` file::
 
-	DPP_PUBLIC_API = True
+    DPP_PUBLIC_API = True
 
 For the API to work you have got to have `Tastypie <http://tastypieapi.org/>`_ 0.9.15+ installed::
 
-	pip install django-tastypie
+    pip install django-tastypie
 
 And add ``tastypie`` to your ``INSTALLED_APPS``.
 
 When the API is working there will be an extra link in the footer leading to to API overview page::
 
-	http://yourproject.org/api/
+    http://yourproject.org/api/
 
 .. note:: The API is still in an experimental/early stage, many features are missing and
           usage params will probably change in the future.
 
-How to contribute: Translation
-==============================
 
-General How-To
---------------
-The main area for contribution for this project is translation, since the scope of the software is relatively
-wide. So if you have got some time, speak English as a base language and another language like Spanish, Russian, 
-French,... you are very welcome to help out (you don't need to be a developer for this task)!
+Backing up the Database
+=======================
 
-You find the basic english language file called ``django.po`` on the 
-`DPP GitHub Page <https://github.com/holgerd77/django-public-project>`_
-in the following folder::
-	
-	public_project/locale/en/LC_MESSAGES/
-	
-Open this file and copy its contents. Then write the translation of the ``msg`` id strings between the 
-double quotes after the ``msstr`` attribute. For longer strings you can use a format like this::
+When backing up the database of a DPP installation, it works best to use the ``-n`` option for
+saving content type and some ohter references as natural keys and at the same time ommit backing up the 
+contenttypes app and the auth.Permission model. This makes it easier to recover an installation
+after DB data loss, since Django is automatically generating the content type objects (used in DPP
+for comments) which could lead to problems with IDs if not using natural keys::
 
-	#: models.py:123
-	msgid "Structural parts of the project being stable over time."
-	msgstr ""
-	"Structural parts of the project being stable over time, e.g. 'Terminals', "
-	"'Gates', 'Traffic Control', 'Integration of Public Transportation', not too "
-	"much (<10), often useful as well: one entry for the project as a whole."
-	
-Just replace the ``msgstr`` with the translation in your language. If there is already a ``msgstr`` in 
-english in the ``django.po`` file, use this string as a translation basis instead of ``msgid`` and
-replace the english string with your language translation.
+    python manage.py dumpdata -n -e contenttypes -e auth.Permission > dpp_dump.json
 
-When you are ready with your translation open an issue on GitHub and past your text there or (advanced
-developer version) make a pull request.
+When loading the data from a generated dump it is important to comment out the ``post_save`` signals
+from the ``models.py`` file, otherwise an error will occur::
 
-.. note:: If you have got limited time: please choose accuracy over speed, it's more helpful if you translate
-          20 strings in an appropriate manner and take some time to think about the translation than translating
-          50 strings and often missing the context or have spelling errors!
-
-
-Generating/compiling message files
-----------------------------------
-
-For generating the message files for a specific locale from the source identifiers, change to the ``public_project``
-app directory and generate the message file for the desired locale with::
-
-	django-admin.py makemessages -l de
-
-Then translate the missing identifier strings and compile the message files with::
-
-	django-admin.py compilemessages
+    python manage.py loaddata dpp_dump.json
 
 
 Running the Test Suite
@@ -278,23 +246,73 @@ Test Server
 A test server is necessary to run some of the tests (e.g. testing RSS feeds). The test server
 can be started with::
 
-	./testserver.sh
+    ./testserver.sh
 
 Browser/Selenium Tests
 ----------------------
 The purpose of Selenium tests is to test the front-end functionality of the site. Tests are
 organized in the app ``browser`` and can be run from within the ``tests`` directory with::
 
-	python manage.py test browser #whole test suite
-	python manage.py test browser.GenericTest #one test case
-	python manage.py test browser.GenericTest.test_main_page #a single test method
+    python manage.py test browser #whole test suite
+    python manage.py test browser.GenericTest #one test case
+    python manage.py test browser.GenericTest.test_main_page #a single test method
 
 Testing the 404 Template
 ------------------------
 When ``DEBUG`` is set to ``True`` in ``settings.py``, ``404 template`` can be tested via the following
 url::
 
-	http://yourdevelopmenturl/404test/
+    http://yourdevelopmenturl/404test/
+
+
+How to contribute: Translation
+==============================
+
+General How-To
+--------------
+The main area for contribution for this project is translation, since the scope of the software is relatively
+wide. So if you have got some time, speak English as a base language and another language like Spanish, Russian, 
+French,... you are very welcome to help out (you don't need to be a developer for this task)!
+
+You find the basic english language file called ``django.po`` on the 
+`DPP GitHub Page <https://github.com/holgerd77/django-public-project>`_
+in the following folder::
+    
+    public_project/locale/en/LC_MESSAGES/
+    
+Open this file and copy its contents. Then write the translation of the ``msg`` id strings between the 
+double quotes after the ``msstr`` attribute. For longer strings you can use a format like this::
+
+    #: models.py:123
+    msgid "Structural parts of the project being stable over time."
+    msgstr ""
+    "Structural parts of the project being stable over time, e.g. 'Terminals', "
+    "'Gates', 'Traffic Control', 'Integration of Public Transportation', not too "
+    "much (<10), often useful as well: one entry for the project as a whole."
+    
+Just replace the ``msgstr`` with the translation in your language. If there is already a ``msgstr`` in 
+english in the ``django.po`` file, use this string as a translation basis instead of ``msgid`` and
+replace the english string with your language translation.
+
+When you are ready with your translation open an issue on GitHub and past your text there or (advanced
+developer version) make a pull request.
+
+.. note:: If you have got limited time: please choose accuracy over speed, it's more helpful if you translate
+          20 strings in an appropriate manner and take some time to think about the translation than translating
+          50 strings and often missing the context or have spelling errors!
+
+
+Generating/compiling message files
+----------------------------------
+
+For generating the message files for a specific locale from the source identifiers, change to the ``public_project``
+app directory and generate the message file for the desired locale with::
+
+    django-admin.py makemessages -l de
+
+Then translate the missing identifier strings and compile the message files with::
+
+    django-admin.py compilemessages
 
 
 Release Notes
