@@ -1,1 +1,4 @@
 Sphinx
+selenium
+django-dynamic-fixture
+ipython
