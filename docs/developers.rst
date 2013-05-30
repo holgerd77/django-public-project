@@ -32,6 +32,9 @@ For PDF conversion to jpg files for having an IE compatible PDF viewer, you need
 
 * `ImageMagick (convert tool) <http://www.imagemagick.org/>`_
 
+.. note:: There are some fabric tasks which can help you set up an environment for DPP located in
+          an own GitHub repository which can be found here: https://github.com/holgerd77/django-public-project-fabric-tasks/
+
 Installation
 ============
 
