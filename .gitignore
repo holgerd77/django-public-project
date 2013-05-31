@@ -11,7 +11,10 @@
 .settings
 .pydevproject
 settings_template.py
-dist
 docs/_build
+example_project/example_project/sqlite3.db
+example_project/media/
+example_project/static/
 tests/bpw_tests/media/
+dist
 django_big_projects_watch.egg-info
