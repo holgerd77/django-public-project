@@ -409,15 +409,15 @@ def participants(request):
     if not cp:
         return response
     
+    groups = Participant.objects.annotate(count=Count('belongs_to')).filter(count=0)
+    middle = int(math.ceil(float(len(groups))/float(2)))
+    
     context = RequestContext(request, {
         'site_config': get_site_config(request),
         'project': get_project(),
         'category': 'participants',
-        'ad_participant_list': Participant.objects.filter(participant_type='AD'),
-        'po_participant_list': Participant.objects.filter(participant_type='PO'),
-        'ci_participant_list': Participant.objects.filter(participant_type='CI'),
-        'co_participant_list': Participant.objects.filter(participant_type='CO'),
-        'se_participant_list': Participant.objects.filter(participant_type='SE'),
+        'group_list_left': groups[0:middle],
+        'group_list_right': groups[middle:],
         'latest_participant_list': Participant.objects.all().order_by('-date_added')[0:3],
     })
     return render_to_response('participants.html', context)

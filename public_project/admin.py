@@ -1,10 +1,11 @@
-from public_project.models import *
+from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.actions import delete_selected
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext as _
+from public_project.models import *
 
 
 class UserProfileInline(admin.StackedInline):
@@ -33,16 +34,24 @@ class SearchTagInline(generic.GenericTabularInline):
     model = SearchTag
 
 
+class CustomParticipantAdminForm(forms.ModelForm):
+    
+    def clean_belongs_to(self):
+        data = self.cleaned_data['belongs_to']
+        for group in data:
+            if group.belongs_to.count() > 0:
+                raise forms.ValidationError(_("A participant can't belong to a participant (%s) which already belongs to another participant. Things would get to complicated.") % unicode(group))
+        return data
 
 class ParticipantAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
-    list_display = ('name', 'participant_type',)
-    list_filter = ('participant_type',)
+    list_display = ('name',)
     search_fields = ['name', 'description',]
     inlines = [
         SearchTagInline,
         WebSourceInline,
     ]
+    form = CustomParticipantAdminForm
     
     def delete_warning_msg(self, request, participant):
         msg  = _('The following associations with "%s" will be deleted') % unicode(participant)  + u': '

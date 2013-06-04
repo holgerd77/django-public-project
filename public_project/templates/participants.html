@@ -52,36 +52,9 @@
     </div>
   </div>
   
-  {% trans "Administration" as sh_title %}
-  {% with sh_title=sh_title sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  <div class="section">
-  
-    <div class="info_box">
-      {% with participant_list=ad_participant_list %}
-        {% include "info_box/participants.html" %}
-      {% endwith %}
-    </div>
-  
-  </div>
-  
-  {% trans "Politics / Party / Parliament" as sh_title %}
-  {% with sh_title=sh_title sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  <div class="section">
-  
-    <div class="info_box">
-      {% with participant_list=po_participant_list %}
-        {% include "info_box/participants.html" %}
-      {% endwith %}
-    </div>
-  
-  </div>
-  
+  {% for group in group_list_left %}
+    {% include "info_box/group.html" %}
+  {% endfor %}
   
 </div>
 
@@ -102,50 +75,9 @@
     {% endwith %}
   </div>
   
-  {% trans "Company" as sh_title %}
-  {% with sh_title=sh_title sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  <div class="section">
-  
-    <div class="info_box">
-      {% with participant_list=co_participant_list %}
-        {% include "info_box/participants.html" %}
-      {% endwith %}
-    </div>
-  
-  </div>
-  
-  {% trans "Citizens" as sh_title %}
-  {% with sh_title=sh_title sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  <div class="section">
-  
-    <div class="info_box">
-      {% with participant_list=ci_participant_list %}
-        {% include "info_box/participants.html" %}
-      {% endwith %}
-    </div>
-  
-  </div>
-  
-  {% trans "Miscellaneous" as sh_title %}
-  {% with sh_title=sh_title sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  <div class="section">
-  
-    <div class="info_box">
-      {% with participant_list=se_participant_list %}
-        {% include "info_box/participants.html" %}
-      {% endwith %}
-    </div>
-  
-  </div>
+  {% for group in group_list_right %}
+    {% include "info_box/group.html" %}
+  {% endfor %}
   
 </div>
 

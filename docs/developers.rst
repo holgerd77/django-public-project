@@ -321,6 +321,12 @@ Then translate the missing identifier strings and compile the message files with
 Release Notes
 =============
 
+** Changes in version 0.6-alpha** (no date yet!)
+
+* Replaced structuring of participants by participant type with a more flexible concept allowing the
+  grouping participants to other participants (groups) by a new attribute ``belongs_to`` in admin.
+  DB changes, migrations ``0002_auto__del_field_participant_type.py``, ``0003_auto.py``
+
 **Changes in version 0.5-alpha (Renaming Release)** (2013-05-27)
 
 This release is just for renaming the Django app. Due to the development of the software it came up,

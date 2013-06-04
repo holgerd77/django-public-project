@@ -131,6 +131,7 @@ class ExampleData:
         d1.document = pdf
         d1.save()
         d1.project_parts = [pp1,]
+        d1.participants = [p3, p4,]
         d1.save()
 
         q1 = Question(
@@ -140,6 +141,21 @@ class ExampleData:
         )
         q1.save()
         q1.project_parts = [pp1,]
+        q1.participants = [p2, p3,]
         q1.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

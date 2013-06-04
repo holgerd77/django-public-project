@@ -1,0 +1,13 @@
+<div class="section">
+    
+    <div class="info_box_header">
+      <a href="{{ group.get_absolute_url }}">{{ group }} <i class="icon-arrow-right"></i></a>
+    </div>
+    {% if group.participant_set.count > 0 %}
+    <div class="info_box">
+      {% with participant_list=group.participant_set.all %}
+        {% include "info_box/participants.html" %}
+      {% endwith %}
+    </div>
+    {% endif %}
+</div>

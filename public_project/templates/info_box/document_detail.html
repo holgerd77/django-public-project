@@ -20,7 +20,7 @@
         {% if participant_list %}
           <p style="font-size:12px;margin:0 0 5px;">
             {% for p in participant_list %}
-              <i class="icon-group"></i> 
+              <i class="{{ p.get_icon_class }}"></i> 
               <a href="{{ p.get_absolute_url}}">{{ p }}</a><br>
             {% endfor %}
           </p>

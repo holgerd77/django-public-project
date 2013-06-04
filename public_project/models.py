@@ -105,23 +105,10 @@ class WebSource(models.Model):
 
 
 class Participant(models.Model):
-    PARTICIPANT_TYPE_CHOICES = (
-        ('AD', _('Administration')),
-        ('PO', _('Politics / Party / Parliament')),
-        ('CI', _('Citizens')),
-        ('CO', _('Company')),
-        ('SE', _('Miscellaneous')),
-    )
-    PARTICIPANT_TYPE_CHOICES_ICONS = {
-        'AD': 'icon-group',
-        'PO': 'icon-group',
-        'CI': 'icon-group',
-        'CO': 'icon-group',
-        'SE': 'icon-group',
-    }
     help_text  = _("Person, group or institution acting in some way in the context of the project or being affected by the process or the result of the project execution.")
     name = models.CharField(max_length=250, help_text=help_text)
-    participant_type = models.CharField(max_length=2, choices=PARTICIPANT_TYPE_CHOICES)
+    help_text = _("The participant belongs to another participant (often an institution or group), leave blank if participant itself is institution/group.")
+    belongs_to = models.ManyToManyField('self', symmetrical=False)
     search_tags = generic.GenericRelation('SearchTag')
     help_text = _("Role/tasks as well as interests/goals of the participant regarding the project.")
     description = models.TextField(help_text=help_text)
@@ -144,12 +131,11 @@ class Participant(models.Model):
     def get_color(cls):
         return '#3e3ec7';
     
-    @classmethod
-    def get_icon_class(cls):
-        return 'icon-group';
-    
-    def get_participant_type_icon(self):
-        return self.PARTICIPANT_TYPE_CHOICES_ICONS[self.participant_type]
+    def get_icon_class(self):
+        if self.belongs_to.count() > 0:
+            return 'icon-user'
+        else:
+            return 'icon-group'
     
     class Meta:
         ordering = ['name',]

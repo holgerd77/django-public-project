@@ -8,7 +8,7 @@
   <title>{{ site_config.title }}{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="/static/css/lib/bootstrap-2.3.1.min.css" type="text/css">
   <link rel="stylesheet" href="/static/css/lib/font-awesome-3.0.2.css" type="text/css" />
-  <link rel="stylesheet" href="/static/css/layout-0.5.0.css" type="text/css" />
+  <link rel="stylesheet" href="/static/css/layout-0.5.1.css" type="text/css" />
   <link rel="shortcut icon" href="/static/favicon.ico" type="image/ico" />
   <meta name="robots" content="index, follow">
   {% block rss_url %}{% endblock %}
@@ -65,7 +65,7 @@
         <li><a href="/{% trans "questions_url" %}" style="{% if category == 'questions' %}font-weight:bold;{% endif %}"><i class="icon-question-sign"></i> {% trans "Questions" %}</a></li>
         <li><a href="/{% trans "participants_url" %}" style="{% if category == 'participants' %}font-weight:bold;{% endif %}"><i class="icon-group"></i> {% trans "Participants" %}</a></li>
         <li><a href="/{% trans "process_url" %}" style="{% if category == 'process' %}font-weight:bold;{% endif %}"><i class="icon-time"></i> {% trans "Process" %}</a></li>
-        <li><a href="/{% trans "documents_url" %}" style="{% if category == 'documents' %}font-weight:bold;{% endif %}"><i class="icon-inbox"></i> {% trans "Dokumente" %}</a></li>
+        <li><a href="/{% trans "documents_url" %}" style="{% if category == 'documents' %}font-weight:bold;{% endif %}"><i class="icon-inbox"></i> {% trans "Documents" %}</a></li>
         
       </ul>
       <form class="navbar-search pull-right" action="/{% trans "search_url" %}" method="GET">

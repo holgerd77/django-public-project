@@ -5,14 +5,19 @@
       <div class="info_box_content">
         {% if pd_with_header %}
         <p style="font-size:16px;font-weight: bold;margin-bottom:15px;">
-          <i class="icon-group"></i> &nbsp;
+          <i class="{{ participant.get_icon_class }}"></i> &nbsp;
           <a href="{{ participant.get_absolute_url}}" style="color:inherit;">{{ participant.name }} &nbsp;
           <i class="icon-arrow-right"></i></a>
         </p>
         {% endif %}
-        <p style="font-size:12px;">
-          {% trans "Type" %}: {{ participant.get_participant_type_display }}
-        </p>
+        {% if participant.belongs_to.count > 0 %}
+          <p style="font-size:12px;">
+            {% trans "Belongs to" %}:<br>
+              {% for bt_participant in participant.belongs_to.all %}
+                <a href="{{ bt_participant.get_absolute_url }}">{{ bt_participant }}</a><br>
+              {% endfor %}
+          </p>
+        {% endif %}
         <p>
           {{ participant.description }}
         </p>
