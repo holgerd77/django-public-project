@@ -24,14 +24,12 @@ class ExampleData:
 
         p1 = Participant(
             name             = 'Tower of Babel International',
-            participant_type = 'CO',
             description      = 'We are the makers. We are the doers. The sky is the limit.',
         )
         p1.save()
 
         p2 = Participant(
             name             = 'Babel Tower Coorporation',
-            participant_type = 'CO',
             description      = 'Former project responsibles. Hmm. Never met. Strange people.',
         )
         p2.save()
@@ -95,10 +93,17 @@ class ExampleData:
 
         p3 = Participant(
             name = 'Department of Stone Measurement (DOFSTON)',
-            participant_type = 'AD',
             description = 'Responsible for all stone measurement certificates at building site',
         )
         p3.save()
+        
+        p4 = Participant(
+            name = 'Mrs. Smith',
+            description = 'Very geeky lady from the DOFSTON, but kind of nice.',
+        )
+        p4.save()
+        p4.belongs_to = [p3,]
+        p4.save()
 
         e2 = Event(
             title = 'No DOFSTON certificate, rebuilding of 500 first floors',

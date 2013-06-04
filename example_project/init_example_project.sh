@@ -6,11 +6,10 @@ while true; do
             rm -f example_project/sqlite3.db;
             rm -Rf media/;
             rm -Rf static/;
-            echo "Don't create a superuser yet on syncdb (type 'no')!";
-            python manage.py syncdb;
+            python manage.py syncdb --noinput;
             python manage.py migrate;
-            echo "Now you can create a superuser!";
-            python manage.py createsuperuser;
+            echo "Creating superuser with username 'admin'...";
+            python manage.py createsuperuser --username=admin --email=d@d.de;
             echo "Creating example project data...";
             python manage.py createexampledata;
             echo "Finished. You're good to go! :-)";
