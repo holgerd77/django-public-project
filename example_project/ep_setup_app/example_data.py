@@ -105,17 +105,6 @@ class ExampleData:
         p4.belongs_to = [p3,]
         p4.save()
 
-        e2 = Event(
-            title = 'No DOFSTON certificate, rebuilding of 500 first floors',
-            event_type = 'IN',
-            description = "The Department of Stone Measurements doesn't give us the certificate for the first " + \
-                          "500 floors due to irregularities in stone dimensions, we are forced to rebuild.",
-            date = '2005-07-15',
-        )
-        e2.save()
-        e2.participants = [p2, p3,]
-        e2.save()
-
         pp1 = ProjectPart(
             name = 'Stone Management',
             description = 'Management of stone acquistion, quality management and deposition.',
@@ -128,6 +117,18 @@ class ExampleData:
             description = 'Certificates for stone measures, stone hole size compliance and stone authenticity.'
         )
         pp2.save()
+
+        e2 = Event(
+            title = 'No DOFSTON certificate, rebuilding of 500 first floors',
+            event_type = 'IN',
+            description = "The Department of Stone Measurements doesn't give us the certificate for the first " + \
+                          "500 floors due to irregularities in stone dimensions, we are forced to rebuild.",
+            date = '2005-07-15',
+        )
+        e2.save()
+        e2.participants = [p2, p3,]
+        e2.project_parts = [pp2,]
+        e2.save()
 
         d1 = Document(
             title =       'DOFSTON Certificate Refusal',
@@ -157,7 +158,7 @@ class ExampleData:
                           'We want to figure out what her role really is and why she did what she did.',
         )
         q2.save()
-        q2.project_parts = [pp1,]
+        q2.project_parts = [pp2,]
         q2.participants = [p4,]
         q2.save()
         
@@ -170,6 +171,7 @@ class ExampleData:
         )
         e3.save()
         e3.participants = [p4,]
+        e3.project_parts = [pp1,]
         e3.save()
         
         d2 = Document(

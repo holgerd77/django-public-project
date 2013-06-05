@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %} - {% trans "Process" %}{% endblock %}
+{% block title %} - {% trans "Events" %}{% endblock %}
 
 {% block rss_url %}
 <link rel="alternate" type="application/rss+xml"
@@ -10,7 +10,7 @@
 
 {% block content %}
 
-{% trans "Process" as ch_title %}
+{% trans "Events" as ch_title %}
 {% with ch_icon="icon-time" ch_title=ch_title ch_bc1=ch_title %}
 {% include "layout_elements/category_header.html" %}
 {% endwith %}

@@ -261,7 +261,7 @@ def index(request):
     return render_to_response('index.html', context)
 
 
-def project(request):
+def project_parts(request):
     cp, response = check_config_prerequisits()
     if not cp:
         return response
@@ -272,11 +272,12 @@ def project(request):
     context = RequestContext(request, {
         'site_config': get_site_config(request),
         'project': get_project(),
-        'category': 'project',
+        'category': 'project_parts',
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
+        'latest_project_part_list': ProjectPart.objects.all().order_by('-date_added')[0:3],
     })
-    return render_to_response('project.html', context)
+    return render_to_response('project_parts.html', context)
 
 
 def project_part(request, project_part_id):
@@ -286,8 +287,8 @@ def project_part(request, project_part_id):
     
     project_part = get_object_or_404(ProjectPart, pk=project_part_id)
     
-    document_list = list(project_part.related_documents.order_by("title"))
-    document_list = merge_with_search_tag_docs(document_list, project_part)
+    document_list = project_part.get_documents()
+    document_list = merge_with_search_tag_docs(list(document_list), project_part)
     
     comment_form_status = validate_comment_form(request)
     
@@ -300,6 +301,8 @@ def project_part(request, project_part_id):
         'user_comment': get_user_comment(request),
         'category': 'project',
         'project_part': project_part,
+        'question_list': project_part.get_questions(),
+        'event_list': project_part.get_events(),
         'document_list': document_list,
         'comment_form_status': comment_form_status,
         'comment_list': comment_list[0:3],
@@ -308,7 +311,7 @@ def project_part(request, project_part_id):
     return render_to_response('project_part.html', context)
 
 
-def process(request):
+def events(request):
     cp, response = check_config_prerequisits()
     if not cp:
         return response
@@ -316,12 +319,12 @@ def process(request):
     context = RequestContext(request, {
         'site_config': get_site_config(request),
         'project': get_project(),
-        'category': 'process',
+        'category': 'events',
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
         'chronology_list': Event.objects.all(),
         'latest_event_list': Event.objects.all()[0:5],
     })
-    return render_to_response('process.html', context)
+    return render_to_response('events.html', context)
 
 
 def event(request, event_id):
@@ -342,7 +345,7 @@ def event(request, event_id):
         'site_config': get_site_config(request),
         'project': get_project(),
         'user_comment': get_user_comment(request),
-        'category': 'process',
+        'category': 'events',
         'event': event,
         'document_list': document_list,
         'comment_form_status': comment_form_status,
@@ -371,8 +374,8 @@ def questions(request):
     if not cp:
         return response
     
-    project_parts = ProjectPart.objects.all()
-    middle = int(math.ceil(float(len(project_parts))/float(2)))
+    main_project_parts = ProjectPart.objects.filter(main_project_part__isnull=True)
+    middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
     research_request_list = ResearchRequest.objects.all()
     
@@ -380,8 +383,8 @@ def questions(request):
         'site_config': get_site_config(request),
         'project': get_project(),
         'category': 'questions',
-        'project_part_list_left': project_parts[0:middle],
-        'project_part_list_right': project_parts[middle:],
+        'main_project_part_list_left': main_project_parts[0:middle],
+        'main_project_part_list_right': main_project_parts[middle:],
         'research_request_list': research_request_list[0:3],
         'num_total_research_requests': len(research_request_list),
     })
@@ -474,15 +477,15 @@ def documents(request):
     if not cp:
         return response
     
-    project_parts = ProjectPart.objects.all()
-    middle = int(math.ceil(float(len(project_parts))/float(2)))
+    main_project_parts = ProjectPart.objects.filter(main_project_part__isnull=True)
+    middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
         'project': get_project(),
         'category': 'documents',
-        'project_part_list_left': project_parts[0:middle],
-        'project_part_list_right': project_parts[middle:],
+        'main_project_part_list_left': main_project_parts[0:middle],
+        'main_project_part_list_right': main_project_parts[middle:],
         'latest_document_list': Document.objects.all()[0:3],
     })
     return render_to_response('documents.html', context)
@@ -492,7 +495,7 @@ def xhr_universal_search(request):
     if request.method == 'GET' and 'query' in request.GET:
         query_string = request.GET['query']
         
-        entry_query = get_query(query_string, ['name',])
+        entry_query = get_query(query_string, ['name', 'main_project_part__name',])
         pp_list = list(ProjectPart.objects.select_related().filter(entry_query)[0:10])
         
         entry_query = get_query(query_string, ['title',])

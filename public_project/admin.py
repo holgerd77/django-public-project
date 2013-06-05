@@ -76,6 +76,15 @@ class ProjectAdmin(admin.ModelAdmin):
     ]
 
 
+class CustomProjectPartAdminForm(forms.ModelForm):
+    
+    def clean_main_project_part(self):
+        data = self.cleaned_data['main_project_part']
+        if data.main_project_part:
+            raise forms.ValidationError(_("A project part can't have a main project part which has a main project part itself. Things would get to complicated."))
+        return data
+
+
 class ProjectPartAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
     list_display = ('name', 'order', 'main_project_part',)
@@ -83,6 +92,7 @@ class ProjectPartAdmin(admin.ModelAdmin):
         SearchTagInline,
         WebSourceInline,
     ]
+    form = CustomProjectPartAdminForm
 
     def delete_warning_msg(self, request, project_part):
         msg  = _('The following associations with "%s" will be deleted') % unicode(project_part)  + u': '

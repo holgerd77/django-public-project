@@ -194,7 +194,19 @@ class ProjectPart(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return self.name
+        if self.main_project_part:
+            return self.name + " (" + self.main_project_part.name + ")"
+        else:
+            return self.name
+    
+    def get_questions(self):
+        return Question.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
+    
+    def get_events(self):
+        return Event.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
+    
+    def get_documents(self):
+        return Document.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
     
     def get_feed_description(self):
         html  = self.description
@@ -207,9 +219,11 @@ class ProjectPart(models.Model):
     def get_color(cls):
         return '#0d9434';
     
-    @classmethod
-    def get_icon_class(cls):
-        return 'icon-cogs';
+    def get_icon_class(self):
+        if self.main_project_part:
+            return 'icon-cog'
+        else:
+            return 'icon-cogs'
     
     class Meta:
         ordering = ['order',]

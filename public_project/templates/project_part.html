@@ -18,14 +18,10 @@
 
 <div class="span6">
   
-  <div class="info_box" style="background-color: #f9f9f9;padding: 15px;">
-      <div class="info_box_content">
-        <p>
-          {{ project_part.description }}
-        </p>
-      </div>
+  <div class="section">
+    {% include "info_box/project_part_detail.html" %}
   </div>
-  <br>
+  
   {% with web_source_list=project_part.web_sources.all %}
   {% include "info_box/web_sources.html" %}
   {% endwith %}
@@ -35,9 +31,7 @@
     {% include "layout_elements/section_header.html" %}
   {% endwith %}
   
-  {% with event_list=project_part.related_events.all %}
-    {% include "info_box/events.html" %}
-  {% endwith %}
+  {% include "info_box/events.html" %}
 
 </div>
 
@@ -48,9 +42,7 @@
     {% include "layout_elements/section_header.html" %}
   {% endwith %}
   
-  {% with question_list=project_part.related_questions.all %}
-    {% include "info_box/questions.html" %}
-  {% endwith %}
+  {% include "info_box/questions.html" %}
   
   
   {% trans "Documents" as sh_title %}
