@@ -266,13 +266,15 @@ def project(request):
     if not cp:
         return response
     
-    project_part_list = ProjectPart.objects.all()
+    main_project_parts = ProjectPart.objects.filter(main_project_part__isnull=True)
+    middle = int(math.ceil(float(len(main_project_parts))/float(2)))
+    
     context = RequestContext(request, {
         'site_config': get_site_config(request),
         'project': get_project(),
         'category': 'project',
-        'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
-        'project_part_list': project_part_list,
+        'main_project_part_list_left': main_project_parts[0:middle],
+        'main_project_part_list_right': main_project_parts[middle:],
     })
     return render_to_response('project.html', context)
 
@@ -348,6 +350,20 @@ def event(request, event_id):
         'num_total_comments': len(comment_list),
     })
     return render_to_response('event.html', context)
+
+
+def goals(request):
+    cp, response = check_config_prerequisits()
+    if not cp:
+        return response
+    
+    context = RequestContext(request, {
+        'site_config': get_site_config(request),
+        'project': get_project(),
+        'category': 'goals',
+        'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
+    })
+    return render_to_response('goals.html', context)
 
 
 def questions(request):
@@ -430,8 +446,8 @@ def participant(request, participant_id):
     
     participant = get_object_or_404(Participant, pk=participant_id)
     
-    document_list = list(participant.related_documents.order_by("title"))
-    document_list = merge_with_search_tag_docs(document_list, participant)
+    document_list = participant.get_documents()
+    document_list = merge_with_search_tag_docs(list(document_list), participant)
     
     comment_form_status = validate_comment_form(request)
     content_type = ContentType.objects.get(app_label="public_project", model="participant")
@@ -443,6 +459,8 @@ def participant(request, participant_id):
         'user_comment': get_user_comment(request),
         'category': 'participants',
         'participant': participant,
+        'question_list': participant.get_questions(),
+        'event_list': participant.get_events(),
         'document_list': document_list,
         'comment_form_status': comment_form_status,
         'comment_list': comment_list[0:3],

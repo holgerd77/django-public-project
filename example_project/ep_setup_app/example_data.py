@@ -121,6 +121,13 @@ class ExampleData:
             description = 'Management of stone acquistion, quality management and deposition.',
         )
         pp1.save()
+        
+        pp2 = ProjectPart(
+            name = 'Certification',
+            main_project_part = pp1,
+            description = 'Certificates for stone measures, stone hole size compliance and stone authenticity.'
+        )
+        pp2.save()
 
         d1 = Document(
             title =       'DOFSTON Certificate Refusal',
@@ -130,8 +137,8 @@ class ExampleData:
         pdf = File(open('ep_setup_app/docs/dofston_cert_refusal.pdf', 'rw'))
         d1.document = pdf
         d1.save()
-        d1.project_parts = [pp1,]
-        d1.participants = [p3, p4,]
+        d1.project_parts = [pp2,]
+        d1.participants = [p3,]
         d1.save()
 
         q1 = Question(
@@ -143,6 +150,47 @@ class ExampleData:
         q1.project_parts = [pp1,]
         q1.participants = [p2, p3,]
         q1.save()
+        
+        q2 = Question(
+            title = 'What is the role of Mrs. Smith?',
+            description = 'Mrs. Smith plays a really dubious role in all this. ' + \
+                          'We want to figure out what her role really is and why she did what she did.',
+        )
+        q2.save()
+        q2.project_parts = [pp1,]
+        q2.participants = [p4,]
+        q2.save()
+        
+        e3 = Event(
+            title = 'Mrs. Smith made a telephone call',
+            event_type = 'IN',
+            description = "On this day Mrs. Smith made a telephone call. Normally this woman never answers " + \
+                          "the phone so this is obviously quite dubious.",
+            date = '2005-03-22',
+        )
+        e3.save()
+        e3.participants = [p4,]
+        e3.save()
+        
+        d2 = Document(
+            title =       'Transcript of telephone call Mrs. Smith',
+            date =        '2005-03-25',
+            description = 'Mrs. Smith made a phone call. Transcript was sent by anonymous caller.', 
+        )
+        pdf = File(open('ep_setup_app/docs/phonecall_mrs_smith.pdf', 'rw'))
+        d2.document = pdf
+        d2.save()
+        d2.project_parts = [pp1,]
+        d2.events = [e3,]
+        d2.participants = [p4,]
+        d2.save()
+
+
+
+
+
+
+
 
 
 

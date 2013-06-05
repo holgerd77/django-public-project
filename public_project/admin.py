@@ -78,7 +78,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 class ProjectPartAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
-    list_display = ('name', 'order',)
+    list_display = ('name', 'order', 'main_project_part',)
     inlines = [
         SearchTagInline,
         WebSourceInline,

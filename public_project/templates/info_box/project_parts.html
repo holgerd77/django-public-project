@@ -1,36 +1,18 @@
 {% load i18n %}
 
 
-  <div class="section">
-    
     {% if project_part_list %}
-    {% for pp in project_part_list %}
-      <div class="info_box ib_text">
-        <div class="info_box_header">
-          {% if with_detail_page_url %}
-          <a href="{{ pp.get_absolute_url }}" style="font-size: 16px !important;">
-          {% endif %}
-            {{ pp.name }}
-          {% if with_detail_page_url %}
-            </a>
-          {% endif %}
-        </div>
         <div class="info_box_content">
-          <p>{{ pp.description|linebreaksbr }}</p>
-          
-        </div> 
-      </div>
-      {% endfor %}
+          <table class="table">
+            {% for pp in project_part_list %}
+            <tr>
+              <td><a href="{{ pp.get_absolute_url}}">{{ pp.name }}</a></td>
+            </tr>
+            {% endfor %}
+          </table>    
+        </div>
       {% else %}
-      <div class="info_box">
-        <div class="info_box_content">
-          <p>
-            <span style="font-size:12px;">
-            {% trans "No project parts available." %}
-            </span>
-          </p>
-        </div>
-      </div>
+        <span style="font-size:12px;">
+        {% trans "No project_parts available." %}
+        </span>
       {% endif %}
-      
-  </div>

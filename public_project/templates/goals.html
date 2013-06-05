@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {% trans "Goals" %}{% endblock %}
+
+{% block content %}
+
+{% trans "Goals" as ch_title %}
+{% with ch_icon="icon-bullseye" ch_title=ch_title ch_bc1=ch_title %}
+{% include "layout_elements/category_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+
+<div class="span6">
+
+</div>
+
+<div class="span6">
+  
+  <div class="section">
+    {% for pgg in project_goal_group_list %}
+      {% include "info_box/project_goal_group.html" with with_details="yes" %}
+    {% endfor %}
+  </div>
+  
+</div>
+
+{% endblock %}

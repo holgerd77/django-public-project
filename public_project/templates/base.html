@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ site_config.title }}{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="/static/css/lib/bootstrap-2.3.1.min.css" type="text/css">
-  <link rel="stylesheet" href="/static/css/lib/font-awesome-3.0.2.css" type="text/css" />
+  <link rel="stylesheet" href="/static/css/lib/font-awesome-3.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/static/css/layout-0.5.1.css" type="text/css" />
   <link rel="shortcut icon" href="/static/favicon.ico" type="image/ico" />
   <meta name="robots" content="index, follow">
@@ -62,6 +62,7 @@
       <ul class="nav">
         <li><a href="/" style="{% if category == 'home' %}font-weight:bold;{% endif %}"><i class="icon-home"></i> Home</a></li>
         <li><a href="/{% trans "project_url" %}" style="{% if category == 'project' %}font-weight:bold;{% endif %}"><i class="icon-cogs"></i> {% trans "Project" %}</a></li>
+        <li><a href="/{% trans "goals_url" %}" style="{% if category == 'goals' %}font-weight:bold;{% endif %}"><i class="icon-bullseye"></i> {% trans "Goals" %}</a></li>
         <li><a href="/{% trans "questions_url" %}" style="{% if category == 'questions' %}font-weight:bold;{% endif %}"><i class="icon-question-sign"></i> {% trans "Questions" %}</a></li>
         <li><a href="/{% trans "participants_url" %}" style="{% if category == 'participants' %}font-weight:bold;{% endif %}"><i class="icon-group"></i> {% trans "Participants" %}</a></li>
         <li><a href="/{% trans "process_url" %}" style="{% if category == 'process' %}font-weight:bold;{% endif %}"><i class="icon-time"></i> {% trans "Process" %}</a></li>
@@ -69,7 +70,7 @@
         
       </ul>
       <form class="navbar-search pull-right" action="/{% trans "search_url" %}" method="GET">
-        <input type="text" class="search-query" name="q" value="{{ request.GET.q }}" placeholder="{% trans "Search" %}" style="width:180px;">
+        <input type="text" class="search-query" name="q" value="{{ request.GET.q }}" placeholder="{% trans "Search" %}" style="width:160px;">
       </form>
     </div>
   </div>

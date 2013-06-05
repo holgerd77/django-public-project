@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 from datetime import datetime
+from itertools import chain
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -120,6 +121,15 @@ class Participant(models.Model):
     def __unicode__(self):
         return self.name
     
+    def get_questions(self):
+        return Question.objects.filter(participants__in=list(chain([self,], self.participant_set.all()))).distinct()
+    
+    def get_events(self):
+        return Event.objects.filter(participants__in=list(chain([self,], self.participant_set.all()))).distinct()
+    
+    def get_documents(self):
+        return Document.objects.filter(participants__in=list(chain([self,], self.participant_set.all()))).distinct()
+    
     def get_feed_description(self):
         html  = self.description
         return  html
@@ -173,6 +183,8 @@ class ProjectPart(models.Model):
     name = models.CharField(max_length=250, help_text=help_text)
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
     order = models.IntegerField(help_text=help_text, blank=True, null=True)
+    help_text = _("If you select another project part here, you'll make this a sub project part.")
+    main_project_part = models.ForeignKey('self', blank=True, null=True, help_text=help_text)
     search_tags = generic.GenericRelation('SearchTag')
     help_text = _("Website (if existant).")
     description = models.TextField(help_text=help_text)

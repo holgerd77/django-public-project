@@ -1,0 +1,13 @@
+<div class="section">
+    
+    <div class="info_box_header">
+      <a href="{{ main_project_part.get_absolute_url }}">{{ main_project_part }} <i class="icon-arrow-right"></i></a>
+    </div>
+    {% if main_project_part.projectpart_set.count > 0 %}
+    <div class="info_box">
+      {% with project_part_list=main_project_part.projectpart_set.all with_detail_page_url="yes" %}
+        {% include "info_box/project_parts.html" %}
+      {% endwith %}
+    </div>
+    {% endif %}
+</div>
