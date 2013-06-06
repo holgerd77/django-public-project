@@ -88,6 +88,37 @@ and some contact information.")
         return self.title
 
 
+class SiteCategoryManager(models.Manager):
+    def get_category(self, category):
+        cnt = super(SiteCategoryManager, self).filter(category=category).count()
+        if cnt == 1:
+            return super(SiteCategoryManager, self).get(category=category)
+        else:
+            sc = self.model(category='home')
+            print sc
+            return sc
+
+
+class SiteCategory(models.Model):
+    NAME_CHOICES = (
+        ('home', "Home"),
+        ('project_parts', _('Topics')),
+        ('goals', _('Goals')),
+        ('questions', _('Questions')),
+        ('participants', _('Participants')),
+        ('events', _('Events')),
+        ('documents', _('Documents')),
+    )
+    category = models.CharField(max_length=50, choices=NAME_CHOICES, unique=True)
+    intro_text = models.TextField(blank=True, null=True)
+    documents = models.ManyToManyField('Document', related_name="related_site_categories", blank=True, null=True)
+    web_sources = generic.GenericRelation('WebSource')
+    comments = models.TextField(blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    
+    objects = SiteCategoryManager()
+
+
 class WebSource(models.Model):
     title = models.CharField(max_length=250)
     content_type = models.ForeignKey(ContentType)
@@ -100,6 +131,10 @@ class WebSource(models.Model):
     
     def __unicode__(self):
         return self.title
+    
+    @classmethod
+    def get_icon_class(cls):
+        return 'icon-globe'
     
     class Meta:
         ordering = ['order']
@@ -149,33 +184,6 @@ class Participant(models.Model):
     
     class Meta:
         ordering = ['name',]
-
-
-class Project(models.Model):
-    help_text = _("Name of the project.")
-    name = models.CharField(max_length=250, help_text=help_text)
-    responsible_participants = models.ManyToManyField(Participant, related_name="responsible_for_project")
-    former_responsible_participants = models.ManyToManyField(Participant, related_name="formerly_responsible_for_project")
-    help_text = _("General description of the project, what is it about, what is being done?")
-    desc_project = models.TextField(help_text=help_text)
-    help_text = _("What are the important parts of the project?")
-    desc_project_parts = models.TextField(help_text=help_text)
-    help_text = _("What questions regarding the project should be answered?")
-    desc_questions = models.TextField(help_text=help_text)
-    help_text = _("Who has initiated the project, what societal groups are involved?")
-    desc_participants = models.TextField(help_text=help_text)
-    help_text = _("What goals does the project target, what conditions should be met?")
-    desc_goal_groups = models.TextField(help_text=help_text)
-    help_text = _("What is the general process of the project development?")
-    desc_process = models.TextField(help_text=help_text)
-    help_text = _("What project documents are collected/provided?")
-    desc_documents = models.TextField(help_text=help_text)
-    web_sources = generic.GenericRelation(WebSource)
-    comments = models.TextField(blank=True)
-    date_added = models.DateTimeField(auto_now_add=True)
-    
-    def __unicode__(self):
-        return self.name    
 
 
 class ProjectPart(models.Model):
@@ -288,11 +296,11 @@ class Event(models.Model):
     
     @classmethod
     def get_color(cls):
-        return '#c91a1a';
+        return '#c91a1a'
     
     @classmethod
     def get_icon_class(cls):
-        return 'icon-time';
+        return 'icon-time'
     
     def as_list(self):
         return [self,]

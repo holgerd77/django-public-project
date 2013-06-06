@@ -22,12 +22,20 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ('title', 'image',)
 
 
+class WebSourceInline(generic.GenericTabularInline):
+    model = WebSource
+
+
 class SiteConfigAdmin(admin.ModelAdmin):
     list_display = ('title', 'short_title', 'title_color', 'sub_title', 'sub_title_color')
 
 
-class WebSourceInline(generic.GenericTabularInline):
-    model = WebSource
+class SiteCategoryAdmin(admin.ModelAdmin):
+    list_display = ('category',)
+    inlines = [
+        WebSourceInline,
+    ]
+    filter_horizontal = ('documents',)
 
 
 class SearchTagInline(generic.GenericTabularInline):
@@ -67,13 +75,6 @@ class ParticipantAdmin(admin.ModelAdmin):
         for object in queryset.all():
             self.delete_warning_msg(request, object)
         return delete_selected(self, request, queryset)
-
-
-class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    inlines = [
-        WebSourceInline,
-    ]
 
 
 class CustomProjectPartAdminForm(forms.ModelForm):
@@ -189,8 +190,8 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(SiteConfig, SiteConfigAdmin)
+admin.site.register(SiteCategory, SiteCategoryAdmin)
 admin.site.register(Participant, ParticipantAdmin)
-admin.site.register(Project, ProjectAdmin)
 admin.site.register(ProjectPart, ProjectPartAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Question, QuestionAdmin)

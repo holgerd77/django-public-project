@@ -193,6 +193,15 @@ instructions.
 .. image:: images/screenshot_site_configuration_message.png
 
 
+Site Domain
+-----------
+For urls in comment emails to work properly, you have to edit the ``Site`` object, which Django
+should have created in the ``Sites`` section in the Django admin.
+
+Provide your fully qualified domain name there (e.g. 'yourproject.yourdomain.com'), without
+trailing 'http://'.
+
+
 JSON API
 --------
 Since ``v.0.4`` DPP comes with a public API, which let developers access the public data of the

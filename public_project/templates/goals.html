@@ -16,6 +16,27 @@
 
 <div class="span6">
 
+  <div class="section">
+    {% include "info_box/site_category_detail.html" %}
+  </div>
+  
+  {% trans "Documents" as sh_title %}
+  {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
+    {% include "layout_elements/section_header.html" %}
+  {% endwith %}
+  
+  {% with document_list=site_category.documents.all %}
+    {% include "info_box/documents.html" %}
+  {% endwith %}
+  
+  {% with web_source_list=site_category.web_sources.all %}
+    {% include "info_box/web_sources.html" %}
+  {% endwith %}
+  
+  {% for main_project_part in main_project_part_list_left %}
+    {% include "info_box/main_project_part.html" %}
+  {% endfor %}
+
 </div>
 
 <div class="span6">

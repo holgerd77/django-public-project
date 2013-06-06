@@ -24,9 +24,7 @@ def check_config_prerequisits():
         missing_cps.append(_("Creation of (exactly) one SiteConfig object in the Django admin \
 with the general config params and non-dynamical contents."))
     
-    if Project.objects.count() != 1:
-        missing_cps.append(_("Creation of (exactly) one Project object in the Django admin \
-with general information about the project."))
+    
     if ProjectGoalGroup.objects.count() == 0 or ProjectGoal.objects.count() == 0:
         missing_cps.append(_("Creation of at least one ProjectGoalGroup object in the Django admin \
 containing at least one ProjectGoal."))
@@ -36,10 +34,6 @@ containing at least one ProjectGoal."))
     }
     cp_met = len(missing_cps) == 0
     return cp_met, render_to_response('config_prerequisits.html', context)
-
-
-def get_project():
-    return Project.objects.all()[0]
 
 
 def get_site_config(request):
@@ -246,8 +240,7 @@ def index(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
-        'category': 'home',
+        'site_category': SiteCategory.objects.get_category('home'),
         'current_project_goal_group': ProjectGoalGroup.objects.get_current(),
         'project_part_list': ProjectPart.objects.all(),
         'latest_event': latest_event,
@@ -271,8 +264,7 @@ def project_parts(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
-        'category': 'project_parts',
+        'site_category': SiteCategory.objects.get_category('project_parts'),
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'latest_project_part_list': ProjectPart.objects.all().order_by('-date_added')[0:3],
@@ -297,9 +289,8 @@ def project_part(request, project_part_id):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
+        'site_category': SiteCategory.objects.get_category('project_parts'),
         'user_comment': get_user_comment(request),
-        'category': 'project',
         'project_part': project_part,
         'question_list': project_part.get_questions(),
         'event_list': project_part.get_events(),
@@ -311,50 +302,6 @@ def project_part(request, project_part_id):
     return render_to_response('project_part.html', context)
 
 
-def events(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
-    context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'project': get_project(),
-        'category': 'events',
-        'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
-        'chronology_list': Event.objects.all(),
-        'latest_event_list': Event.objects.all()[0:5],
-    })
-    return render_to_response('events.html', context)
-
-
-def event(request, event_id):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
-    event = get_object_or_404(Event, pk=event_id)
-    
-    document_list = list(event.related_documents.order_by("title"))
-    document_list = merge_with_search_tag_docs(document_list, event)
-    
-    comment_form_status = validate_comment_form(request)
-    content_type = ContentType.objects.get(app_label="public_project", model="event")
-    comment_list = Comment.objects.filter(commentrelation__content_type=content_type).filter(commentrelation__object_id=event.id).filter(published=True).distinct()
-    
-    context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'project': get_project(),
-        'user_comment': get_user_comment(request),
-        'category': 'events',
-        'event': event,
-        'document_list': document_list,
-        'comment_form_status': comment_form_status,
-        'comment_list': comment_list[0:3],
-        'num_total_comments': len(comment_list),
-    })
-    return render_to_response('event.html', context)
-
-
 def goals(request):
     cp, response = check_config_prerequisits()
     if not cp:
@@ -362,8 +309,7 @@ def goals(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
-        'category': 'goals',
+        'site_category': SiteCategory.objects.get_category('goals'),
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
     })
     return render_to_response('goals.html', context)
@@ -381,8 +327,7 @@ def questions(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
-        'category': 'questions',
+        'site_category': SiteCategory.objects.get_category('questions'),
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'research_request_list': research_request_list[0:3],
@@ -408,10 +353,9 @@ def question(request, question_id):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
+        'site_category': SiteCategory.objects.get_category('questions'),
         'user_comment': get_user_comment(request),
         'research_request': get_research_request(request),
-        'category': 'question',
         'question': question,
         'research_request_form_status': research_request_form_status,
         'research_request_list': research_request_list[0:3],
@@ -433,8 +377,7 @@ def participants(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
-        'category': 'participants',
+        'site_category': SiteCategory.objects.get_category('participants'),
         'group_list_left': groups[0:middle],
         'group_list_right': groups[middle:],
         'latest_participant_list': Participant.objects.all().order_by('-date_added')[0:3],
@@ -458,9 +401,8 @@ def participant(request, participant_id):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
+        'site_category': SiteCategory.objects.get_category('participants'),
         'user_comment': get_user_comment(request),
-        'category': 'participants',
         'participant': participant,
         'question_list': participant.get_questions(),
         'event_list': participant.get_events(),
@@ -470,6 +412,48 @@ def participant(request, participant_id):
         'num_total_comments': len(comment_list),
     })
     return render_to_response('participant.html', context)
+
+
+def events(request):
+    cp, response = check_config_prerequisits()
+    if not cp:
+        return response
+    
+    context = RequestContext(request, {
+        'site_config': get_site_config(request),
+        'site_category': SiteCategory.objects.get_category('events'),
+        'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
+        'chronology_list': Event.objects.all(),
+        'latest_event_list': Event.objects.all()[0:5],
+    })
+    return render_to_response('events.html', context)
+
+
+def event(request, event_id):
+    cp, response = check_config_prerequisits()
+    if not cp:
+        return response
+    
+    event = get_object_or_404(Event, pk=event_id)
+    
+    document_list = list(event.related_documents.order_by("title"))
+    document_list = merge_with_search_tag_docs(document_list, event)
+    
+    comment_form_status = validate_comment_form(request)
+    content_type = ContentType.objects.get(app_label="public_project", model="event")
+    comment_list = Comment.objects.filter(commentrelation__content_type=content_type).filter(commentrelation__object_id=event.id).filter(published=True).distinct()
+    
+    context = RequestContext(request, {
+        'site_config': get_site_config(request),
+        'site_category': SiteCategory.objects.get_category('events'),
+        'user_comment': get_user_comment(request),
+        'event': event,
+        'document_list': document_list,
+        'comment_form_status': comment_form_status,
+        'comment_list': comment_list[0:3],
+        'num_total_comments': len(comment_list),
+    })
+    return render_to_response('event.html', context)
 
 
 def documents(request):
@@ -482,8 +466,7 @@ def documents(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
-        'category': 'documents',
+        'site_category': SiteCategory.objects.get_category('documents'),
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'latest_document_list': Document.objects.all()[0:3],
@@ -612,9 +595,8 @@ def document(request, document_id):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
+        'site_category': SiteCategory.objects.get_category('documents'),
         'user_comment': get_user_comment(request),
-        'category': 'documents',
         'document': document,
         'found_pages': found_pages,
         'comment_form_status': comment_form_status,
@@ -647,8 +629,6 @@ def search(request):
         
         context = RequestContext(request, {
             'site_config': get_site_config(request),
-            'project': get_project(),
-            'category': 'search',
             'query': query_string,
             'project_part_list': project_part_list,
             'question_list': question_list,
@@ -678,7 +658,6 @@ def research_requests(request, object_id, content_type):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
         'rr_object': object,
         'research_request_list': research_request_list,
         'num_total_research_requests': len(research_request_list),
@@ -720,7 +699,6 @@ def comments(request, object_id, content_type):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
         'commented_object': object,
         'comment_list': comment_list,
         'num_total_comments': len(comment_list),
@@ -738,7 +716,6 @@ def api(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
     })
     return render_to_response('api.html', context)
 
@@ -752,7 +729,6 @@ def contact(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
         'image_list': image_list,
     })
     return render_to_response('contact.html', context)
@@ -815,7 +791,6 @@ def custom_404_view(request):
     
     context = RequestContext(request, {
         'site_config': get_site_config(request),
-        'project': get_project(),
     })
     return render_to_response('404.html', context)
     

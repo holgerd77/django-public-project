@@ -23,14 +23,8 @@
 <div class="span6">
   
   <div class="section">
-  {% with ib_content=project.desc_project %}
-  {% include "info_box/generic.html"%}
-  {% endwith %}
+    {% include "info_box/site_category_detail.html" %}
   </div>
-
-  {% with web_source_list=project.web_sources.all %}
-    {% include "info_box/web_sources.html" %}
-  {% endwith %}
   
   {% for main_project_part in main_project_part_list_left %}
     {% include "info_box/main_project_part.html" %}

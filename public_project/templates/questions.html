@@ -22,10 +22,7 @@
 <div class="span6">
 
   <div class="section">
-    {% with ib_content=project.desc_questions %}
-    {% include "info_box/generic.html"%}
-    {% endwith %}
-  
+    {% include "info_box/site_category_detail.html" %}
   </div>
 
   {% for main_pp in main_project_part_list_left %}

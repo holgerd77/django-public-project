@@ -1,0 +1,30 @@
+
+
+
+<div class="info_box" style="background-color: #f9f9f9;padding: 15px;">
+      <div class="info_box_content">
+        <p style="margin: 0 0 10px;">
+          {{ site_category.intro_text }}
+        </p>
+        {% with document_list=site_category.documents.all %}
+        {% if document_list %} 
+          <p style="font-size:12px;margin:5px 0 0;">
+            {% for doc in document_list %}
+              <i class="{{ doc.get_icon_class }}"></i>
+              <a href="{{ doc.get_absolute_url}}">{{ doc.title }}</a><br>
+            {% endfor %}
+          </p>
+        {% endif %}
+        {% endwith %}
+        {% with web_source_list=site_category.web_sources.all %}
+        {% if web_source_list %} 
+          <p style="font-size:12px;margin:5px 0 0;">
+            {% for ws in web_source_list %}
+              <i class="{{ ws.get_icon_class }}"></i>
+              <a href="{{ ws.url}}">{{ ws.title }}</a><br>
+            {% endfor %}
+          </p>
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>

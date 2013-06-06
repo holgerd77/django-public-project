@@ -21,35 +21,7 @@
 <div class="span6">
   
   <div class="section">
-    {% with ib_title="" ib_content=project.desc_participants %}
-    {% include "info_box/generic.html"%}
-    {% endwith %}
-    
-    <div class="info_box ib_text">
-      <div class="info_box_header" style="font-weight: normal;">
-        {% trans "Current project-responsible Actors" %}
-      </div>
-      <div class="info_box_content">
-        <p>
-        {% with participant_list=project.responsible_participants.all %}
-          {% include "info_box/participants.html" %}
-        {% endwith %}
-        </p>
-      </div>
-    </div>
-    
-    <div class="info_box ib_text">
-      <div class="info_box_header" style="font-weight: normal;">
-        {% trans "Former project-responsible Actors" %}
-      </div>
-      <div class="info_box_content">
-        <p>
-        {% with participant_list=project.former_responsible_participants.all %}
-          {% include "info_box/participants.html" %}
-        {% endwith %}
-        </p>
-      </div>
-    </div>
+    {% include "info_box/site_category_detail.html" %}
   </div>
   
   {% for group in group_list_left %}
