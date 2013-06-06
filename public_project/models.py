@@ -140,11 +140,19 @@ class WebSource(models.Model):
         ordering = ['order']
 
 
+class Membership(models.Model):
+    from_participant = models.ForeignKey('Participant', related_name='from_memberships',)
+    to_participant = models.ForeignKey('Participant', related_name='to_memberships',)
+    help_text = _("Type or function of the membership or task or position of the participant.")
+    function = models.CharField(max_length=50, help_text=help_text, blank=True, null=True)
+    active = models.BooleanField(default=True)
+
+
 class Participant(models.Model):
     help_text  = _("Person, group or institution acting in some way in the context of the project or being affected by the process or the result of the project execution.")
     name = models.CharField(max_length=250, help_text=help_text)
     help_text = _("The participant belongs to another participant (often an institution or group), leave blank if participant itself is institution/group.")
-    belongs_to = models.ManyToManyField('self', symmetrical=False)
+    belongs_to = models.ManyToManyField('self', symmetrical=False, through='Membership')
     search_tags = generic.GenericRelation('SearchTag')
     help_text = _("Role/tasks as well as interests/goals of the participant regarding the project.")
     description = models.TextField(help_text=help_text)

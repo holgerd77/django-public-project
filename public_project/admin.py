@@ -42,24 +42,31 @@ class SearchTagInline(generic.GenericTabularInline):
     model = SearchTag
 
 
-class CustomParticipantAdminForm(forms.ModelForm):
+class CustomMembershipAdminForm(forms.ModelForm):
     
-    def clean_belongs_to(self):
-        data = self.cleaned_data['belongs_to']
-        for group in data:
-            if group.belongs_to.count() > 0:
-                raise forms.ValidationError(_("A participant can't belong to a participant (%s) which already belongs to another participant. Things would get to complicated.") % unicode(group))
-        return data
+    def clean_to_participant(self):
+        to_p = self.cleaned_data['to_participant']
+        from_p = self.cleaned_data['from_participant']
+        if to_p == from_p:
+            raise forms.ValidationError(_("A participant can't have a membership with itself. At least in this system."))
+        if to_p.from_memberships.count() > 0:
+            raise forms.ValidationError(_("A participant can't belong to a participant which already belongs to another participant. Things would get to complicated."))
+        return to_p
+
+class MembershipInline(admin.StackedInline):
+    model = Membership
+    fk_name = 'from_participant'
+    form = CustomMembershipAdminForm
 
 class ParticipantAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
     list_display = ('name',)
     search_fields = ['name', 'description',]
     inlines = [
+        MembershipInline,
         SearchTagInline,
         WebSourceInline,
     ]
-    form = CustomParticipantAdminForm
     
     def delete_warning_msg(self, request, participant):
         msg  = _('The following associations with "%s" will be deleted') % unicode(participant)  + u': '

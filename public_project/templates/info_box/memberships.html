@@ -1,0 +1,20 @@
+{% load i18n %}
+
+
+    {% if membership_list %}
+        <div class="info_box_content">
+          <table class="table">
+            {% for m in membership_list %}
+            <tr>
+              <td><a href="{{ m.from_participant.get_absolute_url}}">{{ m.from_participant.name }}</a></td>
+              <td style="text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
+            </tr>
+            {% endfor %}
+          </table>    
+        </div>
+      {% else %}
+        <span style="font-size:12px;">
+        {% trans "No participants available." %}
+        </span>
+      {% endif %}
+    

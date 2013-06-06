@@ -3,10 +3,10 @@
     <div class="info_box_header">
       <a href="{{ group.get_absolute_url }}">{{ group }} <i class="icon-arrow-right"></i></a>
     </div>
-    {% if group.participant_set.count > 0 %}
+    {% if group.to_memberships.count > 0 %}
     <div class="info_box">
-      {% with participant_list=group.participant_set.all %}
-        {% include "info_box/participants.html" %}
+      {% with membership_list=group.to_memberships.all %}
+        {% include "info_box/memberships.html" %}
       {% endwith %}
     </div>
     {% endif %}
