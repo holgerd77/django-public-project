@@ -22,6 +22,7 @@ You need the following ``Python/Django`` libraries, probably best installed in a
 
 * Python 2.7+ (earlier versions untested)
 * `Django <https://www.djangoproject.com/>`_ 1.5+
+* `Grappelli <http://grappelliproject.com/>`_ (for admin interface)
 * `PDFMiner <http://www.unixuser.org/~euske/python/pdfminer/index.html>`_
 * Python Image Library PIL 1.1.7+ (for Django ImageField type)
 * `Tastypie <http://tastypieapi.org/>`_ 0.9+ (for API access)
@@ -68,6 +69,7 @@ is essential for DPP)::
 
     INSTALLED_APPS = (
         ...
+        'grappelli', #this has to be before 'django.contrib.admin'
         'django.contrib.admin',
         'tastypie',
         'public_project',
@@ -140,8 +142,13 @@ DPP uses the request template context processor in its views, so add it to the `
         "django.core.context_processors.request", #this line!
    )
 
-And finally you need to enter a correct domain name (no leading ``http://``) for your Site app in the
-Django admin. This is for links in mails to work properly.
+The next one is a restriction from ``Grappelli``, used for the admin interface: make sure, ``AppDirectoriesFinder``
+is first within your ``STATICFILES_FINDERS``::
+
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+    )
 
 Language Selection
 ------------------
@@ -191,6 +198,14 @@ main url of your dev server, you should see a message similar to the following. 
 instructions.
 
 .. image:: images/screenshot_site_configuration_message.png
+
+
+Admin Interface
+---------------
+The admin interface should now be accessible through the path you defined in your ``urls.py``.
+``DPP`` is using ``Grappelli`` for enhancing the admin interface look and functionality. If
+you have problems getting the admin interface to work, make sure you also have a look at
+the `Grappelli Docs installation section <http://django-grappelli.readthedocs.org/en/latest/quickstart.html#installation>`_. 
 
 
 Site Domain
@@ -332,9 +347,23 @@ Release Notes
 
 ** Changes in version 0.6-alpha** (no date yet!)
 
+* ATTENTION! UPDATE WILL REMOVE THE WEB_SOURCES OF YOUR PROJECT OBJECT (ADMIN).
+  PLEASE BACKUP THEM AND ADD THEM TO APPROPRIATE SITECATEGORY OBJECTS AFTER UPDATE!
 * Replaced structuring of participants by participant type with a more flexible concept allowing the
-  grouping participants to other participants (groups) by a new attribute ``belongs_to`` in admin.
-  DB changes, migrations ``0002_auto__del_field_participant_type.py``, ``0003_auto.py``
+  grouping participants to other participants (groups) by a new attribute ``belongs_to`` in admin and
+  a new many-to-many model ``Membership``. A membership is described by a ``function`` and a boolean field
+  ``active``, connecting two participants. This is replacing the former concept ``responsible_participants``
+  and ``former_responsible_participants``, which could be found in ``Project`` tabe. Both fields were
+  removed. 
+  DB changes: migrations ``0002_auto__del_field_participant_type.py``, ``0003_auto.py``, ``0008_auto_add_membership.py``.
+* Project Parts (Topics) can now also be hierarchically structured, every project part object now has a new
+  attribute ``main_project_part`` allowing to connect project parts to a main topic. This new structure
+  (as well as the participant grouping) will be visible in the frontend as well.
+  DB changes: migration ``0004_auto_add_field_projectpart_main_project_part.py``
+* New ``SiteCategory`` model for providing intro texts to the website categories ("Home", "Questions", ...)
+  and connecting documents and websites with categories, replacing the old model ``Project`` (deleted).
+  DB changes: migrations ``0005_auto_add_sitecategory.py``, ``0006_intro_texts_to_site_category.py``
+  (for automatic data transfer from ``Project`` instance) and ``0007_auto_del_project.py``.
 
 **Changes in version 0.5-alpha (Renaming Release)** (2013-05-27)
 

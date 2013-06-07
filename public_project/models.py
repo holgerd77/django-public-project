@@ -32,60 +32,59 @@ post_save.connect(create_user_profile, sender=User)
 
 
 class Image(models.Model):
-    title = models.CharField(max_length=250)
-    image = models.ImageField(upload_to='images')
+    title = models.CharField(_("Title"), max_length=250)
+    image = models.ImageField(_("Image"), upload_to='images')
     help_text = _("Short linked html attribution snippet to the original image source or \
 alternatively something like 'Own image'.")
-    attribution_html = models.CharField(max_length=250, help_text=help_text)
+    attribution_html = models.CharField(_("Attribution HTML"), max_length=250, help_text=help_text)
     
     def __unicode__(self):
         return self.title
     
     class Meta:
         ordering = ['title',]
+        verbose_name = _('Image')
+        verbose_name_plural = _('Images')
 
 
 class SiteConfig(models.Model):
     help_text = _("Main title, shown in the header navi.")
     default = _("Project Website Title")
-    title = models.CharField(max_length=250, help_text=help_text, default=default)
+    title = models.CharField(_("Title"), max_length=250, help_text=help_text, default=default)
     help_text = _("Short version of the title, used e.g. in emails.")
     default = _("Project Website Short Title")
-    short_title = models.CharField(max_length=250, help_text=help_text, default=default)
+    short_title = models.CharField(_("Short title"), max_length=250, help_text=help_text, default=default)
     help_text = _("Color for the page title (Format: '#990000').")
-    title_color = models.CharField(max_length=7, help_text=help_text, default='#990000')
+    title_color = models.CharField(_("Title color"), max_length=7, help_text=help_text, default='#990000')
     help_text = _("Subtitle of the page.")
     default = _("Project Website Subtitle")
-    sub_title = models.CharField(max_length=250, help_text=help_text, default=default)
+    sub_title = models.CharField(_("Subtitle"), max_length=250, help_text=help_text, default=default)
     help_text = _("Color for the page subtitle (Format: '#990000').")
-    sub_title_color = models.CharField(max_length=7, help_text=help_text, default='#444444')
+    sub_title_color = models.CharField(_("Subtitle color"), max_length=7, help_text=help_text, default='#444444')
     help_text = _("Short intro text to describe your page (HTML possible), not too long, use about text for detailed information.")
     default = _("This is a project watch website.")
-    intro_text = models.TextField(help_text=help_text, default=default)
+    intro_text = models.TextField(_("Intro text"), help_text=help_text, default=default)
     help_text = _("Optional header image shown at the end of intro box on first page (Width: 450px \
 Height: your choice, something around 175px is a good fit).")
-    header_image = models.ForeignKey(Image, help_text=help_text, blank=True, null=True)
-    help_text = _("Background color for the header (Format: '#990000').")
-    header_bg_color = models.CharField(max_length=7, help_text=help_text, default='#EEEEEE')
+    header_image = models.ForeignKey(Image, help_text=help_text, blank=True, null=True, verbose_name=_("Header image"))
     help_text = _("Color of the navi links (Format: '#990000').")
-    navi_link_color = models.CharField(max_length=7, help_text=help_text, default='#FFFFFF')
-    help_text = _("Background color for the navigation (Format: '#990000').")
-    navi_bg_color = models.CharField(max_length=7, help_text=help_text, default='#333333')
-    help_text = _("Background color to mark important elements on various parts of the site, \
-font color will be white, so use something slightly darker.")
-    important_bg_color = models.CharField(max_length=7, help_text=help_text, default='#990000')
+    navi_link_color = models.CharField(_("Navigation link color"), max_length=7, help_text=help_text, default='#FFFFFF')
     help_text = _("Short intro text about this site, what is the purpose, who is running it.")
-    desc_about = models.TextField(help_text=help_text)
+    desc_about = models.TextField(_("About text"), help_text=help_text)
     help_text = _("Some html text you want to use in the footer of the page, you can e.g. \
 provide a link to your email adress or associated social media sites.")
-    footer_html = models.TextField(help_text=help_text, default=_("Footer HTML Default"))
+    footer_html = models.TextField(_("Footer HTML"), help_text=help_text, default=_("Footer HTML Default"))
     help_text = _("Html to be displayed on the contact page, provide at least an adress there \
 and some contact information.")
-    contact_html = models.TextField(help_text=help_text, default=_("Contact HTML Default"))
-    comments = models.TextField(blank=True)
+    contact_html = models.TextField(_("Contact HTML"), help_text=help_text, default=_("Contact HTML Default"))
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     
     def __unicode__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = _('Website Configuration')
+        verbose_name_plural = _('Website Configuration')
 
 
 class SiteCategoryManager(models.Manager):
@@ -109,24 +108,28 @@ class SiteCategory(models.Model):
         ('events', _('Events')),
         ('documents', _('Documents')),
     )
-    category = models.CharField(max_length=50, choices=NAME_CHOICES, unique=True)
-    intro_text = models.TextField(blank=True, null=True)
-    documents = models.ManyToManyField('Document', related_name="related_site_categories", blank=True, null=True)
-    web_sources = generic.GenericRelation('WebSource')
-    comments = models.TextField(blank=True)
+    category = models.CharField(_("Category"), max_length=50, choices=NAME_CHOICES, unique=True)
+    intro_text = models.TextField(_("Intro text"), blank=True, null=True)
+    documents = models.ManyToManyField('Document', related_name="related_site_categories", blank=True, null=True, verbose_name=_("Documents"))
+    web_sources = generic.GenericRelation('WebSource', verbose_name=_("Web Sources"))
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
     objects = SiteCategoryManager()
+    
+    class Meta:
+        verbose_name = _('Website Category')
+        verbose_name_plural = _('Website Categories')
 
 
 class WebSource(models.Model):
-    title = models.CharField(max_length=250)
+    title = models.CharField(_("Title"), max_length=250)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey("content_type", "object_id")
-    order = models.IntegerField(blank=True, null=True)
-    url = models.URLField()
-    date = models.DateField(blank=True, null=True)
+    order = models.IntegerField(_("Order"), blank=True, null=True)
+    url = models.URLField(_("URL"))
+    date = models.DateField(_("Date"), blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
@@ -138,27 +141,33 @@ class WebSource(models.Model):
     
     class Meta:
         ordering = ['order']
+        verbose_name = _('Web-Source')
+        verbose_name_plural = _('Web-Sources')
 
 
 class Membership(models.Model):
-    from_participant = models.ForeignKey('Participant', related_name='from_memberships',)
-    to_participant = models.ForeignKey('Participant', related_name='to_memberships',)
+    from_participant = models.ForeignKey('Participant', related_name='from_memberships', verbose_name=_("From participant"))
+    to_participant = models.ForeignKey('Participant', related_name='to_memberships', verbose_name=_("To participant"))
     help_text = _("Type or function of the membership or task or position of the participant.")
-    function = models.CharField(max_length=50, help_text=help_text, blank=True, null=True)
-    active = models.BooleanField(default=True)
+    function = models.CharField(_("Function"), max_length=50, help_text=help_text, blank=True, null=True)
+    active = models.BooleanField(_("Active"), default=True)
+    
+    class Meta:
+        verbose_name = _('Membership')
+        verbose_name_plural = _('Memberships')
 
 
 class Participant(models.Model):
     help_text  = _("Person, group or institution acting in some way in the context of the project or being affected by the process or the result of the project execution.")
-    name = models.CharField(max_length=250, help_text=help_text)
+    name = models.CharField(_("Name"), max_length=250, help_text=help_text)
     help_text = _("The participant belongs to another participant (often an institution or group), leave blank if participant itself is institution/group.")
-    belongs_to = models.ManyToManyField('self', symmetrical=False, through='Membership')
+    belongs_to = models.ManyToManyField('self', symmetrical=False, through='Membership', verbose_name=_("Belongs to"))
     search_tags = generic.GenericRelation('SearchTag')
     help_text = _("Role/tasks as well as interests/goals of the participant regarding the project.")
-    description = models.TextField(help_text=help_text)
+    description = models.TextField(_("Description"), help_text=help_text)
     web_sources = generic.GenericRelation(WebSource)
     comment_relations = generic.GenericRelation('CommentRelation')
-    comments = models.TextField(blank=True)
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
@@ -192,21 +201,23 @@ class Participant(models.Model):
     
     class Meta:
         ordering = ['name',]
+        verbose_name = _('Participant')
+        verbose_name_plural = _('Participants')
 
 
 class ProjectPart(models.Model):
     help_text = _("Structural parts of the project being stable over time.")
-    name = models.CharField(max_length=250, help_text=help_text)
+    name = models.CharField(_("Name"), max_length=250, help_text=help_text)
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
-    order = models.IntegerField(help_text=help_text, blank=True, null=True)
+    order = models.IntegerField(_("Order"), help_text=help_text, blank=True, null=True)
     help_text = _("If you select another project part here, you'll make this a sub project part.")
-    main_project_part = models.ForeignKey('self', blank=True, null=True, help_text=help_text)
+    main_project_part = models.ForeignKey('self', blank=True, null=True, help_text=help_text, verbose_name=_("Main topic"))
     search_tags = generic.GenericRelation('SearchTag')
     help_text = _("Website (if existant).")
-    description = models.TextField(help_text=help_text)
+    description = models.TextField(_("Description"), help_text=help_text)
     web_sources = generic.GenericRelation(WebSource)
     comment_relations = generic.GenericRelation('CommentRelation')
-    comments = models.TextField(blank=True)
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
@@ -243,6 +254,8 @@ class ProjectPart(models.Model):
     
     class Meta:
         ordering = ['order',]
+        verbose_name = _('Project Part')
+        verbose_name_plural = _('Project Parts')
 
 
 class Event(models.Model):
@@ -262,18 +275,18 @@ class Event(models.Model):
         'UE': 'icon-bolt',
         'SE': 'icon-asterisk',
     }
-    title = models.CharField(max_length=250)
-    event_type = models.CharField(max_length=2, choices=EVENT_TYPE_CHOICES)
+    title = models.CharField(_("Title"), max_length=250)
+    event_type = models.CharField(_("Type"), max_length=2, choices=EVENT_TYPE_CHOICES)
     help_text = _("Event being of central importance for the project.")
-    important = models.BooleanField(help_text=help_text)
+    important = models.BooleanField(_("Important"), help_text=help_text)
     search_tags = generic.GenericRelation('SearchTag')
-    description = models.TextField()
-    date = models.DateField()
-    participants = models.ManyToManyField(Participant, related_name="related_events", blank=True, null=True)
-    project_parts = models.ManyToManyField(ProjectPart, related_name="related_events", blank=True, null=True)
+    description = models.TextField(_("Description"))
+    date = models.DateField(_("Date"))
+    participants = models.ManyToManyField(Participant, related_name="related_events", blank=True, null=True, verbose_name=_("Participants"))
+    project_parts = models.ManyToManyField(ProjectPart, related_name="related_events", blank=True, null=True, verbose_name=_("Topics"))
     web_sources = generic.GenericRelation(WebSource)
     comment_relations = generic.GenericRelation('CommentRelation')
-    comments = models.TextField(blank=True)
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
@@ -315,25 +328,27 @@ class Event(models.Model):
     
     class Meta:
         ordering = ['-date']
+        verbose_name = _('Event')
+        verbose_name_plural = _('Events')
 
 
 class Question(models.Model):
     help_text = _("Title/short version of the question. Use prefix (e.g. 1,2,3 or A1,A2,A3) to sort questions")
-    title = models.CharField(max_length=250, help_text=help_text)
-    answered = models.BooleanField()
+    title = models.CharField(_("Title"), max_length=250, help_text=help_text)
+    answered = models.BooleanField(_("Answered"))
     help_text = _("Description/long version of the question.")
-    description = models.TextField(help_text=help_text)
-    project_parts = models.ManyToManyField(ProjectPart, related_name="related_questions", blank=True, null=True)
-    participants = models.ManyToManyField(Participant, related_name="related_questions", blank=True, null=True)
-    events = models.ManyToManyField(Event, related_name="related_questions", blank=True, null=True)
+    description = models.TextField(_("Description"), help_text=help_text)
+    project_parts = models.ManyToManyField(ProjectPart, related_name="related_questions", blank=True, null=True, verbose_name=_("Topics"))
+    participants = models.ManyToManyField(Participant, related_name="related_questions", blank=True, null=True, verbose_name=_("Participants"))
+    events = models.ManyToManyField(Event, related_name="related_questions", blank=True, null=True, verbose_name=_("Events"))
     help_text = _("Optional explanations or remarks around the question")
-    explanations = models.TextField(blank=True, help_text=help_text)
+    explanations = models.TextField(_("Explanations"), blank=True, help_text=help_text)
     help_text = _("Optional answer (summary) of a question")
-    answer = models.TextField(blank=True, help_text=help_text)
-    documents = models.ManyToManyField('Document', related_name="related_documents", blank=True, null=True)
+    answer = models.TextField(_("Answer"), blank=True, help_text=help_text)
+    documents = models.ManyToManyField('Document', related_name="related_documents", blank=True, null=True, verbose_name=_("Documents"))
     web_sources = generic.GenericRelation(WebSource)
     comment_relations = generic.GenericRelation('CommentRelation')
-    comments = models.TextField(blank=True)
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
     def get_feed_description(self):
@@ -375,6 +390,8 @@ class Question(models.Model):
     
     class Meta:
         ordering = ['title']
+        verbose_name = _('Question')
+        verbose_name_plural = _('Questions')
 
 
 class ProjectGoalGroupManager(models.Manager):
@@ -385,11 +402,11 @@ class ProjectGoalGroupManager(models.Manager):
 
 class ProjectGoalGroup(models.Model):
     help_text = _("Group of project goals being determined at a certain point in time.")
-    title = models.CharField(max_length=250, help_text=help_text)
-    event = models.ForeignKey(Event)
+    title = models.CharField(_("Title"), max_length=250, help_text=help_text)
+    event = models.ForeignKey(Event, verbose_name=_("Associated event"))
     help_text = _("Description of the group of project goals.")
-    description = models.TextField(help_text=help_text)
-    comments = models.TextField(blank=True)
+    description = models.TextField(_("Description"), help_text=help_text)
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     objects = ProjectGoalGroupManager()
     date_added = models.DateTimeField(auto_now_add=True)
     
@@ -398,36 +415,42 @@ class ProjectGoalGroup(models.Model):
 
     def is_current(self):
         return self == ProjectGoalGroup.objects.get_current()
+    
+    class Meta:
+        verbose_name = _('Goal')
+        verbose_name_plural = _('Goals')
 
 
 class ProjectGoal(models.Model):
     help_text = _("Name, e.g. 'Project budget', 'Target date', 'Noise level'")
-    name = models.CharField(max_length=250, help_text=help_text)
+    name = models.CharField(_("Name"), max_length=250, help_text=help_text)
     project_goal_group = models.ForeignKey(ProjectGoalGroup)
     help_text = _("Single performance figure describing the project goal, e.g. '1.000.000 Euro', 'January 25th 2020', ...")
-    performance_figure = models.CharField(max_length=250, help_text=help_text)
+    performance_figure = models.CharField(_("Performance figure"), max_length=250, help_text=help_text)
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
-    order = models.IntegerField(help_text=help_text, blank=True, null=True)
+    order = models.IntegerField(_("Order"), help_text=help_text, blank=True, null=True)
     
     def __unicode__(self):
         return self.name
     
     class Meta:
         ordering = ['order',]
+        verbose_name = _('Goal Value')
+        verbose_name_plural = _('Goal Values')
 
 
 class Document(models.Model):
     help_text = _("Unique and descriptive title (if PublicDocs is used: PDF live view is shown, if document title is the same)")
-    title = models.CharField(max_length=250, help_text=help_text)
-    document = models.FileField(upload_to='documents')
-    date = models.DateField()
+    title = models.CharField(_("Title"), max_length=250, help_text=help_text)
+    document = models.FileField(_("Document"), upload_to='documents')
+    date = models.DateField(_("Date"))
     help_text = _("Short description.")
-    description = models.TextField(help_text=help_text)
-    participants = models.ManyToManyField(Participant, related_name="related_documents", blank=True, null=True)
-    project_parts = models.ManyToManyField(ProjectPart, related_name="related_documents", blank=True, null=True)
-    events = models.ManyToManyField(Event, related_name="related_documents", blank=True, null=True)
+    description = models.TextField(_("Description"), help_text=help_text)
+    participants = models.ManyToManyField(Participant, related_name="related_documents", blank=True, null=True, verbose_name=_("Participants"))
+    project_parts = models.ManyToManyField(ProjectPart, related_name="related_documents", blank=True, null=True, verbose_name=_("Topics"))
+    events = models.ManyToManyField(Event, related_name="related_documents", blank=True, null=True, verbose_name=_("Documents"))
     comment_relations = generic.GenericRelation('CommentRelation')
-    comments = models.TextField(blank=True)
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     pdf_images_generated = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now_add=True)
     
@@ -482,6 +505,8 @@ class Document(models.Model):
     
     class Meta:
         ordering = ['-date_added']
+        verbose_name = _('Document')
+        verbose_name_plural = _('Documents')
     
     def __init__(self, *args, **kwargs):
         super(Document, self).__init__(*args, **kwargs)
@@ -541,6 +566,8 @@ class Page(models.Model):
     
     class Meta:
         ordering = ['number']
+        verbose_name = _('Page')
+        verbose_name_plural = _('Pages')
 
 
 def delete_page_image(sender, **kwargs):
@@ -553,11 +580,11 @@ pre_delete.connect(delete_page_image, sender=Page)
 
 class SearchTag(models.Model):
     help_text = _("Documents containing these search tags are shown on the detail page of this object.")
-    name = models.CharField(max_length=250, help_text=help_text)
+    name = models.CharField(_("Name"), max_length=250, help_text=help_text)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey("content_type", "object_id")
-    order = models.IntegerField(blank=True, null=True)
+    order = models.IntegerField(_("Order"), blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
@@ -565,6 +592,8 @@ class SearchTag(models.Model):
     
     class Meta:
         ordering = ['order']
+        verbose_name = _('Search Tag')
+        verbose_name_plural = _('Search Tags')
 
 
 @receiver(post_save, sender=SearchTag)
@@ -602,18 +631,22 @@ of the object change form in the admin).')
     object_id = models.PositiveIntegerField(help_text=help_text)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     help_text = _("Page number in document")
-    page = models.IntegerField(blank=True, null=True, help_text=help_text)
+    page = models.IntegerField(_("Page"), blank=True, null=True, help_text=help_text)
     
     def __unicode__(self):
         return unicode(self.research_request) + ', ' + unicode(self.content_object)
     
+    class Meta:
+        verbose_name = _('Relation with Project Element')
+        verbose_name_plural = _('Relations with Project Elements')
+    
 
 class ResearchRequest(models.Model):
     help_text = _('Give a unique number to your request so that people can reference it (e.g. "R1", "R2",...)')
-    nr = models.CharField(max_length=8, help_text=help_text)
-    title = models.CharField(max_length=250)
-    open = models.BooleanField(default=True)
-    description = models.TextField()
+    nr = models.CharField(_("Nr"), max_length=8, help_text=help_text)
+    title = models.CharField(_("Title"), max_length=250)
+    open = models.BooleanField(_("Open"), default=True)
+    description = models.TextField(_("Description"))
     date_added = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
@@ -684,6 +717,8 @@ class ResearchRequest(models.Model):
     
     class Meta:
         ordering = ['-date_added']
+        verbose_name = _('Research Request')
+        verbose_name_plural = _('Research Requests')
 
 
 
@@ -697,22 +732,25 @@ of the object change form in the admin).')
     object_id = models.PositiveIntegerField(help_text=help_text)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     help_text = _("Page number in document")
-    page = models.IntegerField(blank=True, null=True, help_text=help_text)
+    page = models.IntegerField(_("Page"), blank=True, null=True, help_text=help_text)
     
     def __unicode__(self):
         return unicode(self.comment) + ', ' + unicode(self.content_object)
     
+    class Meta:
+        verbose_name = _('Relation with Project Element')
+        verbose_name_plural = _('Relations with Project Elements')
 
 class Comment(models.Model):
-    username = models.CharField(max_length=250)
-    email = models.EmailField(max_length=250)
+    username = models.CharField(_("Username"), max_length=250)
+    email = models.EmailField(_("Email"), max_length=250)
     help_text = _('User has given permission to get in contact vi.')
-    feedback_allowed = models.BooleanField(default=False, help_text=help_text)
-    comment = models.TextField()
+    feedback_allowed = models.BooleanField(_("Feedback allowed"), default=False, help_text=help_text)
+    comment = models.TextField(_("Comment text"))
     help_text = _('Comment is only shown on page if published is true.')
-    published = models.BooleanField(default=False, help_text=help_text)
-    published_by = models.CharField(max_length=250, blank=True)
-    activation_hash = models.CharField(max_length=250, blank=True)
+    published = models.BooleanField(_("Published"), default=False, help_text=help_text)
+    published_by = models.CharField(_("Published by"), max_length=250, blank=True)
+    activation_hash = models.CharField(_("Activation hash"), max_length=250, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
@@ -779,6 +817,8 @@ class Comment(models.Model):
     
     class Meta:
         ordering = ['-date_added']
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
     
 
 class ActivityLog(models.Model):
@@ -794,15 +834,17 @@ class ActivityLog(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    type = models.CharField(max_length=2, choices=TYPE_CHOICES)
-    info = models.CharField(max_length=250, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
+    type = models.CharField(_("Type"), max_length=2, choices=TYPE_CHOICES)
+    info = models.CharField(_("Info"), max_length=250, blank=True)
+    date = models.DateTimeField(_("Date"), auto_now_add=True)
     
     def __unicode__(self):
         return u'Activity: ' + unicode(self.content_object)
     
     class Meta:
         ordering = ['-date']
+        verbose_name = _('Activity Log Entry')
+        verbose_name_plural = _('Website Activity Log')
 
 
 @receiver(post_save, sender=ProjectPart)
