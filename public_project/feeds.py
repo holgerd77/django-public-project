@@ -13,7 +13,7 @@ class ActivityFeed(Feed):
         self.link = '/' + link
         if SiteConfig.objects.count() == 0:
             return None
-        site_config = SiteConfig.objects.all()[0]
+        site_config = SiteConfig.objects.get_site_config(None)
         if type == 'NA':
             self.title = site_config.short_title + ": " + _("Subject Areas")
             self.description = _("Feed with new subject areas from %s.") % site_config.short_title
@@ -83,7 +83,7 @@ class QuestionResearchRequestsFeed(Feed):
         return research_request_list[:8]
     
     def set_config(self, obj):
-        site_config = SiteConfig.objects.all()[0]
+        site_config = SiteConfig.objects.get_site_config(None)
         self.link = obj.get_absolute_url() + _('research_requests_url')
         self.title = site_config.short_title + ": " + _("Research Requests on") + " " + unicode(obj)
         self.description = _("Feed with new research requests on {object} on {title}.").format(
@@ -111,7 +111,7 @@ class ObjectCommentsFeed(Feed):
     item_guid_is_permalink = False
     
     def set_config(self, obj):
-        site_config = SiteConfig.objects.all()[0]
+        site_config = SiteConfig.objects.get_site_config(None)
         self.link = obj.get_absolute_url() + _('comments_url')
         self.title = site_config.short_title + ": " + _("Comments on") + " " + unicode(obj)
         self.description = _("Feed with new comments on {object} on {title}.").format(

@@ -47,6 +47,45 @@ alternatively something like 'Own image'.")
         verbose_name_plural = _('Images')
 
 
+class SiteConfigManager(models.Manager):
+    
+    def get_site_config(self, request):
+        if super(SiteConfigManager, self).count() == 0:
+            site_config = SiteConfig()
+            site_config.save()
+        else:
+            site_config = super(SiteConfigManager, self).all()[0]
+        
+        site_config.pdf_viewer = 'STANDARD'
+        site_config.browser = 'Unknown'
+        if request and 'HTTP_USER_AGENT' in request.META:
+            if 'Mozilla'.lower() in request.META['HTTP_USER_AGENT'].lower():
+                site_config.pdf_viewer = 'STANDARD'
+                site_config.browser = 'Mozilla'
+            if 'Safari'.lower() in request.META['HTTP_USER_AGENT'].lower():
+                site_config.pdf_viewer = 'STANDARD'
+                site_config.browser = 'Safari'
+            if 'Chrome'.lower() in request.META['HTTP_USER_AGENT'].lower():
+                site_config.pdf_viewer = 'STANDARD'
+                site_config.browser = 'Chrome'
+            if 'Opera'.lower() in request.META['HTTP_USER_AGENT'].lower():
+                site_config.pdf_viewer = 'STANDARD'
+                site_config.browser = 'Opera'
+            if 'MSIE'.lower() in request.META['HTTP_USER_AGENT'].lower():
+                if getattr(settings, 'DPP_IE_COMPATIBLE_PDF_VIEWER', False):
+                    site_config.pdf_viewer = 'LEGACY'
+                else:
+                    site_config.pdf_viewer = False
+                site_config.browser = 'MSIE'
+        
+        if getattr(settings, 'DPP_PUBLIC_API', False):
+            site_config.public_api = True
+        else:
+            site_config.public_api = False
+        
+        return site_config
+    
+
 class SiteConfig(models.Model):
     help_text = _("Main title, shown in the header navi.")
     default = _("Project Website Title")
@@ -70,7 +109,8 @@ Height: your choice, something around 175px is a good fit).")
     help_text = _("Color of the navi links (Format: '#990000').")
     navi_link_color = models.CharField(_("Navigation link color"), max_length=7, help_text=help_text, default='#FFFFFF')
     help_text = _("Short intro text about this site, what is the purpose, who is running it.")
-    desc_about = models.TextField(_("About text"), help_text=help_text)
+    default = _("About text")
+    desc_about = models.TextField(_("About text"), help_text=help_text, default=default)
     help_text = _("Some html text you want to use in the footer of the page, you can e.g. \
 provide a link to your email adress or associated social media sites.")
     footer_html = models.TextField(_("Footer HTML"), help_text=help_text, default=_("Footer HTML Default"))
@@ -79,23 +119,14 @@ and some contact information.")
     contact_html = models.TextField(_("Contact HTML"), help_text=help_text, default=_("Contact HTML Default"))
     comments = models.TextField(_("Comments (internal)"), blank=True)
     
+    objects = SiteConfigManager()
+    
     def __unicode__(self):
         return self.title
     
     class Meta:
         verbose_name = _('Website Configuration')
         verbose_name_plural = _('Website Configuration')
-
-
-class SiteCategoryManager(models.Manager):
-    def get_category(self, category):
-        cnt = super(SiteCategoryManager, self).filter(category=category).count()
-        if cnt == 1:
-            return super(SiteCategoryManager, self).get(category=category)
-        else:
-            sc = self.model(category='home')
-            print sc
-            return sc
 
 
 class SiteCategory(models.Model):
@@ -114,8 +145,6 @@ class SiteCategory(models.Model):
     web_sources = generic.GenericRelation('WebSource', verbose_name=_("Web Sources"))
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    
-    objects = SiteCategoryManager()
     
     class Meta:
         verbose_name = _('Website Category')
@@ -397,7 +426,10 @@ class Question(models.Model):
 class ProjectGoalGroupManager(models.Manager):
     
     def get_current(self):
-        return self.all().order_by('event')[0]
+        if self.count() > 0:
+            return self.all().order_by('event')[0]
+        else:
+            return None
         
 
 class ProjectGoalGroup(models.Model):
@@ -844,7 +876,7 @@ class ActivityLog(models.Model):
     class Meta:
         ordering = ['-date']
         verbose_name = _('Activity Log Entry')
-        verbose_name_plural = _('Website Activity Log')
+        verbose_name_plural = _('Activity Log')
 
 
 @receiver(post_save, sender=ProjectPart)

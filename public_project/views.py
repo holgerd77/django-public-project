@@ -17,58 +17,6 @@ from public_project.models import *
 from public_project.search import get_query, search_for_documents
 
 
-def check_config_prerequisits():
-    missing_cps = []
-    
-    if SiteConfig.objects.count() != 1:
-        missing_cps.append(_("Creation of (exactly) one SiteConfig object in the Django admin \
-with the general config params and non-dynamical contents."))
-    
-    
-    if ProjectGoalGroup.objects.count() == 0 or ProjectGoal.objects.count() == 0:
-        missing_cps.append(_("Creation of at least one ProjectGoalGroup object in the Django admin \
-containing at least one ProjectGoal."))
-        
-    context = {
-      'missing_cps': missing_cps,  
-    }
-    cp_met = len(missing_cps) == 0
-    return cp_met, render_to_response('config_prerequisits.html', context)
-
-
-def get_site_config(request):
-    site_config = SiteConfig.objects.all()[0]
-    
-    site_config.pdf_viewer = 'STANDARD'
-    site_config.browser = 'Unknown'
-    if 'HTTP_USER_AGENT' in request.META:
-        if 'Mozilla'.lower() in request.META['HTTP_USER_AGENT'].lower():
-            site_config.pdf_viewer = 'STANDARD'
-            site_config.browser = 'Mozilla'
-        if 'Safari'.lower() in request.META['HTTP_USER_AGENT'].lower():
-            site_config.pdf_viewer = 'STANDARD'
-            site_config.browser = 'Safari'
-        if 'Chrome'.lower() in request.META['HTTP_USER_AGENT'].lower():
-            site_config.pdf_viewer = 'STANDARD'
-            site_config.browser = 'Chrome'
-        if 'Opera'.lower() in request.META['HTTP_USER_AGENT'].lower():
-            site_config.pdf_viewer = 'STANDARD'
-            site_config.browser = 'Opera'
-        if 'MSIE'.lower() in request.META['HTTP_USER_AGENT'].lower():
-            if getattr(settings, 'DPP_IE_COMPATIBLE_PDF_VIEWER', False):
-                site_config.pdf_viewer = 'LEGACY'
-            else:
-                site_config.pdf_viewer = False
-            site_config.browser = 'MSIE'
-    
-    if getattr(settings, 'DPP_PUBLIC_API', False):
-        site_config.public_api = True
-    else:
-        site_config.public_api = False
-    
-    return site_config
-
-
 def get_research_request(request):
     if 'research_request_id' in request.GET:
         try:
@@ -222,10 +170,6 @@ def merge_with_search_tag_docs(document_list, object):
 
 
 def index(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     research_request_list = ResearchRequest.objects.all()
     comment_list = Comment.objects.filter(published=True)
     
@@ -239,8 +183,8 @@ def index(request):
         latest_document = None 
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('home'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='home'),
         'current_project_goal_group': ProjectGoalGroup.objects.get_current(),
         'project_part_list': ProjectPart.objects.all(),
         'latest_event': latest_event,
@@ -255,16 +199,12 @@ def index(request):
 
 
 def project_parts(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     main_project_parts = ProjectPart.objects.filter(main_project_part__isnull=True)
     middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('project_parts'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='project_parts'),
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'latest_project_part_list': ProjectPart.objects.all().order_by('-date_added')[0:3],
@@ -273,10 +213,6 @@ def project_parts(request):
 
 
 def project_part(request, project_part_id):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     project_part = get_object_or_404(ProjectPart, pk=project_part_id)
     
     document_list = project_part.get_documents()
@@ -288,8 +224,8 @@ def project_part(request, project_part_id):
     comment_list = Comment.objects.filter(commentrelation__content_type=content_type).filter(commentrelation__object_id=project_part.id).filter(published=True).distinct()
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('project_parts'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='project_parts'),
         'user_comment': get_user_comment(request),
         'project_part': project_part,
         'question_list': project_part.get_questions(),
@@ -303,31 +239,23 @@ def project_part(request, project_part_id):
 
 
 def goals(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('goals'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='goals'),
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
     })
     return render_to_response('goals.html', context)
 
 
 def questions(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     main_project_parts = ProjectPart.objects.filter(main_project_part__isnull=True)
     middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
     research_request_list = ResearchRequest.objects.all()
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('questions'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='questions'),
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'research_request_list': research_request_list[0:3],
@@ -337,10 +265,6 @@ def questions(request):
 
 
 def question(request, question_id):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     question = get_object_or_404(Question, pk=question_id)
     
     research_request_form_status = validate_research_request_form(request)
@@ -352,8 +276,8 @@ def question(request, question_id):
     comment_list = Comment.objects.filter(commentrelation__content_type=content_type).filter(commentrelation__object_id=question.id).filter(published=True).distinct()
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('questions'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='questions'),
         'user_comment': get_user_comment(request),
         'research_request': get_research_request(request),
         'question': question,
@@ -368,16 +292,12 @@ def question(request, question_id):
 
 
 def participants(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     groups = Participant.objects.annotate(count=Count('belongs_to')).filter(count=0)
     middle = int(math.ceil(float(len(groups))/float(2)))
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('participants'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='participants'),
         'group_list_left': groups[0:middle],
         'group_list_right': groups[middle:],
         'latest_participant_list': Participant.objects.all().order_by('-date_added')[0:3],
@@ -386,10 +306,6 @@ def participants(request):
 
 
 def participant(request, participant_id):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     participant = get_object_or_404(Participant, pk=participant_id)
     
     document_list = participant.get_documents()
@@ -400,8 +316,8 @@ def participant(request, participant_id):
     comment_list = Comment.objects.filter(commentrelation__content_type=content_type).filter(commentrelation__object_id=participant.id).filter(published=True).distinct()
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('participants'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='participants'),
         'user_comment': get_user_comment(request),
         'participant': participant,
         'question_list': participant.get_questions(),
@@ -415,13 +331,9 @@ def participant(request, participant_id):
 
 
 def events(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('events'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='events'),
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
         'chronology_list': Event.objects.all(),
         'latest_event_list': Event.objects.all()[0:5],
@@ -430,10 +342,6 @@ def events(request):
 
 
 def event(request, event_id):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     event = get_object_or_404(Event, pk=event_id)
     
     document_list = list(event.related_documents.order_by("title"))
@@ -444,8 +352,8 @@ def event(request, event_id):
     comment_list = Comment.objects.filter(commentrelation__content_type=content_type).filter(commentrelation__object_id=event.id).filter(published=True).distinct()
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('events'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='events'),
         'user_comment': get_user_comment(request),
         'event': event,
         'document_list': document_list,
@@ -457,16 +365,12 @@ def event(request, event_id):
 
 
 def documents(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     main_project_parts = ProjectPart.objects.filter(main_project_part__isnull=True)
     middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('documents'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='documents'),
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'latest_document_list': Document.objects.all()[0:3],
@@ -567,11 +471,6 @@ def xhr_document_tags(request):
 
 
 def document(request, document_id):
-    
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     document = get_object_or_404(Document, pk=document_id)
     comment_form_status = validate_comment_form(request)
     
@@ -594,8 +493,8 @@ def document(request, document_id):
     comment_list.sort(key=lambda x:x.page)
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
-        'site_category': SiteCategory.objects.get_category('documents'),
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'site_category': SiteCategory.objects.get_or_create(category='documents'),
         'user_comment': get_user_comment(request),
         'document': document,
         'found_pages': found_pages,
@@ -628,7 +527,7 @@ def search(request):
         document_list = search_for_documents(query_string)
         
         context = RequestContext(request, {
-            'site_config': get_site_config(request),
+            'site_config': SiteConfig.objects.get_site_config(request),
             'query': query_string,
             'project_part_list': project_part_list,
             'question_list': question_list,
@@ -657,7 +556,7 @@ def research_requests(request, object_id, content_type):
     ph_title = unicode(object)
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
+        'site_config': SiteConfig.objects.get_site_config(request),
         'rr_object': object,
         'research_request_list': research_request_list,
         'num_total_research_requests': len(research_request_list),
@@ -698,7 +597,7 @@ def comments(request, object_id, content_type):
     ph_title = unicode(object)
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
+        'site_config': SiteConfig.objects.get_site_config(request),
         'commented_object': object,
         'comment_list': comment_list,
         'num_total_comments': len(comment_list),
@@ -710,25 +609,17 @@ def comments(request, object_id, content_type):
 
 
 def api(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
+        'site_config': SiteConfig.objects.get_site_config(request),
     })
     return render_to_response('api.html', context)
 
 
 def contact(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     image_list = Image.objects.all()
     
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
+        'site_config': SiteConfig.objects.get_site_config(request),
         'image_list': image_list,
     })
     return render_to_response('contact.html', context)
@@ -736,7 +627,7 @@ def contact(request):
 
 def activate_comment(request):
     c = get_object_or_404(Comment, activation_hash=request.GET['activation_hash'])
-    site_config = get_site_config(request)
+    site_config = SiteConfig.objects.get_site_config(request)
     
     res  = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>'
     res += '<div style="margin:20px;padding:20px;border:1px solid #999;float:left;color:#333;font-size:14px;'
@@ -785,12 +676,8 @@ def activate_comment(request):
 
 
 def custom_404_view(request):
-    cp, response = check_config_prerequisits()
-    if not cp:
-        return response
-    
     context = RequestContext(request, {
-        'site_config': get_site_config(request),
+        'site_config': SiteConfig.objects.get_site_config(request),
     })
     return render_to_response('404.html', context)
     

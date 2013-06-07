@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-07 18:42+0200\n"
+"POT-Creation-Date: 2013-06-07 18:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -802,8 +802,8 @@ msgid "Activity Log Entry"
 msgstr "Aktivität Log-Eintrag"
 
 #: models.py:847
-msgid "Website Activity Log"
-msgstr "Website Log Aktivitäten"
+msgid "Activity Log"
+msgstr "Log Aktivitäten"
 
 #: urls.py:40 templates/base.html:65
 msgid "goals_url"
@@ -1309,6 +1309,9 @@ msgstr "Keine Rechercheaufträge vorhanden."
 #: templates/info_box/web_sources.html:22
 msgid "No web sources available."
 msgstr "Keine Web-Quellen vorhanden."
+
+#~ msgid "Website Activity Log"
+#~ msgstr "Website Log Aktivitäten"
 
 #~ msgid "Background color for the header (Format: '#990000')."
 #~ msgstr "Hintergrundfarbe des Seitenheaders (Format: '#990000')."

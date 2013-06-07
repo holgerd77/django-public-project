@@ -20,7 +20,6 @@ setup(
     include_package_data=True,
     install_requires=[
         'Django>=1.5,<1.6',
-        'django-grappelli>=2.4.5,<2.5',
         'pdfminer',
         'PIL',
         'django-tastypie>=0.9,<1.0',
