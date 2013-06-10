@@ -21,7 +21,7 @@
           <p style="font-size:12px;margin:5px 0 0;">
             {% for ws in web_source_list %}
               <i class="{{ ws.get_icon_class }}"></i>
-              <a href="{{ ws.url}}">{{ ws.title }}</a><br>
+              <a href="{{ ws.url}}">{{ ws.title }}{% if ws.date %}, {{ ws.date }}{% endif %}</a><br>
             {% endfor %}
           </p>
         {% endif %}
