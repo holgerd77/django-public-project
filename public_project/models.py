@@ -477,7 +477,7 @@ class Document(models.Model):
     description = models.TextField(_("Description"), help_text=help_text)
     participants = models.ManyToManyField(Participant, related_name="related_documents", blank=True, null=True, verbose_name=_("Participants"))
     project_parts = models.ManyToManyField(ProjectPart, related_name="related_documents", blank=True, null=True, verbose_name=_("Topics"))
-    events = models.ManyToManyField(Event, related_name="related_documents", blank=True, null=True, verbose_name=_("Documents"))
+    events = models.ManyToManyField(Event, related_name="related_documents", blank=True, null=True, verbose_name=_("Events"))
     comment_relations = generic.GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     pdf_images_generated = models.BooleanField(default=False)
