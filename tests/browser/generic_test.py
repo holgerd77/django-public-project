@@ -24,14 +24,6 @@ class GenericTest(LiveServerTestCase):
         cls.selenium.quit()
         super(GenericTest, cls).tearDownClass()
     
-    def test_config_prerequisites_page(self):
-        self.selenium.get('%s%s' % (self.live_server_url, "/"))
-        time.sleep(SELENIUM_SLEEP_TIME)
-        try:
-            self.selenium.find_element_by_xpath('//div[@class="config_prerequisites"]')
-        except NoSuchElementException:
-            self.assertTrue(0, "No config prerequisites page displayed!")
-    
     def test_main_page(self):
         PF.create_base_project()
         self.selenium.get('%s/' % (self.live_server_url))
@@ -41,12 +33,12 @@ class GenericTest(LiveServerTestCase):
         except NoSuchElementException:
             self.assertTrue(0, "No main page displayed!")
     
-    def test_project_page(self):
+    def test_project_parts_page(self):
         PF.create_base_project()
-        self.selenium.get('%s/%s' % (self.live_server_url, _('project_url')))
+        self.selenium.get('%s/%s' % (self.live_server_url, _('project_parts_url')))
         time.sleep(SELENIUM_SLEEP_TIME)
         try:
-            self.selenium.find_element_by_xpath('//h2[contains(text(),"' + _("Project") + '")]')
+            self.selenium.find_element_by_xpath('//h2[contains(text(),"' + _("Topics") + '")]')
         except NoSuchElementException:
             self.assertTrue(0, "No project page displayed!")
     
@@ -98,12 +90,12 @@ class GenericTest(LiveServerTestCase):
         except NoSuchElementException:
             self.assertTrue(0, "Participant page not displayed correctly!")
     
-    def test_process_page(self):
+    def test_events_page(self):
         PF.create_base_project()
-        self.selenium.get('%s/%s' % (self.live_server_url, _('process_url')))
+        self.selenium.get('%s/%s' % (self.live_server_url, _('events_url')))
         time.sleep(SELENIUM_SLEEP_TIME)
         try:
-            self.selenium.find_element_by_xpath('//h2[contains(text(),"' + _("Process") + '")]')
+            self.selenium.find_element_by_xpath('//h2[contains(text(),"' + _("Events") + '")]')
         except NoSuchElementException:
             self.assertTrue(0, "No process page displayed!")
     

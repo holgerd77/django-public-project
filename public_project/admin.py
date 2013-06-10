@@ -88,7 +88,7 @@ class CustomProjectPartAdminForm(forms.ModelForm):
     
     def clean_main_project_part(self):
         data = self.cleaned_data['main_project_part']
-        if data.main_project_part:
+        if data and data.main_project_part:
             raise forms.ValidationError(_("A project part can't have a main project part which has a main project part itself. Things would get to complicated."))
         return data
 

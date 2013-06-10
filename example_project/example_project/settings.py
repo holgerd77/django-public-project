@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'grappelli',
+    #'django_admin_bootstrapped',
     'django.contrib.admin',
     'tastypie',
     'public_project',

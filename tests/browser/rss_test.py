@@ -17,11 +17,11 @@ class RSSTest(TestCase):
         xml = response.read()
         self.assertGreaterEqual(xml.count('<item>'), 5, "Main rss feed not working!")
     
-    def test_project_feed(self):
+    def test_project_parts_feed(self):
         PF.create_base_project()
-        response = urllib2.urlopen('%s/%srss/' % (TEST_SERVER_URL, _('project_url')))
+        response = urllib2.urlopen('%s/%srss/' % (TEST_SERVER_URL, _('project_parts_url')))
         xml = response.read()
-        self.assertGreaterEqual(xml.count('<item>'), 1, "Project rss feed not working!")
+        self.assertGreaterEqual(xml.count('<item>'), 1, "Project parts rss feed not working!")
     
     def test_questions_feed(self):
         PF.create_base_project()
@@ -37,9 +37,9 @@ class RSSTest(TestCase):
     
     def test_process_feed(self):
         PF.create_base_project()
-        response = urllib2.urlopen('%s/%srss/' % (TEST_SERVER_URL, _('process_url')))
+        response = urllib2.urlopen('%s/%srss/' % (TEST_SERVER_URL, _('events_url')))
         xml = response.read()
-        self.assertGreaterEqual(xml.count('<item>'), 1, "Process rss feed not working!")
+        self.assertGreaterEqual(xml.count('<item>'), 1, "Events rss feed not working!")
     
     def test_research_requests_of_question_feed(self):
         PF.create_base_project()

@@ -33,25 +33,26 @@ class ExampleData:
             description      = 'Former project responsibles. Hmm. Never met. Strange people.',
         )
         p2.save()
-
-        p = Project(
-            name           = 'Tower of Babel',
-            desc_project   = '"whose top may reach unto heaven" - that is the tower we want to build. ' + \
-                             'Some may call us crazy. Some may call us naive. But we are determined and ' + \
-                             'beside from having some language problems between some of our workers ' + \
-                             'we are very much in our plan and will succeed!',
-            desc_project_parts = 'We want to make everything as transparent as possible. Our trust ' + \
-                                 'in us is our trust in you.',
-            desc_questions     = 'We try to work with you on common questions around the tower building here.',
-            desc_participants  = 'Such an ambitious project has various actors involved. You can find them here.',
-            desc_goal_groups   = 'We have adopted our goals over the centuries. See them here.',
-            desc_process       = 'This is the building timeline of our amazing construction project.',
-            desc_documents     = 'We want that you are able to take part. So we publish all construction documents here.',
-        )
-        p.save()
-        p.responsible_participants = [p1,]
-        p.former_responsible_participants = [p2,]
-        p.save()
+        
+        
+        #p = Project(
+        #    name           = 'Tower of Babel',
+        #    desc_project   = '"whose top may reach unto heaven" - that is the tower we want to build. ' + \
+        #                     'Some may call us crazy. Some may call us naive. But we are determined and ' + \
+        #                     'beside from having some language problems between some of our workers ' + \
+        #                     'we are very much in our plan and will succeed!',
+        #    desc_project_parts = 'We want to make everything as transparent as possible. Our trust ' + \
+        #                         'in us is our trust in you.',
+        #    desc_questions     = 'We try to work with you on common questions around the tower building here.',
+        #    desc_participants  = 'Such an ambitious project has various actors involved. You can find them here.',
+        #    desc_goal_groups   = 'We have adopted our goals over the centuries. See them here.',
+        #    desc_process       = 'This is the building timeline of our amazing construction project.',
+        #    desc_documents     = 'We want that you are able to take part. So we publish all construction documents here.',
+        #)
+        #p.save()
+        #p.responsible_participants = [p1,]
+        #p.former_responsible_participants = [p2,]
+        #p.save()
 
         e1 = Event(
             title       = 'Begin of the construction work',

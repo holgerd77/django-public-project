@@ -10,7 +10,6 @@ class ProjectFactory():
         sc   = G(SiteConfig, header_image=None)
         p1   = G(Participant)
         p2   = G(Participant)
-        p    = G(Project, responsible_participants=[p1,], former_responsible_participants=[p2,])
         pgg1 = G(ProjectGoalGroup)
         pg1  = G(ProjectGoal, project_goal_group=pgg1)
         pp1  = G(ProjectPart)
