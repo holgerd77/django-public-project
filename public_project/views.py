@@ -184,7 +184,7 @@ def index(request):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='home'),
+        'site_category': SiteCategory.objects.get_or_create(category='home')[0],
         'current_project_goal_group': ProjectGoalGroup.objects.get_current(),
         'project_part_list': ProjectPart.objects.all(),
         'latest_event': latest_event,
@@ -204,7 +204,7 @@ def project_parts(request):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='project_parts'),
+        'site_category': SiteCategory.objects.get_or_create(category='project_parts')[0],
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'latest_project_part_list': ProjectPart.objects.all().order_by('-date_added')[0:3],
@@ -225,7 +225,7 @@ def project_part(request, project_part_id):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='project_parts'),
+        'site_category': SiteCategory.objects.get_or_create(category='project_parts')[0],
         'user_comment': get_user_comment(request),
         'project_part': project_part,
         'question_list': project_part.get_questions(),
@@ -241,7 +241,7 @@ def project_part(request, project_part_id):
 def goals(request):
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='goals'),
+        'site_category': SiteCategory.objects.get_or_create(category='goals')[0],
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
     })
     return render_to_response('goals.html', context)
@@ -255,7 +255,7 @@ def questions(request):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='questions'),
+        'site_category': SiteCategory.objects.get_or_create(category='questions')[0],
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'research_request_list': research_request_list[0:3],
@@ -277,7 +277,7 @@ def question(request, question_id):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='questions'),
+        'site_category': SiteCategory.objects.get_or_create(category='questions')[0],
         'user_comment': get_user_comment(request),
         'research_request': get_research_request(request),
         'question': question,
@@ -297,7 +297,7 @@ def participants(request):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='participants'),
+        'site_category': SiteCategory.objects.get_or_create(category='participants')[0],
         'group_list_left': groups[0:middle],
         'group_list_right': groups[middle:],
         'latest_participant_list': Participant.objects.all().order_by('-date_added')[0:3],
@@ -317,7 +317,7 @@ def participant(request, participant_id):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='participants'),
+        'site_category': SiteCategory.objects.get_or_create(category='participants')[0],
         'user_comment': get_user_comment(request),
         'participant': participant,
         'question_list': participant.get_questions(),
@@ -333,7 +333,7 @@ def participant(request, participant_id):
 def events(request):
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='events'),
+        'site_category': SiteCategory.objects.get_or_create(category='events')[0],
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
         'chronology_list': Event.objects.all(),
         'latest_event_list': Event.objects.all()[0:5],
@@ -353,7 +353,7 @@ def event(request, event_id):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='events'),
+        'site_category': SiteCategory.objects.get_or_create(category='events')[0],
         'user_comment': get_user_comment(request),
         'event': event,
         'document_list': document_list,
@@ -370,7 +370,7 @@ def documents(request):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='documents'),
+        'site_category': SiteCategory.objects.get_or_create(category='documents')[0],
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
         'latest_document_list': Document.objects.all()[0:3],
@@ -494,7 +494,7 @@ def document(request, document_id):
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
-        'site_category': SiteCategory.objects.get_or_create(category='documents'),
+        'site_category': SiteCategory.objects.get_or_create(category='documents')[0],
         'user_comment': get_user_comment(request),
         'document': document,
         'found_pages': found_pages,
