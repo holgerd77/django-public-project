@@ -10,10 +10,12 @@
           <i class="icon-arrow-right"></i></a>
         </p>
         {% endif %}
-        {% if project_part.main_project_part %}
+        {% if project_part.main_project_parts.count > 0 %}
           <p style="font-size:12px;">
-            {% trans "Main Topic" %}:
-                <a href="{{ project_part.main_project_part.get_absolute_url }}">{{ project_part.main_project_part }}</a>
+            {% trans "Main Topics" %}:<br>
+              {% for main_pp in project_part.main_project_parts.all %}
+                <a href="{{ main_pp.get_absolute_url }}">{{ main_pp }}</a><br>
+              {% endfor %}
           </p>
         {% endif %}
         <p>

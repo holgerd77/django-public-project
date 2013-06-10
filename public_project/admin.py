@@ -86,20 +86,22 @@ class ParticipantAdmin(admin.ModelAdmin):
 
 class CustomProjectPartAdminForm(forms.ModelForm):
     
-    def clean_main_project_part(self):
-        data = self.cleaned_data['main_project_part']
-        if data and data.main_project_part:
-            raise forms.ValidationError(_("A project part can't have a main project part which has a main project part itself. Things would get to complicated."))
+    def clean_main_project_parts(self):
+        data = self.cleaned_data['main_project_parts']
+        for main_pp in data.all():
+            if main_pp.main_project_parts.count() > 0:
+                raise forms.ValidationError(_("A project part can't have a main project part which has a main project part itself. Things would get to complicated."))
         return data
 
 
 class ProjectPartAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
-    list_display = ('name', 'order', 'main_project_part',)
+    list_display = ('name', 'order',)
     inlines = [
         SearchTagInline,
         WebSourceInline,
     ]
+    filter_horizontal = ('main_project_parts',)
     form = CustomProjectPartAdminForm
 
     def delete_warning_msg(self, request, project_part):

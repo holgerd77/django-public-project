@@ -199,7 +199,7 @@ def index(request):
 
 
 def project_parts(request):
-    main_project_parts = ProjectPart.objects.filter(main_project_part__isnull=True)
+    main_project_parts = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
     middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
     context = RequestContext(request, {

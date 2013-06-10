@@ -240,7 +240,7 @@ class ProjectPart(models.Model):
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
     order = models.IntegerField(_("Order"), help_text=help_text, blank=True, null=True)
     help_text = _("If you select another project part here, you'll make this a sub project part.")
-    main_project_part = models.ForeignKey('self', blank=True, null=True, help_text=help_text, verbose_name=_("Main topic"))
+    main_project_parts = models.ManyToManyField('self', symmetrical=False, help_text=help_text, blank=True, null=True, verbose_name=_("Main Topic"))
     search_tags = generic.GenericRelation('SearchTag')
     help_text = _("Website (if existant).")
     description = models.TextField(_("Description"), help_text=help_text)
@@ -250,10 +250,7 @@ class ProjectPart(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        if self.main_project_part:
-            return self.name + " (" + self.main_project_part.name + ")"
-        else:
-            return self.name
+        return self.name
     
     def get_questions(self):
         return Question.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
@@ -276,7 +273,7 @@ class ProjectPart(models.Model):
         return '#0d9434';
     
     def get_icon_class(self):
-        if self.main_project_part:
+        if self.main_project_parts.count() > 0:
             return 'icon-cog'
         else:
             return 'icon-cogs'
