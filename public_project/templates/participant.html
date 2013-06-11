@@ -25,6 +25,21 @@
   {% include "info_box/web_sources.html" %}
   {% endwith %}
   
+  
+  
+  {% if participant.to_memberships.count > 0 %}
+    {% trans "Associated Participants" as sh_title %}
+    {% with sh_title=sh_title sh_icon="icon-user" sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
+    <div class="info_box">
+      {% with membership_list=participant.to_memberships.all %}
+        {% include "info_box/memberships.html" %}
+      {% endwith %}
+    </div>
+  {% endif %}
+  
+  
   {% trans "Events" as sh_title %}
   {% with sh_title=sh_title sh_icon="icon-time" sh_url_title="" %}
     {% include "layout_elements/section_header.html" %}
