@@ -239,10 +239,20 @@ def project_part(request, project_part_id):
 
 
 def goals(request):
+    
+    all_main_project_parts = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
+    main_project_parts = []
+    for main_pp in all_main_project_parts:
+        if main_pp.projectgoalgroup_set.count() > 0:
+            main_project_parts.append(main_pp)
+    middle = int(math.ceil(float(len(main_project_parts))/float(2)))
+    
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
         'site_category': SiteCategory.objects.get_or_create(category='goals')[0],
-        'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
+        'common_goal_group_list': ProjectGoalGroup.objects.filter(project_part=None).order_by('event'),
+        'main_project_part_list_left': main_project_parts[0:middle],
+        'main_project_part_list_right': main_project_parts[middle:],
     })
     return render_to_response('goals.html', context)
 

@@ -432,7 +432,10 @@ class ProjectGoalGroupManager(models.Manager):
 class ProjectGoalGroup(models.Model):
     help_text = _("Group of project goals being determined at a certain point in time.")
     title = models.CharField(_("Title"), max_length=250, help_text=help_text)
+    help_text = _("The topic the group of goals belong to. Will be shown as common goal group if none selected.")
+    project_part = models.ForeignKey(ProjectPart, blank=True, null=True, verbose_name=_("Topic"))
     event = models.ForeignKey(Event, verbose_name=_("Associated event"))
+    is_current = models.BooleanField(default=True, verbose_name=_("Is current"))
     help_text = _("Description of the group of project goals.")
     description = models.TextField(_("Description"), help_text=help_text)
     comments = models.TextField(_("Comments (internal)"), blank=True)
@@ -441,9 +444,6 @@ class ProjectGoalGroup(models.Model):
     
     def __unicode__(self):
         return self.title
-
-    def is_current(self):
-        return self == ProjectGoalGroup.objects.get_current()
     
     class Meta:
         verbose_name = _('Goal')

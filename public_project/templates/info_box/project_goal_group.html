@@ -5,10 +5,22 @@
   <div class="info_box_content">
     <div style="padding:15px;border:1px solid #ddd;">
     <table>
+      <tr>
+        <td style="padding-bottom:15px;" colspan="2">
+          <div style="float:right;">
+            {% if pgg.is_current %}
+              <span class="label label-success">{% trans "Current" %}</span>
+            {% else %}
+              <span class="label label-important">{% trans "Not current" %}</span>
+            {% endif %}
+          </div>
+          <span style="font-size:16px;font-color:black;font-weight:bold;">{{ pgg.title }}</span>
+        </td>
+      </tr>
       {% for pg in pgg.projectgoal_set.all %}
       <tr>
-        <td style="font-size:14px;font-weight: bold;{% if pgg.is_current %}color:#900;{% else %}color:#444;{% endif %}background-color:#f6f6f6;width:150px;">{{ pg.name }}</td>
-        <td style="font-size:14px;font-weight: bold;{% if pgg.is_current %}color:#900;{% else %}color:#444;{% endif %}background-color:#f6f6f6;">{{ pg.performance_figure }}</td>
+        <td style="font-size:14px;font-weight: bold;background-color:#f6f6f6;width:150px;">{{ pg.name }}</td>
+        <td style="font-size:14px;font-weight: bold;background-color:#f6f6f6;">{{ pg.performance_figure }}</td>
       </tr>
       {% endfor %}
       

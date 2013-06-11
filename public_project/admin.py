@@ -144,7 +144,7 @@ class ProjectGoalInline(admin.StackedInline):
 
 
 class ProjectGoalGroupAdmin(admin.ModelAdmin):
-    list_display = ('title', 'event')
+    list_display = ('title', 'event', 'project_part', 'is_current',)
     inlines = [
         ProjectGoalInline,
     ]

@@ -10,9 +10,6 @@ while true; do
             python manage.py migrate;
             echo "Creating superuser with username 'admin'...";
             python manage.py createsuperuser --username=admin --email=d@d.de;
-            echo "Creating example project data...";
-            python manage.py createexampledata;
-            echo "Finished. You're good to go! :-)";
             break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes (Y/y) or no (N/n).";;
