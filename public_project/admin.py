@@ -60,13 +60,27 @@ class MembershipInline(admin.StackedInline):
 
 class ParticipantAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
-    list_display = ('name',)
+    list_display = ('name', 'is_group', 'in_num_groups',)
     search_fields = ['name', 'description',]
     inlines = [
         MembershipInline,
         SearchTagInline,
         WebSourceInline,
     ]
+    
+    def is_group(self, obj):
+        if obj.from_memberships.count() == 0:
+            return True
+        else:
+            return False
+    is_group.boolean = True
+    
+    def in_num_groups(self, obj):
+        if obj.from_memberships.count() > 0:
+            return str(obj.from_memberships.count())
+        else:
+            return ""  
+        
     
     def delete_warning_msg(self, request, participant):
         msg  = _('The following associations with "%s" will be deleted') % unicode(participant)  + u': '
