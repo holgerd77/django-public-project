@@ -1,5 +1,7 @@
 from django import forms
+from django.db.models import Count
 from django.contrib import admin, messages
+from django.contrib.admin import SimpleListFilter
 from django.contrib.admin.actions import delete_selected
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -58,9 +60,35 @@ class MembershipInline(admin.StackedInline):
     fk_name = 'from_participant'
     form = CustomMembershipAdminForm
 
+
+class GroupMembersFilter(SimpleListFilter):    
+    title = _('Group Members')
+    parameter_name = 'group_members'
+    
+    def lookups(self, request, model_admin):
+        groups = Participant.objects.annotate(count=Count('belongs_to')).filter(count=0)
+        
+        lookups = []
+        
+        for group in groups:
+            lookups.append((group.id, unicode(group),))
+        return tuple(lookups)
+    
+    def queryset(self, request, queryset):
+        if not self.value():
+            return queryset
+        memberships = Membership.objects.filter(to_participant=int(self.value()))
+        from_participants = []
+        for m in memberships:
+            from_participants.append(m.from_participant.id)
+        from_participants.append(int(self.value()))
+        return queryset.filter(id__in=from_participants)
+    
+
 class ParticipantAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
     list_display = ('name', 'is_group', 'in_num_groups',)
+    list_filter = (GroupMembersFilter,)
     search_fields = ['name', 'description',]
     inlines = [
         MembershipInline,
