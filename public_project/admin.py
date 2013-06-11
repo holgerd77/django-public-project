@@ -81,7 +81,7 @@ class GroupMembersFilter(SimpleListFilter):
         from_participants = []
         for m in memberships:
             from_participants.append(m.from_participant.id)
-        from_participants.append(int(self.value()))
+        #from_participants.append(int(self.value()))
         return queryset.filter(id__in=from_participants)
     
 
@@ -152,7 +152,8 @@ class MainProjectPartFilter(SimpleListFilter):
     def queryset(self, request, queryset):
         if not self.value():
             return queryset
-        return ProjectPart.objects.filter(id__in=[int(self.value()),])
+        
+        return queryset.filter(main_project_parts__in=[int(self.value()),])
         
 
 
