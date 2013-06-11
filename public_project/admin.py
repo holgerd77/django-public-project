@@ -136,16 +136,50 @@ class CustomProjectPartAdminForm(forms.ModelForm):
         return data
 
 
+class MainProjectPartFilter(SimpleListFilter):    
+    title = _('Main Topics')
+    parameter_name = 'main_topics'
+    
+    def lookups(self, request, model_admin):
+        main_project_parts = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
+        
+        lookups = []
+        
+        for main_pp in main_project_parts:
+            lookups.append((main_pp.id, unicode(main_pp),))
+        return tuple(lookups)
+    
+    def queryset(self, request, queryset):
+        if not self.value():
+            return queryset
+        return ProjectPart.objects.filter(id__in=[int(self.value()),])
+        
+
+
 class ProjectPartAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
-    list_display = ('name', 'order',)
+    list_display = ('name', 'order', 'is_main_project_part', 'in_num_main_project_parts',)
+    list_filter = (MainProjectPartFilter,)
     inlines = [
         SearchTagInline,
         WebSourceInline,
     ]
     filter_horizontal = ('main_project_parts',)
     form = CustomProjectPartAdminForm
-
+    
+    def is_main_project_part(self, obj):
+        if obj.main_project_parts.count() == 0:
+            return True
+        else:
+            return False
+    is_main_project_part.boolean = True
+    
+    def in_num_main_project_parts(self, obj):
+        if obj.main_project_parts.count() > 0:
+            return str(obj.main_project_parts.count())
+        else:
+            return ""  
+    
     def delete_warning_msg(self, request, project_part):
         msg  = _('The following associations with "%s" will be deleted') % unicode(project_part)  + u': '
         msg += u'%i Events, ' % project_part.related_events.count()

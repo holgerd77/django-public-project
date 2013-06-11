@@ -544,8 +544,10 @@ class Document(models.Model):
         self.old_document = self.document
 
     def save(self, force_insert=False, force_update=False):
-        if getattr(settings, 'DPP_IE_COMPATIBLE_PDF_VIEWER', False) and self.old_document != self.document:
+        if getattr(settings, 'DPP_IE_COMPATIBLE_PDF_VIEWER', True) and self.old_document != self.document:
             self.pdf_images_generated = False
+        else:
+            self.pdf_images_generated = True
         super(Document, self).save(force_insert, force_update)
 
         # Delete old document
@@ -553,12 +555,13 @@ class Document(models.Model):
             if os.path.exists(self.old_document.path):
                 os.remove(self.old_document.path)
         
-        # Saving pages when DPP_IE_COMPATIBLE_PDF_VIEWER=True in settings.py
-        if getattr(settings, 'DPP_IE_COMPATIBLE_PDF_VIEWER', False) and self.old_document != self.document:
+        if self.old_document != self.document:
             self.page_set.all().delete()
             cmd = u"python manage.py createpages " + str(self.id) + " --settings=" + settings.SETTINGS_MODULE
             subprocess.Popen(cmd, shell=True)
-            
+        
+        # Creating images when DPP_IE_COMPATIBLE_PDF_VIEWER=True in settings.py    
+        if getattr(settings, 'DPP_IE_COMPATIBLE_PDF_VIEWER', True) and self.old_document != self.document:
             cmd = u"python manage.py generatepdfimages " + str(self.id) + " --settings=" + settings.SETTINGS_MODULE
             subprocess.Popen(cmd, shell=True)
         
