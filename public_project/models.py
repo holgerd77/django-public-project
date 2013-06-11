@@ -141,6 +141,8 @@ class SiteCategory(models.Model):
     )
     category = models.CharField(_("Category"), max_length=50, choices=NAME_CHOICES, unique=True)
     intro_text = models.TextField(_("Intro text"), blank=True, null=True)
+    help_text = _("Numbers of new entries on page, not working/relevant for every category.")
+    num_new_entries = models.IntegerField(default=3, help_text=help_text, verbose_name=_("Number new entries"))
     documents = models.ManyToManyField('Document', related_name="related_site_categories", blank=True, null=True, verbose_name=_("Documents"))
     web_sources = generic.GenericRelation('WebSource', verbose_name=_("Web Sources"))
     comments = models.TextField(_("Comments (internal)"), blank=True)

@@ -34,20 +34,22 @@
 
 <div class="span6">
   
-  {% trans "New Topics" as sh_title %}
-  {% with sh_title=sh_title rss_url="rss/" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  <div class="section">
-    {% with ppd_with_header="yes" %}
-    {% for project_part in latest_project_part_list %}
-      <div style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
-      {% include "info_box/project_part_detail.html" %}
-      </div>
-    {% endfor %}
+  {% if latest_project_part_list %}
+    {% trans "New Topics" as sh_title %}
+    {% with sh_title=sh_title rss_url="rss/" %}
+      {% include "layout_elements/section_header.html" %}
     {% endwith %}
-  </div>
+    
+    <div class="section">
+      {% with ppd_with_header="yes" %}
+      {% for project_part in latest_project_part_list %}
+        <div style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
+        {% include "info_box/project_part_detail.html" %}
+        </div>
+      {% endfor %}
+      {% endwith %}
+    </div>
+  {% endif %}
   
   {% for main_project_part in main_project_part_list_right %}
     {% include "info_box/main_project_part.html" %}
