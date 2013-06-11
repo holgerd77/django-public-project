@@ -1296,9 +1296,8 @@ msgid "Agreement at"
 msgstr "Vereinbart"
 
 #: templates/info_box/project_part_detail.html:15
-#, fuzzy
 msgid "Main Topics"
-msgstr "Hauptthema"
+msgstr "Hauptthemen"
 
 #: templates/info_box/project_parts.html:16
 #, fuzzy
