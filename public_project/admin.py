@@ -152,6 +152,21 @@ class CustomProjectPartAdminForm(forms.ModelForm):
         return data
 
 
+class IsMainProjectPartFilter(SimpleListFilter):
+    title = _('Is Main Topic')
+    parameter_name = 'is_main_topic'
+    
+    def lookups(self, request, model_admin):
+        return (
+            ('main_project_parts', _('Only main topics')),
+        )
+    
+    def queryset(self, request, queryset):
+        if not self.value():
+            return queryset
+        return queryset.annotate(count=Count('main_project_parts')).filter(count=0)
+
+
 class MainProjectPartFilter(SimpleListFilter):    
     title = _('Main Topics')
     parameter_name = 'main_topics'
@@ -176,7 +191,7 @@ class MainProjectPartFilter(SimpleListFilter):
 class ProjectPartAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
     list_display = ('name', 'order', 'is_main_project_part', 'in_num_main_project_parts',)
-    list_filter = (MainProjectPartFilter,)
+    list_filter = (IsMainProjectPartFilter, MainProjectPartFilter,)
     inlines = [
         SearchTagInline,
         WebSourceInline,
