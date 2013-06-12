@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-11 18:05+0200\n"
+"POT-Creation-Date: 2013-06-12 11:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,16 +36,24 @@ msgstr ""
 "kompliziert werden."
 
 #: admin.py:65
+msgid "Is Group"
+msgstr ""
+
+#: admin.py:70
+msgid "Only groups"
+msgstr ""
+
+#: admin.py:81
 #, fuzzy
 msgid "Group Members"
 msgstr "Zugehörigkeit"
 
-#: admin.py:114 admin.py:185
+#: admin.py:130 admin.py:201
 #, python-format
 msgid "The following associations with \"%s\" will be deleted"
 msgstr "Die folgenden Verknüpfungen mit \"%s\" werden gelöscht"
 
-#: admin.py:135
+#: admin.py:151
 msgid ""
 "A project part can't have a main project part which has a main project part "
 "itself. Things would get to complicated."
@@ -53,7 +61,7 @@ msgstr ""
 "Ein Themenbereich kann keinen Hauptthemenbereich haben, der selbst einen "
 "Hauptthemenbereich hat. Dinge würde zu kompliziert werden."
 
-#: admin.py:140 templates/info_box/project_part_detail.html:15
+#: admin.py:156 templates/info_box/project_part_detail.html:15
 msgid "Main Topics"
 msgstr "Hauptthemen"
 
@@ -1127,7 +1135,15 @@ msgstr "Letzter Kommentar"
 msgid "Associated Participants"
 msgstr "Zugehörige Beteiligte"
 
-#: templates/participants.html:36
+#: templates/participants.html:29
+msgid "All participants"
+msgstr "Alle Beteiligten"
+
+#: templates/participants.html:30
+msgid "Only groups/institutions"
+msgstr "Nur Gruppen/Institutionen"
+
+#: templates/participants.html:43
 msgid "New Participants"
 msgstr "Neue Beteiligte"
 
@@ -1343,6 +1359,9 @@ msgstr "Keine Rechercheaufträge vorhanden."
 #: templates/info_box/web_sources.html:22
 msgid "No web sources available."
 msgstr "Keine Web-Quellen vorhanden."
+
+#~ msgid "Show all"
+#~ msgstr "Alle anzeigen"
 
 #~ msgid "Main topic"
 #~ msgstr "Hauptthema"

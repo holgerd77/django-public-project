@@ -24,6 +24,29 @@
     {% include "info_box/site_category_detail.html" %}
   </div>
   
+  <div class="section">
+    <div class="btn-group" id="only_groups_btn_group" data-toggle="buttons-checkbox">
+      <button class="btn active" id="og_all">{% trans "All participants" %}</button>
+      <button class="btn" id="og_groups">{% trans "Only groups/institutions" %}</button>
+    </div>
+  </div>
+  
+<script>
+  $(document).ready(function() {
+    
+    $('#og_all').click(function() {
+      $('#og_groups').removeClass('active');
+      $('.membership').css('display', 'block');
+    });
+    $('#og_groups').click(function() {
+      $('#og_all').removeClass('active');
+      $('.membership').css('display', 'none');
+    });
+    
+  });
+  
+</script>
+  
   {% for group in group_list_left %}
     {% include "info_box/group.html" %}
   {% endfor %}

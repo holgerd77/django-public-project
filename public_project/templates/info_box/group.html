@@ -4,7 +4,7 @@
       <a href="{{ group.get_absolute_url }}">{{ group }} <i class="icon-arrow-right"></i></a>
     </div>
     {% if group.to_memberships.count > 0 %}
-    <div class="info_box">
+    <div class="info_box membership">
       {% with membership_list=group.to_memberships.all %}
         {% include "info_box/memberships.html" %}
       {% endwith %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-11 18:05+0200\n"
+"POT-Creation-Date: 2013-06-12 11:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,21 +29,29 @@ msgid ""
 msgstr ""
 
 #: admin.py:65
+msgid "Is Group"
+msgstr ""
+
+#: admin.py:70
+msgid "Only groups"
+msgstr ""
+
+#: admin.py:81
 msgid "Group Members"
 msgstr ""
 
-#: admin.py:114 admin.py:185
+#: admin.py:130 admin.py:201
 #, python-format
 msgid "The following associations with \"%s\" will be deleted"
 msgstr ""
 
-#: admin.py:135
+#: admin.py:151
 msgid ""
 "A project part can't have a main project part which has a main project part "
 "itself. Things would get to complicated."
 msgstr ""
 
-#: admin.py:140 templates/info_box/project_part_detail.html:15
+#: admin.py:156 templates/info_box/project_part_detail.html:15
 #, fuzzy
 msgid "Main Topics"
 msgstr "/events/"
@@ -1104,7 +1112,16 @@ msgstr "/events/"
 msgid "Associated Participants"
 msgstr "participants/"
 
-#: templates/participants.html:36
+#: templates/participants.html:29
+#, fuzzy
+msgid "All participants"
+msgstr "participants/"
+
+#: templates/participants.html:30
+msgid "Only groups/institutions"
+msgstr ""
+
+#: templates/participants.html:43
 #, fuzzy
 msgid "New Participants"
 msgstr "participants/"
