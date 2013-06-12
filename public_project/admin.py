@@ -61,6 +61,22 @@ class MembershipInline(admin.StackedInline):
     form = CustomMembershipAdminForm
 
 
+class IsGroupFilter(SimpleListFilter):
+    title = _('Is Group')
+    parameter_name = 'is_group'
+    
+    def lookups(self, request, model_admin):
+        return (
+            ('groups', _('Only groups')),
+        )
+    
+    def queryset(self, request, queryset):
+        if not self.value():
+            return queryset
+        return queryset.annotate(count=Count('belongs_to')).filter(count=0)
+        
+    
+
 class GroupMembersFilter(SimpleListFilter):    
     title = _('Group Members')
     parameter_name = 'group_members'
@@ -88,7 +104,7 @@ class GroupMembersFilter(SimpleListFilter):
 class ParticipantAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
     list_display = ('name', 'is_group', 'in_num_groups',)
-    list_filter = (GroupMembersFilter,)
+    list_filter = (IsGroupFilter, GroupMembersFilter,)
     search_fields = ['name', 'description',]
     inlines = [
         MembershipInline,
