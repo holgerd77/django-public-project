@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 11:44+0200\n"
+"POT-Creation-Date: 2013-06-12 12:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1121,7 +1121,7 @@ msgstr "participants/"
 msgid "Only groups/institutions"
 msgstr ""
 
-#: templates/participants.html:43
+#: templates/participants.html:59
 #, fuzzy
 msgid "New Participants"
 msgstr "participants/"
@@ -1130,7 +1130,17 @@ msgstr "participants/"
 msgid "Subtopics"
 msgstr ""
 
-#: templates/project_parts.html:38
+#: templates/project_parts.html:31
+#, fuzzy
+msgid "All topics"
+msgstr "participants/"
+
+#: templates/project_parts.html:32
+#, fuzzy
+msgid "Only main topics"
+msgstr "/events/"
+
+#: templates/project_parts.html:61
 #, fuzzy
 msgid "New Topics"
 msgstr "/events/"

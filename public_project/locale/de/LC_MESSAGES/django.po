@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 11:44+0200\n"
+"POT-Creation-Date: 2013-06-12 12:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1143,7 +1143,7 @@ msgstr "Alle Beteiligten"
 msgid "Only groups/institutions"
 msgstr "Nur Gruppen/Institutionen"
 
-#: templates/participants.html:43
+#: templates/participants.html:59
 msgid "New Participants"
 msgstr "Neue Beteiligte"
 
@@ -1151,7 +1151,15 @@ msgstr "Neue Beteiligte"
 msgid "Subtopics"
 msgstr "Unterthemen"
 
-#: templates/project_parts.html:38
+#: templates/project_parts.html:31
+msgid "All topics"
+msgstr "Alle Themen"
+
+#: templates/project_parts.html:32
+msgid "Only main topics"
+msgstr "Nur Hauptthemen"
+
+#: templates/project_parts.html:61
 msgid "New Topics"
 msgstr "Neue Themen"
 
@@ -1362,9 +1370,6 @@ msgstr "Keine Web-Quellen vorhanden."
 
 #~ msgid "Show all"
 #~ msgstr "Alle anzeigen"
-
-#~ msgid "Main topic"
-#~ msgstr "Hauptthema"
 
 #~ msgid ""
 #~ "Creation of (exactly) one SiteConfig object in the Django admin with the "

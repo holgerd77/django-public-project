@@ -26,6 +26,29 @@
     {% include "info_box/site_category_detail.html" %}
   </div>
   
+  <div class="section">
+    <div class="btn-group" id="only_main_project_parts_btn_group" data-toggle="buttons-checkbox">
+      <button class="btn active" id="ompp_all">{% trans "All topics" %}</button>
+      <button class="btn" id="ompp_mpps">{% trans "Only main topics" %}</button>
+    </div>
+  </div>
+  
+<script>
+  $(document).ready(function() {
+    
+    $('#ompp_all').click(function() {
+      $('#ompp_mpps').removeClass('active');
+      $('.main_project_part').css('display', 'block');
+    });
+    $('#ompp_mpps').click(function() {
+      $('#ompp_all').removeClass('active');
+      $('.main_project_part').css('display', 'none');
+    });
+    
+  });
+  
+</script>
+  
   {% for main_project_part in main_project_part_list_left %}
     {% include "info_box/main_project_part.html" %}
   {% endfor %}
