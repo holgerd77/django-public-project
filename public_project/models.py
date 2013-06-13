@@ -156,7 +156,7 @@ class WebSource(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey("content_type", "object_id")
-    order = models.IntegerField(_("Order"), blank=True, null=True)
+    order = models.IntegerField(_("Order"), default=100, blank=True, null=True)
     url = models.URLField(_("URL"))
     date = models.DateField(_("Date"), blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -189,6 +189,8 @@ class Membership(models.Model):
 class Participant(models.Model):
     help_text  = _("Person, group or institution acting in some way in the context of the project or being affected by the process or the result of the project execution.")
     name = models.CharField(_("Name"), max_length=250, help_text=help_text, unique=True)
+    help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
+    order = models.IntegerField(_("Order"), help_text=help_text, default=500, blank=True, null=True)
     help_text = _("The participant belongs to another participant (often an institution or group), leave blank if participant itself is institution/group.")
     belongs_to = models.ManyToManyField('self', symmetrical=False, through='Membership', verbose_name=_("Belongs to"))
     search_tags = generic.GenericRelation('SearchTag')
@@ -229,7 +231,7 @@ class Participant(models.Model):
             return 'icon-group'
     
     class Meta:
-        ordering = ['name',]
+        ordering = ['order', 'name',]
         verbose_name = _('Participant')
         verbose_name_plural = _('Participants')
 
@@ -238,7 +240,7 @@ class ProjectPart(models.Model):
     help_text = _("Structural parts of the project being stable over time.")
     name = models.CharField(_("Name"), max_length=250, help_text=help_text)
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
-    order = models.IntegerField(_("Order"), help_text=help_text, blank=True, null=True)
+    order = models.IntegerField(_("Order"), help_text=help_text, default=500, blank=True, null=True)
     help_text = _("If you select another project part here, you'll make this a sub project part.")
     main_project_parts = models.ManyToManyField('self', symmetrical=False, help_text=help_text, blank=True, null=True, verbose_name=_("Main Topic"))
     search_tags = generic.GenericRelation('SearchTag')
@@ -457,7 +459,7 @@ class ProjectGoal(models.Model):
     help_text = _("Single performance figure describing the project goal, e.g. '1.000.000 Euro', 'January 25th 2020', ...")
     performance_figure = models.CharField(_("Performance figure"), max_length=250, help_text=help_text)
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
-    order = models.IntegerField(_("Order"), help_text=help_text, blank=True, null=True)
+    order = models.IntegerField(_("Order"), help_text=help_text, default=100, blank=True, null=True)
     
     def __unicode__(self):
         return self.name
@@ -618,7 +620,7 @@ class SearchTag(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey("content_type", "object_id")
-    order = models.IntegerField(_("Order"), blank=True, null=True)
+    order = models.IntegerField(_("Order"), default=100, blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
