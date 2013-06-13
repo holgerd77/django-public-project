@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from public_project.models import Document
 from public_project.doc_scanner import DocScanner
+from public_project.tag_cache_creator import rebuild_cache_for_document
 
 class Command(BaseCommand):
     
@@ -17,3 +18,6 @@ class Command(BaseCommand):
                 raise CommandError('Pages for document "%s" already created' % document_id)
             ds = DocScanner(document)
             ds.create_pages()
+            
+            rebuild_cache_for_document(document)
+            print "Rebuid search tag cache for document."

@@ -547,26 +547,28 @@ class Document(models.Model):
         else:
             self.pdf_images_generated = True
         super(Document, self).save(force_insert, force_update)
+        #print "pdf_images_generated set to: " + str(self.pdf_images_generated)
 
         # Delete old document
         if self.old_document and self.old_document != self.document:
             if os.path.exists(self.old_document.path):
                 os.remove(self.old_document.path)
+                #print "Old document deleted from path: " + self.old_document.path
         
         if self.old_document != self.document:
             self.page_set.all().delete()
             cmd = u"python manage.py createpages " + str(self.id) + " --settings=" + settings.SETTINGS_MODULE
             subprocess.Popen(cmd, shell=True)
+            #print "New page creation process started..."
         
         # Creating images when DPP_IE_COMPATIBLE_PDF_VIEWER=True in settings.py    
         if getattr(settings, 'DPP_IE_COMPATIBLE_PDF_VIEWER', True) and self.old_document != self.document:
             cmd = u"python manage.py generatepdfimages " + str(self.id) + " --settings=" + settings.SETTINGS_MODULE
             subprocess.Popen(cmd, shell=True)
-        
-        from public_project.tag_cache_creator import rebuild_cache_for_document
-        rebuild_cache_for_document(self)
+            #print "Image generation process started..."
         
         self.old_document = self.document
+
 
 def delete_pages_folder(sender, **kwargs):
     instance = kwargs['instance']
