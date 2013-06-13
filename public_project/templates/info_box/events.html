@@ -8,7 +8,7 @@
         {% if event_list %}
           <table class="table">
             {% for event in event_list %}
-            <tr class="{% if not event.important %}tr_normal_event{% endif %}" style="{% if not event.important and not site_config.show_all_events %}display:none;{% endif %}">
+            <tr class="{% if not event.important %}tr_normal_event{% endif %}">
               <td 
                 style="width:72px;text-align:center;">
                 {{ event.date|date:"d.m.Y" }}
