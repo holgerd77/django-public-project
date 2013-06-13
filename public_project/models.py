@@ -192,7 +192,7 @@ class Membership(models.Model):
 
 class Participant(models.Model):
     help_text  = _("Person, group or institution acting in some way in the context of the project or being affected by the process or the result of the project execution.")
-    name = models.CharField(_("Name"), max_length=250, help_text=help_text)
+    name = models.CharField(_("Name"), max_length=250, help_text=help_text, unique=True)
     help_text = _("The participant belongs to another participant (often an institution or group), leave blank if participant itself is institution/group.")
     belongs_to = models.ManyToManyField('self', symmetrical=False, through='Membership', verbose_name=_("Belongs to"))
     search_tags = generic.GenericRelation('SearchTag')
