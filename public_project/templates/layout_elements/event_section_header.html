@@ -1,0 +1,62 @@
+{% load i18n %}
+
+  <ul class="nav nav-tabs">
+  <li class="active">
+    <a href="#" style="font-weight:bold;">
+      {% if sh_icon %}
+        <i class="{{ sh_icon }}"></i>
+      {% endif %}
+      {{ sh_title }}
+      {% if rss_url %}
+        &nbsp;<button class="btn btn-mini" id="rss_btn{{ rss_btn_id }}">RSS <i class="icon-rss"></i></button>
+        <script>
+          $('#rss_btn{{ rss_btn_id }}').click(function() {
+            location.href = '{{ rss_url }}';
+          });
+        </script>
+      {% endif %}
+      </a>
+      
+  </li>
+    <li style="float:right;">
+      <div class="btn-group" id="only_main_events_btn_group" data-toggle="buttons-checkbox">
+      <button class="btn btn-small{% if site_config.show_all_events %} active{% endif %}" id="ome_all">{% trans "All" %}</button>
+      <button class="btn btn-small{% if not site_config.show_all_events %} active{% endif %}" id="ome_selected">{% trans "Only main events" %}</button>
+    </div>
+    </li>
+</ul>
+
+<script>
+  $(document).ready(function() {
+    
+    $('#ome_all').click(function() {
+      $('#ome_selected').removeClass('active');
+      $('.tr_normal_event').css('display', 'table-row');
+    });
+    $('#ome_selected').click(function() {
+      $('#ome_all').removeClass('active');
+      $('.tr_normal_event').css('display', 'none');
+    });
+    
+  });
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
