@@ -33,7 +33,7 @@ class SiteConfigAdmin(admin.ModelAdmin):
 
 
 class SiteCategoryAdmin(admin.ModelAdmin):
-    list_display = ('category', 'num_new_entries',)
+    list_display = ('category',)
     inlines = [
         WebSourceInline,
     ]

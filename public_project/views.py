@@ -209,7 +209,6 @@ def project_parts(request):
         'site_category': site_category,
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
-        'latest_project_part_list': ProjectPart.objects.all().order_by('-date_added')[0:site_category.num_new_entries],
     })
     return render_to_response('project_parts.html', context)
 
@@ -313,7 +312,6 @@ def participants(request):
         'site_category': site_category,
         'group_list_left': groups[0:middle],
         'group_list_right': groups[middle:],
-        'latest_participant_list': Participant.objects.all().order_by('-date_added')[0:site_category.num_new_entries],
     })
     return render_to_response('participants.html', context)
 
@@ -351,7 +349,6 @@ def events(request):
         'site_category': SiteCategory.objects.get_or_create(category='events')[0],
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
         'chronology_list': Event.objects.all(),
-        'latest_event_list': Event.objects.all()[0:site_category.num_new_entries],
     })
     return render_to_response('events.html', context)
 
@@ -390,7 +387,6 @@ def documents(request):
         'site_category': site_category,
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
-        'latest_document_list': Document.objects.all()[0:site_category.num_new_entries],
     })
     return render_to_response('documents.html', context)
 
