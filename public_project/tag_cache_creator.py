@@ -9,10 +9,11 @@ def create_cache_entry(tag, document):
     
     if num_results > 0:
         ce = SearchTagCacheEntry()
-        ce.tag = tag
-        ce.document = document
-        ce.num_results = num_results
-        ce.save()
+        if SearchTagCacheEntry.objects.filter(document=document).filter(tag__name=tag.name).count() == 0:
+            ce.tag = tag
+            ce.document = document
+            ce.num_results = num_results
+            ce.save()
 
 
 def rebuild_cache_for_tag(tag):
@@ -31,11 +32,23 @@ def rebuild_cache_for_document(document):
     
     for tag in SearchTag.objects.all():
         create_cache_entry(tag, document)
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
