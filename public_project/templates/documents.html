@@ -27,12 +27,14 @@
   </div>
   
   {% for main_pp in main_project_part_list_left %}
-    {% with sh_title=main_pp.name sh_url_title="" %}
-      {% include "layout_elements/section_header.html" %}
-    {% endwith %}
-    {% with document_list=main_pp.get_documents %}
-      {% include "info_box/documents.html" %}
-    {% endwith %}
+    {% if main_pp.get_documents %}
+      {% with sh_title=main_pp.name sh_url_title="" %}
+        {% include "layout_elements/section_header.html" %}
+      {% endwith %}
+      {% with document_list=main_pp.get_documents %}
+        {% include "info_box/documents.html" %}
+      {% endwith %}
+    {% endif %}
   {% endfor %}
   
 </div>
