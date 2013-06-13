@@ -283,7 +283,7 @@ class ProjectPart(models.Model):
             return 'icon-cogs'
     
     class Meta:
-        ordering = ['order',]
+        ordering = ['order', 'name',]
         verbose_name = _('Project Part')
         verbose_name_plural = _('Project Parts')
 
