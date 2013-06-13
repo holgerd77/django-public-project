@@ -444,35 +444,30 @@ def xhr_document_tags(request):
         if request.POST['document_id']:
             document = get_object_or_404(Document, pk=request.POST['document_id'])
             if request.POST['content_type']:
-                cache_entries = SearchTagCacheEntry.objects.filter(document=document).filter(tag__content_type__model=request.POST['content_type'])
+                st_dict_list = SearchTagCacheEntry.objects.filter(document=document).filter(tag__content_type__model=request.POST['content_type']).values('tag__name', 'tag__content_type__model',).annotate(num_tags=Count('tag__name')).order_by('-num_tags')
+                #cache_entries = SearchTagCacheEntry.objects.filter(document=document).filter(tag__content_type__model=request.POST['content_type'])
             else:
-                cache_entries = SearchTagCacheEntry.objects.filter(document=document)
-            cache_entries = cache_entries[0:16]
+                st_dict_list = SearchTagCacheEntry.objects.filter(document=document).values('tag__name', 'tag__content_type__model',).annotate(num_tags=Count('tag__name')).order_by('-num_tags')
+            st_dict_list = st_dict_list[0:16]
             size_start = 14
             size_span = 10
         else:
-            cache_entries = []
             if request.POST['content_type']:
-                search_tags = SearchTag.objects.filter(content_type__model=request.POST['content_type']).annotate(num_cache_entries=Count('searchtagcacheentry')).order_by('-num_cache_entries')[0:22]
+                st_dict_list = SearchTagCacheEntry.objects.filter(tag__content_type__model=request.POST['content_type']).values('tag__name', 'tag__content_type__model',).annotate(num_tags=Count('tag__name')).order_by('-num_tags')[0:22]
             else:
-                search_tags = SearchTag.objects.annotate(num_cache_entries=Count('searchtagcacheentry')).order_by('-num_cache_entries')[0:22]
-            for st in search_tags:
-                if(st.searchtagcacheentry_set.count() > 0):
-                    ce = st.searchtagcacheentry_set.all()[0]
-                    ce.num_results = st.searchtagcacheentry_set.count()
-                    cache_entries.append(ce)
+                st_dict_list = SearchTagCacheEntry.objects.values('tag__name', 'tag__content_type__model',).annotate(num_tags=Count('tag__name')).order_by('-num_tags')[0:22]
             size_start = 16
             size_span = 12
         
-        if len(cache_entries) > 0:
-            first = cache_entries[0]
-            max_num_results = first.num_results
+        if len(st_dict_list) > 0:
+            first = st_dict_list[0]
+            max_num_results = first['num_tags']
         
         words = []
-        for ce in cache_entries:
-            text = ce.tag.name
-            size = size_start + int(round((float(ce.num_results)/ float(max_num_results)) * size_span))
-            color = colors[ce.tag.content_type.model]
+        for st_dict in st_dict_list:
+            text = st_dict['tag__name']
+            size = size_start + int(round((float(st_dict['num_tags'])/ float(max_num_results)) * size_span))
+            color = colors[st_dict['tag__content_type__model']]
             
             word = { "text": text, "size":size, "color": color, }
             words.append(word)
