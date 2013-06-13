@@ -18,8 +18,9 @@
         {{ site_config.intro_text|linebreaksbr }}
       {% endautoescape %}
     </p>
-      
+    {% if site_config.header_image %}      
       <img width="{{ site_config.header_image.image.width }}" height="{{ site_config.header_image.image.height }}" src="/media/{{ site_config.header_image.image }}">
+    {% endif %}
     </div>
 
 

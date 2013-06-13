@@ -26,7 +26,6 @@ msgstr ""
 "Rahmen dieser Software."
 
 #: admin.py:55
-#, fuzzy
 msgid ""
 "A participant can't belong to a participant which already belongs to another "
 "participant. Things would get to complicated."
@@ -37,14 +36,13 @@ msgstr ""
 
 #: admin.py:65
 msgid "Is Group"
-msgstr ""
+msgstr "Ist Gruppe/Institution"
 
 #: admin.py:70
 msgid "Only groups"
-msgstr ""
+msgstr "Nur Gruppen/Institutionen"
 
 #: admin.py:81
-#, fuzzy
 msgid "Group Members"
 msgstr "Zugehörigkeit"
 
@@ -62,9 +60,8 @@ msgstr ""
 "Hauptthemenbereich hat. Dinge würde zu kompliziert werden."
 
 #: admin.py:156
-#, fuzzy
 msgid "Is Main Topic"
-msgstr "Hauptthema"
+msgstr "Ist Hauptthema"
 
 #: admin.py:161 templates/project_parts.html:32
 msgid "Only main topics"
@@ -80,7 +77,7 @@ msgid "Subject Areas"
 msgstr "Themenbereiche"
 
 #: feeds.py:19
-#, fuzzy, python-format
+#, python-format
 msgid "Feed with new subject areas from %s."
 msgstr "Feed mit neuen Themenbereichen von %s."
 
@@ -799,10 +796,9 @@ msgid "Comment text"
 msgstr "Kommentartext"
 
 #: models.py:786
-#, fuzzy
 msgid "Comment is only shown on page if published is true."
 msgstr ""
-"Verbindung wird nur auf der Webseite angezeigt wenn published Checkbox "
+"Kommentar wird nur auf der Webseite angezeigt wenn published Checkbox "
 "aktiviert ist."
 
 #: models.py:787
@@ -1362,9 +1358,8 @@ msgid "Agreement at"
 msgstr "Vereinbart"
 
 #: templates/info_box/project_parts.html:16
-#, fuzzy
 msgid "No project_parts available."
-msgstr "Keine Projektbereiche vorhanden."
+msgstr "Keine Themen vorhanden."
 
 #: templates/info_box/questions.html:72
 msgid "No questions available."
