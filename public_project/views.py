@@ -395,7 +395,7 @@ def xhr_universal_search(request):
     if request.method == 'GET' and 'query' in request.GET:
         query_string = request.GET['query']
         
-        entry_query = get_query(query_string, ['name', 'main_project_part__name',])
+        entry_query = get_query(query_string, ['name',])
         pp_list = list(ProjectPart.objects.select_related().filter(entry_query)[0:10])
         
         entry_query = get_query(query_string, ['title',])

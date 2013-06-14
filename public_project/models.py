@@ -220,6 +220,15 @@ class Participant(models.Model):
     def get_absolute_url(self):
         return "/" + ugettext("participants_url") + unicode(self.id) + "/"
     
+    def get_comments_url(self):
+        return "/" + ugettext("participants_url") + unicode(self.id) + "/" + ugettext("comments_url")
+    
+    def get_active_user_comments(self):
+        return self.comment_relations.filter(comment__published=True)
+    
+    def get_num_active_user_comments(self):
+        return self.comment_relations.filter(comment__published=True).count()
+    
     @classmethod
     def get_color(cls):
         return '#3e3ec7';
@@ -343,6 +352,15 @@ class Event(models.Model):
     def get_event_type_icon(self):
         return self.EVENT_TYPE_CHOICES_ICONS[self.event_type]
     
+    def get_comments_url(self):
+        return "/" + ugettext("events_url") + unicode(self.id) + "/" + ugettext("comments_url")
+    
+    def get_active_user_comments(self):
+        return self.comment_relations.filter(comment__published=True)
+    
+    def get_num_active_user_comments(self):
+        return self.comment_relations.filter(comment__published=True).count()
+    
     @classmethod
     def get_color(cls):
         return '#c91a1a'
@@ -404,6 +422,15 @@ class Question(models.Model):
     
     def get_absolute_url(self):
         return "/" + ugettext("questions_url") + unicode(self.id) + "/"
+    
+    def get_comments_url(self):
+        return "/" + ugettext("questions_url") + unicode(self.id) + "/" + ugettext("comments_url")
+    
+    def get_active_user_comments(self):
+        return self.comment_relations.filter(comment__published=True)
+    
+    def get_num_active_user_comments(self):
+        return self.comment_relations.filter(comment__published=True).count()
     
     @classmethod
     def get_color(cls):
@@ -513,6 +540,9 @@ class Document(models.Model):
     
     def get_absolute_url(self):
         return "/" + ugettext("documents_url") + unicode(self.id) + "/"
+    
+    def get_comments_url(self):
+        return "/" + ugettext("documents_url") + unicode(self.id) + "/" + ugettext("comments_url")
     
     @classmethod
     def get_color(cls):

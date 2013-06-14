@@ -6,7 +6,14 @@
           <table class="table">
             {% for m in membership_list %}
             <tr>
-              <td><a href="{{ m.from_participant.get_absolute_url}}">{{ m.from_participant.name }}</a></td>
+              <td>
+                <a href="{{ m.from_participant.get_absolute_url}}">{{ m.from_participant.name }}</a>
+                {% if m.from_participant.get_num_active_user_comments %}<br> 
+                  <a href="{{ m.from_participant.get_comments_url }}" style="font-size:11px;">
+                    {{ m.from_participant.get_num_active_user_comments }} {% trans "Comments" %}
+                  </a>
+                {% endif %}
+              </td>
               <td style="text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
             </tr>
             {% endfor %}

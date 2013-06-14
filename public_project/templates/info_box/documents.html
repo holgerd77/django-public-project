@@ -20,7 +20,10 @@
                 {% endfor %}
                 <br>
               {% endif %}
-              {{ doc.page_set.count }} {% trans "Pages" %}, {{ doc.get_num_active_user_comments }} {% trans "Comments" %}
+              {{ doc.page_set.count }} {% trans "Pages" %}{% if doc.get_num_active_user_comments %}, 
+                <a href="{{ doc.get_comments_url }}">
+                {{ doc.get_num_active_user_comments }} {% trans "Comments" %}</a>
+              {% endif %}
               
             </td>
             <td style="text-align: right;">{{ doc.date_added|date:"d.m.Y"}}</td>
