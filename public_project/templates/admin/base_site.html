@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} test | {% trans 'Public Project site admin' %}{% endblock %}
+
+
+{% block extrastyle %}
+<style type="text/css">
+#mce_12 {
+    margin-left:106px !important;
+}
+</style>
+{% endblock %}
+
+{% block extrahead %}
+<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script>
+        tinymce.init({selector:'textarea.htmleditor', width: 650, plugins: "image", image_list: [
+{% for image in uploaded_images_list %}
+  {title: '{{ image.title }}', value: '{{ image.image.url }}'},
+{% endfor %}
+    ],});
+</script>
+
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    {% trans 'Public Project administration' %}
+    
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

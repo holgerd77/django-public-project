@@ -22,7 +22,6 @@ You need the following ``Python/Django`` libraries, probably best installed in a
 
 * Python 2.7+ (earlier versions untested)
 * `Django <https://www.djangoproject.com/>`_ 1.5+
-* `Grappelli <http://grappelliproject.com/>`_ (for admin interface)
 * `PDFMiner <http://www.unixuser.org/~euske/python/pdfminer/index.html>`_
 * Python Image Library PIL 1.1.7+ (for Django ImageField type)
 * `Tastypie <http://tastypieapi.org/>`_ 0.9+ (for API access)
@@ -69,10 +68,9 @@ is essential for DPP)::
 
     INSTALLED_APPS = (
         ...
-        'grappelli', #this has to be before 'django.contrib.admin'
+        'public_project', # Since DPP changes some admin templates, app has to be placed before admin
         'django.contrib.admin',
         'tastypie',
-        'public_project',
         'south',
     )
 
@@ -129,18 +127,16 @@ the Django email settings properly::
     EMAIL_HOST_PASSWORD = 'YOURSECUREPASSWORD'
    
 
-DPP uses the request template context processor in its views, so add it to the ``settings.py`` file::
+DPP uses the request template context processor in its views and adds its own context processors,
+add them to the ``settings.py`` file::
    
-   TEMPLATE_CONTEXT_PROCESSORS = (
-        "django.contrib.auth.context_processors.auth",
-        "django.core.context_processors.debug",
-        "django.core.context_processors.i18n",
-        "django.core.context_processors.media",
-        "django.core.context_processors.static",
-        "django.core.context_processors.tz",
-        "django.contrib.messages.context_processors.messages",
-        "django.core.context_processors.request", #this line!
-   )
+    from django.conf import global_settings
+    ...
+    
+    TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+        "django.core.context_processors.request",
+        "public_project.context_processors.uploaded_images_list",
+    )
 
 The next one is a restriction from ``Grappelli``, used for the admin interface: make sure, ``AppDirectoriesFinder``
 is first within your ``STATICFILES_FINDERS``::
@@ -191,22 +187,11 @@ the MSIE and another browser.
           for large documents.
 
 
-Initial project data
---------------------
-For the site to be properly displayed, you have to enter some initial project data. When you open the
-main url of your dev server, you should see a message similar to the following. Please follow the
-instructions.
-
-.. image:: images/screenshot_site_configuration_message.png
-
-
-Admin Interface
----------------
+Admin Interface and initial project data
+-----------------------------------------
 The admin interface should now be accessible through the path you defined in your ``urls.py``.
-``DPP`` is using ``Grappelli`` for enhancing the admin interface look and functionality. If
-you have problems getting the admin interface to work, make sure you also have a look at
-the `Grappelli Docs installation section <http://django-grappelli.readthedocs.org/en/latest/quickstart.html#installation>`_. 
-
+Start by adding/changing some configuration parameters and introductory texts in the SiteConfig
+and SiteCategory menu.
 
 Site Domain
 -----------
@@ -345,7 +330,7 @@ Then translate the missing identifier strings and compile the message files with
 Release Notes
 =============
 
-** Changes in version 0.6-alpha** (no date yet!)
+**Changes in version 0.6-alpha** (no date yet!)
 
 * ATTENTION! UPDATE WILL REMOVE THE WEB_SOURCES OF YOUR PROJECT OBJECT (ADMIN).
   PLEASE BACKUP THEM AND ADD THEM TO APPROPRIATE SITECATEGORY OBJECTS AFTER UPDATE!
@@ -364,6 +349,13 @@ Release Notes
   and connecting documents and websites with categories, replacing the old model ``Project`` (deleted).
   DB changes: migrations ``0005_auto_add_sitecategory.py``, ``0006_intro_texts_to_site_category.py``
   (for automatic data transfer from ``Project`` instance) and ``0007_auto_del_project.py``.
+* NOTE TO SELF: ADD INFORMATION ABOUT THE REST OF THE MIGRATIONS, IF POSSIBLE ENHANCE MIGRATION ABOVE,
+  LOOK THROUGH COMMITS
+* Direct integration of TinyMCE as HTML editor for descriptive admin fields by overwriting Django admin
+  templates. ``public_project`` app in ``INSTALLED_APPS`` in ``settings.py`` now has to be placed before (!)
+  Django admin app, new ``TEMPLATE_CONTEXT_PROCESSOR`` (also has to be added to ``settings.py``) for loading
+  images in Admin to be selectable by TinyMCE editor
+  
 
 **Changes in version 0.5-alpha (Renaming Release)** (2013-05-27)
 

@@ -84,13 +84,6 @@ entering these data types).
 Basic Site Configuration and Project Description
 ================================================
 
-Before you can actually see anything on the frontend website you have to provide some basic site configuration
-settings and project information. Before you are confronted with a screenshot like the following
-when opening the main url of your website:
-
-.. image:: images/screenshot_site_configuration_message.png
-
-
 Site Configuration
 ------------------
 

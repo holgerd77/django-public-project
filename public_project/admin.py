@@ -144,6 +144,8 @@ class ParticipantAdmin(admin.ModelAdmin):
 
 class CustomProjectPartAdminForm(forms.ModelForm):
     
+    description = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
+
     def clean_main_project_parts(self):
         data = self.cleaned_data['main_project_parts']
         for main_pp in data.all():
