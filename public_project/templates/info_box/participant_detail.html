@@ -2,7 +2,7 @@
 
 
     <div class="info_box" style="background-color: #f9f9f9;padding: 15px;">
-      <div class="info_box_content">
+      <div class="info_box_content html_text_with_imgs">
         {% if pd_with_header %}
         <p style="font-size:16px;font-weight: bold;margin-bottom:15px;">
           <i class="{{ participant.get_icon_class }}"></i> &nbsp;
@@ -19,7 +19,8 @@
           </p>
         {% endif %}
         <p>
-          {{ participant.description }}
+          {{ participant.description|safe }}
+          <div style="clear:both;height:1px;"></div>
         </p>
       </div>
     </div>

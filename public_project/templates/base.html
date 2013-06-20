@@ -155,10 +155,19 @@
         $('#user_comment').modal('hide');
      });
   });
-  
 </script>
 
 {% endif %}
+
+<script>
+  $(document).ready(function() {
+     $('.html_text_with_imgs img').each(function() {
+        var title = '"' + $(this).attr("alt") + '"' + ", {% trans 'image attribution under' %} {% trans 'Contact' %}"; 
+        $(this).attr("title", title);
+     }); 
+  });
+</script>
+
 
 </body>
 </html>

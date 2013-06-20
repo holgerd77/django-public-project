@@ -33,10 +33,13 @@ post_save.connect(create_user_profile, sender=User)
 
 class Image(models.Model):
     title = models.CharField(_("Title"), max_length=250)
-    image = models.ImageField(_("Image"), upload_to='images')
-    help_text = _("Short linked html attribution snippet to the original image source or \
-alternatively something like 'Own image'.")
-    attribution_html = models.CharField(_("Attribution HTML"), max_length=250, help_text=help_text)
+    help_text = _("400px max width, 200px for images used with floating texts")
+    image = models.ImageField(_("Image"), upload_to='images', help_text=help_text)
+    help_text = _("Attribution to the original image source or alternatively something like 'Own image'.")
+    attribution = models.CharField(_("Attribution"), max_length=250, help_text=help_text)
+    help_text = _("Link to the original image source (if available)")
+    attribution_url = models.URLField(_("Attribution URL"), help_text=help_text, blank=True, null=True)
+    comments = models.TextField(_("Comments (internal)"), blank=True)
     
     def __unicode__(self):
         return self.title

@@ -22,6 +22,7 @@ class UserAdmin(UserAdmin):
 
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('title', 'image',)
+    search_fields = ['title',]
 
 
 class WebSourceInline(generic.GenericTabularInline):
@@ -101,6 +102,11 @@ class GroupMembersFilter(SimpleListFilter):
         return queryset.filter(id__in=from_participants)
     
 
+class CustomParticipantAdminForm(forms.ModelForm):
+    
+    description = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
+
+
 class ParticipantAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
     list_display = ('name', 'is_group', 'in_num_groups',)
@@ -111,6 +117,7 @@ class ParticipantAdmin(admin.ModelAdmin):
         SearchTagInline,
         WebSourceInline,
     ]
+    form = CustomParticipantAdminForm
     
     def is_group(self, obj):
         if obj.from_memberships.count() == 0:

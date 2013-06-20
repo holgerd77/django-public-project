@@ -6,20 +6,30 @@
 
 {% block extrastyle %}
 <style type="text/css">
-#mce_12 {
-    margin-left:106px !important;
+.mce-tinymce {
+   margin-left:106px !important;
 }
 </style>
 {% endblock %}
 
 {% block extrahead %}
-<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script src="/static/js/lib/tinymce-4.0.0/tinymce.min.js"></script>
 <script>
-        tinymce.init({selector:'textarea.htmleditor', width: 650, plugins: "image", image_list: [
-{% for image in uploaded_images_list %}
-  {title: '{{ image.title }}', value: '{{ image.image.url }}'},
-{% endfor %}
-    ],});
+  tinymce.init({
+    selector:'textarea.htmleditor',
+    body_id: 'htmleditor_body',
+    content_css: '/static/css/tinymce_editor-0.1.0.css',
+    width: 570,
+    height: 350,
+    plugins: "link image code",
+    menubar: false,
+    toolbar: "undo redo | bold italic | alignleft aligncenter alignright alignjustify blockquote | bullist numlist | link image | code",
+    image_list: [
+    {% for image in uploaded_images_list %}
+      {title: '{{ image.title|escapejs }}', value: '{{ image.image.url }}'},
+    {% endfor %}
+    ],
+  });
 </script>
 
 {% endblock %}

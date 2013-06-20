@@ -58,7 +58,7 @@
             <a href="http://djangoproject.com" target="_blank">Django (Web Framework)</a>
           </li>
           <li>
-            <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Twitter Bootstrap</a>
+            <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap (Layout)</a>
           </li>
           <li>
             <a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome (Iconic Font Set)</a>
@@ -68,6 +68,9 @@
           </li>
           <li>
             <a href="http://mozilla.github.com/pdf.js/" target="_blank">Mozilla pdf.js (PDF rendering)</a>
+          </li>
+          <li>
+            <a href="http://www.tinymce.com/" target="_blank">TinyMCE (Admin HTML editor)</a>
           </li>
         </ul>
       </div>
@@ -91,9 +94,13 @@
           <tr>
             <td>{{ image.title }}</td>
             <td>
-              {% autoescape off %}
-                {{ image.attribution_html }}
-              {% endautoescape %}
+              {% if image.attribution_url %}
+                <a href="{{ image.attribution_url }}">
+              {% endif %}
+              {{ image.attribution }}
+              {% if image.attribution_url %}
+                </a>
+              {% endif %}
             </td>
           </tr>
           {% endfor %}
