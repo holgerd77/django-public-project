@@ -113,13 +113,13 @@ Height: your choice, something around 175px is a good fit).")
     navi_link_color = models.CharField(_("Navigation link color"), max_length=7, help_text=help_text, default='#FFFFFF')
     help_text = _("Short intro text about this site, what is the purpose, who is running it.")
     default = _("About text")
-    desc_about = models.TextField(_("About text"), help_text=help_text, default=default)
+    about_text = models.TextField(_("About text"), help_text=help_text, default=default)
     help_text = _("Some html text you want to use in the footer of the page, you can e.g. \
 provide a link to your email adress or associated social media sites.")
-    footer_html = models.TextField(_("Footer HTML"), help_text=help_text, default=_("Footer HTML Default"))
+    footer = models.TextField(_("Footer"), help_text=help_text, default=_("Footer HTML Default"))
     help_text = _("Html to be displayed on the contact page, provide at least an adress there \
 and some contact information.")
-    contact_html = models.TextField(_("Contact HTML"), help_text=help_text, default=_("Contact HTML Default"))
+    contact_text = models.TextField(_("Contact"), help_text=help_text, default=_("Contact HTML Default"))
     comments = models.TextField(_("Comments (internal)"), blank=True)
     
     objects = SiteConfigManager()

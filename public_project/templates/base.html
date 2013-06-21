@@ -86,7 +86,7 @@
 <div class="row">
   <div class="span12" id="footer">
     <div class="row">
-      <div class="span6">{% autoescape off %}{{ site_config.footer_html }}{% endautoescape %}</div>
+      <div class="span6">{{ site_config.footer|safe }}</div>
       <div class="span6" style="text-align: right;">
 {% if site_config.public_api %}
   <a href="/api/">Content API</a> | 

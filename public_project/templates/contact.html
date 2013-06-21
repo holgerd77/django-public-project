@@ -18,10 +18,9 @@
   
   <div class="section">
     <div class="info_box">
-      <div class="info_box_content ib_text">
-        {% autoescape off %}
-          {{ site_config.contact_html|linebreaksbr }}  
-        {% endautoescape %}
+      <div class="info_box_content ib_text html_text_with_imgs">
+          {{ site_config.contact_text|safe }}
+          <div style="clear:both;height:1px;"></div>
       </div>
     </div>
   </div>

@@ -2,9 +2,10 @@
 
 
 <div class="info_box" style="background-color: #f9f9f9;padding: 15px;">
-      <div class="info_box_content">
+      <div class="info_box_content html_text_with_imgs">
         <p style="margin: 0 0 10px;">
-          {{ site_category.intro_text }}
+          {{ site_category.intro_text|safe }}
+          <div style="clear:both;height:1px;"></div>
         </p>
         {% with document_list=site_category.documents.all %}
         {% if document_list %} 

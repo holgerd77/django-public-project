@@ -2,7 +2,7 @@
 
 
 <div class="info_box" style="background-color: #f9f9f9;padding: 15px;">
-      <div class="info_box_content">
+      <div class="info_box_content html_text_with_imgs">
         {% if ed_with_header %}
         <p style="font-size:16px;font-weight: bold;margin-bottom:15px;">
           <i class="icon-time"></i> &nbsp;
@@ -14,7 +14,8 @@
           {{ event.date }}
         </p>
         <p style="margin: 0 0 10px;">
-          {{ event.description }}
+          {{ event.description|safe }}
+          <div style="clear:both;height:1px;"></div>
         </p>
         {% with participant_list=event.participants.all %}
         {% if participant_list %} 

@@ -13,11 +13,12 @@
 
       <div class="hero-unit" style="padding: 35px !important;">
     <h4 style="color:{{ site_config.sub_title_color }};">{{ site_config.sub_title }}</h4>
+    <div  class="html_text_with_imgs">
     <p style="font-size:16px !important; line-height:26px !important;">
-      {% autoescape off %}
-        {{ site_config.intro_text|linebreaksbr }}
-      {% endautoescape %}
+        {{ site_config.intro_text|safe }}
+        <div style="clear:both;height:1px;"></div>
     </p>
+    </div>
     {% if site_config.header_image %}      
       <img width="{{ site_config.header_image.image.width }}" height="{{ site_config.header_image.image.height }}" src="/media/{{ site_config.header_image.image }}">
     {% endif %}
@@ -61,8 +62,8 @@
   {% endwith %}
   
   <div class="section">
-  {% with ib_content=site_config.desc_about %}
-  {% include "info_box/generic.html"%}
+  {% with ib_content=site_config.about_text %}
+  {% include "info_box/generic_html.html"%}
   {% endwith %}
   </div>
   

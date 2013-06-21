@@ -29,8 +29,20 @@ class WebSourceInline(generic.GenericTabularInline):
     model = WebSource
 
 
+class CustomSiteConfigAdminForm(forms.ModelForm):
+    intro_text = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
+    about_text = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
+    footer = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
+    contact_text = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
+
+
 class SiteConfigAdmin(admin.ModelAdmin):
     list_display = ('title', 'short_title', 'title_color', 'sub_title', 'sub_title_color')
+    form = CustomSiteConfigAdminForm
+
+
+class CustomSiteCategoryAdminForm(forms.ModelForm):
+    intro_text = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
 
 
 class SiteCategoryAdmin(admin.ModelAdmin):
@@ -39,6 +51,7 @@ class SiteCategoryAdmin(admin.ModelAdmin):
         WebSourceInline,
     ]
     filter_horizontal = ('documents',)
+    form = CustomSiteCategoryAdminForm
 
 
 class SearchTagInline(generic.GenericTabularInline):
@@ -103,7 +116,6 @@ class GroupMembersFilter(SimpleListFilter):
     
 
 class CustomParticipantAdminForm(forms.ModelForm):
-    
     description = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
 
 
@@ -237,6 +249,10 @@ class ProjectPartAdmin(admin.ModelAdmin):
         return delete_selected(self, request, queryset)
 
 
+class CustomEventAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
+
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'event_type', 'important', 'date')
     filter_horizontal = ('project_parts', 'participants',)
@@ -246,6 +262,7 @@ class EventAdmin(admin.ModelAdmin):
     ]
     list_filter = ('event_type', 'important',)
     search_fields = ['title', 'description',]
+    form = CustomEventAdminForm
 
 
 class QuestionAdmin(admin.ModelAdmin):
@@ -267,11 +284,18 @@ class ProjectGoalGroupAdmin(admin.ModelAdmin):
     ]
 
 
+class CustomDocumentAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'class':'htmleditor'}))
+    
+    class Meta:
+        exclude = ('pdf_images_generated',)
+
+
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('title', 'document', 'date',)
     search_fields = ['title', 'description',]
     filter_horizontal = ('participants', 'project_parts', 'events',)
-    exclude = ('pdf_images_generated',)
+    form = CustomDocumentAdminForm
 
 
 class PageAdmin(admin.ModelAdmin):

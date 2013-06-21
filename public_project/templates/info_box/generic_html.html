@@ -1,0 +1,13 @@
+  <div class="info_box ib_text">
+    {% if ib_title %}
+    <div class="info_box_header">
+      {{ ib_title }}
+    </div>
+    {% endif %}
+    <div class="info_box_content html_text_with_imgs">
+      <p>
+          {{ ib_content|safe }}
+          <div style="clear:both;height:1px;"></div>
+      </p>
+    </div> 
+  </div>
