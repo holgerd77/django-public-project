@@ -122,18 +122,25 @@
       e_tr.css('background-color', '#f7f7f7');
       d_tr.css('background-color', '#f7f7f7');
       
-      p_a.before('<i class="icon-group"></i>&nbsp; ');
-      i_a.before('<i class="icon-picture"></i>&nbsp; ');
-      d_a.before('<i class="icon-inbox"></i>&nbsp; ');
-      e_a.before('<i class="icon-time"></i>&nbsp; ');
-      q_a.before('<i class="icon-question-sign"></i>&nbsp; ');
-      c_a.before('<i class="icon-comments"></i>&nbsp; ');
-      g_a.before('<i class="icon-bullseye"></i>&nbsp; ');
-      a_a.before('<i class="icon-dashboard"></i>&nbsp; ');
-      r_a.before('<i class="icon-eye-open"></i>&nbsp; ');
-      t_a.before('<i class="icon-cogs"></i>&nbsp; ');
-      scat_a.before('<i class="icon-sitemap"></i>&nbsp; ');
       sconf_a.before('<i class="icon-wrench"></i>&nbsp; ');
+      scat_a.before('<i class="icon-sitemap"></i>&nbsp; ');
+      a_a.before('<i class="icon-dashboard"></i>&nbsp; ');
+      i_a.before('<i class="icon-picture"></i>&nbsp; ');
+      t_a.before('<i class="icon-cogs"></i>&nbsp; ');
+      g_a.before('<i class="icon-bullseye"></i>&nbsp; ');
+      q_a.before('<i class="icon-question-sign"></i>&nbsp; ');
+      p_a.before('<i class="icon-group"></i>&nbsp; ');
+      e_a.before('<i class="icon-time"></i>&nbsp; ');
+      d_a.before('<i class="icon-inbox"></i>&nbsp; ');
+      c_a.before('<i class="icon-comments"></i>&nbsp; ');
+      r_a.before('<i class="icon-eye-open"></i>&nbsp; ');
+      
+      sconf_a.attr('title', '{% trans "General settings (e.g. page title) and common introductory texts (e.g. about text)" %}');
+      scat_a.attr('title', '{% trans "Introductory texts and documents and web sources for the site categories (e.g. Events category), one entry per category" %}');
+      a_a.attr('title', '{% trans "Log of activities throughout the system, shown on main page, entries can be deleted safely" %}');
+      i_a.attr('title', '{% trans "Images for introductory texts, images must be uploaded here first before they can be embedded in a text" %}');
+      t_a.attr('title', '{% trans " " %}');
+      g_a.attr('title', '{% trans " " %}');
       
   });
 </script>
