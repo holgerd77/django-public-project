@@ -1,18 +1,44 @@
 {% extends "admin/base.html" %}
 {% load i18n %}
 
-{% block title %}{{ title }} test | {% trans 'Public Project site admin' %}{% endblock %}
+{% block title %}{{ title }} test | {% trans 'Public Project Site Admin' %}{% endblock %}
 
 
 {% block extrastyle %}
+  <link rel="stylesheet" href="/static/css/lib/font-awesome-3.1.1.css" type="text/css" />
 <style type="text/css">
 .mce-tinymce {
    margin-left:106px !important;
+}
+.icon-home {
+	color:#444 !important;
+}
+.icon-cogs, .icon-cog {
+	color:#0d9434 !important;
+}
+.icon-bullseye {
+	color:#875513 !important;
+}
+.icon-question-sign {
+	color: #941bbf !important;
+}
+.icon-group {
+	color:#3e3ec7 !important;
+}
+.icon-user {
+	color:#3e3ec7 !important;
+}
+.icon-time {
+	color:#c91a1a !important;
+}
+.icon-inbox {
+	color:#b88f00 !important;
 }
 </style>
 {% endblock %}
 
 {% block extrahead %}
+<script src="/static/js/lib/jquery-1.8.1.min.js" type="text/javascript"></script>
 <script src="/static/js/lib/tinymce-4.0.0/tinymce.min.js"></script>
 <script>
   tinymce.init({
@@ -30,13 +56,93 @@
     {% endfor %}
     ],
   });
+  
+  $('document').ready(function() {
+      var p_a = $('#content-main a[href="/admin/public_project/participant/"]:first');
+      var p_tr = p_a.parent().parent();
+      var pp_table = p_tr.parent().parent();
+      var i_a = $('#content-main a[href="/admin/public_project/image/"]:first');
+      var i_tr = i_a.parent().parent();
+      var d_a = $('#content-main a[href="/admin/public_project/document/"]:first');
+      var d_tr = d_a.parent().parent();
+      var e_a = $('#content-main a[href="/admin/public_project/event/"]:first');
+      var e_tr = e_a.parent().parent();
+      var q_a = $('#content-main a[href="/admin/public_project/question/"]:first');
+      var q_tr = q_a.parent().parent();
+      var c_a = $('#content-main a[href="/admin/public_project/comment/"]:first');
+      var c_tr = c_a.parent().parent();
+      var g_a = $('#content-main a[href="/admin/public_project/projectgoalgroup/"]:first');
+      var g_tr = g_a.parent().parent();
+      var a_a = $('#content-main a[href="/admin/public_project/activitylog/"]:first');
+      var a_tr = a_a.parent().parent();
+      var r_a = $('#content-main a[href="/admin/public_project/researchrequest/"]:first');
+      var r_tr = r_a.parent().parent();
+      var t_a = $('#content-main a[href="/admin/public_project/projectpart/"]:first');
+      var t_tr = t_a.parent().parent();
+      var scat_a = $('#content-main a[href="/admin/public_project/sitecategory/"]:first');
+      var scat_tr = scat_a.parent().parent();
+      var sconf_a = $('#content-main a[href="/admin/public_project/siteconfig/"]:first');
+      var sconf_tr = sconf_a.parent().parent();
+      
+      p_tr.detach();
+      i_tr.detach();
+      d_tr.detach();
+      e_tr.detach();
+      q_tr.detach();
+      c_tr.detach();
+      g_tr.detach();
+      a_tr.detach();
+      r_tr.detach();
+      t_tr.detach();
+      scat_tr.detach();
+      sconf_tr.detach();
+      
+      sconf_tr.appendTo(pp_table);
+      scat_tr.appendTo(pp_table);
+      a_tr.appendTo(pp_table);
+      i_tr.appendTo(pp_table);
+      t_tr.appendTo(pp_table);
+      g_tr.appendTo(pp_table);
+      q_tr.appendTo(pp_table);
+      p_tr.appendTo(pp_table);
+      e_tr.appendTo(pp_table);
+      d_tr.appendTo(pp_table);
+      c_tr.appendTo(pp_table);
+      r_tr.appendTo(pp_table);
+      
+      pp_table.find('th').css('font-size', '14px');
+      pp_table.find('tr').css('line-height', '18px');
+      pp_table.find('th').css('line-height', '18px');
+      pp_table.find('td').css('line-height', '18px');
+      
+      t_tr.css('background-color', '#f7f7f7');
+      g_tr.css('background-color', '#f7f7f7');
+      q_tr.css('background-color', '#f7f7f7');
+      p_tr.css('background-color', '#f7f7f7');
+      e_tr.css('background-color', '#f7f7f7');
+      d_tr.css('background-color', '#f7f7f7');
+      
+      p_a.before('<i class="icon-group"></i>&nbsp; ');
+      i_a.before('<i class="icon-picture"></i>&nbsp; ');
+      d_a.before('<i class="icon-inbox"></i>&nbsp; ');
+      e_a.before('<i class="icon-time"></i>&nbsp; ');
+      q_a.before('<i class="icon-question-sign"></i>&nbsp; ');
+      c_a.before('<i class="icon-comments"></i>&nbsp; ');
+      g_a.before('<i class="icon-bullseye"></i>&nbsp; ');
+      a_a.before('<i class="icon-dashboard"></i>&nbsp; ');
+      r_a.before('<i class="icon-eye-open"></i>&nbsp; ');
+      t_a.before('<i class="icon-cogs"></i>&nbsp; ');
+      scat_a.before('<i class="icon-sitemap"></i>&nbsp; ');
+      sconf_a.before('<i class="icon-wrench"></i>&nbsp; ');
+      
+  });
 </script>
 
 {% endblock %}
 
 {% block branding %}
 <h1 id="site-name">
-    {% trans 'Public Project administration' %}
+    {% trans 'Public Project Administration' %}
     
 </h1>
 {% endblock %}
