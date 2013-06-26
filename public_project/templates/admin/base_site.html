@@ -72,6 +72,12 @@
         var p_a = $('#content-main a[href*="/public_project/participant/"]:first');
         var p_tr = p_a.parent().parent();
         var pp_table = p_tr.parent().parent();
+        var pp_module = pp_table.parent();
+        var content_div = pp_module.parent();
+        
+        pp_module.detach();
+        pp_module.prependTo(content_div);
+        
         var i_a = $('#content-main a[href*="/public_project/image/"]:first');
         var i_tr = i_a.parent().parent();
         var d_a = $('#content-main a[href*="/public_project/document/"]:first');
