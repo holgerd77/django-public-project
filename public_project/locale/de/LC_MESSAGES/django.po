@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 15:12+0200\n"
+"POT-Creation-Date: 2013-06-26 15:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1153,16 +1153,16 @@ msgstr "Suche nach"
 msgid "Public Project Site Admin"
 msgstr "ProjectWatch"
 
-#: templates/admin/base_site.html:123
+#: templates/admin/base_site.html:131
 msgid ""
 "Administration for the creation and maintenance of a Public Project Website"
 msgstr "Administration zur Erstellung und Pflege einer Public Project-Webseite"
 
-#: templates/admin/base_site.html:126
+#: templates/admin/base_site.html:134
 msgid "Open main page"
 msgstr "Hauptseite öffnen"
 
-#: templates/admin/base_site.html:154
+#: templates/admin/base_site.html:160
 msgid ""
 "General settings (e.g. page title) and common introductory texts (e.g. about "
 "text)"
@@ -1170,7 +1170,7 @@ msgstr ""
 "Allgemeine Einstellungen (z.B. Seitentitel) und Einleitungstexte (z.B. About-"
 "Text)"
 
-#: templates/admin/base_site.html:155
+#: templates/admin/base_site.html:161
 msgid ""
 "Introductory texts and documents and web sources for the site categories (e."
 "g. Events category), one entry per category"
@@ -1178,7 +1178,7 @@ msgstr ""
 "Einleitungstexte sowie Dokumente und Web-Quellen für Seitenkategorien (z.B. "
 "Katgorie Ereignisse), ein Eintrag pro Kategorie"
 
-#: templates/admin/base_site.html:156
+#: templates/admin/base_site.html:162
 msgid ""
 "Log of activities throughout the system, shown on main page, entries can be "
 "deleted safely"
@@ -1186,7 +1186,7 @@ msgstr ""
 "Log der Aktivitäten im System, wird auf der Startseite angezeigt, Einträge "
 "können gefahrlos gelöscht werden"
 
-#: templates/admin/base_site.html:157
+#: templates/admin/base_site.html:163
 msgid ""
 "Images for introductory texts, images must be uploaded here first before "
 "they can be embedded in a text"
@@ -1194,40 +1194,40 @@ msgstr ""
 "Bilder für Einleitungstexte, Bilder müssen zunächst hier hochgeladen werden "
 "bevor sie in Texte eingebettet werden können"
 
-#: templates/admin/base_site.html:158
+#: templates/admin/base_site.html:164
 msgid ""
 "Topics to structure the project, can be divided into main and sub topics"
 msgstr ""
 "Themen um das Projekt zu strukturieren, können in Haupt- und Unterthemen "
 "unterteilt werden"
 
-#: templates/admin/base_site.html:159
+#: templates/admin/base_site.html:165
 msgid "Target settings during project development"
 msgstr "Zielvorgaben im Laufe des Projektes"
 
-#: templates/admin/base_site.html:160
+#: templates/admin/base_site.html:166
 msgid "Questions around the project"
 msgstr "Fragen rund um das Projekt"
 
-#: templates/admin/base_site.html:161
+#: templates/admin/base_site.html:167
 msgid "Single persons, groups or institutions related to the project"
 msgstr ""
 "Einzelpersonen, Gruppen oder Institutionen, die mit dem Projekt in "
 "Verbindung stehen"
 
-#: templates/admin/base_site.html:162
+#: templates/admin/base_site.html:168
 msgid "Events being related to the project"
 msgstr "Mit dem Projekt in Verbindung stehende Ereignisse"
 
-#: templates/admin/base_site.html:163
+#: templates/admin/base_site.html:169
 msgid "Documents from within or about the project"
 msgstr "Aus dem Projekt kommende oder das Projekt beschreibende Dokumente"
 
-#: templates/admin/base_site.html:164
+#: templates/admin/base_site.html:170
 msgid "Comments from users being entered on the front-end website"
 msgstr "Über die Frontend-Webseite eingegebe Kommentare von Nutzern"
 
-#: templates/admin/base_site.html:165
+#: templates/admin/base_site.html:171
 msgid ""
 "Research requests for crowdsourcing certain tasks regarding project "
 "questions, can be entered on the front-end website on a questions page when "
@@ -1237,7 +1237,11 @@ msgstr ""
 "Projektes an die Crowd zu vergeben, können auf der Frontend-Webseite auf "
 "einer Frageseite eingegeben werden, sofern man eingeloggt ist"
 
-#: templates/admin/base_site.html:174
+#: templates/admin/base_site.html:176
+msgid "ADMIN_PROJECT_PART_FORM_HELP"
+msgstr ""
+
+#: templates/admin/base_site.html:187
 #, fuzzy
 msgid "Public Project Administration"
 msgstr "Verwaltung"
