@@ -66,30 +66,30 @@
   });
   
   $('document').ready(function() {
-      var p_a = $('#content-main a[href="/admin/public_project/participant/"]:first');
+      var p_a = $('#content-main a[href*="/public_project/participant/"]:first');
       var p_tr = p_a.parent().parent();
       var pp_table = p_tr.parent().parent();
-      var i_a = $('#content-main a[href="/admin/public_project/image/"]:first');
+      var i_a = $('#content-main a[href*="/public_project/image/"]:first');
       var i_tr = i_a.parent().parent();
-      var d_a = $('#content-main a[href="/admin/public_project/document/"]:first');
+      var d_a = $('#content-main a[href*="/public_project/document/"]:first');
       var d_tr = d_a.parent().parent();
-      var e_a = $('#content-main a[href="/admin/public_project/event/"]:first');
+      var e_a = $('#content-main a[href*="/public_project/event/"]:first');
       var e_tr = e_a.parent().parent();
-      var q_a = $('#content-main a[href="/admin/public_project/question/"]:first');
+      var q_a = $('#content-main a[href*="/public_project/question/"]:first');
       var q_tr = q_a.parent().parent();
-      var c_a = $('#content-main a[href="/admin/public_project/comment/"]:first');
+      var c_a = $('#content-main a[href*="/public_project/comment/"]:first');
       var c_tr = c_a.parent().parent();
-      var g_a = $('#content-main a[href="/admin/public_project/projectgoalgroup/"]:first');
+      var g_a = $('#content-main a[href*="/public_project/projectgoalgroup/"]:first');
       var g_tr = g_a.parent().parent();
-      var a_a = $('#content-main a[href="/admin/public_project/activitylog/"]:first');
+      var a_a = $('#content-main a[href*="/public_project/activitylog/"]:first');
       var a_tr = a_a.parent().parent();
-      var r_a = $('#content-main a[href="/admin/public_project/researchrequest/"]:first');
+      var r_a = $('#content-main a[href*="/public_project/researchrequest/"]:first');
       var r_tr = r_a.parent().parent();
-      var t_a = $('#content-main a[href="/admin/public_project/projectpart/"]:first');
+      var t_a = $('#content-main a[href*="/public_project/projectpart/"]:first');
       var t_tr = t_a.parent().parent();
-      var scat_a = $('#content-main a[href="/admin/public_project/sitecategory/"]:first');
+      var scat_a = $('#content-main a[href*="/public_project/sitecategory/"]:first');
       var scat_tr = scat_a.parent().parent();
-      var sconf_a = $('#content-main a[href="/admin/public_project/siteconfig/"]:first');
+      var sconf_a = $('#content-main a[href*="/public_project/siteconfig/"]:first');
       var sconf_tr = sconf_a.parent().parent();
       
       p_tr.detach();
