@@ -34,6 +34,14 @@
 .icon-inbox {
 	color:#b88f00 !important;
 }
+.admin_model_help_box {
+   float:right;
+   width:270px;
+   border:1px solid #ccc;
+   font-size:12px;
+   padding:10px;
+   background-color:#fff9c8; 
+}
 </style>
 {% endblock %}
 
@@ -110,17 +118,33 @@
       c_tr.appendTo(pp_table);
       r_tr.appendTo(pp_table);
       
+      pp_table.parent().css('border', '1px solid #bbb');
+      pp_table.find('caption').css('font-size', '16px');
+      
       pp_table.find('th').css('font-size', '14px');
       pp_table.find('tr').css('line-height', '18px');
       pp_table.find('th').css('line-height', '18px');
       pp_table.find('td').css('line-height', '18px');
       
+      var html = '<div class="module" style="padding:5px;font-size:11px;background-color:#f7f7f7;color:#111;">';
+      html += '<div style="padding:5px;">';
+      html += '{% trans "Administration for the creation and maintenance of a Public Project Website" %}';
+      html += '</div>';
+      html += '<div style="padding:5px;">';
+      html += '<a href="/" target="_blank">{% trans "Open main page" %}</a>';
+      html += '</div>';
+      html += '</div>'
+      $(html).prependTo('#content-related');
+      
+      scat_tr.find('td, th').css('border-bottom', '1px solid #e0e0e0');
+      i_tr.find('td, th').css('border-bottom', '1px solid #e0e0e0');
       t_tr.css('background-color', '#f7f7f7');
       g_tr.css('background-color', '#f7f7f7');
       q_tr.css('background-color', '#f7f7f7');
       p_tr.css('background-color', '#f7f7f7');
       e_tr.css('background-color', '#f7f7f7');
       d_tr.css('background-color', '#f7f7f7');
+      d_tr.find('td, th').css('border-bottom', '1px solid #e0e0e0');
       
       sconf_a.before('<i class="icon-wrench"></i>&nbsp; ');
       scat_a.before('<i class="icon-sitemap"></i>&nbsp; ');
@@ -139,9 +163,22 @@
       scat_a.attr('title', '{% trans "Introductory texts and documents and web sources for the site categories (e.g. Events category), one entry per category" %}');
       a_a.attr('title', '{% trans "Log of activities throughout the system, shown on main page, entries can be deleted safely" %}');
       i_a.attr('title', '{% trans "Images for introductory texts, images must be uploaded here first before they can be embedded in a text" %}');
-      t_a.attr('title', '{% trans " " %}');
-      g_a.attr('title', '{% trans " " %}');
+      t_a.attr('title', '{% trans "Topics to structure the project, can be divided into main and sub topics" %}');
+      g_a.attr('title', '{% trans "Target settings during project development" %}');
+      q_a.attr('title', '{% trans "Questions around the project" %}');
+      p_a.attr('title', '{% trans "Single persons, groups or institutions related to the project" %}');
+      e_a.attr('title', '{% trans "Events being related to the project" %}');
+      d_a.attr('title', '{% trans "Documents from within or about the project" %}');
+      c_a.attr('title', '{% trans "Comments from users being entered on the front-end website" %}');
+      r_a.attr('title', '{% trans "Research requests for crowdsourcing certain tasks regarding project questions, can be entered on the front-end website on a questions page when being logged in" %}');
       
+      
+      if($('#projectpart_form').length > 0) {
+          var html = '<div class="admin_model_help_box">';
+          html += '{% trans "ADMIN_PROJECT_PART_FORM_HELP" %}';
+          html += '</div>';
+          $('.field-title > div').prepend(html);
+      }
   });
 </script>
 

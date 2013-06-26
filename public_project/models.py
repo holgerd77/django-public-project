@@ -98,19 +98,9 @@ class SiteConfig(models.Model):
     short_title = models.CharField(_("Short title"), max_length=250, help_text=help_text, default=default)
     help_text = _("Color for the page title (Format: '#990000').")
     title_color = models.CharField(_("Title color"), max_length=7, help_text=help_text, default='#990000')
-    help_text = _("Subtitle of the page.")
-    default = _("Project Website Subtitle")
-    sub_title = models.CharField(_("Subtitle"), max_length=250, help_text=help_text, default=default)
-    help_text = _("Color for the page subtitle (Format: '#990000').")
-    sub_title_color = models.CharField(_("Subtitle color"), max_length=7, help_text=help_text, default='#444444')
     help_text = _("Short intro text to describe your page (HTML possible), not too long, use about text for detailed information.")
     default = _("This is a project watch website.")
     intro_text = models.TextField(_("Intro text"), help_text=help_text, default=default)
-    help_text = _("Optional header image shown at the end of intro box on first page (Width: 450px \
-Height: your choice, something around 175px is a good fit).")
-    header_image = models.ForeignKey(Image, help_text=help_text, blank=True, null=True, verbose_name=_("Header image"))
-    help_text = _("Color of the navi links (Format: '#990000').")
-    navi_link_color = models.CharField(_("Navigation link color"), max_length=7, help_text=help_text, default='#FFFFFF')
     help_text = _("Short intro text about this site, what is the purpose, who is running it.")
     default = _("About text")
     about_text = models.TextField(_("About text"), help_text=help_text, default=default)
@@ -148,6 +138,9 @@ class SiteCategory(models.Model):
     web_sources = generic.GenericRelation('WebSource', verbose_name=_("Web Sources"))
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    
+    def __unicode__(self):
+        return self.get_category_display()
     
     class Meta:
         verbose_name = _('Website Category')
@@ -249,7 +242,7 @@ class Participant(models.Model):
 
 
 class ProjectPart(models.Model):
-    help_text = _("Structural parts of the project being stable over time.")
+    help_text = _("Name of the topic")
     name = models.CharField(_("Name"), max_length=250, help_text=help_text)
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
     order = models.IntegerField(_("Order"), help_text=help_text, default=500, blank=True, null=True)

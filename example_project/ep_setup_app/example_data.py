@@ -1,5 +1,6 @@
 import datetime
 from django.core.files import File
+from django.contrib.sites.models import Site
 from public_project.models import *
 
 
@@ -8,17 +9,21 @@ class ExampleData:
 
     def create(self):
         
+        site = Site.objects.all()[0]
+        site.domain = '127.0.0.1:8075'
+        site.name = '127.0.0.1:8075'
+        site.save()
+        
         sc = SiteConfig(
             title          = 'Tower of Babel',
             short_title    = 'Tower of Babel',
-            sub_title      = "We will finish. Someday.",
-            intro_text     = "This project is taking a litte longer than expected. Having some language problems " + \
+            intro_text     = "<p><b>We will finish. Someday.</b></p>This project is taking a litte longer than expected. Having some language problems " + \
                              " as well. But we will finish. We promise.",
-            desc_about     = "This project website is run by Tower of Babel International, London, " + \
+            about_text     = "This project website is run by Tower of Babel International, London, " + \
                              "but is not at all associated with the Babel Tower Coorporation, Antalya or the " + \
                              "Babel Tower Group, Jamaica.",
-            footer_html    = "For questions ask Jim, John, Miranda or Turtle-Joey.",
-            contact_html   = "Contact: no-reply@towerofbabelinternationalassociation.com",
+            footer         = "For questions ask Jim, John, Miranda or Turtle-Joey.",
+            contact_text   = "Contact: no-reply@towerofbabelinternationalassociation.com",
         )
         sc.save()
         

@@ -8,15 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        db.rename_column(u'public_project_siteconfig', 'desc_about', 'about_text')
-        db.rename_column(u'public_project_siteconfig', 'footer_html', 'footer')
-        db.rename_column(u'public_project_siteconfig', 'contact_html', 'contact_text')
+        # Deleting field 'SiteConfig.header_image'
+        db.delete_column(u'public_project_siteconfig', 'header_image_id')
 
 
     def backwards(self, orm):
-        db.rename_column(u'public_project_siteconfig', 'about_text', 'desc_about')
-        db.rename_column(u'public_project_siteconfig', 'footer', 'footer_html')
-        db.rename_column(u'public_project_siteconfig', 'contact_text', 'contact_html')
+        # Adding field 'SiteConfig.header_image'
+        db.add_column(u'public_project_siteconfig', 'header_image',
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.Image'], null=True, blank=True),
+                      keep_default=False)
 
 
     models = {
@@ -238,7 +238,6 @@ class Migration(SchemaMigration):
             'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'contact_text': ('django.db.models.fields.TextField', [], {'default': "u'This text will be shown on the contact page.'"}),
             'footer': ('django.db.models.fields.TextField', [], {'default': "u'This text will be shown in the footer of the site.'"}),
-            'header_image': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.Image']", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'intro_text': ('django.db.models.fields.TextField', [], {'default': "u'This is a project watch website.'"}),
             'navi_link_color': ('django.db.models.fields.CharField', [], {'default': "'#FFFFFF'", 'max_length': '7'}),

@@ -21,8 +21,21 @@ class UserAdmin(UserAdmin):
 
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image',)
+    list_display = ('title', 'image_url', 'attribution_with_url',)
     search_fields = ['title',]
+    
+    def image_url(self, obj):
+        return '<a href="' + obj.image.url + '" target="_blank">' + obj.image.url + '</a>'
+    image_url.allow_tags = True
+    image_url.short_description = _('Image')
+    
+    def attribution_with_url(self, obj):
+        if obj.attribution_url:
+            return '<a href="' + obj.attribution_url + '" target="_blank">' + obj.attribution + '</a>'
+        else:
+            return obj.attribution
+    attribution_with_url.allow_tags = True
+    attribution_with_url.short_description = _('Attribution')
 
 
 class WebSourceInline(generic.GenericTabularInline):
@@ -37,7 +50,7 @@ class CustomSiteConfigAdminForm(forms.ModelForm):
 
 
 class SiteConfigAdmin(admin.ModelAdmin):
-    list_display = ('title', 'short_title', 'title_color', 'sub_title', 'sub_title_color')
+    list_display = ('title', 'short_title', 'title_color',)
     form = CustomSiteConfigAdminForm
 
 
@@ -46,12 +59,28 @@ class CustomSiteCategoryAdminForm(forms.ModelForm):
 
 
 class SiteCategoryAdmin(admin.ModelAdmin):
-    list_display = ('category',)
+    list_display = ('category', 'num_documents', 'num_web_sources')
     inlines = [
         WebSourceInline,
     ]
     filter_horizontal = ('documents',)
     form = CustomSiteCategoryAdminForm
+    
+    def num_documents(self, obj):
+        num = obj.documents.count()
+        if num > 0:
+            return str(num)
+        else:
+            return ""
+    num_documents.short_description = _('Number of documents')
+    
+    def num_web_sources(self, obj):
+        num = obj.web_sources.count()
+        if num > 0:
+            return str(num)
+        else:
+            return ""
+    num_web_sources.short_description = _('Number of web sources')
 
 
 class SearchTagInline(generic.GenericTabularInline):
@@ -226,12 +255,14 @@ class ProjectPartAdmin(admin.ModelAdmin):
         else:
             return False
     is_main_project_part.boolean = True
+    is_main_project_part.short_description = _('Is Main Topic')
     
     def in_num_main_project_parts(self, obj):
         if obj.main_project_parts.count() > 0:
             return str(obj.main_project_parts.count())
         else:
-            return ""  
+            return ""
+    in_num_main_project_parts.short_description = _('Number Main Topics')
     
     def delete_warning_msg(self, request, project_part):
         msg  = _('The following associations with "%s" will be deleted') % unicode(project_part)  + u': '
