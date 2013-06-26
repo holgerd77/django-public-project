@@ -77,6 +77,7 @@
         
         pp_module.detach();
         pp_module.prependTo(content_div);
+        pp_module.css('margin-bottom', '20px');
         
         var i_a = $('#content-main a[href*="/public_project/image/"]:first');
         var i_tr = i_a.parent().parent();
@@ -163,6 +164,8 @@
         g_a.before('<i class="icon-bullseye"></i>&nbsp; ');
         q_a.before('<i class="icon-question-sign"></i>&nbsp; ');
         p_a.before('<i class="icon-group"></i>&nbsp; ');
+        e_a.before('<i class="icon-time"></i>&nbsp; ');
+        d_a.before('<i class="icon-inbox"></i>&nbsp; ')
         c_a.before('<i class="icon-comments"></i>&nbsp; ');
         r_a.before('<i class="icon-eye-open"></i>&nbsp; ');
         
