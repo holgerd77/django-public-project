@@ -349,6 +349,7 @@ def events(request):
         'site_category': SiteCategory.objects.get_or_create(category='events')[0],
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
         'chronology_list': Event.objects.all(),
+        'main_project_part_list': ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0),
     })
     return render_to_response('events.html', context)
 

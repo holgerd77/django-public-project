@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 15:24+0200\n"
+"POT-Creation-Date: 2013-07-01 14:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -867,46 +867,46 @@ msgstr "/events/"
 msgid "NEW_COMMENT_EMAIL_MESSAGE_ACTIVATION"
 msgstr "Activate comment for publication on website:"
 
-#: views.py:648
+#: views.py:649
 msgid "The following comment was activated for publication on website:"
 msgstr ""
 
-#: views.py:652
+#: views.py:653
 #, python-format
 msgid "Your comment on %s was published"
 msgstr ""
 
-#: views.py:654
+#: views.py:655
 #, fuzzy, python-format
 msgid "Hello %s,"
 msgstr "Hallo %(username),"
 
-#: views.py:655
+#: views.py:656
 msgid "thank you for your comment, which you can find under the following url:"
 msgstr ""
 
-#: views.py:658
+#: views.py:659
 msgid "You can use the url above to tell others about your comment."
 msgstr ""
 
-#: views.py:660
+#: views.py:661
 msgid "If you want to share your comment on a social network,"
 msgstr ""
 
-#: views.py:661
+#: views.py:662
 msgid "you can use the following share urls as a staring point:"
 msgstr ""
 
-#: views.py:668
+#: views.py:669
 msgid "Greetings"
 msgstr ""
 
-#: views.py:669
+#: views.py:670
 #, python-format
 msgid "Your %s team"
 msgstr ""
 
-#: views.py:679
+#: views.py:680
 #, fuzzy, python-format
 msgid "Comment already activated by user %s."
 msgstr "/events/"
@@ -1034,9 +1034,9 @@ msgstr "/events/"
 msgid "Chronology"
 msgstr ""
 
-#: templates/events.html:40
+#: templates/events.html:39
 #, fuzzy
-msgid "New Events"
+msgid "Sorted by Topics"
 msgstr "/events/"
 
 #: templates/goals.html:24
@@ -1149,81 +1149,81 @@ msgstr "search/"
 msgid "Public Project Site Admin"
 msgstr "ProjectWatch"
 
-#: templates/admin/base_site.html:131
+#: templates/admin/base_site.html:141
 msgid ""
 "Administration for the creation and maintenance of a Public Project Website"
 msgstr ""
 
-#: templates/admin/base_site.html:134
+#: templates/admin/base_site.html:144
 #, fuzzy
 msgid "Open main page"
 msgstr "/events/"
 
-#: templates/admin/base_site.html:160
+#: templates/admin/base_site.html:172
 msgid ""
 "General settings (e.g. page title) and common introductory texts (e.g. about "
 "text)"
 msgstr ""
 
-#: templates/admin/base_site.html:161
+#: templates/admin/base_site.html:173
 msgid ""
 "Introductory texts and documents and web sources for the site categories (e."
 "g. Events category), one entry per category"
 msgstr ""
 
-#: templates/admin/base_site.html:162
+#: templates/admin/base_site.html:174
 msgid ""
 "Log of activities throughout the system, shown on main page, entries can be "
 "deleted safely"
 msgstr ""
 
-#: templates/admin/base_site.html:163
+#: templates/admin/base_site.html:175
 msgid ""
 "Images for introductory texts, images must be uploaded here first before "
 "they can be embedded in a text"
 msgstr ""
 
-#: templates/admin/base_site.html:164
+#: templates/admin/base_site.html:176
 msgid ""
 "Topics to structure the project, can be divided into main and sub topics"
 msgstr ""
 
-#: templates/admin/base_site.html:165
+#: templates/admin/base_site.html:177
 msgid "Target settings during project development"
 msgstr ""
 
-#: templates/admin/base_site.html:166
+#: templates/admin/base_site.html:178
 msgid "Questions around the project"
 msgstr ""
 
-#: templates/admin/base_site.html:167
+#: templates/admin/base_site.html:179
 msgid "Single persons, groups or institutions related to the project"
 msgstr ""
 
-#: templates/admin/base_site.html:168
+#: templates/admin/base_site.html:180
 msgid "Events being related to the project"
 msgstr ""
 
-#: templates/admin/base_site.html:169
+#: templates/admin/base_site.html:181
 msgid "Documents from within or about the project"
 msgstr ""
 
-#: templates/admin/base_site.html:170
+#: templates/admin/base_site.html:182
 msgid "Comments from users being entered on the front-end website"
 msgstr ""
 
-#: templates/admin/base_site.html:171
+#: templates/admin/base_site.html:183
 msgid ""
 "Research requests for crowdsourcing certain tasks regarding project "
 "questions, can be entered on the front-end website on a questions page when "
 "being logged in"
 msgstr ""
 
-#: templates/admin/base_site.html:176
+#: templates/admin/base_site.html:188
 msgid "ADMIN_PROJECT_PART_FORM_HELP"
 msgstr ""
 
-#: templates/admin/base_site.html:187
+#: templates/admin/base_site.html:199
 #, fuzzy
 msgid "Public Project Administration"
 msgstr "ProjectWatch"
@@ -1425,6 +1425,10 @@ msgstr "documents/"
 #, fuzzy
 msgid "Only main events"
 msgstr "/events/"
+
+#, fuzzy
+#~ msgid "New Events"
+#~ msgstr "/events/"
 
 #~ msgid "Structural parts of the project being stable over time."
 #~ msgstr ""

@@ -26,32 +26,49 @@
   </div>
   
   {% trans "Chronology" as sh_title %}
-  {% with sh_title=sh_title %}
+  {% with sh_title=sh_title only_main="yes" id_addon="1" %}
     {% include "layout_elements/event_section_header.html" %}
   {% endwith %}
   
-  {% with event_list=chronology_list %}
+  {% with event_list=chronology_list class_addon="1" %}
   {% include "info_box/events.html" %}
   {% endwith %}
 </div>
 
 <div class="span6">
-  {% if latest_event_list %}
-    {% trans "New Events" as sh_title %}
-    {% with sh_title=sh_title rss_url="rss/" %}
-      {% include "layout_elements/section_header.html" %}
-    {% endwith %}
+  {% trans "Sorted by Topics" as sh_title %}
+  {% with sh_title=sh_title id_addon="2" %}
+    {% include "layout_elements/event_section_header.html" %}
+  {% endwith %}
+  
+  <div class="pull-right" style="margin-bottom:9px;">
+  <select name="mpp_events_select" id="mpp_events_select">
+  {% for mpp in main_project_part_list %}
+    <option value="{{ mpp.id }}"{% if forloop.first %} selected{% endif %}>{{ mpp }}</option>
+  {% endfor %}
+  </select>
+  </div>
+  
+  {% for mpp in main_project_part_list %}
+  {% with event_list=mpp.related_events.all id_addon=mpp.id class_addon="2" %}
+  {% include "info_box/events.html" %}
+  {% endwith %}
+  {% endfor %}
+  
+<script>
+  $(document).ready(function() {
+    $('.events_2').css('display', 'none');
+    $('.events_2:first').css('display', 'block');
     
-    <div class="section">
-      {% with ed_with_header="yes" %}
-      {% for event in latest_event_list %}
-        <div style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
-        {% include "info_box/event_detail.html" %}
-        </div>
-      {% endfor %}
-      {% endwith %}
-    </div>
-  {% endif %}
+    $('#mpp_events_select').change(function(){
+      var id = $(this).val();
+      $('.events_2').css('display', 'none');
+      $('#events_' + id).css('display', 'block');
+    });
+    
+  });
+  
+</script>
   
 </div>
 

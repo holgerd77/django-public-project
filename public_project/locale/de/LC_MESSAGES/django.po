@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 15:23+0200\n"
+"POT-Creation-Date: 2013-07-01 14:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -878,49 +878,49 @@ msgstr "Kommentar zu"
 msgid "NEW_COMMENT_EMAIL_MESSAGE_ACTIVATION"
 msgstr "Kommentar für Veröffentlichung auf Webseite freischalten:"
 
-#: views.py:648
+#: views.py:649
 msgid "The following comment was activated for publication on website:"
 msgstr ""
 "Der folgende Kommentar wurde für eine Veröffentlichung auf der Webseite "
 "freigeschaltet:"
 
-#: views.py:652
+#: views.py:653
 #, python-format
 msgid "Your comment on %s was published"
 msgstr "Dein Kommentar auf %s wurde freigeschaltet"
 
-#: views.py:654
+#: views.py:655
 #, python-format
 msgid "Hello %s,"
 msgstr "Hallo %s,"
 
-#: views.py:655
+#: views.py:656
 msgid "thank you for your comment, which you can find under the following url:"
 msgstr "danke für Deinen Kommentar, Du findest diesen unter folgender URL:"
 
-#: views.py:658
+#: views.py:659
 msgid "You can use the url above to tell others about your comment."
 msgstr ""
 "Du kannst die obige URL nutzen, um anderen von Deinem Kommentar zu erzählen."
 
-#: views.py:660
+#: views.py:661
 msgid "If you want to share your comment on a social network,"
 msgstr "Wenn Du Deinen Kommentar über ein soziales Netzwerk teilen möchtest,"
 
-#: views.py:661
+#: views.py:662
 msgid "you can use the following share urls as a staring point:"
 msgstr "kannst Du die folgenden Links als Ausgangspunkt verwenden:"
 
-#: views.py:668
+#: views.py:669
 msgid "Greetings"
 msgstr "Viele Grüße"
 
-#: views.py:669
+#: views.py:670
 #, python-format
 msgid "Your %s team"
 msgstr "Dein %s Team"
 
-#: views.py:679
+#: views.py:680
 #, python-format
 msgid "Comment already activated by user %s."
 msgstr "Kommentar wurde schon freigeschaltet von Nutzer %s."
@@ -1051,9 +1051,9 @@ msgstr "Neue Dokumente"
 msgid "Chronology"
 msgstr "Chronologie"
 
-#: templates/events.html:40
-msgid "New Events"
-msgstr "Neue Ereignisse"
+#: templates/events.html:39
+msgid "Sorted by Topics"
+msgstr "Nach Themen"
 
 #: templates/goals.html:24
 msgid "Common"
@@ -1153,16 +1153,16 @@ msgstr "Suche nach"
 msgid "Public Project Site Admin"
 msgstr "ProjectWatch"
 
-#: templates/admin/base_site.html:131
+#: templates/admin/base_site.html:141
 msgid ""
 "Administration for the creation and maintenance of a Public Project Website"
 msgstr "Administration zur Erstellung und Pflege einer Public Project-Webseite"
 
-#: templates/admin/base_site.html:134
+#: templates/admin/base_site.html:144
 msgid "Open main page"
 msgstr "Hauptseite öffnen"
 
-#: templates/admin/base_site.html:160
+#: templates/admin/base_site.html:172
 msgid ""
 "General settings (e.g. page title) and common introductory texts (e.g. about "
 "text)"
@@ -1170,7 +1170,7 @@ msgstr ""
 "Allgemeine Einstellungen (z.B. Seitentitel) und Einleitungstexte (z.B. About-"
 "Text)"
 
-#: templates/admin/base_site.html:161
+#: templates/admin/base_site.html:173
 msgid ""
 "Introductory texts and documents and web sources for the site categories (e."
 "g. Events category), one entry per category"
@@ -1178,7 +1178,7 @@ msgstr ""
 "Einleitungstexte sowie Dokumente und Web-Quellen für Seitenkategorien (z.B. "
 "Katgorie Ereignisse), ein Eintrag pro Kategorie"
 
-#: templates/admin/base_site.html:162
+#: templates/admin/base_site.html:174
 msgid ""
 "Log of activities throughout the system, shown on main page, entries can be "
 "deleted safely"
@@ -1186,7 +1186,7 @@ msgstr ""
 "Log der Aktivitäten im System, wird auf der Startseite angezeigt, Einträge "
 "können gefahrlos gelöscht werden"
 
-#: templates/admin/base_site.html:163
+#: templates/admin/base_site.html:175
 msgid ""
 "Images for introductory texts, images must be uploaded here first before "
 "they can be embedded in a text"
@@ -1194,40 +1194,40 @@ msgstr ""
 "Bilder für Einleitungstexte, Bilder müssen zunächst hier hochgeladen werden "
 "bevor sie in Texte eingebettet werden können"
 
-#: templates/admin/base_site.html:164
+#: templates/admin/base_site.html:176
 msgid ""
 "Topics to structure the project, can be divided into main and sub topics"
 msgstr ""
 "Themen um das Projekt zu strukturieren, können in Haupt- und Unterthemen "
 "unterteilt werden"
 
-#: templates/admin/base_site.html:165
+#: templates/admin/base_site.html:177
 msgid "Target settings during project development"
 msgstr "Zielvorgaben im Laufe des Projektes"
 
-#: templates/admin/base_site.html:166
+#: templates/admin/base_site.html:178
 msgid "Questions around the project"
 msgstr "Fragen rund um das Projekt"
 
-#: templates/admin/base_site.html:167
+#: templates/admin/base_site.html:179
 msgid "Single persons, groups or institutions related to the project"
 msgstr ""
 "Einzelpersonen, Gruppen oder Institutionen, die mit dem Projekt in "
 "Verbindung stehen"
 
-#: templates/admin/base_site.html:168
+#: templates/admin/base_site.html:180
 msgid "Events being related to the project"
 msgstr "Mit dem Projekt in Verbindung stehende Ereignisse"
 
-#: templates/admin/base_site.html:169
+#: templates/admin/base_site.html:181
 msgid "Documents from within or about the project"
 msgstr "Aus dem Projekt kommende oder das Projekt beschreibende Dokumente"
 
-#: templates/admin/base_site.html:170
+#: templates/admin/base_site.html:182
 msgid "Comments from users being entered on the front-end website"
 msgstr "Über die Frontend-Webseite eingegebe Kommentare von Nutzern"
 
-#: templates/admin/base_site.html:171
+#: templates/admin/base_site.html:183
 msgid ""
 "Research requests for crowdsourcing certain tasks regarding project "
 "questions, can be entered on the front-end website on a questions page when "
@@ -1237,11 +1237,11 @@ msgstr ""
 "Projektes an die Crowd zu vergeben, können auf der Frontend-Webseite auf "
 "einer Frageseite eingegeben werden, sofern man eingeloggt ist"
 
-#: templates/admin/base_site.html:176
+#: templates/admin/base_site.html:188
 msgid "ADMIN_PROJECT_PART_FORM_HELP"
 msgstr ""
 
-#: templates/admin/base_site.html:187
+#: templates/admin/base_site.html:199
 #, fuzzy
 msgid "Public Project Administration"
 msgstr "Verwaltung"
@@ -1440,6 +1440,9 @@ msgstr "Keine Web-Quellen vorhanden."
 #: templates/layout_elements/event_section_header.html:24
 msgid "Only main events"
 msgstr "Nur Hauptereignisse"
+
+#~ msgid "New Events"
+#~ msgstr "Neue Ereignisse"
 
 #~ msgid "Structural parts of the project being stable over time."
 #~ msgstr ""

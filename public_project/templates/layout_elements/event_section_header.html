@@ -19,9 +19,9 @@
       
   </li>
     <li style="float:right;">
-      <div class="btn-group" id="only_main_events_btn_group" data-toggle="buttons-checkbox">
-      <button class="btn btn-small active" id="ome_all">{% trans "All" %}</button>
-      <button class="btn btn-small" id="ome_selected">{% trans "Only main events" %}</button>
+      <div class="btn-group" id="ome_btn_group_{{ id_addon }}" data-toggle="buttons-radio">
+      <button class="btn btn-small{% if not only_main %} active{% endif %}" id="ome_all">{% trans "All" %}</button>
+      <button class="btn btn-small{% if only_main %} active{% endif %}" id="ome_selected">{% trans "Only main events" %}</button>
     </div>
     </li>
 </ul>
@@ -29,15 +29,28 @@
 <script>
   $(document).ready(function() {
     
-    $('#ome_all').click(function() {
-      $('#ome_selected').removeClass('active');
-      $('.tr_normal_event').css('display', 'table-row');
+    $('#ome_btn_group_{{ id_addon }} #ome_all').click(function() {
+      $('.events_{{ id_addon }} tr.no_events_tr').css('display', 'none'); 
+      $('.events_{{ id_addon }} .tr_normal_event').css('display', 'table-row');
     });
-    $('#ome_selected').click(function() {
-      $('#ome_all').removeClass('active');
-      $('.tr_normal_event').css('display', 'none');
+    $('#ome_btn_group_{{ id_addon }} #ome_selected').click(function() {
+      $('.events_{{ id_addon }} .tr_normal_event').css('display', 'none');
+      var num_visible_trs = 0;
+      $('.events_{{ id_addon }} tr').each(function() {
+        if($(this).css('display') != 'none') {
+          num_visible_trs += 1;
+        }
+      });
+      if(num_visible_trs == 0) {
+        $('.events_{{ id_addon }} tr.no_events_tr').css('display', 'table-row'); 
+      }
     });
     
+    {% if not only_main %}
+      $('#ome_btn_group_{{ id_addon }} #ome_all').trigger('click');
+    {% else %}
+      $('#ome_btn_group_{{ id_addon }} #ome_selected').trigger('click');
+    {% endif %}
   });
   
 </script>

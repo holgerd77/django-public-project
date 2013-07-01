@@ -1,6 +1,6 @@
 {% load i18n %}
 
-  <div class="section">
+  <div class="section  events_{{ class_addon }}" id="events_{{ id_addon }}">
   
     <div class="info_box">
       <div class="info_box_content">
@@ -26,6 +26,11 @@
               </td>
             </tr>
             {% endfor %}
+            <tr style="display: none;" class="no_events_tr">
+              <td colspan="3">
+                {% trans "No events available." %}
+              </td>
+            </tr>
           </table>
         {% else %}
           <span style="font-size:12px;">
