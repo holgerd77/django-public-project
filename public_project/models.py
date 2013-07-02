@@ -172,7 +172,8 @@ class WebSource(models.Model):
 
 class Membership(models.Model):
     from_participant = models.ForeignKey('Participant', related_name='from_memberships', verbose_name=_("From participant"))
-    to_participant = models.ForeignKey('Participant', related_name='to_memberships', verbose_name=_("To participant"))
+    help_text = _('Association with a group or institution')
+    to_participant = models.ForeignKey('Participant', help_text=help_text, related_name='to_memberships', verbose_name=_("To participant"))
     help_text = _("Type or function of the membership or task or position of the participant.")
     function = models.CharField(_("Function"), max_length=50, help_text=help_text, blank=True, null=True)
     active = models.BooleanField(_("Active"), default=True)
@@ -494,10 +495,12 @@ class ProjectGoal(models.Model):
 
 
 class Document(models.Model):
-    help_text = _("Unique and descriptive title (if PublicDocs is used: PDF live view is shown, if document title is the same)")
+    help_text = _("Title of the document")
     title = models.CharField(_("Title"), max_length=250, help_text=help_text)
-    document = models.FileField(_("Document"), upload_to='documents')
-    date = models.DateField(_("Date"))
+    help_text = _('Document in pdf format')
+    document = models.FileField(_("Document"), upload_to='documents', help_text=help_text)
+    help_text = _('Date of creation of the document')
+    date = models.DateField(_("Date"), help_text=help_text)
     help_text = _("Short description.")
     description = models.TextField(_("Description"), help_text=help_text)
     participants = models.ManyToManyField(Participant, related_name="related_documents", blank=True, null=True, verbose_name=_("Participants"))
@@ -806,7 +809,7 @@ of the object change form in the admin).')
 class Comment(models.Model):
     username = models.CharField(_("Username"), max_length=250)
     email = models.EmailField(_("Email"), max_length=250)
-    help_text = _('User has given permission to get in contact vi.')
+    help_text = _('User has given permission to get in contact via email.')
     feedback_allowed = models.BooleanField(_("Feedback allowed"), default=False, help_text=help_text)
     comment = models.TextField(_("Comment text"))
     help_text = _('Comment is only shown on page if published is true.')

@@ -187,7 +187,20 @@
           var html = '<div class="admin_model_help_box">';
           html += '{% trans "ADMIN_PROJECT_PART_FORM_HELP" %}';
           html += '</div>';
-          //$('.field-name > div').prepend(html);
+          $('.field-name:first > div').prepend(html);
+      }
+      
+      if($('#participant_form').length > 0) {
+          var html = '<div class="admin_model_help_box">';
+          html += '{% trans "ADMIN_PARTICIPANT_FORM_HELP" %}';
+          html += '</div>';
+          $('.field-name:first > div').prepend(html);
+      }
+      if($('#researchrequest_form').length > 0) {
+          var html = '<div class="admin_model_help_box">';
+          html += '{% trans "ADMIN_RESEARCH_REQUEST_FORM_HELP" %}';
+          html += '</div>';
+          $('.field-nr:first > div').prepend(html);
       }
   });
 </script>
