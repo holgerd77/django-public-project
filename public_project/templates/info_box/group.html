@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="section" style="border:1px solid #ddd; padding:3px;margin-bottom:15px;">
+<div class="section" style="border:1px solid #ddd; padding:3px;margin-bottom:7px;">
     
     <div class="info_box_header" style="margin-bottom:0px;">
       
@@ -10,7 +10,7 @@
         <td style="padding:3px;">
       <a href="{{ group.get_absolute_url }}" style="font-weight: normal;">{{ group }}</a>
         </td>
-        <td style="padding:3px;width: 151px;">
+        <td style="padding:3px;width: 151px;display:none;">
         {% with web_source_list=group.web_sources.all size="mini" %}
           {% include "layout_elements/menu_web_sources.html" %}
         {% endwith %}

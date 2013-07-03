@@ -9,7 +9,7 @@
               <td style="width:320px;">
                 <a href="{{ pp.get_absolute_url}}">{{ pp.name }}</a>
               </td>
-              <td>
+              <td style="display:none;">
               {% with web_source_list=pp.web_sources.all size="mini" %}
                 {% include "layout_elements/menu_web_sources.html" %}
               {% endwith %}
