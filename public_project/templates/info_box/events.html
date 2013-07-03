@@ -16,8 +16,13 @@
               <td style="text-align: center; width:15px;">
                 <i class="{{ event.get_event_type_icon }}"></i>
               </td>
+              <td style="text-align: center; width:40px;">
+                {% with web_source_list=event.web_sources.all size="mini" %}
+                  {% include "layout_elements/menu_web_sources.html" %}
+                {% endwith %}
+              </td>
               <td>
-                <a style="font-size:14px;" href="{{ event.get_absolute_url }}">{{ event.title }}</a><br>
+                <a href="{{ event.get_absolute_url }}">{{ event.title }}</a><br>
                 
                 {% if event.get_num_active_user_comments %}<br> 
                   <a href="{{ event.get_comments_url }}" style="font-size:11px;">

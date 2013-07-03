@@ -13,6 +13,7 @@
                     {{ m.from_participant.get_num_active_user_comments }} {% trans "Comments" %}
                   </a>
                 {% endif %}
+              </td>
               <td>
               {% with document_list=m.from_participant.related_documents.all size="mini" %}
                 {% include "layout_elements/menu_documents.html" %}
@@ -20,7 +21,6 @@
               {% with web_source_list=m.from_participant.web_sources.all size="mini" %}
                 {% include "layout_elements/menu_web_sources.html" %}
               {% endwith %}
-              </td>
               </td>
               <td style="text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
             </tr>

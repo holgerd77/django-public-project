@@ -1,15 +1,31 @@
 <div class="section" style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
     
     <div class="info_box_header">
-      <a href="{{ main_project_part.get_absolute_url }}">{{ main_project_part }}</a>
+      <table style="width:100%;">
       
+      <th>
+        <td>
+      <a href="{{ main_project_part.get_absolute_url }}">{{ main_project_part }}</a>
+        </td>
+        <td style="text-align: right;">
+        {% with document_list=main_project_part.related_documents.all size="mini" %}
+          {% include "layout_elements/menu_documents.html" %}
+        {% endwith %}
+        {% with web_source_list=main_project_part.web_sources.all size="mini" %}
+          {% include "layout_elements/menu_web_sources.html" %}
+        {% endwith %}
+      </td>
+      <td style="width:40px;text-align: right;">
       {% if main_project_part.projectpart_set.count > 0 %}
-        <a href="#" style="float:right;font-size:16px;text-decoration: none;" id="ompp_{{ main_project_part.id }}">
+        <a href="#" style="font-size:16px;text-decoration: none;" id="ompp_{{ main_project_part.id }}">
           {{ main_project_part.projectpart_set.count }}
           <i class="icon-circle-arrow-down"></i>
         </a>
       {% endif %}
+      </td>
+      </th>
       
+      </table>
     </div>
     {% if main_project_part.projectpart_set.count > 0 %}
     <div class="info_box main_project_part" id="main_project_part_{{ main_project_part.id }}" style="display: none;">
