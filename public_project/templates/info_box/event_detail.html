@@ -17,6 +17,24 @@
           {{ event.description|safe }}
           <div style="clear:both;height:1px;"></div>
         </p>
+        {% if document_list %} 
+          <p style="font-size:12px;margin:5px 0 0;">
+            {% for doc in document_list %}
+              <i class="{{ doc.get_icon_class }}"></i>
+              <a href="{{ doc.get_absolute_url}}">{{ doc.title }}</a><br>
+            {% endfor %}
+          </p>
+        {% endif %}
+        {% with web_source_list=event.web_sources.all %}
+        {% if web_source_list %} 
+          <p style="font-size:12px;margin:5px 0 0;">
+            {% for ws in web_source_list %}
+              <i class="{{ ws.get_icon_class }}"></i>
+              <a href="{{ ws.url}}">{{ ws.title }}{% if ws.date %} ({{ ws.date|date:"d.m.Y" }}){% endif %}</a><br>
+            {% endfor %}
+          </p>
+        {% endif %}
+        {% endwith %}
         {% with participant_list=event.participants.all %}
         {% if participant_list %} 
           <p style="font-size:12px;margin:5px 0 0;">

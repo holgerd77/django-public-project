@@ -22,29 +22,29 @@
     {% include "info_box/event_detail.html" %}
   </div>
   
-  {% with web_source_list=event.web_sources.all %}
-  {% include "info_box/web_sources.html" %}
-  {% endwith %}
- 
+  {% if content_document_list %}
+    {% trans "Document Contents" as sh_title %}
+    {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
+    
+    {% with document_list=content_document_list %}
+      {% include "info_box/documents.html" %}
+    {% endwith %}
+  {% endif %}
+  
 </div>
 
 <div class="span6">
   
-  {% trans "Questions" as sh_title %}
-  {% with sh_title=sh_title sh_icon="icon-question-sign" sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  {% with question_list=event.related_questions.all %}
-    {% include "info_box/questions.html" %}
-  {% endwith %}
-  
-  {% trans "Documents" as sh_title %}
-  {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
+  {% if question_list.count > 0 %}
+    {% trans "Questions" as sh_title %}
+    {% with sh_title=sh_title sh_icon="icon-question-sign" sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
     
-  {% include "info_box/documents.html" %}
+    {% include "info_box/questions.html" %}
+  {% endif %}
   
   
   {% trans "Comments" as sh_title %}

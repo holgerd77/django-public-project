@@ -22,9 +22,11 @@
     {% include "info_box/project_part_detail.html" %}
   </div>
   
-  {% with web_source_list=project_part.web_sources.all %}
-  {% include "info_box/web_sources.html" %}
-  {% endwith %}
+  {% if web_source_list.count > 0 %}
+    {% with web_source_list=project_part.web_sources.all %}
+    {% include "info_box/web_sources.html" %}
+    {% endwith %}
+  {% endif %}
   
   {% if project_part.projectpart_set.count > 0 %}
     {% trans "Subtopics" as sh_title %}
@@ -38,32 +40,47 @@
     </div>
   {% endif %}
   
-  {% trans "Events" as sh_title %}
-  {% with sh_title=sh_title sh_icon="icon-time" sh_url_title="" %}
-    {% include "layout_elements/event_section_header.html" %}
-  {% endwith %}
-  
-  {% include "info_box/events.html" %}
+  {% if event_list.count > 0 %}
+    {% trans "Events" as sh_title %}
+    {% with sh_title=sh_title sh_icon="icon-time" sh_url_title="" %}
+      {% include "layout_elements/event_section_header.html" %}
+    {% endwith %}
+    
+    {% include "info_box/events.html" %}
+  {% endif %}
+
+  {% if content_document_list %}
+    {% trans "Document Contents" as sh_title %}
+    {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
+    
+    {% with document_list=content_document_list %}
+      {% include "info_box/documents.html" %}
+    {% endwith %}
+  {% endif %}
 
 </div>
 
 <div class="span6">
   
-  {% trans "Questions" as sh_title %}
-  {% with sh_title=sh_title sh_icon="icon-question-sign" sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  {% include "info_box/questions.html" %}
-  
-  
-  {% trans "Documents" as sh_title %}
-  {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
+  {% if question_list.count > 0 %}
+    {% trans "Questions" as sh_title %}
+    {% with sh_title=sh_title sh_icon="icon-question-sign" sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
     
-  {% include "info_box/documents.html" %}
+    {% include "info_box/questions.html" %}
+  {% endif %}
   
+  {% if document_list.count > 0 %}
+    {% trans "Documents" as sh_title %}
+    {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
+      
+    {% include "info_box/documents.html" %}
+  {% endif %}
   
   {% trans "Comments" as sh_title %}
   {% trans "New" as sh_url_title %}

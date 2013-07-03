@@ -216,9 +216,6 @@ def project_parts(request):
 def project_part(request, project_part_id):
     project_part = get_object_or_404(ProjectPart, pk=project_part_id)
     
-    document_list = project_part.get_documents()
-    document_list = merge_with_search_tag_docs(list(document_list), project_part)
-    
     comment_form_status = validate_comment_form(request)
     
     content_type = ContentType.objects.get(app_label="public_project", model="projectpart")
@@ -231,7 +228,8 @@ def project_part(request, project_part_id):
         'project_part': project_part,
         'question_list': project_part.get_questions(),
         'event_list': project_part.get_events(),
-        'document_list': document_list,
+        'document_list': project_part.get_documents(),
+        'content_document_list': merge_with_search_tag_docs([], project_part),
         'comment_form_status': comment_form_status,
         'comment_list': comment_list[0:3],
         'num_total_comments': len(comment_list),
@@ -292,6 +290,7 @@ def question(request, question_id):
         'user_comment': get_user_comment(request),
         'research_request': get_research_request(request),
         'question': question,
+        'document_list': question.documents.all(),
         'research_request_form_status': research_request_form_status,
         'research_request_list': research_request_list[0:3],
         'num_total_research_requests': len(research_request_list),
@@ -319,9 +318,6 @@ def participants(request):
 def participant(request, participant_id):
     participant = get_object_or_404(Participant, pk=participant_id)
     
-    document_list = participant.get_documents()
-    document_list = merge_with_search_tag_docs(list(document_list), participant)
-    
     comment_form_status = validate_comment_form(request)
     content_type = ContentType.objects.get(app_label="public_project", model="participant")
     comment_list = Comment.objects.filter(commentrelation__content_type=content_type).filter(commentrelation__object_id=participant.id).filter(published=True).distinct()
@@ -333,7 +329,8 @@ def participant(request, participant_id):
         'participant': participant,
         'question_list': participant.get_questions(),
         'event_list': participant.get_events(),
-        'document_list': document_list,
+        'document_list': participant.get_documents(),
+        'content_document_list': merge_with_search_tag_docs([], participant),
         'comment_form_status': comment_form_status,
         'comment_list': comment_list[0:3],
         'num_total_comments': len(comment_list),
@@ -357,8 +354,7 @@ def events(request):
 def event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     
-    document_list = list(event.related_documents.order_by("title"))
-    document_list = merge_with_search_tag_docs(document_list, event)
+    content_document_list = merge_with_search_tag_docs([], event)
     
     comment_form_status = validate_comment_form(request)
     content_type = ContentType.objects.get(app_label="public_project", model="event")
@@ -369,7 +365,8 @@ def event(request, event_id):
         'site_category': SiteCategory.objects.get_or_create(category='events')[0],
         'user_comment': get_user_comment(request),
         'event': event,
-        'document_list': document_list,
+        'document_list': event.related_documents.order_by("title"),
+        'content_document_list': content_document_list,
         'comment_form_status': comment_form_status,
         'comment_list': comment_list[0:3],
         'num_total_comments': len(comment_list),

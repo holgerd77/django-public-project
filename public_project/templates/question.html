@@ -44,19 +44,6 @@
   </div>
   {% endif %}
   </div>
-  
-  {% trans "Documents" as sh_title %}
-  {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-    
-  {% with document_list=question.documents.all %}
-  {% include "info_box/documents.html" %}
-  {% endwith %}
-
-  {% with web_source_list=question.web_sources.all %}
-  {% include "info_box/web_sources.html" %}
-  {% endwith %}
  
 </div>
 
