@@ -5,13 +5,9 @@
       <div class="info_box_content">
       {% if document_list %}
         <table class="table table-striped">
-          <tr>
-            <th>{% trans "Document" %}</th>
-            <th style="text-align: right;">{% trans "Added" %}</th>
-          </tr>
           {% for doc in document_list %}
           <tr>
-            <td><a href="{{ doc.get_absolute_url }}">{{ doc }}</a>
+            <td><a href="{{ doc.get_absolute_url }}">{{ doc.title }}</a>
               <br>
               {% if doc.search_tags %}
                 {% for tag in doc.search_tags %}
@@ -20,13 +16,13 @@
                 {% endfor %}
                 <br>
               {% endif %}
+              {{ doc.date|date:"d.m.Y"}}, 
               {{ doc.page_set.count }} {% trans "Pages" %}{% if doc.get_num_active_user_comments %}, 
                 <a href="{{ doc.get_comments_url }}">
                 {{ doc.get_num_active_user_comments }} {% trans "Comments" %}</a>
               {% endif %}
               
             </td>
-            <td style="text-align: right;">{{ doc.date_added|date:"d.m.Y"}}</td>
           </tr>
           {% endfor %}
         </table>
