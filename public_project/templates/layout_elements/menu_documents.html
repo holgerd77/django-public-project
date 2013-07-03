@@ -1,0 +1,15 @@
+
+{% if document_list %}
+<div class="btn-group">
+  <a class="btn btn-{{ size }} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
+    <i class="icon-inbox"></i> <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    {% for d in document_list %}
+      <li>
+        <a href="{{ d.get_absolute_url}}"><i class="{{ d.get_icon_class }}"></i> {{ d.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

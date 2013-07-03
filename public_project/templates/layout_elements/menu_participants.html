@@ -1,0 +1,15 @@
+
+{% if participant_list %}
+<div class="btn-group">
+  <a class="btn btn-{{ size }} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
+    <i class="icon-user"></i> <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    {% for p in participant_list %}
+      <li>
+        <a href="{{ p.get_absolute_url}}"><i class="{{ p.get_icon_class }}"></i> {{ p.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

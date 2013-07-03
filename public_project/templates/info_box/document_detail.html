@@ -1,7 +1,7 @@
 
 
 <div class="info_box" style="background-color: #f9f9f9;padding: 15px;">
-      <div class="info_box_content html_text_with_imgs">
+      <div class="info_box_content html_text_with_imgs" style="font-size:12px;">
         {% if dd_with_header %}
         <p style="font-size:16px;font-weight: bold;margin-bottom:15px;">
           <i class="icon-inbox"></i> &nbsp;
@@ -12,41 +12,21 @@
         <p style="font-size:14px;font-weight: bold;">
           {{ document.date }}
         </p>
-        <p style="margin: 0 0 15px;">
-          {{ document.description|safe }}
-          <div style="clear:both;height:1px;"></div>
-        </p>
         
-        {% with participant_list=document.participants.all %}
-        {% if participant_list %}
-          <p style="font-size:12px;margin:0 0 5px;">
-            {% for p in participant_list %}
-              <i class="{{ p.get_icon_class }}"></i> 
-              <a href="{{ p.get_absolute_url}}">{{ p }}</a><br>
-            {% endfor %}
-          </p>
-        {% endif %}
+        {{ document.description|safe }}
+        <div style="clear:both;height:1px;"></div>
+        
+        <p>
+        {% with project_part_list=document.project_parts.all size="small" %}  
+          {% include "layout_elements/menu_project_parts.html" %}
         {% endwith %}
-        {% with project_part_list=document.project_parts.all %}
-        {% if project_part_list %}
-          <p style="font-size:12px;margin:0 0 5px;">
-            {% for pp in project_part_list %}
-              <i class="icon-cogs"></i> 
-              <a href="{{ pp.get_absolute_url}}">{{ pp }}</a><br>
-            {% endfor %}
-          </p>
-        {% endif %}
+        {% with participant_list=document.participants.all size="small" %}  
+          {% include "layout_elements/menu_participants.html" %}
         {% endwith %}
-        {% with event_list=document.events.all %}
-        {% if event_list %}
-          <p style="font-size:12px;margin:0 0 5px;">
-            {% for e in event_list %}
-              <i class="icon-time"></i> 
-              <a href="{{ e.get_absolute_url}}">{{ e }}</a><br>
-            {% endfor %}
-          </p>
-        {% endif %}
+        {% with event_list=document.events.all size="small" %}  
+          {% include "layout_elements/menu_events.html" %}
         {% endwith %}
+        </p>
         
       </div>
     

@@ -1,0 +1,15 @@
+
+{% if event_list %}
+<div class="btn-group">
+  <a class="btn btn-{{ size }} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
+    <i class="icon-time"></i> <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    {% for e in event_list %}
+      <li>
+        <a href="{{ e.get_absolute_url}}"><i class="{{ e.get_icon_class }}"></i> {{ e.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
