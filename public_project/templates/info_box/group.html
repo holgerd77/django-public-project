@@ -10,7 +10,7 @@
         <td style="padding:3px;">
       <a href="{{ group.get_absolute_url }}" style="font-weight: normal;">{{ group }}</a>
         </td>
-        <td style="padding:3px;width: 60px;text-align: right;">
+        <td style="padding:3px;width: 151px;">
         {% with web_source_list=group.web_sources.all size="mini" %}
           {% include "layout_elements/menu_web_sources.html" %}
         {% endwith %}
