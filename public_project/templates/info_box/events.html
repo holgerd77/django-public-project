@@ -19,19 +19,6 @@
               <td>
                 <a style="font-size:14px;" href="{{ event.get_absolute_url }}">{{ event.title }}</a><br>
                 
-                {% with document_list=event.related_documents.all size="mini" %}
-                  {% include "layout_elements/menu_documents.html" %}
-                {% endwith %}
-                {% with web_source_list=event.web_sources.all size="mini" %}
-                  {% include "layout_elements/menu_web_sources.html" %}
-                {% endwith %}
-                {% with project_part_list=event.project_parts.all size="mini" %}  
-                  {% include "layout_elements/menu_project_parts.html" %}
-                {% endwith %}
-                {% with participant_list=event.participants.all size="mini" %}  
-                  {% include "layout_elements/menu_participants.html" %}
-                {% endwith %}
-                
                 {% if event.get_num_active_user_comments %}<br> 
                   <a href="{{ event.get_comments_url }}" style="font-size:11px;">
                     {{ event.get_num_active_user_comments }} {% trans "Comments" %}
