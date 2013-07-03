@@ -5,6 +5,7 @@
       
       {% if main_project_part.projectpart_set.count > 0 %}
         <a href="#" style="float:right;font-size:16px;text-decoration: none;" id="ompp_{{ main_project_part.id }}">
+          {{ main_project_part.projectpart_set.count }}
           <i class="icon-circle-arrow-down"></i>
         </a>
       {% endif %}

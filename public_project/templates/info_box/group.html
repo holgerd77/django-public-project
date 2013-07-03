@@ -7,6 +7,7 @@
       
       {% if group.to_memberships.count > 0 %}
         <a href="#" style="float:right;font-size:16px;text-decoration: none;" id="og_{{ group.id }}">
+          {{ group.to_memberships.count }}
           <i class="icon-circle-arrow-down"></i>
         </a>
       {% endif %}
