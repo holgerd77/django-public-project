@@ -21,5 +21,14 @@
         
         {{ project_part.description|safe }}
         <div style="clear:both;height:1px;"></div>
+        
+        <p>
+        {% with size="small" %}
+          {% include "layout_elements/menu_documents.html" %}
+        {% endwith %}
+        {% with web_source_list=project_part.web_sources.all size="small" %}
+          {% include "layout_elements/menu_web_sources.html" %}
+        {% endwith %}
+        </p>
       </div>
   </div>
