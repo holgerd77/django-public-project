@@ -1,13 +1,32 @@
 <div class="section" style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
     
     <div class="info_box_header">
-      <a href="{{ main_project_part.get_absolute_url }}">{{ main_project_part }} <i class="icon-arrow-right"></i></a>
+      <a href="{{ main_project_part.get_absolute_url }}">{{ main_project_part }}</a>
+      
+      {% if main_project_part.projectpart_set.count > 0 %}
+        <a href="#" style="float:right;font-size:16px;text-decoration: none;" id="ompp_{{ main_project_part.id }}">
+          <i class="icon-circle-arrow-down"></i>
+        </a>
+      {% endif %}
+      
     </div>
     {% if main_project_part.projectpart_set.count > 0 %}
-    <div class="info_box main_project_part">
+    <div class="info_box main_project_part" id="main_project_part_{{ main_project_part.id }}" style="display: none;">
       {% with project_part_list=main_project_part.projectpart_set.all with_detail_page_url="yes" %}
         {% include "info_box/project_parts.html" %}
       {% endwith %}
     </div>
     {% endif %}
+    
+<script>
+  $(document).ready(function() {
+    
+    $('#ompp_{{ main_project_part.id }}').click(function(e) {
+      e.preventDefault();
+      $('#main_project_part_{{ main_project_part.id }}').toggle();
+    });  
+  });
+  
+</script>
+
 </div>

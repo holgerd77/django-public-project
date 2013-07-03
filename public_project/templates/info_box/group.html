@@ -3,7 +3,14 @@
 <div class="section" style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
     
     <div class="info_box_header">
-      <a href="{{ group.get_absolute_url }}">{{ group }} <i class="icon-arrow-right"></i></a>
+      <a href="{{ group.get_absolute_url }}">{{ group }}</a>
+      
+      {% if group.to_memberships.count > 0 %}
+        <a href="#" style="float:right;font-size:16px;text-decoration: none;" id="og_{{ group.id }}">
+          <i class="icon-circle-arrow-down"></i>
+        </a>
+      {% endif %}
+      
       {% if group.get_num_active_user_comments %}<br> 
         <a href="{{ group.get_comments_url }}" style="font-size: 12px !important;font-weight: normal;">
           {{ group.get_num_active_user_comments }} {% trans "Comments" %}
@@ -11,10 +18,22 @@
       {% endif %}
     </div>
     {% if group.to_memberships.count > 0 %}
-    <div class="info_box membership">
+    <div class="info_box membership" id="membership_{{ group.id }}" style="display:none;">
       {% with membership_list=group.to_memberships.all %}
         {% include "info_box/memberships.html" %}
       {% endwith %}
     </div>
     {% endif %}
+
+<script>
+  $(document).ready(function() {
+    
+    $('#og_{{ group.id }}').click(function(e) {
+      e.preventDefault();
+      $('#membership_{{ group.id }}').toggle();
+    });  
+  });
+  
+</script>
+
 </div>

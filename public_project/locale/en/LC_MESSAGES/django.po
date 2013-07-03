@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-02 17:14+0200\n"
+"POT-Creation-Date: 2013-07-03 10:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Attribution"
 msgstr ""
 
-#: admin.py:114 admin.py:387 feeds.py:30 models.py:133 models.py:137
+#: admin.py:116 admin.py:395 feeds.py:30 models.py:133 models.py:137
 #: models.py:391 models.py:569 templates/base.html:69
 #: templates/comments.html:38 templates/document.html:8
 #: templates/documents.html:4 templates/documents.html.py:13
@@ -35,77 +35,77 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: admin.py:118 admin.py:218 admin.py:316 admin.py:363 admin.py:391
+#: admin.py:120 admin.py:222 admin.py:322 admin.py:370 admin.py:399
 #, fuzzy
 msgid "Web sources"
 msgstr "documents/"
 
-#: admin.py:131
+#: admin.py:133
 msgid ""
 "A participant can't have a membership with itself. At least in this system."
 msgstr ""
 
-#: admin.py:133
+#: admin.py:135
 msgid ""
 "A participant can't belong to a participant which already belongs to another "
 "participant. Things would get to complicated."
 msgstr ""
 
-#: admin.py:143 admin.py:203
+#: admin.py:145 admin.py:207
 msgid "Is Group"
 msgstr ""
 
-#: admin.py:148
+#: admin.py:150
 msgid "Only groups"
 msgstr ""
 
-#: admin.py:158
+#: admin.py:160
 msgid "Group Members"
 msgstr ""
 
-#: admin.py:210
+#: admin.py:214
 #, fuzzy
 msgid "In number of groups"
 msgstr "/events/"
 
-#: admin.py:214 admin.py:312 admin.py:359
+#: admin.py:218 admin.py:318 admin.py:366
 #, fuzzy
 msgid "Search tags"
 msgstr "search/"
 
-#: admin.py:221 admin.py:319
+#: admin.py:225 admin.py:325
 #, python-format
 msgid "The following associations with \"%s\" will be deleted"
 msgstr ""
 
-#: admin.py:244
+#: admin.py:248
 msgid ""
 "A project part can't have a main project part which has a main project part "
 "itself. Things would get to complicated."
 msgstr ""
 
-#: admin.py:249 admin.py:301
+#: admin.py:253 admin.py:307
 #, fuzzy
 msgid "Is Main Topic"
 msgstr "/events/"
 
-#: admin.py:254 templates/project_parts.html:32
+#: admin.py:258 templates/project_parts.html:32
 #, fuzzy
 msgid "Only main topics"
 msgstr "/events/"
 
-#: admin.py:264 admin.py:308 templates/info_box/project_part_detail.html:15
+#: admin.py:268 admin.py:314 templates/info_box/project_part_detail.html:15
 #, fuzzy
 msgid "Main Topics"
 msgstr "/events/"
 
-#: admin.py:351 admin.py:375 admin.py:428 models.py:128 models.py:320
+#: admin.py:358 admin.py:383 admin.py:438 models.py:128 models.py:320
 #: models.py:384 models.py:507 templates/base.html:64
 #: templates/project_parts.html:4 templates/project_parts.html.py:14
 msgid "Topics"
 msgstr ""
 
-#: admin.py:355 admin.py:379 admin.py:432 feeds.py:24 models.py:131
+#: admin.py:362 admin.py:387 admin.py:442 feeds.py:24 models.py:131
 #: models.py:242 models.py:319 models.py:334 models.py:385 models.py:408
 #: models.py:506 models.py:522 templates/base.html:67
 #: templates/comments.html:26 templates/participant.html:8
@@ -114,7 +114,7 @@ msgstr ""
 msgid "Participants"
 msgstr ""
 
-#: admin.py:383 admin.py:436 feeds.py:27 models.py:132 models.py:375
+#: admin.py:391 admin.py:446 feeds.py:27 models.py:132 models.py:375
 #: models.py:386 models.py:414 models.py:508 models.py:534
 #: templates/base.html:68 templates/comments.html:32 templates/event.html:8
 #: templates/events.html:4 templates/events.html.py:13
@@ -124,16 +124,16 @@ msgstr ""
 msgid "Events"
 msgstr "/events/"
 
-#: admin.py:410
+#: admin.py:419
 #, fuzzy
 msgid "Performance figures"
 msgstr "documents/"
 
-#: admin.py:462
+#: admin.py:472
 msgid "A research request must be associated with a question"
 msgstr ""
 
-#: admin.py:479 models.py:445 templates/comments.html:22
+#: admin.py:490 models.py:445 templates/comments.html:22
 #: templates/question.html:10 templates/research_requests.html:16
 #, fuzzy
 msgid "Question"
@@ -1125,15 +1125,14 @@ msgid "Associated Participants"
 msgstr "participants/"
 
 #: templates/participants.html:29
-#, fuzzy
-msgid "All participants"
-msgstr "participants/"
-
-#: templates/participants.html:30
-msgid "Only groups/institutions"
+msgid "Expand all"
 msgstr ""
 
-#: templates/participants.html:59
+#: templates/participants.html:30
+msgid "Collapse all"
+msgstr ""
+
+#: templates/participants.html:57
 #, fuzzy
 msgid "New Participants"
 msgstr "participants/"
@@ -1466,6 +1465,10 @@ msgstr "documents/"
 #, fuzzy
 msgid "Only main events"
 msgstr "/events/"
+
+#, fuzzy
+#~ msgid "All participants"
+#~ msgstr "participants/"
 
 #, fuzzy
 #~ msgid "ADMIN_GOAL_GROUP_FORM_HELP"
