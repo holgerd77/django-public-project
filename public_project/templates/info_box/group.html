@@ -1,21 +1,21 @@
 {% load i18n %}
 
-<div class="section" style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
+<div class="section" style="margin-bottom:10px;">
     
     <div class="info_box_header">
       
-      <table style="width:100%;">
+      <table style="width:100%;background-color:#f6f6f6;">
       
       <th>
-        <td>
+        <td style="padding:3px;">
       <a href="{{ group.get_absolute_url }}" style="font-weight: normal;">{{ group }}</a>
         </td>
-        <td style="width: 60px;text-align: right;">
+        <td style="padding:3px;width: 60px;text-align: right;">
         {% with web_source_list=group.web_sources.all size="mini" %}
           {% include "layout_elements/menu_web_sources.html" %}
         {% endwith %}
       </td>
-      <td style="width:40px;text-align: right;">
+      <td style="width:40px;padding:3px;text-align: right;">
       {% if group.to_memberships.count > 0 %}
         <a href="#" style="font-size:16px;text-decoration: none;" id="og_{{ group.id }}">
           {{ group.to_memberships.count }}

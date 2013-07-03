@@ -6,16 +6,14 @@
           <table class="table">
             {% for pp in project_part_list %}
             <tr>
-              <td style="width:52px;">
+              <td style="width:320px;">
+                <a href="{{ pp.get_absolute_url}}">{{ pp.name }}</a>
+              </td>
+              <td>
               {% with web_source_list=pp.web_sources.all size="mini" %}
                 {% include "layout_elements/menu_web_sources.html" %}
               {% endwith %}
               </td>
-              
-              <td>
-                <a href="{{ pp.get_absolute_url}}">{{ pp.name }}</a>
-              </td>
-              
             </tr>
             {% endfor %}
           </table>    

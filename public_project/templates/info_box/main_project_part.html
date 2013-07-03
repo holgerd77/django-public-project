@@ -1,18 +1,18 @@
-<div class="section" style="border: 1px solid #ddd;padding:10px;margin-bottom:5px;">
+<div class="section" style="margin-bottom:10px;">
     
     <div class="info_box_header">
-      <table style="width:100%;">
+      <table style="width:100%;background-color:#f6f6f6;">
       
-      <th>
-        <td style="width:60px;">
+      <tr>
+        <td style="padding: 3px;width:320px;">
+      <a href="{{ main_project_part.get_absolute_url }}" style="font-weight: normal;">{{ main_project_part }}</a>
+        </td>
+        <td style="padding:3px;">
         {% with web_source_list=main_project_part.web_sources.all size="mini" %}
           {% include "layout_elements/menu_web_sources.html" %}
         {% endwith %}
       </td>
-        <td>
-      <a href="{{ main_project_part.get_absolute_url }}" style="font-weight: normal;">{{ main_project_part }}</a>
-        </td>
-      <td style="width:40px;text-align: right;">
+      <td style="padding: 3px;width:40px;text-align: right;">
       {% if main_project_part.projectpart_set.count > 0 %}
         <a href="#" style="font-size:16px;text-decoration: none;" id="ompp_{{ main_project_part.id }}">
           {{ main_project_part.projectpart_set.count }}
@@ -20,7 +20,7 @@
         </a>
       {% endif %}
       </td>
-      </th>
+      </tr>
       
       </table>
     </div>
