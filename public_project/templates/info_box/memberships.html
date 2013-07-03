@@ -14,11 +14,6 @@
                   </a>
                 {% endif %}
               </td>
-              <td style="40px; text-align: right;display:none;">
-              {% with web_source_list=m.from_participant.web_sources.all size="mini" %}
-                {% include "layout_elements/menu_web_sources.html" %}
-              {% endwith %}
-              </td>
               <td style="width:135px;text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
             </tr>
             {% endfor %}
