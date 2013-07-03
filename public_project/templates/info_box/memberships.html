@@ -6,11 +6,6 @@
           <table class="table">
             {% for m in membership_list %}
             <tr>
-              <td style="width: 48px;">
-              {% with web_source_list=m.from_participant.web_sources.all size="mini" %}
-                {% include "layout_elements/menu_web_sources.html" %}
-              {% endwith %}
-              </td>
               <td>
                 <a href="{{ m.from_participant.get_absolute_url}}">{{ m.from_participant.name }}</a>
                 {% if m.from_participant.get_num_active_user_comments %}<br> 
@@ -19,7 +14,12 @@
                   </a>
                 {% endif %}
               </td>
-              <td style="text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
+              <td style="40px; text-align: right;">
+              {% with web_source_list=m.from_participant.web_sources.all size="mini" %}
+                {% include "layout_elements/menu_web_sources.html" %}
+              {% endwith %}
+              </td>
+              <td style="width:160px;text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
             </tr>
             {% endfor %}
           </table>    
