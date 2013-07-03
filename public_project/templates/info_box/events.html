@@ -24,6 +24,20 @@
                   </a>
                 {% endif %}
               </td>
+              <td style="text-align: right;">
+                {% with document_list=event.related_documents.all size="mini" %}
+                  {% include "layout_elements/menu_documents.html" %}
+                {% endwith %}
+                {% with web_source_list=event.web_sources.all size="mini" %}
+                  {% include "layout_elements/menu_web_sources.html" %}
+                {% endwith %}
+                {% with project_part_list=event.project_parts.all size="mini" %}  
+                  {% include "layout_elements/menu_project_parts.html" %}
+                {% endwith %}
+                {% with participant_list=event.participants.all size="mini" %}  
+                  {% include "layout_elements/menu_participants.html" %}
+                {% endwith %}
+              </td>
             </tr>
             {% endfor %}
             <tr style="display: none;" class="no_events_tr">
