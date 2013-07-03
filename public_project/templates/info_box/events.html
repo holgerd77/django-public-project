@@ -16,7 +16,7 @@
               <td style="text-align: center; width:15px;">
                 <i class="{{ event.get_event_type_icon }}"></i>
               </td>
-              <td style="text-align: center; width:40px;">
+              <td style="text-align: center; width:40px;display:none;">
                 {% with web_source_list=event.web_sources.all size="mini" %}
                   {% include "layout_elements/menu_web_sources.html" %}
                 {% endwith %}
