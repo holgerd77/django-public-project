@@ -2,7 +2,7 @@
 {% if event_list %}
 <div class="btn-group">
   <a class="btn btn-{{ size }} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
-    <i class="icon-time"></i> <span class="caret"></span>
+    <i class="icon-time"></i> {{ event_list|length }} <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
     {% for e in event_list %}

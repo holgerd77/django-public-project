@@ -2,7 +2,7 @@
 {% if document_list %}
 <div class="btn-group">
   <a class="btn btn-{{ size }} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
-    <i class="icon-inbox"></i> <span class="caret"></span>
+    <i class="icon-inbox"></i> {{ document_list|length }} <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
     {% for d in document_list %}

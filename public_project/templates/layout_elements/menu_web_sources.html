@@ -2,7 +2,7 @@
 {% if web_source_list %}
 <div class="btn-group">
   <a class="btn btn-{{ size }} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
-    <i class="icon-globe"></i> <span class="caret"></span>
+    <i class="icon-globe"></i> {{ web_source_list|length }} <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
     {% for ws in web_source_list %}

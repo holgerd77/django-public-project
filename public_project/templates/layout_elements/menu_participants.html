@@ -2,7 +2,7 @@
 {% if participant_list %}
 <div class="btn-group">
   <a class="btn btn-{{ size }} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
-    <i class="icon-user"></i> <span class="caret"></span>
+    <i class="icon-user"></i> {{ participant_list|length }} <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
     {% for p in participant_list %}

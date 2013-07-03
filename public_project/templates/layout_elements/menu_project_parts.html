@@ -2,7 +2,7 @@
 {% if project_part_list %}
 <div class="btn-group">
   <a class="btn btn-{{ size }} dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#">
-    <i class="icon-cogs"></i> <span class="caret"></span>
+    <i class="icon-cogs"></i> {{ project_part_list|length }} <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
     {% for pp in project_part_list %}
