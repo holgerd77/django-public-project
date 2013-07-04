@@ -260,7 +260,7 @@ def questions(request):
     all_mpps = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
     main_project_parts = []
     for mpp in all_mpps:
-        if mpp.get_num_questions > 0:
+        if mpp.get_num_questions() > 0:
             main_project_parts.append(mpp)
     middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
@@ -384,7 +384,7 @@ def documents(request):
     all_mpps = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
     main_project_parts = []
     for mpp in all_mpps:
-        if mpp.get_num_documents > 0:
+        if mpp.get_num_documents() > 0:
             main_project_parts.append(mpp)
     middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
