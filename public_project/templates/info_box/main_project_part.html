@@ -5,7 +5,7 @@
       
       <tr>
         <td style="padding: 3px;width:320px;">
-      <a href="{{ main_project_part.get_absolute_url }}" style="font-weight: normal;">{{ main_project_part }}</a>
+      <a href="{{ main_project_part.get_absolute_url }}">{{ main_project_part }}</a>
         </td>
         <td style="padding:3px;display:none;">
         {% with web_source_list=main_project_part.web_sources.all size="mini" %}
