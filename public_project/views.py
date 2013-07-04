@@ -257,7 +257,11 @@ def goals(request):
 
 
 def questions(request):
-    main_project_parts = ProjectPart.objects.annotate(count=Count('main_project_parts'), count2=Count('related_questions')).filter(count=0).filter(count2__gt=0)
+    all_mpps = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
+    main_project_parts = []
+    for mpp in all_mpps:
+        if mpp.get_num_questions > 0:
+            main_project_parts.append(mpp)
     middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
     research_request_list = ResearchRequest.objects.all()
@@ -377,7 +381,11 @@ def event(request, event_id):
 def documents(request):
     site_category = SiteCategory.objects.get_or_create(category='documents')[0]
     
-    main_project_parts = ProjectPart.objects.annotate(count=Count('main_project_parts'), count2=Count('related_documents')).filter(count=0).filter(count2__gt=0)
+    all_mpps = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
+    main_project_parts = []
+    for mpp in all_mpps:
+        if mpp.get_num_documents > 0:
+            main_project_parts.append(mpp)
     middle = int(math.ceil(float(len(main_project_parts))/float(2)))
     
     context = RequestContext(request, {
