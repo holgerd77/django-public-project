@@ -8,7 +8,7 @@
       
       <th>
         <td style="padding:3px;">
-      <a href="{{ group.get_absolute_url }}">{{ group }}</a>
+      <a href="{{ group.get_absolute_url }}" style="font-weight: normal;">{{ group }}</a>
         </td>
         <td style="padding:3px;width: 151px;display:none;">
         {% with web_source_list=group.web_sources.all size="mini" %}
