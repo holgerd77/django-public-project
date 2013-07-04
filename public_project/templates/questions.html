@@ -24,16 +24,15 @@
   <div class="section">
     {% include "info_box/site_category_detail.html" %}
   </div>
+  
+  {% with ec_class="main_project_part" %}
+    {% include "layout_elements/ec_button_group.html" %}
+  {% endwith %}
 
-  {% for main_pp in main_project_part_list_left %}
-  {% if main_pp.get_questions %}
-    {% with sh_title=main_pp.name sh_url_title="" %}
-      {% include "layout_elements/section_header.html" %}
+  {% for mpp in main_project_part_list_left %}
+    {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.question_set.count question_list=mpp.get_questions id_addon=mpp.id ec_box_include="info_box/questions.html" %}
+      {% include "layout_elements/ec_header_box.html" %}
     {% endwith %}
-    {% with question_list=main_pp.get_questions id_addon=main_pp.id %}
-      {% include "info_box/questions.html" %}
-    {% endwith %}
-  {% endif %}
   {% endfor %}
 
 </div>
@@ -49,15 +48,10 @@
   {% include "info_box/research_requests.html" %}
   
   
-  {% for main_pp in main_project_part_list_right %}
-  {% if main_pp.get_questions %}
-    {% with sh_title=main_pp.name sh_url_title="" %}
-      {% include "layout_elements/section_header.html" %}
+  {% for mpp in main_project_part_list_right %}
+    {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.question_set.count question_list=mpp.get_questions id_addon=mpp.id ec_box_include="info_box/questions.html" %}
+      {% include "layout_elements/ec_header_box.html" %}
     {% endwith %}
-    {% with question_list=main_pp.get_questions id_addon=main_pp.id %}
-      {% include "info_box/questions.html" %}
-    {% endwith %}
-  {% endif %}
   {% endfor %}
 
 </div>

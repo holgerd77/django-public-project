@@ -1,0 +1,37 @@
+{% load i18n %}
+
+<div style="border:1px solid #ddd; padding:3px;margin-bottom:7px;">    
+    <table style="width:100%;">
+      <tr>
+        <td style="padding:3px;">
+          {% if ec_url %}<a href="{{ ec_url }}" style="font-weight: normal;">{% endif %}
+            {{ ec_title }}
+          {% if ec_url %}</a>{% endif %}
+        </td>
+        <td style="width:40px;padding:3px;text-align: right;">
+        {% if ec_count > 0 %}
+          <a href="#" style="font-size:16px;text-decoration: none;" id="ec_button_{{ ec_id }}">
+            {{ ec_count }} <i class="icon-circle-arrow-down"></i></a>
+        {% endif %}
+        </td>
+      </tr>
+      
+      </table>
+    {% if ec_count > 0 %}
+    <div class="info_box ec_box" id="ec_box_{{ ec_id }}" style="display:none;">
+      {% include ec_box_include %}
+    </div>
+    {% endif %}
+
+<script>
+  $(document).ready(function() {
+    
+    $('#ec_button_{{ ec_id }}').click(function(e) {
+      e.preventDefault();
+      $('#ec_box_{{ ec_id }}').toggle();
+    });  
+  });
+  
+</script>
+
+</div>

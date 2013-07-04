@@ -24,29 +24,12 @@
     {% include "info_box/site_category_detail.html" %}
   </div>
   
-  <div class="section pull-right" style="margin-bottom:15px;">
-    <div class="btn-group" id="only_groups_btn_group">
-      <button class="btn btn-small" id="og_all">{% trans "Expand all" %}</button>
-      <button class="btn btn-small" id="og_groups">{% trans "Collapse all" %}</button>
-    </div>
-  </div>
-  
-<script>
-  $(document).ready(function() {
-    
-    $('#og_all').click(function() {
-      $('.membership').css('display', 'block');
-    });
-    $('#og_groups').click(function() {
-      $('.membership').css('display', 'none');
-    });
-    
-  });
-  
-</script>
+  {% include "layout_elements/ec_button_group.html" %}
   
   {% for group in group_list_left %}
-    {% include "info_box/group.html" %}
+    {% with ec_title=group ec_id=group.id ec_url=group.get_absolute_url ec_count=group.to_memberships.count membership_list=group.to_memberships.all ec_box_include="info_box/memberships.html" %}
+      {% include "layout_elements/ec_header_box.html" %}
+    {% endwith %}
   {% endfor %}
   
 </div>
@@ -71,7 +54,9 @@
   {% endif %}
   
   {% for group in group_list_right %}
-    {% include "info_box/group.html" %}
+    {% with ec_title=group ec_id=group.id ec_url=group.get_absolute_url ec_count=group.to_memberships.count membership_list=group.to_memberships.all ec_box_include="info_box/memberships.html" %}
+      {% include "layout_elements/ec_header_box.html" %}
+    {% endwith %}
   {% endfor %}
   
 </div>

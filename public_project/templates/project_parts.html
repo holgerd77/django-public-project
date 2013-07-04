@@ -26,29 +26,14 @@
     {% include "info_box/site_category_detail.html" %}
   </div>
   
-  <div class="section pull-right" style="margin-bottom:15px;">
-    <div class="btn-group" id="only_main_project_parts_btn_group">
-      <button class="btn btn-small" id="ompp_all">{% trans "Expand all" %}</button>
-      <button class="btn btn-small" id="ompp_mpps">{% trans "Collapse all" %}</button>
-    </div>
-  </div>
+  {% with ec_class="main_project_part" %}
+    {% include "layout_elements/ec_button_group.html" %}
+  {% endwith %}
   
-<script>
-  $(document).ready(function() {
-    
-    $('#ompp_all').click(function() {
-      $('.main_project_part').css('display', 'block');
-    });
-    $('#ompp_mpps').click(function() {
-      $('.main_project_part').css('display', 'none');
-    });
-    
-  });
-  
-</script>
-  
-  {% for main_project_part in main_project_part_list_left %}
-    {% include "info_box/main_project_part.html" %}
+  {% for mpp in main_project_part_list_left %}
+    {% with ec_title=mpp ec_id=mpp.id ec_url=mpp.get_absolute_url ec_count=mpp.projectpart_set.count project_part_list=mpp.projectpart_set.all with_detail_page_url="yes" ec_box_include="info_box/project_parts.html" %}
+      {% include "layout_elements/ec_header_box.html" %}
+    {% endwith %}
   {% endfor %}
   
 </div>
@@ -72,8 +57,10 @@
     </div>
   {% endif %}
   
-  {% for main_project_part in main_project_part_list_right %}
-    {% include "info_box/main_project_part.html" %}
+  {% for mpp in main_project_part_list_right %}
+    {% with ec_title=mpp ec_id=mpp.id ec_url=mpp.get_absolute_url ec_count=mpp.projectpart_set.count project_part_list=mpp.projectpart_set.all with_detail_page_url="yes" ec_box_include="info_box/project_parts.html" %}
+      {% include "layout_elements/ec_header_box.html" %}
+    {% endwith %}
   {% endfor %}
   
 </div>

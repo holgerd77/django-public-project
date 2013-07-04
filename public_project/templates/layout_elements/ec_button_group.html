@@ -1,0 +1,20 @@
+{% load i18n %}
+
+  <div class="section pull-right" style="margin-bottom:15px;">
+    <div class="btn-group" id="ec_btn_group">
+      <button class="btn btn-small" id="bg_expand">{% trans "Expand all" %}</button>
+      <button class="btn btn-small" id="bg_collapse">{% trans "Collapse all" %}</button>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
+  
+<script>
+  $(document).ready(function() {
+    $('#ec_btn_group #bg_expand').click(function() {
+      $('.ec_box').css('display', 'block');
+    });
+    $('#ec_btn_group #bg_collapse').click(function() {
+      $('.ec_box').css('display', 'none');
+    });
+  });
+</script>

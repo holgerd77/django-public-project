@@ -12,7 +12,7 @@
           <div class="accordion-heading"  style="background-color:#f6f6f6;">
             <a class="accordion-toggle" style="float:right;padding:5px 15px;display:inline-block;text-decoration: none;font-size:16px;" data-toggle="collapse" data-parent="#accordion{{ id_addon }}" href="#collapse{{ id_addon }}_{{ forloop.counter }}">
               {% if q.answered %}<span style="color:#0D9434;font-size:16px;"><i class="icon-ok"></i>&nbsp;&nbsp;</span>{% endif %}
-              <i class="icon-circle-arrow-down"></i></a>
+              <span style="color:#000;"><i class="icon-circle-arrow-down"></i></span></a>
             
             <a href="{{ q.get_absolute_url}}" style="font-size:12px;padding:5px 15px;display:inline-block;color:inherit;">
               {{ q.title }}
