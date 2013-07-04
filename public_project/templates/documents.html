@@ -24,15 +24,12 @@
     {% include "info_box/site_category_detail.html" %}
   </div>
   
-  {% for main_pp in main_project_part_list_left %}
-    {% if main_pp.get_documents %}
-      {% with sh_title=main_pp.name sh_url_title="" %}
-        {% include "layout_elements/section_header.html" %}
-      {% endwith %}
-      {% with document_list=main_pp.get_documents %}
-        {% include "info_box/documents.html" %}
-      {% endwith %}
-    {% endif %}
+  {% include "layout_elements/ec_button_group.html" %}
+  
+  {% for mpp in main_project_part_list_left %}
+    {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.get_num_documents document_list=mpp.get_documents ec_box_include="info_box/documents.html" %}
+      {% include "layout_elements/ec_header_box.html" %}
+    {% endwith %}
   {% endfor %}
   
 </div>
@@ -56,15 +53,10 @@
     </div>
   {% endif %}
   
-  {% for main_pp in main_project_part_list_right %}
-  {% if main_pp.get_documents %}
-    {% with sh_title=main_pp.name sh_url_title="" %}
-      {% include "layout_elements/section_header.html" %}
+  {% for mpp in main_project_part_list_right %}
+    {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.get_num_documents document_list=mpp.get_documents ec_box_include="info_box/documents.html" %}
+      {% include "layout_elements/ec_header_box.html" %}
     {% endwith %}
-    {% with document_list=main_pp.get_documents %}
-      {% include "info_box/documents.html" %}
-    {% endwith %}
-  {% endif %}
   {% endfor %}
 </div>
 

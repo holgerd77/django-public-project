@@ -272,6 +272,9 @@ class ProjectPart(models.Model):
     def get_documents(self):
         return Document.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
     
+    def get_num_documents(self):
+        return Document.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct().count()
+    
     def get_feed_description(self):
         html  = self.description
         return  html

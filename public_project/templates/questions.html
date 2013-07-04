@@ -25,9 +25,7 @@
     {% include "info_box/site_category_detail.html" %}
   </div>
   
-  {% with ec_class="main_project_part" %}
-    {% include "layout_elements/ec_button_group.html" %}
-  {% endwith %}
+  {% include "layout_elements/ec_button_group.html" %}
 
   {% for mpp in main_project_part_list_left %}
     {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.get_num_questions question_list=mpp.get_questions id_addon=mpp.id ec_box_include="info_box/questions.html" %}
