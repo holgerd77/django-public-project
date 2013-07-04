@@ -30,7 +30,7 @@
   {% endwith %}
 
   {% for mpp in main_project_part_list_left %}
-    {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.question_set.count question_list=mpp.get_questions id_addon=mpp.id ec_box_include="info_box/questions.html" %}
+    {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.get_num_questions question_list=mpp.get_questions id_addon=mpp.id ec_box_include="info_box/questions.html" %}
       {% include "layout_elements/ec_header_box.html" %}
     {% endwith %}
   {% endfor %}
@@ -49,7 +49,7 @@
   
   
   {% for mpp in main_project_part_list_right %}
-    {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.question_set.count question_list=mpp.get_questions id_addon=mpp.id ec_box_include="info_box/questions.html" %}
+    {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.get_num_questions question_list=mpp.get_questions id_addon=mpp.id ec_box_include="info_box/questions.html" %}
       {% include "layout_elements/ec_header_box.html" %}
     {% endwith %}
   {% endfor %}

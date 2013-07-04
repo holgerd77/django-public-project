@@ -263,6 +263,9 @@ class ProjectPart(models.Model):
     def get_questions(self):
         return Question.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
     
+    def get_num_questions(self):
+        return Question.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct().count()
+    
     def get_events(self):
         return Event.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
     
