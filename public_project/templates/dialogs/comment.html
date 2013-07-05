@@ -10,7 +10,7 @@
   {% include "dialogs/generic_confirm.html" %}   
 {% endif %}
 
-<div class="modal hide fade" id="CommentModal" style="position:absolute;width:800px;margin-left:-400px;">
+<div class="modal hide fade" id="CommentModal" style="background-color:#222;position:absolute;width:800px;height:850px;margin-left:-400px;">
   
   <div class="modal-header" style="background-color:#f9f9f9;">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -27,7 +27,7 @@
     {% endif %}
     {% endwith %}
   {% csrf_token %}
-  <div class="modal-body" style="max-height:inherit;">
+  <div class="modal-body" style="max-height:inherit;background-color: #fff;">
     <div style="margin-top:10px;">
       <div style="float:left;margin-right:20px;">
       <textarea id="id_comment" style="width: 400px;height: 160px;" rows="10" cols="40" name="comment"></textarea>
