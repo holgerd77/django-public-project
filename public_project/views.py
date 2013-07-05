@@ -401,37 +401,53 @@ def xhr_universal_search(request):
     if request.method == 'GET' and 'query' in request.GET:
         query_string = request.GET['query']
         
-        entry_query = get_query(query_string, ['name',])
-        pp_list = list(ProjectPart.objects.select_related().filter(entry_query)[0:10])
-        
-        entry_query = get_query(query_string, ['title',])
-        q_list = list(Question.objects.select_related().filter(entry_query)[0:10])
-        
-        entry_query = get_query(query_string, ['name',])
-        p_list = list(Participant.objects.select_related().filter(entry_query)[0:10])
-        
-        entry_query = get_query(query_string, ['title',])
-        e_list = list(Event.objects.select_related().filter(entry_query)[0:10])
-        
-        entry_query = get_query(query_string, ['title',])
-        d_list = list(Document.objects.select_related().filter(entry_query)[0:10])
-        
-        object_list = pp_list + q_list + p_list + e_list + d_list
+        if len(query_string) >= 4:
+            entry_query = get_query(query_string, ['name',])
+            pp_list = list(ProjectPart.objects.select_related().filter(entry_query)[0:10])
+            
+            entry_query = get_query(query_string, ['title',])
+            q_list = list(Question.objects.select_related().filter(entry_query)[0:10])
+            
+            entry_query = get_query(query_string, ['name',])
+            p_list = list(Participant.objects.select_related().filter(entry_query)[0:10])
+            
+            entry_query = get_query(query_string, ['title',])
+            e_list = list(Event.objects.select_related().filter(entry_query)[0:10])
+            
+            entry_query = get_query(query_string, ['title',])
+            d_list = list(Document.objects.select_related().filter(entry_query)[0:10])
+            
+            object_list = pp_list + q_list + p_list + e_list + d_list
+        else:
+            object_list = []
         
         res = {
             'values': {},
             'options': [],
         }
         
+        if 'with_query_search' in request.GET:
+            if len(query_string) < 4:
+                option = unicode(query_string)
+            else:
+                option = '<i class="icon-search"></i> ' + unicode(query_string)
+            res['values'][option] = {
+                'content_type': 'query_search',
+                'id': 0,
+                'absolute_url': '/' + _('search_url') + '?q=' + urllib.quote_plus(query_string),
+            }
+            res['options'].append(option)
+        
         for object in object_list:
             content_type = object.__class__.__name__.lower()
             id = object.id
             
-            if not (content_type == request.GET['ommit_content_type'] and str(id) == request.GET['ommit_id']):
+            if not 'ommit_content_type' in request.GET or not (content_type == request.GET['ommit_content_type'] and str(id) == request.GET['ommit_id']):
                 option = '<i class="' + object.get_icon_class() + '"></i> ' + unicode(object)
                 res['values'][option] = {
                     'content_type': content_type,
                     'id': id,
+                    'absolute_url': object.get_absolute_url(),
                 }
                 res['options'].append(option)
         
