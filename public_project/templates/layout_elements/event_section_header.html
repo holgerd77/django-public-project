@@ -30,19 +30,32 @@
   $(document).ready(function() {
     
     $('#ome_btn_group_{{ id_addon }} #ome_all').click(function() {
-      $('.events_{{ id_addon }} tr.no_events_tr').css('display', 'none'); 
-      $('.events_{{ id_addon }} .tr_normal_event').css('display', 'table-row');
+      $('.events_{{ id_addon }} .no_events_tr').css('display', 'none');
+      if ($('.events_{{ id_addon }} .tr_normal_event').is("div")) {
+        $('.events_{{ id_addon }} .tr_normal_event').css('display', 'block');
+      } else {
+        $('.events_{{ id_addon }} .tr_normal_event').css('display', 'table-row');
+      }
     });
     $('#ome_btn_group_{{ id_addon }} #ome_selected').click(function() {
       $('.events_{{ id_addon }} .tr_normal_event').css('display', 'none');
       var num_visible_trs = 0;
-      $('.events_{{ id_addon }} tr').each(function() {
+      $('.events_{{ id_addon }} .type_table tr').each(function() {
+        if($(this).css('display') != 'none') {
+          num_visible_trs += 1;
+        }
+      });
+      $('.events_{{ id_addon }} .type_div').each(function() {
         if($(this).css('display') != 'none') {
           num_visible_trs += 1;
         }
       });
       if(num_visible_trs == 0) {
-        $('.events_{{ id_addon }} tr.no_events_tr').css('display', 'table-row'); 
+        if ($('.events_{{ id_addon }} .no_events_tr').is("div")) {
+          $('.events_{{ id_addon }} .no_events_tr').css('display', 'block');
+        } else {
+          $('.events_{{ id_addon }} .no_events_tr').css('display', 'table-row');
+        } 
       }
     });
     

@@ -48,10 +48,18 @@
   {% endfor %}
   </select>
   </div>
+  <div style="clear:both;"></div>
   
   {% for mpp in main_project_part_list %}
   {% with event_list=mpp.related_events.all id_addon=mpp.id class_addon="2" %}
-  {% include "info_box/events.html" %}
+  <div class="events_{{ class_addon }}" id="events_{{ id_addon }}">
+  {% for event in mpp.related_events.all %}
+    {% include "info_box/event_compact.html" %}
+  {% endfor %}
+  <div style="display: none;" class="no_events_tr">
+    {% trans "No events available." %}
+  </div>
+  </div>
   {% endwith %}
   {% endfor %}
   

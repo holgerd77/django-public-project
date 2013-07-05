@@ -81,11 +81,9 @@
   
   <div class="section">
   
-    {% with event=latest_event ed_with_header="yes" %}
-    <div style="border: 1px solid #ddd;padding:10px;">
-      {% include "info_box/event_detail.html" %}
-    </div>
-    {% endwith %}
+  {% with event=latest_event %}
+    {% include "info_box/event_compact.html" %}
+  {% endwith %}
   
   </div>
   
