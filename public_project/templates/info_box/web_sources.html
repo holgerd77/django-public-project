@@ -10,7 +10,7 @@
     <div class="info_box">
       <div class="info_box_content">
           {% if web_source_list %}
-            <table class="table table-striped">
+            <table class="table table-striped" style="border:1px solid #ddd;">
               {% for ws in web_source_list %}
               <tr>
                 <td><i class="icon-external-link"></i> <a href="{{ ws.url }}" target="_blank">{{ ws.title }}</a></td>

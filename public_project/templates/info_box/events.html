@@ -6,7 +6,7 @@
       <div class="info_box_content">
         <p>
         {% if event_list %}
-          <table class="table">
+          <table class="table" style="border:1px solid #ddd;">
             {% for event in event_list %}
             <tr class="{% if not event.important %}tr_normal_event{% endif %}">
               <td 
