@@ -27,7 +27,8 @@
     {% endif %}
     {% endwith %}
   {% csrf_token %}
-  <div class="modal-body" style="max-height:inherit;background-color: #fff;">
+  <div class="modal-body" style="padding:0px;max-height:inherit;background-color: #fff;">
+    <div style="padding:15px;">
     <div style="margin-top:10px;">
       <div style="float:left;margin-right:20px;">
       <textarea id="id_comment" style="width: 400px;height: 160px;" rows="10" cols="40" name="comment"></textarea>
@@ -72,16 +73,20 @@
     {% with dialog="CommentModal" %}
     {% include "dialogs/more_cos_input.html" %}
     {% endwith %}
-       
-  </div>
-  
-  <div class="modal-footer">
+    
+    <br>
     <div style="text-align:left;float:left;" id="error_msg_box">
     </div>
     <div style="text-align:left;float:right;">
     <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Close" %}</button>
     <input id="comment_form_submit_btn" name="comment_form" type="submit" class="btn btn-primary" value="{% trans "Send comment" %}" />
     </div>
+    <div style="clear:both;"></div>
+  </div>
+  <div style="background-color: #222;height:275px;">
+    &nbsp;
+  </div>
+    
   </div>
   </form>
   
