@@ -121,7 +121,7 @@
     {% trans "Click on the tags for searching for the term." %}
   </div>
   
-  <div id="tag_cloud" style="border:1px solid #ddd;margin-bottom: 5px;height:200px;">
+  <div id="tag_cloud" style="border:1px solid #ddd;margin-bottom: 5px;height:180px;">
   </div>
   <div style="margin-bottom:20px;">
     <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, null, '/suche/', 200);">{% trans "All" %}</a>
@@ -132,7 +132,7 @@
   
 <script>
   $(document).ready(function() {
-    load_tag_cloud('#tag_cloud', null, null, '/suche/', 200);
+    load_tag_cloud('#tag_cloud', null, null, '/suche/', 180);
   });
 </script>
 

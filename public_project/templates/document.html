@@ -59,7 +59,7 @@
     {% trans "Click on the tags for searching the document." %}
   </div>
   
-  <div id="tag_cloud" style="border:1px solid #ddd;margin-bottom: 5px;height:140px;">
+  <div id="tag_cloud" style="border:1px solid #ddd;margin-bottom: 5px;height:120px;">
   </div>
   <div style="margin-bottom:20px;">
     <a class="label" href="javascript:load_tag_cloud('#tag_cloud', {{ document.id }}, null, '{{ document.get_absolute_url }}', 140);">{% trans "All" %}</a>
@@ -71,7 +71,7 @@
   
 <script>
   $(document).ready(function() {
-    load_tag_cloud('#tag_cloud', {{ document.id }}, null, '{{ document.get_absolute_url }}', 140);
+    load_tag_cloud('#tag_cloud', {{ document.id }}, null, '{{ document.get_absolute_url }}', 120);
   });
 </script>
   
