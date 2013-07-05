@@ -13,6 +13,7 @@
           <tr>
             <td><a href="{{ doc.get_absolute_url }}">{{ doc }}</a>
               <br>
+              <span style="display:inline-block;width:75px;">{{ doc.page_set.count }} {% trans "Pages" %}</span> 
               {% if doc.search_tags %}
                 {% for tag in doc.search_tags %}
                   <a class="label" href="{{ doc.get_absolute_url }}?q={{ tag|urlencode }}">
@@ -20,10 +21,7 @@
                 {% endfor %}
                 <br>
               {% endif %}
-              {{ doc.page_set.count }} {% trans "Pages" %}{% if doc.get_num_active_user_comments %}, 
-                <a href="{{ doc.get_comments_url }}">
-                {{ doc.get_num_active_user_comments }} {% trans "Comments" %}</a>
-              {% endif %}
+              
               
             </td>
             <td style="text-align: right;">{{ doc.date_added|date:"d.m.Y"}}</td>
