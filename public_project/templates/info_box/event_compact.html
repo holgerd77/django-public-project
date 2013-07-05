@@ -4,27 +4,14 @@
 
   <table style="width:100%;">
     <tr>
-      <td style="width:80px;font-size:12px;vertical-align: top;padding: 10px;">
+      <td style="width:70px;font-size:12px;vertical-align: top;padding: 10px;">
           {{ event.date|date:"d.m.Y" }}
       </td>
-      
-      <td style="font-size:14px;padding: 10px 10px 0px 10px;">
+      <td style="text-align: center;width:15px;padding: 10px;">
+                <i class="{{ event.get_event_type_icon }}"></i>
+              </td>
+      <td style="font-size:14px;padding: 10px;">
         <a href="{{ event.get_absolute_url}}">{{ event.title }}</a>
-        
-        <p>
-        {% with size="mini" %}
-          {% include "layout_elements/menu_documents.html" %}
-        {% endwith %}
-        {% with web_source_list=event.web_sources.all size="mini" %}
-          {% include "layout_elements/menu_web_sources.html" %}
-        {% endwith %}
-        {% with project_part_list=event.project_parts.all size="mini" %}  
-          {% include "layout_elements/menu_project_parts.html" %}
-        {% endwith %}
-        {% with participant_list=event.participants.all size="mini" %}  
-          {% include "layout_elements/menu_participants.html" %}
-        {% endwith %}
-        </p>
 
     </td></tr>
   </table>

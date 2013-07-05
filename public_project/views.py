@@ -456,14 +456,14 @@ def xhr_document_tags(request):
                 st_dict_list = SearchTagCacheEntry.objects.filter(document=document).values('tag__name', 'tag__content_type__model',).annotate(num_tags=Count('tag__name')).order_by('-num_tags')
             st_dict_list = st_dict_list[0:16]
             size_start = 10
-            size_span = 8
+            size_span = 10
         else:
             if request.POST['content_type']:
                 st_dict_list = SearchTagCacheEntry.objects.filter(tag__content_type__model=request.POST['content_type']).values('tag__name', 'tag__content_type__model',).annotate(num_tags=Count('tag__name')).order_by('-num_tags')[0:22]
             else:
                 st_dict_list = SearchTagCacheEntry.objects.values('tag__name', 'tag__content_type__model',).annotate(num_tags=Count('tag__name')).order_by('-num_tags')[0:22]
             size_start = 12
-            size_span = 10
+            size_span = 12
         
         if len(st_dict_list) > 0:
             first = st_dict_list[0]

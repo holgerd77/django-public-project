@@ -30,9 +30,17 @@
     {% include "layout_elements/event_section_header.html" %}
   {% endwith %}
   
-  {% with event_list=chronology_list class_addon="1" %}
-  {% include "info_box/events.html" %}
+  {% with event_list=chronology_list class_addon="1" id_addon="1" %}
+  <div class="events_{{ class_addon }}" id="events_{{ id_addon }}">
+  {% for event in event_list %}
+    {% include "info_box/event_compact.html" %}
+  {% endfor %}
+  <div style="display: none;" class="no_events_tr">
+    {% trans "No events available." %}
+  </div>
+  </div>
   {% endwith %}
+  
 </div>
 
 <div class="span6">
