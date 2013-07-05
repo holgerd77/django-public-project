@@ -400,6 +400,7 @@ def documents(request):
 def xhr_universal_search(request):
     if request.method == 'GET' and 'query' in request.GET:
         query_string = request.GET['query']
+        query_string = unicode(query_string).encode('utf-8')
         
         if len(query_string) >= 4:
             entry_query = get_query(query_string, ['name',])
@@ -425,12 +426,12 @@ def xhr_universal_search(request):
             'values': {},
             'options': [],
         }
-        
+        print query_string
         if 'with_query_search' in request.GET:
             if len(query_string) < 4:
-                option = unicode(query_string)
+                option = query_string
             else:
-                option = '<i class="icon-search"></i> ' + unicode(query_string)
+                option = '<i class="icon-search"></i> ' + query_string
             res['values'][option] = {
                 'content_type': 'query_search',
                 'id': 0,
