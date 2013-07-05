@@ -8,13 +8,16 @@
           <div style="clear:both;height:1px;"></div>
         </p>
         
-        <p>
-        {% with document_list=site_category.documents.all size="small" %}
-          {% include "layout_elements/menu_documents.html" %}
-        {% endwith %}
-        {% with web_source_list=site_category.web_sources.all size="small" %}
-          {% include "layout_elements/menu_web_sources.html" %}
-        {% endwith %}
+        <p style="font-size:12px;margin:0 0 5px;">
+          {% for doc in site_category.documents.all %}
+            <i class="icon-inbox"></i> <a href="doc.get_absolute_url">{{ doc }}</a><br>
+          {% endfor %}
         </p>
+        <p style="font-size:12px;margin:0 0 5px;">
+          {% for ws in site_category.web_sources.all %}
+            <i class="icon-globe"></i> <a href="ws.url" target="_blank">{{ ws }}</a><br>
+          {% endfor %}
+        </p>
+        
       </div>
     </div>

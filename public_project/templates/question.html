@@ -21,6 +21,10 @@
   <div class="section">
     {% include "info_box/question_detail.html" %}
   
+  {% with web_source_list=question.web_sources.all %}
+    {% include "info_box/web_sources.html" %}
+  {% endwith %}
+  
   {% if question.explanations %}
   <div class="info_box ib_text"  style="margin-top:10px;background-color: #fff;border:3px solid #ebebeb;">
     <div class="info_box_header">
