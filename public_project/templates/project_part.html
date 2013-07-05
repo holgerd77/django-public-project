@@ -28,10 +28,10 @@
   
   {% if project_part.projectpart_set.count > 0 %}
     {% trans "Subtopics" as sh_title %}
-    {% with sh_title=sh_title sh_icon="icon-user" sh_url_title="" %}
+    {% with sh_title=sh_title sh_ec_id="st_1" sh_icon="icon-user" sh_url_title="" %}
       {% include "layout_elements/section_header.html" %}
     {% endwith %}
-    <div class="info_box">
+    <div class="info_box" id="st_1">
       {% with project_part_list=project_part.projectpart_set.all with_detail_page_url="yes" %}
         {% include "info_box/project_parts.html" %}
       {% endwith %}
@@ -53,22 +53,13 @@
 
 <div class="span6">
   
-  {% if question_list.count > 0 %}
-    {% trans "Questions" as sh_title %}
-    {% with sh_title=sh_title sh_icon="icon-question-sign" sh_url_title="" %}
-      {% include "layout_elements/section_header.html" %}
-    {% endwith %}
-    
+  {% if question_list.count > 0 %}    
     {% include "info_box/questions.html" %}
   {% endif %}
   
   {% if content_document_list %}
     {% trans "Document Contents" as sh_title %}
-    {% with sh_title=sh_title sh_icon="icon-inbox" sh_url_title="" %}
-      {% include "layout_elements/section_header.html" %}
-    {% endwith %}
-    
-    {% with document_list=content_document_list %}
+    {% with sh_title=sh_title document_list=content_document_list %}
       {% include "info_box/documents.html" %}
     {% endwith %}
   {% endif %}

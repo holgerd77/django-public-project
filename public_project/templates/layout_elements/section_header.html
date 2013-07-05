@@ -14,6 +14,11 @@
           });
         </script>
       {% endif %}
+      
+      {% if sh_ec_id %}&nbsp;
+      <button class="btn btn-mini" style="font-size:16px;text-decoration: none;" id="sh_ec_btn_{{ sh_ec_id }}">
+        <i class="icon-circle-arrow-down"></i></button>
+      {% endif %}
       </a>
       
   </li>
@@ -26,3 +31,12 @@
   {% endif %}
 </ul>
 
+<script>
+  $(document).ready(function() {    
+    $('#sh_ec_btn_{{ sh_ec_id }}').click(function(e) {
+      e.preventDefault();
+      $('#{{ sh_ec_id }}').toggle();
+    });  
+  });
+  
+</script>
