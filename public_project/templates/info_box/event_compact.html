@@ -1,8 +1,8 @@
 {% load i18n %}
 
-<div style="border: 1px solid #ddd;padding:7px;margin-bottom:5px;" class="type_div {% if not event.important %}tr_normal_event{% endif %}">
+<div style="border: 1px solid #ddd;margin-bottom:5px;" class="type_div {% if not event.important %}tr_normal_event{% endif %}">
 
-  <table style="width:100%;background-color: #f9f9f9;">
+  <table style="width:100%;">
     <tr>
       <td style="width:80px;font-size:12px;vertical-align: top;padding: 10px;">
           {{ event.date|date:"d.m.Y" }}
