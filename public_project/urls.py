@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls.defaults import include, patterns, url
+from django.conf.urls import include, patterns, url
 from django.utils.translation import ugettext as _
 from tastypie.api import Api
 from public_project.api import *

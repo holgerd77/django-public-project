@@ -9,7 +9,14 @@ class ProjectFactory():
     def create_base_project(cls):
         sc   = G(SiteConfig, header_image=None)
         p1   = G(Participant)
+        p1.name = "Test Corporation"
+        p1.save()
         p2   = G(Participant)
+        
+        m = G(Membership)
+        m.from_participant = p1
+        m.to_participant = p2
+        m.save()
         pgg1 = G(ProjectGoalGroup)
         pg1  = G(ProjectGoal, project_goal_group=pgg1)
         pp1  = G(ProjectPart)

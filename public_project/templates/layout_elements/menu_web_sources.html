@@ -1,8 +1,8 @@
 
 {% if web_source_list %}
-<div class="btn-group" style="text-align: left;">
-  <a class="btn btn-{{ size }} dropdown-toggle" style="font-weight: normal;" data-toggle="dropdown" data-hover="dropdown" href="#">
-    <i class="icon-globe"></i> {{ web_source_list|length }} <span class="caret"></span>
+<div class="{% if size %}btn-group{% else %}dropdown{% endif %}" style="text-align: left;display:inline-block;">
+  <a class="{% if size %}btn btn-{{ size }}{% endif %} dropdown-toggle" style="font-weight: normal;" data-toggle="dropdown" data-hover="dropdown" href="#">
+    {{ web_source_list|length }} <i class="icon-globe"></i>{% if size %} <span class="caret"></span>{% endif %}
   </a>
   <ul class="dropdown-menu">
     {% for ws in web_source_list %}
@@ -12,5 +12,5 @@
       </li>
     {% endfor %}
   </ul>
-</div>
+</div>&nbsp;&nbsp;
 {% endif %}

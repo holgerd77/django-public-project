@@ -136,12 +136,33 @@ class ExampleData:
         )
         p4.save()
         
+        ws1 = WebSource(
+            title = 'Official Website',
+            url = 'http://www.spiegel.de',
+            content_object = p4,
+        )
+        ws1.save()
+        
         m1 = Membership(
             from_participant = p4,
             to_participant = p3,
             function = 'Department Manager',
         )
         m1.save()
+        
+        c1 = Comment(
+            username = 'Robert Gutherfeather',
+            email = 'robgus@smirdenbroeth.co.uk',
+            comment = 'Is Mrs. Smith THE Mrs. Smith I encountered in Durbanport in 1957?? How exciting!',
+            published = True,
+        )
+        c1.save()
+        
+        cr1 = CommentRelation(
+            comment = c1,
+            content_object = p4,
+        )
+        cr1.save()
 
         pp1 = ProjectPart(
             name = 'Stone Management',

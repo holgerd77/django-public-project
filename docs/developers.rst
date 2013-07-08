@@ -255,10 +255,23 @@ The following types of tests are implemented:
 
 Test Server
 -----------
-A test server is necessary to run some of the tests (e.g. testing RSS feeds). The test server
-can be started with::
+A test server is necessary to run some of the tests (e.g. testing RSS feeds). The data for the 
+test server configuration can be created with::
+
+	./init_test_project.sh
+
+This doesn't has to be done every time before running the tests, but at least once and every time
+after updating the ``DPP`` library.
+
+The test server can than be started with::
 
     ./testserver.sh
+
+The test server serves a normal ``DPP`` instance and both the frontend site and the admin should be
+normally accessible through the browser:
+
+* http://127.0.0.1:8010/
+* http://127.0.0.1:8010/admin/
 
 Browser/Selenium Tests
 ----------------------

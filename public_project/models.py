@@ -593,7 +593,6 @@ class Document(models.Model):
                 #print "Old document deleted from path: " + self.old_document.path
         
         if self.old_document != self.document:
-            self.page_set.all().delete()
             cmd = u"python manage.py createpages " + str(self.id) + " --settings=" + settings.SETTINGS_MODULE
             subprocess.Popen(cmd, shell=True)
             #print "New page creation process started..."

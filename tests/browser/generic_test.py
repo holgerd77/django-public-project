@@ -29,7 +29,7 @@ class GenericTest(LiveServerTestCase):
         self.selenium.get('%s/' % (self.live_server_url))
         time.sleep(SELENIUM_SLEEP_TIME)
         try:
-            self.selenium.find_element_by_xpath('//div[@class="hero-unit"]')
+            self.selenium.find_element_by_xpath('//div[@id="site_intro_text"]')
         except NoSuchElementException:
             self.assertTrue(0, "No main page displayed!")
     

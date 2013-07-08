@@ -14,10 +14,8 @@ class Command(BaseCommand):
                 document = Document.objects.get(pk=int(document_id))
             except Document.DoesNotExist:
                 raise CommandError('Document "%s" does not exist' % document_id)
-            if document.page_set.count() > 0:
-                raise CommandError('Pages for document "%s" already created' % document_id)
+            document.page_set.all().delete()
             ds = DocScanner(document)
             ds.create_pages()
             
             rebuild_cache_for_document(document)
-            print "Rebuid search tag cache for document."
