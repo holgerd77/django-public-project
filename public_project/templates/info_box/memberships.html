@@ -9,6 +9,7 @@
               <td>
                 <a href="{{ m.from_participant.get_absolute_url}}">{{ m.from_participant.name }}</a>
               </td>
+              {% if 0 %}
               <td>
                 {% with web_source_list=m.from_participant.web_sources.all %}
                   {% include "layout_elements/menu_web_sources.html" %}
@@ -19,6 +20,7 @@
                   </a>
                 {% endif %}&nbsp;
               </td>
+              {% endif %}
               <td style="width:135px;text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
             </tr>
             {% endfor %}
