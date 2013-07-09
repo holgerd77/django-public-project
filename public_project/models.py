@@ -197,6 +197,7 @@ class Participant(models.Model):
     comment_relations = generic.GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    activities = generic.GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.name
@@ -256,6 +257,7 @@ class ProjectPart(models.Model):
     comment_relations = generic.GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    activities = generic.GenericRelation('ActivityLog')
 
     def __unicode__(self):
         return self.name
@@ -328,6 +330,7 @@ class Event(models.Model):
     comment_relations = generic.GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    activities = generic.GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.title + ", " + datetime.strftime(self.date, '%d.%m.%Y') 
@@ -399,6 +402,7 @@ class Question(models.Model):
     comment_relations = generic.GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    activities = generic.GenericRelation('ActivityLog')
     
     def get_feed_description(self):
         html  = self.description
@@ -473,6 +477,7 @@ class ProjectGoalGroup(models.Model):
     comments = models.TextField(_("Comments (internal)"), blank=True)
     objects = ProjectGoalGroupManager()
     date_added = models.DateTimeField(auto_now_add=True)
+    activities = generic.GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.title
@@ -516,6 +521,7 @@ class Document(models.Model):
     comments = models.TextField(_("Comments (internal)"), blank=True)
     pdf_images_generated = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now_add=True)
+    activities = generic.GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.title + " (" + datetime.strftime(self.date, '%d.%m.%Y') + ")"
@@ -718,6 +724,7 @@ class ResearchRequest(models.Model):
     open = models.BooleanField(_("Open"), default=True)
     description = models.TextField(_("Description"))
     date_added = models.DateTimeField(auto_now_add=True)
+    activities = generic.GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return unicode(self.nr) + ': ' + self.title
@@ -822,6 +829,7 @@ class Comment(models.Model):
     published_by = models.CharField(_("Published by"), max_length=250, blank=True)
     activation_hash = models.CharField(_("Activation hash"), max_length=250, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    activities = generic.GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.username + ", " + datetime.strftime(self.date_added, '%d.%m.%Y')
