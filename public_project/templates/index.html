@@ -108,7 +108,9 @@
   {% endwith %}
   
   {% trans "questions_url" as add_rr_url %}
-  {% include "info_box/research_requests.html" %}
+  {% with rr_with_ec="yes" %}
+    {% include "info_box/research_requests.html" %}
+  {% endwith %}
   
   
   {% trans "Frequent Document Contents" as sh_title %}

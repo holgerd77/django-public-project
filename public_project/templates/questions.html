@@ -43,8 +43,9 @@
     {% include "layout_elements/section_header.html" %}
   {% endwith %}
   
-  {% include "info_box/research_requests.html" %}
-  
+  {% with rr_with_ec="yes" %}
+    {% include "info_box/research_requests.html" %}
+  {% endwith %}
   
   {% for mpp in main_project_part_list_right %}
     {% with ec_title=mpp ec_id=mpp.id ec_url="" ec_count=mpp.get_num_questions question_list=mpp.get_questions id_addon=mpp.id ec_box_include="info_box/questions.html" sh_title="" %}

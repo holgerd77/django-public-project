@@ -16,19 +16,20 @@
                   <a href="{{ rr.get_google_plus_url }}" target="_blank" style="font-size:18px;color:#929292;text-decoration: none;"><i class="icon-google-plus-sign"></i></a>&nbsp;
                   <a href="{{ rr.get_app_net_url }}" target="_blank" style="color:#929292;text-decoration: none;">
                     <img src="/static/img/icon-app-net.png" width="16" height="17" style="vertical-align:top;margin-top:1px;">
-                  </a>&nbsp;&nbsp;
+                  </a>&nbsp;
                   
+                  {% if rr_with_ec %}
+                  &nbsp;
                   <a href="#" id="rr_ec_btn_{{ rr.id }}" style="font-size:16px;color:#000;text-decoration: none;">
                     <i class="icon-circle-arrow-down"></i>
                   </a>
-
-<script>
-  $('#rr_ec_btn_{{ rr.id }}').click(function(e) {
-    e.preventDefault();
-    $('#rr_content_{{ rr.id }}').toggle();
-  });
-  
-</script>
+                  <script>
+                    $('#rr_ec_btn_{{ rr.id }}').click(function(e) {
+                      e.preventDefault();
+                      $('#rr_content_{{ rr.id }}').toggle();
+                    });
+                  </script>
+                  {% endif %}
 
                 </div>
                 
@@ -38,7 +39,7 @@
                 </a>
                 {% if not rr.open %}&nbsp;<span>({% trans "done" %}){% endif %}
               </div>
-              <div id="rr_content_{{ rr.id }}" style="display:none;">
+              <div id="rr_content_{{ rr.id }}" style="{% if rr_with_ec %}display:none;{% endif %}">
               <div style="border-top:1px solid #ddd;padding:7px 12px 7px 12px;font-size:11px;" class="comment_relations">
                 {% for rr_rel in rr.researchrequestrelation_set.all %}
                   <div>

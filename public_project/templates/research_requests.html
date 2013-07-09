@@ -37,7 +37,9 @@
     {% include "layout_elements/section_header.html" %}
   {% endwith %}
   
-  {% include "info_box/research_requests.html" %}
+  {% with rr_with_ec="yes" %}
+    {% include "info_box/research_requests.html" %}
+  {% endwith %}
 
 </div>
 
