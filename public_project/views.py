@@ -404,13 +404,13 @@ def xhr_universal_search(request):
         
         if len(query_string) >= 4:
             entry_query = get_query(query_string, ['name',])
+            p_list = list(Participant.objects.select_related().filter(entry_query)[0:10])
+            
+            entry_query = get_query(query_string, ['name',])
             pp_list = list(ProjectPart.objects.select_related().filter(entry_query)[0:10])
             
             entry_query = get_query(query_string, ['title',])
             q_list = list(Question.objects.select_related().filter(entry_query)[0:10])
-            
-            entry_query = get_query(query_string, ['name',])
-            p_list = list(Participant.objects.select_related().filter(entry_query)[0:10])
             
             entry_query = get_query(query_string, ['title',])
             e_list = list(Event.objects.select_related().filter(entry_query)[0:10])

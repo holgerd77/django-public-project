@@ -173,6 +173,7 @@
   
   $("#q").typeahead({
   minLength: 1,
+  items: 10,
   source: function(query, process) {
         return $.ajax({
            url: '/xhr/universal_search/',

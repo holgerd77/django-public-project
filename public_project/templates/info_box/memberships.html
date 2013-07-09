@@ -9,8 +9,9 @@
               <td>
                 <a href="{{ m.from_participant.get_absolute_url}}">{{ m.from_participant.name }}</a>
               </td>
+              <td style="width:135px;text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
               {% if 0 %}
-              <td>
+              <td style="width:55px;text-align:right;">
                 {% with web_source_list=m.from_participant.web_sources.all %}
                   {% include "layout_elements/menu_web_sources.html" %}
                 {% endwith %}
@@ -18,10 +19,9 @@
                   <a href="{{ m.from_participant.get_comments_url }}" style="font-size:11px;">
                     {{ m.from_participant.get_num_active_user_comments }} <i class="icon-comments"></i>
                   </a>
-                {% endif %}&nbsp;
+                {% endif %}
               </td>
               {% endif %}
-              <td style="width:135px;text-align:right;">{{ m.function }} {% if not m.active %}({% trans "former" %}){% endif %}</td>
             </tr>
             {% endfor %}
           </table>    

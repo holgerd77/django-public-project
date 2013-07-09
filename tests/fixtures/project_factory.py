@@ -8,14 +8,16 @@ class ProjectFactory():
     @classmethod
     def create_base_project(cls):
         sc   = G(SiteConfig, header_image=None)
+        pp1 = G(ProjectPart)
+        pp2 = G(ProjectPart)
         p1   = G(Participant)
         p1.name = "Test Corporation"
         p1.save()
         p2   = G(Participant)
         
         m = G(Membership)
-        m.from_participant = p1
-        m.to_participant = p2
+        m.from_participant = p2
+        m.to_participant = p1
         m.save()
         pgg1 = G(ProjectGoalGroup)
         pg1  = G(ProjectGoal, project_goal_group=pgg1)
@@ -32,6 +34,12 @@ class ProjectFactory():
         a1.save()
         cr1.content_object = p1
         cr1.save()
+        e1 = G(Event)
+        e1.project_parts = [pp1,]
+        e1.save()
+        e2 = G(Event)
+        e2.project_parts = [pp2,]
+        e2.save()
         d1 = N(Document)
         pdf = File(open('fixtures/test_document.pdf', 'rw'))
         d1.document = pdf
