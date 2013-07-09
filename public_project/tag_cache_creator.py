@@ -9,7 +9,9 @@ def create_cache_entry(tag, document):
     
     if num_results > 0:
         ce = SearchTagCacheEntry()
-        if SearchTagCacheEntry.objects.filter(document=document).filter(tag__name=tag.name).count() == 0:
+        if SearchTagCacheEntry.objects.filter(document=document).filter(tag__name=tag.name).count() == 0 and \
+           SearchTagCacheEntry.objects.filter(document=document).filter(tag__name=tag.name.title()).count() == 0 and \
+           SearchTagCacheEntry.objects.filter(document=document).filter(tag__name=tag.name.upper()).count() == 0:
             ce.tag = tag
             ce.document = document
             ce.num_results = num_results

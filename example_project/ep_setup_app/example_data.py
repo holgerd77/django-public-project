@@ -143,6 +143,12 @@ class ExampleData:
         )
         ws1.save()
         
+        st1 = SearchTag(
+            name = 'Smith',
+            content_object = p4,
+        )
+        st1.save()
+        
         m1 = Membership(
             from_participant = p4,
             to_participant = p3,
