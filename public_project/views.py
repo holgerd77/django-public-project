@@ -418,7 +418,7 @@ def xhr_universal_search(request):
             entry_query = get_query(query_string, ['title',])
             d_list = list(Document.objects.select_related().filter(entry_query)[0:10])
             
-            object_list = pp_list + q_list + p_list + e_list + d_list
+            object_list = p_list + pp_list + q_list + e_list + d_list
         else:
             object_list = []
         
