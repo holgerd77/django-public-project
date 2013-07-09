@@ -190,7 +190,7 @@ def index(request):
         'latest_event': latest_event,
         'latest_document': latest_document,
         'activity_list': ActivityLog.objects.all()[0:5],
-        'research_request_list': research_request_list[0:1],
+        'research_request_list': research_request_list[0:3],
         'num_total_research_requests': len(research_request_list),
         'comment_list': comment_list[0:1],
         'num_total_comments': len(comment_list),
