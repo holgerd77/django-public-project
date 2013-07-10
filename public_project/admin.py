@@ -372,6 +372,7 @@ class EventAdmin(admin.ModelAdmin):
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('title', 'answered', 'num_project_parts', 'num_participants', 'num_events', 'num_documents', 'num_web_sources',)
+    search_fields = ['title',]
     inlines = [
         WebSourceInline,
     ]

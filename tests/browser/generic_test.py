@@ -158,7 +158,7 @@ class GenericTest(LiveServerTestCase):
         PF.create_base_project()
         p1 = Participant.objects.all()[0]
         c1 = Comment.objects.all()[0]
-        self.selenium.get('%s/%s%i/%s' % (self.live_server_url, _('participants_url'), c1.pk, _('comments_url')))
+        self.selenium.get('%s/%s%i/%s' % (self.live_server_url, _('participants_url'), p1.pk, _('comments_url')))
         time.sleep(SELENIUM_SLEEP_TIME)
         try:
             x_path = '//h3[contains(text(),"' + p1.name + '")]'
