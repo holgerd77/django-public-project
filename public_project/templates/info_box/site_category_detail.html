@@ -10,12 +10,12 @@
         
         <p style="font-size:12px;margin:0 0 5px;">
           {% for doc in site_category.documents.all %}
-            <i class="icon-inbox"></i> <a href="doc.get_absolute_url">{{ doc }}</a><br>
+            <i class="icon-inbox"></i> <a href="{{ doc.get_absolute_url }}">{{ doc }}</a><br>
           {% endfor %}
         </p>
         <p style="font-size:12px;margin:0 0 5px;">
           {% for ws in site_category.web_sources.all %}
-            <i class="icon-globe"></i> <a href="ws.url" target="_blank">{{ ws }}</a><br>
+            <i class="icon-globe"></i> <a href="{{ ws.url }}" target="_blank">{{ ws }}</a><br>
           {% endfor %}
         </p>
         
