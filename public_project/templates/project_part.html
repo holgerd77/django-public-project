@@ -53,8 +53,10 @@
 
 <div class="span6">
   
-  {% if question_list.count > 0 %}    
+  {% if question_list.count > 0 %}  
+  {% with sh_title="yes" %}  
     {% include "info_box/questions.html" %}
+  {% endwith %}
   {% endif %}
   
   {% if content_document_list %}
