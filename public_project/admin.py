@@ -290,6 +290,7 @@ class ProjectPartAdmin(admin.ModelAdmin):
     list_display = ('name', 'order', 'is_main_project_part', 'in_num_main_project_parts', 'num_search_tags', 'num_web_sources')
     list_editable = ('order',)
     list_filter = (IsMainProjectPartFilter, MainProjectPartFilter,)
+    search_fields = ['name',]
     save_on_top = True
     inlines = [
         SearchTagInline,
