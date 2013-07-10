@@ -34,14 +34,37 @@
               </p>
               
               <p>
-              {% with project_part_list=q.project_parts.all size="small" %}  
-                {% include "layout_elements/menu_project_parts.html" %}
+              {% with project_part_list=q.project_parts.all %}
+              {% if project_part_list %}
+                <p style="font-size:12px;">
+                  {% for pp in project_part_list %}
+                    <i class="icon-cogs"></i> 
+                    <a href="{{ pp.get_absolute_url}}">{{ pp }}</a><br>
+                  {% endfor %}
+                </p>
+              {% endif %}
               {% endwith %}
-              {% with participant_list=q.participants.all size="small" %}  
-                {% include "layout_elements/menu_participants.html" %}
+              
+              {% with participant_list=q.participants.all %}
+              {% if participant_list %}
+                <p style="font-size:12px;">
+                  {% for p in participant_list %}
+                    <i class="icon-group"></i> 
+                    <a href="{{ p.get_absolute_url}}">{{ p }}</a><br>
+                  {% endfor %}
+                </p>
+              {% endif %}
               {% endwith %}
-              {% with event_list=q.events.all size="small" %}  
-                {% include "layout_elements/menu_events.html" %}
+              
+              {% with event_list=q.events.all %}
+              {% if event_list %}
+                <p style="font-size:12px;">
+                  {% for e in event_list %}
+                    <i class="icon-time"></i> 
+                    <a href="{{ e.get_absolute_url}}">{{ e }}</a><br>
+                  {% endfor %}
+                </p>
+              {% endif %}
               {% endwith %}
               </p>
           </div>
