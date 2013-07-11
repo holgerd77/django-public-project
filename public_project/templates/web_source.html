@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} - {{ web_source }}{% endblock %}
+
+{% block content %}
+
+{% with ph_icon="icon-globe" ph_title=web_source.title %}
+{% include "layout_elements/page_header.html" %}
+{% endwith %}
+
+</div>
+
+<div class="row">
+
+<div class="span8">
+  <div class="well">
+    <h3 style="line-height: inherit;">
+      <a href="{{ web_source.url }}" target="_blank">{{ web_source.url }}</a>
+    </h3>
+    Associated with object:
+    <i class="{{ web_source.content_object.get_icon_class }}"></i> 
+    <a href="{{ web_source.content_object.get_absolute_url }}">
+      {{ web_source.content_object }}
+    </a>
+  </div>
+  
+  <h4>Found search tags on web page:</h4>
+  {% if found_search_tag_list %}
+    <table class="table table-striped">
+      {% for st in found_search_tag_list %}
+        <tr>
+          <td>{{ st }}</td>
+          <td>
+            <i class="{{ st.content_object.get_icon_class }}"></i> 
+            <a href="{{ st.content_object.get_absolute_url }}">
+              {{ st.content_object }}
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    No search tags found.
+  {% endif %}
+</div>
+
+<div class="span4">
+  <div class="alert alert-warning">
+    Beta feature, only available to logged in users, not thoroughly tested!
+  </div>
+  
+</div>
+
+{% endblock %}

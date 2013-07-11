@@ -160,6 +160,9 @@ class WebSource(models.Model):
     def __unicode__(self):
         return self.title
     
+    def get_absolute_url(self):
+        return "/" + ugettext("web_sources_url") + unicode(self.id) + "/"
+    
     @classmethod
     def get_icon_class(cls):
         return 'icon-globe'

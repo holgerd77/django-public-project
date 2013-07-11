@@ -1,5 +1,5 @@
 # coding=UTF-8
-import json, math, os, urllib
+import json, math, os, urllib, urllib2
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -7,7 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.db.models import Count
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.html import strip_tags
@@ -376,6 +376,30 @@ def event(request, event_id):
         'num_total_comments': len(comment_list),
     })
     return render_to_response('event.html', context)
+
+
+def web_source(request, web_source_id):
+    web_source = get_object_or_404(WebSource, pk=web_source_id)
+    
+    req = urllib2.Request(web_source.url, headers={'User-Agent' : "Magic Browser"}) 
+    response = urllib2.urlopen(req)
+    html = response.read()
+    
+    search_tags = SearchTag.objects.all()
+    found_search_tag_list = []
+    for st in search_tags:
+        if st.name.lower() in unicode(html, errors='replace').lower():
+            found_search_tag_list.append(st)
+    
+    context = RequestContext(request, {
+        'site_config': SiteConfig.objects.get_site_config(request),
+        'web_source': web_source,
+        'found_search_tag_list': found_search_tag_list,
+    })
+    if request.user.is_authenticated():
+        return render_to_response('web_source.html', context)
+    else:
+        raise Http404
 
 
 def documents(request):
