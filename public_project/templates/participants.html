@@ -37,6 +37,7 @@
       </div>
       <h4>{{ pt }}</h4>
     </div>
+    
     <div style="display: none;" id="pt_ec_box_{{ pt.id }}" class="ec_box_main">
     {% for group in pt.get_participants %}
       {% with ec_title=group ec_id=group.id ec_url=group.get_absolute_url ec_count=group.to_memberships.count membership_list=group.to_memberships.all ec_box_include="info_box/memberships.html" %}
@@ -44,7 +45,7 @@
       {% endwith %}
     {% endfor %}
     </div>
-
+    
     <script>
       $(document).ready(function() {    
         $('#pt_ec_btn_{{ pt.id }}').click(function(e) {
@@ -55,7 +56,7 @@
     </script>
   
   {% endfor %}
-  </div>
+  
   
 </div>
 
