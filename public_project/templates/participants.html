@@ -30,13 +30,13 @@
   
   {% for pt in participant_type_list_left %}
   
-    <div style="background-color:#f9f9f9;padding:10px;margin-top:15px;margin-bottom: 5px;">
+    <div style="background-color:#f3f3f3;padding:10px;margin-top:15px;margin-bottom: 5px;">
       <div>
       <div style="float:right;">
         <a href="#" style="font-size:18px;color:#000;text-decoration: none;" id="pt_ec_btn_{{ pt.id }}">
           {{ pt.get_participants|length }} <i class="icon-circle-arrow-down"></i></a>
       </div>
-      <h4 style="margin:0px;">{{ pt }}</h4>
+      <h4 style="margin:0px;font-weight: normal;">{{ pt }}</h4>
       </div>
     </div>
     
@@ -83,13 +83,13 @@
   
   {% for pt in participant_type_list_right %}
   
-    <div style="background-color:#f9f9f9;padding:10px;margin-top:15px;margin-bottom: 5px;">
+    <div style="background-color:#f3f3f3;padding:10px;margin-top:15px;margin-bottom: 5px;">
       <div>
       <div style="float:right;">
         <a href="#" style="font-size:18px;color:#000;text-decoration: none;" id="pt_ec_btn_{{ pt.id }}">
           {{ pt.get_participants|length }} <i class="icon-circle-arrow-down"></i></a>
       </div>
-      <h4 style="margin:0px;">{{ pt }}</h4>
+      <h4 style="margin:0px;font-weight: normal;">{{ pt }}</h4>
       </div>
     </div>
     
