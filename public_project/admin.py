@@ -120,6 +120,11 @@ class SiteCategoryAdmin(admin.ModelAdmin):
     num_web_sources.short_description = _('Web sources')
 
 
+class ParticipantTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order',)
+    list_editable = ('order',)
+
+
 class SearchTagInline(generic.GenericTabularInline):
     model = SearchTag
 
@@ -186,9 +191,9 @@ class CustomParticipantAdminForm(forms.ModelForm):
 
 class ParticipantAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
-    list_display = ('name', 'order', 'is_group', 'in_num_groups', 'num_search_tags', 'num_web_sources',)
+    list_display = ('name', 'type', 'order', 'is_group', 'in_num_groups', 'num_search_tags', 'num_web_sources',)
     list_editable = ('order',)
-    list_filter = (IsGroupFilter, GroupMembersFilter,)
+    list_filter = ('type', IsGroupFilter, GroupMembersFilter,)
     search_fields = ['name', 'description',]
     save_on_top = True
     inlines = [
@@ -515,6 +520,7 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(SiteConfig, SiteConfigAdmin)
 admin.site.register(SiteCategory, SiteCategoryAdmin)
+admin.site.register(ParticipantType, ParticipantTypeAdmin)
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(ProjectPart, ProjectPartAdmin)
 admin.site.register(Event, EventAdmin)

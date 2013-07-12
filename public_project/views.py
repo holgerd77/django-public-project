@@ -307,14 +307,18 @@ def question(request, question_id):
 
 def participants(request):
     site_category = SiteCategory.objects.get_or_create(category='participants')[0]
-    groups = Participant.objects.annotate(count=Count('belongs_to')).filter(count=0)
-    middle = int(math.ceil(float(len(groups))/float(2)))
+    participant_types = ParticipantType.objects.all()
+    middle = int(math.ceil(float(len(participant_types))/float(2)))
+    #groups = Participant.objects.annotate(count=Count('belongs_to')).filter(count=0)
+    #middle = int(math.ceil(float(len(groups))/float(2)))
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
         'site_category': site_category,
-        'group_list_left': groups[0:middle],
-        'group_list_right': groups[middle:],
+        'participant_type_list_left': participant_types[0:middle],
+        'participant_type_list_right': participant_types[middle:],
+        #'group_list_left': groups[0:middle],
+        #'group_list_right': groups[middle:],
     })
     return render_to_response('participants.html', context)
 

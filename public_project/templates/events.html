@@ -61,7 +61,7 @@
   {% for mpp in main_project_part_list %}
   {% with event_list=mpp.related_events.all id_addon=mpp.id class_addon="2" %}
   <div class="events_{{ class_addon }}" id="events_{{ id_addon }}">
-  {% for event in mpp.related_events.all %}
+  {% for event in mpp.get_events %}
     {% include "info_box/event_compact.html" %}
   {% endfor %}
   <div style="display: none;" class="no_events_tr">

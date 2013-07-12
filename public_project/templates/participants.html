@@ -24,13 +24,37 @@
     {% include "info_box/site_category_detail.html" %}
   </div>
   
-  {% include "layout_elements/ec_button_group.html" %}
+  {% with ec_class_addon='_main' %}
+    {% include "layout_elements/ec_button_group.html" %}
+  {% endwith %}
   
-  {% for group in group_list_left %}
-    {% with ec_title=group ec_id=group.id ec_url=group.get_absolute_url ec_count=group.to_memberships.count membership_list=group.to_memberships.all ec_box_include="info_box/memberships.html" %}
-      {% include "layout_elements/ec_header_box.html" %}
-    {% endwith %}
+  {% for pt in participant_type_list_left %}
+  
+    <div>
+      <div style="float:right;">
+        <a href="#" style="font-size:18px;color:#000;text-decoration: none;" id="pt_ec_btn_{{ pt.id }}">
+          <i class="icon-circle-arrow-down"></i></a>
+      </div>
+      <h4>{{ pt }}</h4>
+    </div>
+    <div style="display: none;" id="pt_ec_box_{{ pt.id }}" class="ec_box_main">
+    {% for group in pt.get_participants %}
+      {% with ec_title=group ec_id=group.id ec_url=group.get_absolute_url ec_count=group.to_memberships.count membership_list=group.to_memberships.all ec_box_include="info_box/memberships.html" %}
+        {% include "layout_elements/ec_header_box.html" %}
+      {% endwith %}
+    {% endfor %}
+
+    <script>
+      $(document).ready(function() {    
+        $('#pt_ec_btn_{{ pt.id }}').click(function(e) {
+          e.preventDefault();
+          $('#pt_ec_box_{{ pt.id }}').toggle();
+        });  
+      });
+    </script>
+  
   {% endfor %}
+  </div>
   
 </div>
 
@@ -53,10 +77,31 @@
     </div>
   {% endif %}
   
-  {% for group in group_list_right %}
-    {% with ec_title=group ec_id=group.id ec_url=group.get_absolute_url ec_count=group.to_memberships.count membership_list=group.to_memberships.all ec_box_include="info_box/memberships.html" %}
-      {% include "layout_elements/ec_header_box.html" %}
-    {% endwith %}
+  {% for pt in participant_type_list_right %}
+  
+    <div>
+      <div style="float:right;">
+        <a href="#" style="font-size:18px;color:#000;text-decoration: none;" id="pt_ec_btn_{{ pt.id }}">
+          <i class="icon-circle-arrow-down"></i></a>
+      </div>
+      <h4>{{ pt }}</h4>
+    </div>
+    <div style="display: none;" id="pt_ec_box_{{ pt.id }}" class="ec_box_main">
+    {% for group in pt.get_participants %}
+      {% with ec_title=group ec_id=group.id ec_url=group.get_absolute_url ec_count=group.to_memberships.count membership_list=group.to_memberships.all ec_box_include="info_box/memberships.html" %}
+        {% include "layout_elements/ec_header_box.html" %}
+      {% endwith %}
+    {% endfor %}
+
+    <script>
+      $(document).ready(function() {    
+        $('#pt_ec_btn_{{ pt.id }}').click(function(e) {
+          e.preventDefault();
+          $('#pt_ec_box_{{ pt.id }}').toggle();
+        });  
+      });
+    </script>
+  
   {% endfor %}
   
 </div>

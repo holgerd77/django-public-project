@@ -147,12 +147,32 @@ class SiteCategory(models.Model):
         verbose_name_plural = _('Website Categories')
 
 
+class ParticipantType(models.Model):
+    help_text = _("Type or category for sorting of participants")
+    name = models.CharField(_("Title"), max_length=250, help_text=help_text)
+    help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
+    order = models.IntegerField(_("Order"), default=100)
+    date_added = models.DateTimeField(auto_now_add=True)    
+    
+    def get_participants(self):
+        return self.participant_set.filter(belongs_to=None)
+    
+    def __unicode__(self):
+        return self.name
+    
+    class Meta:
+        ordering = ['order']
+        verbose_name = _('Type Participants')
+        verbose_name_plural = _('Types Participants')
+
+
 class WebSource(models.Model):
     title = models.CharField(_("Title"), max_length=250)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey("content_type", "object_id")
-    order = models.IntegerField(_("Order"), default=100, blank=True, null=True)
+    help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
+    order = models.IntegerField(_("Order"), help_text=help_text, default=100, blank=True, null=True)
     url = models.URLField(_("URL"))
     date = models.DateField(_("Date"), blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -189,6 +209,8 @@ class Membership(models.Model):
 class Participant(models.Model):
     help_text  = _("Person, group or institution acting in some way in the context of the project or being affected by the process or the result of the project execution.")
     name = models.CharField(_("Name"), max_length=250, help_text=help_text, unique=True)
+    help_text = _("Type for sorting, only for groups/institutions, necessary for participant to be visible on site")
+    type = models.ForeignKey(ParticipantType, blank=True, null=True, help_text=help_text)
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
     order = models.IntegerField(_("Order"), help_text=help_text, default=500, blank=True, null=True)
     help_text = _("The participant belongs to another participant (often an institution or group), leave blank if participant itself is institution/group.")
@@ -241,7 +263,7 @@ class Participant(models.Model):
             return 'icon-group'
     
     class Meta:
-        ordering = ['order', 'name',]
+        ordering = ['type', 'order', 'name',]
         verbose_name = _('Participant')
         verbose_name_plural = _('Participants')
 

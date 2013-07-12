@@ -79,6 +79,8 @@
         pp_module.prependTo(content_div);
         pp_module.css('margin-bottom', '20px');
         
+        var pt_a = $('#content-main a[href*="/public_project/participanttype/"]:first');
+        var pt_tr = pt_a.parent().parent();
         var i_a = $('#content-main a[href*="/public_project/image/"]:first');
         var i_tr = i_a.parent().parent();
         var d_a = $('#content-main a[href*="/public_project/document/"]:first');
@@ -103,6 +105,7 @@
         var sconf_tr = sconf_a.parent().parent();
         
         p_tr.detach();
+        pt_tr.detach();
         i_tr.detach();
         d_tr.detach();
         e_tr.detach();
@@ -117,6 +120,7 @@
         
         sconf_tr.appendTo(pp_table);
         scat_tr.appendTo(pp_table);
+        pt_tr.appendTo(pp_table);
         a_tr.appendTo(pp_table);
         i_tr.appendTo(pp_table);
         t_tr.appendTo(pp_table);
@@ -158,6 +162,7 @@
         
         sconf_a.before('<i class="icon-wrench"></i>&nbsp; ');
         scat_a.before('<i class="icon-sitemap"></i>&nbsp; ');
+        pt_a.before('<i class="icon-group" style="color:#000 !important;"></i>&nbsp; ');
         a_a.before('<i class="icon-dashboard"></i>&nbsp; ');
         i_a.before('<i class="icon-picture"></i>&nbsp; ');
         t_a.before('<i class="icon-cogs"></i>&nbsp; ');
@@ -171,6 +176,7 @@
         
         sconf_a.attr('title', '{% trans "General settings (e.g. page title) and common introductory texts (e.g. about text)" %}');
         scat_a.attr('title', '{% trans "Introductory texts and documents and web sources for the site categories (e.g. Events category), one entry per category" %}');
+        pt_a.attr('title', '{% trans "Type or category for sorting of participants" %}');
         a_a.attr('title', '{% trans "Log of activities throughout the system, shown on main page, entries can be deleted safely" %}');
         i_a.attr('title', '{% trans "Images for introductory texts, images must be uploaded here first before they can be embedded in a text" %}');
         t_a.attr('title', '{% trans "Topics to structure the project, can be divided into main and sub topics" %}');
