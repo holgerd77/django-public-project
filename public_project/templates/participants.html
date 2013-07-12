@@ -33,7 +33,7 @@
     <div style="margin-top:25px;margin-bottom: 5px;">
       <div style="float:right;">
         <a href="#" style="font-size:18px;color:#000;text-decoration: none;" id="pt_ec_btn_{{ pt.id }}">
-          <i class="icon-circle-arrow-down"></i></a>
+          {{ pt.get_participants|length }} <i class="icon-circle-arrow-down"></i></a>
       </div>
       <h4>{{ pt }}</h4>
     </div>
@@ -84,7 +84,7 @@
     <div style="margin-top:25px;margin-bottom: 5px;">
       <div style="float:right;">
         <a href="#" style="font-size:18px;color:#000;text-decoration: none;" id="pt_ec_btn_{{ pt.id }}">
-          <i class="icon-circle-arrow-down"></i></a>
+          {{ pt.get_participants|length }} <i class="icon-circle-arrow-down"></i></a>
       </div>
       <h4>{{ pt }}</h4>
     </div>
