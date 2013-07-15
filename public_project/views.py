@@ -349,12 +349,18 @@ def participant(request, participant_id):
 def events(request):
     site_category = SiteCategory.objects.get_or_create(category='events')[0]
     
+    all_mpps = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
+    main_project_parts = []
+    for mpp in all_mpps:
+        if mpp.get_num_events() > 0:
+            main_project_parts.append(mpp)
+    
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
         'site_category': SiteCategory.objects.get_or_create(category='events')[0],
         'project_goal_group_list': ProjectGoalGroup.objects.all().order_by('event'),
         'chronology_list': Event.objects.all(),
-        'main_project_part_list': ProjectPart.objects.annotate(count=Count('main_project_parts'), count2=Count('related_events')).filter(count=0).filter(count2__gt=0),
+        'main_project_part_list': main_project_parts,
     })
     return render_to_response('events.html', context)
 

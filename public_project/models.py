@@ -296,6 +296,9 @@ class ProjectPart(models.Model):
     def get_events(self):
         return Event.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
     
+    def get_num_events(self):
+        return Event.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct().count()
+    
     def get_documents(self):
         return Document.objects.filter(project_parts__in=list(chain([self,], self.projectpart_set.all()))).distinct()
     
