@@ -11,7 +11,7 @@
         </p>
         {% endif %}
         <p style="font-size:14px;font-weight: bold;">
-          {{ event.date }}
+          {% if event.not_exact %}({% endif %}{{ event.date|date:"d.m.Y" }}{% if event.not_exact %}){% endif %}
         </p>
         {{ event.description|safe }}
         <div style="clear:both;height:1px;"></div>

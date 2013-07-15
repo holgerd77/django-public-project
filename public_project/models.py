@@ -349,6 +349,8 @@ class Event(models.Model):
     search_tags = generic.GenericRelation('SearchTag')
     description = models.TextField(_("Description"))
     date = models.DateField(_("Date"))
+    help_text = _("Date is not exact (e.g. if a source refers only to the month)")
+    not_exact = models.BooleanField(_("Date not exact"), default=False, help_text=help_text)
     participants = models.ManyToManyField(Participant, related_name="related_events", blank=True, null=True, verbose_name=_("Participants"))
     project_parts = models.ManyToManyField(ProjectPart, related_name="related_events", blank=True, null=True, verbose_name=_("Topics"))
     web_sources = generic.GenericRelation(WebSource)
@@ -358,7 +360,13 @@ class Event(models.Model):
     activities = generic.GenericRelation('ActivityLog')
     
     def __unicode__(self):
-        return self.title + ", " + datetime.strftime(self.date, '%d.%m.%Y') 
+        str  = self.title + ", "
+        if self.not_exact:
+            str += '('
+        str += datetime.strftime(self.date, '%d.%m.%Y')
+        if self.not_exact:
+            str += ')'
+        return str 
     
     def get_feed_description(self):
         html  = self.description

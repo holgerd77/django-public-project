@@ -5,7 +5,7 @@
   <table style="width:100%;">
     <tr>
       <td style="width:70px;font-size:12px;padding: 10px;">
-          {{ event.date|date:"d.m.Y" }}
+          {% if event.not_exact %}({% endif %}{{ event.date|date:"d.m.Y" }}{% if event.not_exact %}){% endif %}
       </td>
       <td style="text-align: center;width:15px;padding: 10px;">
                 <i class="{{ event.get_event_type_icon }}"></i>

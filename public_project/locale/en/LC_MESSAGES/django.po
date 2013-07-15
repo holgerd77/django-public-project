@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-12 13:19+0200\n"
+"POT-Creation-Date: 2013-07-15 13:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,94 +25,94 @@ msgstr ""
 msgid "Attribution"
 msgstr ""
 
-#: admin.py:116 admin.py:401 feeds.py:30 models.py:133 models.py:137
-#: models.py:419 models.py:600 templates/base.html:70
+#: admin.py:116 admin.py:402 feeds.py:30 models.py:133 models.py:137
+#: models.py:427 models.py:608 templates/base.html:70
 #: templates/comments.html:38 templates/document.html:8
 #: templates/documents.html:4 templates/documents.html.py:13
 msgid "Documents"
 msgstr ""
 
-#: admin.py:120 admin.py:226 admin.py:327 admin.py:375 admin.py:405
+#: admin.py:120 admin.py:227 admin.py:328 admin.py:376 admin.py:406
 #, fuzzy
 msgid "Web sources"
 msgstr "documents/"
 
-#: admin.py:137
+#: admin.py:138
 msgid ""
 "A participant can't have a membership with itself. At least in this system."
 msgstr ""
 
-#: admin.py:139
+#: admin.py:140
 msgid ""
 "A participant can't belong to a participant which already belongs to another "
 "participant. Things would get to complicated."
 msgstr ""
 
-#: admin.py:149 admin.py:211
+#: admin.py:150 admin.py:212
 msgid "Is Group"
 msgstr ""
 
-#: admin.py:154
+#: admin.py:155
 msgid "Only groups"
 msgstr ""
 
-#: admin.py:164
+#: admin.py:165
 msgid "Group Members"
 msgstr ""
 
-#: admin.py:218
+#: admin.py:219
 #, fuzzy
 msgid "In number of groups"
 msgstr "/events/"
 
-#: admin.py:222 admin.py:323 admin.py:371
+#: admin.py:223 admin.py:324 admin.py:372
 #, fuzzy
 msgid "Search tags"
 msgstr "search/"
 
-#: admin.py:229 admin.py:330
+#: admin.py:230 admin.py:331
 #, python-format
 msgid "The following associations with \"%s\" will be deleted"
 msgstr ""
 
-#: admin.py:252
+#: admin.py:253
 msgid ""
 "A project part can't have a main project part which has a main project part "
 "itself. Things would get to complicated."
 msgstr ""
 
-#: admin.py:257 admin.py:312
+#: admin.py:258 admin.py:313
 #, fuzzy
 msgid "Is Main Topic"
 msgstr "/events/"
 
-#: admin.py:262
+#: admin.py:263
 #, fuzzy
 msgid "Only main topics"
 msgstr "/events/"
 
-#: admin.py:272 admin.py:319 templates/info_box/project_part_detail.html:15
+#: admin.py:273 admin.py:320 templates/info_box/project_part_detail.html:15
 #, fuzzy
 msgid "Main Topics"
 msgstr "/events/"
 
-#: admin.py:363 admin.py:389 admin.py:444 models.py:128 models.py:347
-#: models.py:412 models.py:537 templates/base.html:65
+#: admin.py:364 admin.py:390 admin.py:445 models.py:128 models.py:355
+#: models.py:420 models.py:545 templates/base.html:65
 #: templates/project_parts.html:4 templates/project_parts.html.py:14
 msgid "Topics"
 msgstr ""
 
-#: admin.py:367 admin.py:393 admin.py:448 feeds.py:24 models.py:131
-#: models.py:262 models.py:346 models.py:362 models.py:413 models.py:437
-#: models.py:536 models.py:553 templates/base.html:68
+#: admin.py:368 admin.py:394 admin.py:449 feeds.py:24 models.py:131
+#: models.py:268 models.py:354 models.py:370 models.py:421 models.py:445
+#: models.py:544 models.py:561 templates/base.html:68
 #: templates/comments.html:26 templates/participant.html:8
 #: templates/participants.html:4 templates/participants.html.py:13
 #: templates/search.html:30
 msgid "Participants"
 msgstr ""
 
-#: admin.py:397 admin.py:452 feeds.py:27 models.py:132 models.py:403
-#: models.py:414 models.py:443 models.py:538 models.py:565
+#: admin.py:398 admin.py:453 feeds.py:27 models.py:132 models.py:411
+#: models.py:422 models.py:451 models.py:546 models.py:573
 #: templates/base.html:69 templates/comments.html:32 templates/event.html:8
 #: templates/events.html:4 templates/events.html.py:13
 #: templates/participant.html:41 templates/project_part.html:42
@@ -121,22 +121,22 @@ msgstr ""
 msgid "Events"
 msgstr "/events/"
 
-#: admin.py:425
+#: admin.py:426
 #, fuzzy
 msgid "Performance figures"
 msgstr "documents/"
 
-#: admin.py:478
+#: admin.py:479
 msgid "A research request must be associated with a question"
 msgstr ""
 
-#: admin.py:496 models.py:474 templates/comments.html:22
+#: admin.py:497 models.py:482 templates/comments.html:22
 #: templates/question.html:10 templates/research_requests.html:16
 #, fuzzy
 msgid "Question"
 msgstr "questions/"
 
-#: feeds.py:18 models.py:368 models.py:431 models.py:559
+#: feeds.py:18 models.py:376 models.py:439 models.py:567
 #: templates/search.html:19
 msgid "Subject Areas"
 msgstr ""
@@ -146,7 +146,7 @@ msgstr ""
 msgid "Feed with new subject areas from %s."
 msgstr ""
 
-#: feeds.py:21 models.py:130 models.py:475 templates/base.html:67
+#: feeds.py:21 models.py:130 models.py:483 templates/base.html:67
 #: templates/comments.html:20 templates/question.html:8
 #: templates/questions.html:4 templates/questions.html.py:13
 #: templates/research_requests.html:14 templates/info_box/questions.html:4
@@ -198,7 +198,7 @@ msgstr "research_requests/"
 msgid "Feed with new research requests on {object} on {title}."
 msgstr ""
 
-#: feeds.py:115 models.py:241 models.py:381 models.py:453 models.py:575
+#: feeds.py:115 models.py:247 models.py:389 models.py:461 models.py:583
 #: urls.py:32 urls.py:33 urls.py:38 urls.py:39 urls.py:48 urls.py:49
 #: urls.py:53 urls.py:54 urls.py:58 urls.py:59 urls.py:64 urls.py:65
 #: templates/document.html:87 templates/event.html:49
@@ -216,8 +216,8 @@ msgstr "/events/"
 msgid "Feed with new comments on {object} on {title}."
 msgstr ""
 
-#: models.py:35 models.py:95 models.py:152 models.py:164 models.py:339
-#: models.py:408 models.py:489 models.py:529 models.py:742
+#: models.py:35 models.py:95 models.py:152 models.py:170 models.py:345
+#: models.py:416 models.py:497 models.py:537 models.py:750
 msgid "Title"
 msgstr ""
 
@@ -239,8 +239,8 @@ msgstr ""
 msgid "Attribution URL"
 msgstr ""
 
-#: models.py:42 models.py:113 models.py:139 models.py:217 models.py:277
-#: models.py:350 models.py:422 models.py:496 models.py:540
+#: models.py:42 models.py:113 models.py:139 models.py:223 models.py:283
+#: models.py:358 models.py:430 models.py:504 models.py:548
 #, fuzzy
 msgid "Comments (internal)"
 msgstr "/events/"
@@ -334,7 +334,7 @@ msgstr "This text will be shown on the contact page."
 msgid "Website Configuration"
 msgstr ""
 
-#: models.py:129 models.py:506 templates/base.html:66 templates/goals.html:4
+#: models.py:129 models.py:514 templates/base.html:66 templates/goals.html:4
 #: templates/goals.html.py:8
 msgid "Goals"
 msgstr ""
@@ -359,333 +359,341 @@ msgstr ""
 msgid "Type or category for sorting of participants"
 msgstr ""
 
-#: models.py:153 models.py:168 models.py:208 models.py:268 models.py:515
+#: models.py:153 models.py:174 models.py:214 models.py:274 models.py:523
 msgid "Use integer numbers for ordering (e.g. '100', '200', '300')."
 msgstr ""
 
-#: models.py:154 models.py:169 models.py:209 models.py:269 models.py:516
-#: models.py:682
+#: models.py:154 models.py:175 models.py:215 models.py:275 models.py:524
+#: models.py:690
 msgid "Order"
 msgstr ""
 
-#: models.py:159
+#: models.py:165
 #, fuzzy
 msgid "Type Participants"
 msgstr "participants/"
 
-#: models.py:160
+#: models.py:166
 #, fuzzy
 msgid "Types Participants"
 msgstr "participants/"
 
-#: models.py:170
+#: models.py:176
 msgid "URL"
 msgstr ""
 
-#: models.py:171 models.py:345 models.py:533 models.py:936
+#: models.py:177 models.py:351 models.py:541 models.py:944
 msgid "Date"
 msgstr ""
 
-#: models.py:178 urls.py:60
+#: models.py:184 urls.py:60
 msgid "web_sources_url"
 msgstr "web_sources/"
 
-#: models.py:186
+#: models.py:192
 msgid "Web-Source"
 msgstr ""
 
-#: models.py:187 templates/info_box/web_sources.html:4
+#: models.py:193 templates/info_box/web_sources.html:4
 msgid "Web-Sources"
 msgstr ""
 
-#: models.py:191
+#: models.py:197
 #, fuzzy
 msgid "From participant"
 msgstr "participants/"
 
-#: models.py:192
+#: models.py:198
 msgid "Association with a group or institution"
 msgstr ""
 
-#: models.py:193
+#: models.py:199
 #, fuzzy
 msgid "To participant"
 msgstr "participants/"
 
-#: models.py:194
+#: models.py:200
 msgid ""
 "Type or function of the membership or task or position of the participant."
 msgstr ""
 
-#: models.py:195
+#: models.py:201
 #, fuzzy
 msgid "Function"
 msgstr "questions/"
 
-#: models.py:196
+#: models.py:202
 msgid "Active"
 msgstr ""
 
-#: models.py:199
+#: models.py:205
 msgid "Membership"
 msgstr ""
 
-#: models.py:200
+#: models.py:206
 msgid "Memberships"
 msgstr ""
 
-#: models.py:204
+#: models.py:210
 msgid ""
 "Person, group or institution acting in some way in the context of the "
 "project or being affected by the process or the result of the project "
 "execution."
 msgstr ""
 
-#: models.py:205 models.py:267 models.py:511 models.py:678 views.py:124
+#: models.py:211 models.py:273 models.py:519 models.py:686 views.py:124
 #: templates/dialogs/comment.html:40
 msgid "Name"
 msgstr ""
 
-#: models.py:206
+#: models.py:212
 msgid ""
 "Type for sorting, only for groups/institutions, necessary for participant to "
 "be visible on site"
 msgstr ""
 
-#: models.py:210
+#: models.py:216
 msgid ""
 "The participant belongs to another participant (often an institution or "
 "group), leave blank if participant itself is institution/group."
 msgstr ""
 
-#: models.py:211 templates/info_box/participant_detail.html:15
+#: models.py:217 templates/info_box/participant_detail.html:15
 msgid "Belongs to"
 msgstr ""
 
-#: models.py:213
+#: models.py:219
 msgid ""
 "Role/tasks as well as interests/goals of the participant regarding the "
 "project."
 msgstr ""
 
-#: models.py:214 models.py:274 models.py:344 models.py:411 models.py:495
-#: models.py:535 models.py:744
+#: models.py:220 models.py:280 models.py:350 models.py:419 models.py:503
+#: models.py:543 models.py:752
 #, fuzzy
 msgid "Description"
 msgstr "questions/"
 
-#: models.py:238 models.py:241 urls.py:55 urls.py:56 urls.py:57 urls.py:58
+#: models.py:244 models.py:247 urls.py:55 urls.py:56 urls.py:57 urls.py:58
 #: urls.py:59 templates/base.html:68 templates/comments.html:27
 #: templates/participant.html:9
 msgid "participants_url"
 msgstr "participants/"
 
-#: models.py:261 templates/comments.html:28 templates/participant.html:10
+#: models.py:267 templates/comments.html:28 templates/participant.html:10
 #, fuzzy
 msgid "Participant"
 msgstr "participants/"
 
-#: models.py:266
+#: models.py:272
 msgid "Name of the topic"
 msgstr ""
 
-#: models.py:270
+#: models.py:276
 msgid ""
 "If you select another project part here, you'll make this a sub project part."
 msgstr ""
 
-#: models.py:271
+#: models.py:277
 msgid "Main Topic"
 msgstr ""
 
-#: models.py:273
+#: models.py:279
 msgid "Website (if existant)."
 msgstr ""
 
-#: models.py:304 urls.py:35 urls.py:36 urls.py:37 urls.py:38 urls.py:39
+#: models.py:310 urls.py:35 urls.py:36 urls.py:37 urls.py:38 urls.py:39
 #: templates/base.html:65 templates/index.html:24
 msgid "project_parts_url"
 msgstr "topics/"
 
-#: models.py:318 templates/comments.html:16 templates/project_part.html:10
+#: models.py:324 templates/comments.html:16 templates/project_part.html:10
 #, fuzzy
 msgid "Project Part"
 msgstr "/project_parts/"
 
-#: models.py:319
+#: models.py:325
 #, fuzzy
 msgid "Project Parts"
 msgstr "/project_parts/"
 
-#: models.py:324
+#: models.py:330
 msgid "Meeting / Gathering / Session"
 msgstr ""
 
-#: models.py:325
+#: models.py:331
 msgid "New Information / Decision / Statement"
 msgstr ""
 
-#: models.py:326
+#: models.py:332
 msgid "Project Progress / Execution / Milestone"
 msgstr ""
 
-#: models.py:327
+#: models.py:333
 msgid "Action by Civil Society"
 msgstr ""
 
-#: models.py:328
+#: models.py:334
 msgid "Unplanned Event"
 msgstr ""
 
-#: models.py:329
+#: models.py:335
 msgid "Miscellaneous"
 msgstr ""
 
-#: models.py:340 models.py:934
+#: models.py:346 models.py:942
 msgid "Type"
 msgstr ""
 
-#: models.py:341
+#: models.py:347
 msgid "Event being of central importance for the project."
 msgstr ""
 
-#: models.py:342
+#: models.py:348
 #, fuzzy
 msgid "Main Event"
 msgstr "/events/"
 
-#: models.py:375 models.py:381 urls.py:50 urls.py:51 urls.py:52 urls.py:53
+#: models.py:352
+msgid "Date is not exact (e.g. if a source refers only to the month)"
+msgstr ""
+
+#: models.py:353
+msgid "Date not exact"
+msgstr ""
+
+#: models.py:383 models.py:389 urls.py:50 urls.py:51 urls.py:52 urls.py:53
 #: urls.py:54 templates/base.html:69 templates/comments.html:33
 #: templates/event.html:9 templates/index.html:77
 msgid "events_url"
 msgstr "events/"
 
-#: models.py:402 models.py:926 templates/comments.html:34
+#: models.py:410 models.py:934 templates/comments.html:34
 #: templates/event.html:10
 msgid "Event"
 msgstr ""
 
-#: models.py:407
+#: models.py:415
 msgid ""
 "Title/short version of the question. Use prefix (e.g. 1,2,3 or A1,A2,A3) to "
 "sort questions"
 msgstr ""
 
-#: models.py:409
+#: models.py:417
 msgid "Answered"
 msgstr ""
 
-#: models.py:410
+#: models.py:418
 msgid "Description/long version of the question."
 msgstr ""
 
-#: models.py:415
+#: models.py:423
 msgid "Optional explanations or remarks around the question"
 msgstr ""
 
-#: models.py:416 templates/question.html:31
+#: models.py:424 templates/question.html:31
 msgid "Explanations"
 msgstr ""
 
-#: models.py:417
+#: models.py:425
 msgid "Optional answer (summary) of a question"
 msgstr ""
 
-#: models.py:418 templates/question.html:42
+#: models.py:426 templates/question.html:42
 msgid "Answer"
 msgstr ""
 
-#: models.py:450 models.py:453 urls.py:41 urls.py:42 urls.py:43 urls.py:44
+#: models.py:458 models.py:461 urls.py:41 urls.py:42 urls.py:43 urls.py:44
 #: urls.py:45 urls.py:46 urls.py:47 urls.py:48 urls.py:49
 #: templates/base.html:67 templates/comments.html:21 templates/index.html:110
 #: templates/question.html:9 templates/research_requests.html:15
 msgid "questions_url"
 msgstr "questions/"
 
-#: models.py:488
+#: models.py:496
 msgid "Group of project goals being determined at a certain point in time."
 msgstr ""
 
-#: models.py:490
+#: models.py:498
 msgid ""
 "The topic the group of goals belong to. Will be shown as common goal group "
 "if none selected."
 msgstr ""
 
-#: models.py:491
+#: models.py:499
 #, fuzzy
 msgid "Topic"
 msgstr "/events/"
 
-#: models.py:492
+#: models.py:500
 msgid "Associated event"
 msgstr ""
 
-#: models.py:493
+#: models.py:501
 msgid "Is current"
 msgstr ""
 
-#: models.py:494
+#: models.py:502
 msgid "Description of the group of project goals."
 msgstr ""
 
-#: models.py:505
+#: models.py:513
 msgid "Goal"
 msgstr ""
 
-#: models.py:510
+#: models.py:518
 msgid "Name, e.g. 'Project budget', 'Target date', 'Noise level'"
 msgstr ""
 
-#: models.py:513
+#: models.py:521
 msgid ""
 "Single performance figure describing the project goal, e.g. '1.000.000 "
 "Euro', 'January 25th 2020', ..."
 msgstr ""
 
-#: models.py:514
+#: models.py:522
 msgid "Performance figure"
 msgstr ""
 
-#: models.py:523
+#: models.py:531
 msgid "Goal Value"
 msgstr ""
 
-#: models.py:524
+#: models.py:532
 msgid "Goal Values"
 msgstr ""
 
-#: models.py:528
+#: models.py:536
 #, fuzzy
 msgid "Title of the document"
 msgstr "/events/"
 
-#: models.py:530
+#: models.py:538
 msgid "Document in pdf format"
 msgstr ""
 
-#: models.py:531 models.py:599 templates/comments.html:40
+#: models.py:539 models.py:607 templates/comments.html:40
 #: templates/document.html:10 templates/info_box/documents.html:15
 #, fuzzy
 msgid "Document"
 msgstr "/events/"
 
-#: models.py:532
+#: models.py:540
 #, fuzzy
 msgid "Date of creation of the document"
 msgstr "/events/"
 
-#: models.py:534
+#: models.py:542
 msgid "Short description."
 msgstr ""
 
-#: models.py:572 models.py:575 urls.py:61 urls.py:62 urls.py:63 urls.py:64
+#: models.py:580 models.py:583 urls.py:61 urls.py:62 urls.py:63 urls.py:64
 #: urls.py:65 templates/base.html:70 templates/comments.html:39
 #: templates/document.html:9 templates/index.html:36
 msgid "documents_url"
 msgstr "documents/"
 
-#: models.py:664 models.py:729 models.py:831
+#: models.py:672 models.py:737 models.py:839
 #: templates/dialogs/comment.html:105 templates/dialogs/more_cos_input.html:85
 #: templates/dialogs/research_request.html:97
 #: templates/info_box/comments.html:39
@@ -693,133 +701,133 @@ msgstr "documents/"
 msgid "Page"
 msgstr ""
 
-#: models.py:665 templates/info_box/documents.html:22
+#: models.py:673 templates/info_box/documents.html:22
 msgid "Pages"
 msgstr ""
 
-#: models.py:677
+#: models.py:685
 msgid ""
 "Documents containing these search tags are shown on the detail page of this "
 "object."
 msgstr ""
 
-#: models.py:690
+#: models.py:698
 #, fuzzy
 msgid "Search Tag"
 msgstr "search/"
 
-#: models.py:691
+#: models.py:699
 #, fuzzy
 msgid "Search Tags"
 msgstr "search/"
 
-#: models.py:721 models.py:823
+#: models.py:729 models.py:831
 msgid ""
 "Type of the related object (ProjectPart, Question, Participant, Event, "
 "Document)."
 msgstr ""
 
-#: models.py:724 models.py:826
+#: models.py:732 models.py:834
 msgid ""
 "The id of the related object (you can find the id of an object in the url of "
 "the object change form in the admin)."
 msgstr ""
 
-#: models.py:728 models.py:830
+#: models.py:736 models.py:838
 msgid "Page number in document"
 msgstr ""
 
-#: models.py:735 models.py:837
+#: models.py:743 models.py:845
 #, fuzzy
 msgid "Relation with Project Element"
 msgstr "/events/"
 
-#: models.py:736 models.py:838
+#: models.py:744 models.py:846
 #, fuzzy
 msgid "Relations with Project Elements"
 msgstr "/events/"
 
-#: models.py:740 templates/dialogs/research_request.html:46
+#: models.py:748 templates/dialogs/research_request.html:46
 msgid ""
 "Give a unique number to your request so that people can reference it (e.g. "
 "\"R1\", \"R2\",...)"
 msgstr ""
 
-#: models.py:741
+#: models.py:749
 msgid "Nr"
 msgstr ""
 
-#: models.py:743
+#: models.py:751
 msgid "Open"
 msgstr ""
 
-#: models.py:755
+#: models.py:763
 msgid "Request on the following contents"
 msgstr ""
 
-#: models.py:787 models.py:816 models.py:928 templates/base.html:112
+#: models.py:795 models.py:824 models.py:936 templates/base.html:112
 #: templates/dialogs/research_request.html:17
 msgid "Research Request"
 msgstr ""
 
-#: models.py:817 templates/question.html:56
+#: models.py:825 templates/question.html:56
 #: templates/layout_elements/research_requests_header.html:13
 msgid "Research Requests"
 msgstr ""
 
-#: models.py:841
+#: models.py:849
 msgid "Username"
 msgstr ""
 
-#: models.py:842
+#: models.py:850
 msgid "Email"
 msgstr ""
 
-#: models.py:843
+#: models.py:851
 msgid "User has given permission to get in contact via email."
 msgstr ""
 
-#: models.py:844
+#: models.py:852
 msgid "Feedback allowed"
 msgstr ""
 
-#: models.py:845
+#: models.py:853
 #, fuzzy
 msgid "Comment text"
 msgstr "/events/"
 
-#: models.py:846
+#: models.py:854
 msgid "Comment is only shown on page if published is true."
 msgstr ""
 
-#: models.py:847
+#: models.py:855
 msgid "Published"
 msgstr ""
 
-#: models.py:848
+#: models.py:856
 msgid "Published by"
 msgstr ""
 
-#: models.py:849
+#: models.py:857
 msgid "Activation hash"
 msgstr ""
 
-#: models.py:860
+#: models.py:868
 #, fuzzy
 msgid "Commented contents"
 msgstr "/events/"
 
-#: models.py:886
+#: models.py:894
 #, fuzzy, python-format
 msgid "Comment on %s on"
 msgstr "/events/"
 
-#: models.py:917 models.py:929 views.py:131 templates/base.html:142
+#: models.py:925 models.py:937 views.py:131 templates/base.html:142
 #, fuzzy
 msgid "Comment"
 msgstr "/events/"
 
-#: models.py:918 templates/comments.html:4 templates/document.html:85
+#: models.py:926 templates/comments.html:4 templates/document.html:85
 #: templates/event.html:47 templates/participant.html:64
 #: templates/project_part.html:69 templates/question.html:77
 #: templates/research_requests.html:4
@@ -828,34 +836,34 @@ msgstr "/events/"
 msgid "Comments"
 msgstr "/events/"
 
-#: models.py:923
+#: models.py:931
 msgid "New Subject Area"
 msgstr ""
 
-#: models.py:924
+#: models.py:932
 #, fuzzy
 msgid "New Question"
 msgstr "questions/"
 
-#: models.py:925
+#: models.py:933
 #, fuzzy
 msgid "New Participant"
 msgstr "participants/"
 
-#: models.py:927
+#: models.py:935
 #, fuzzy
 msgid "New Document"
 msgstr "/events/"
 
-#: models.py:935
+#: models.py:943
 msgid "Info"
 msgstr ""
 
-#: models.py:943
+#: models.py:951
 msgid "Activity Log Entry"
 msgstr ""
 
-#: models.py:944
+#: models.py:952
 msgid "Activity Log"
 msgstr ""
 
@@ -863,7 +871,7 @@ msgstr ""
 msgid "goals_url"
 msgstr "goals/"
 
-#: urls.py:66 views.py:462
+#: urls.py:66 views.py:466
 msgid "search_url"
 msgstr "search/"
 
@@ -909,46 +917,46 @@ msgstr "/events/"
 msgid "NEW_COMMENT_EMAIL_MESSAGE_ACTIVATION"
 msgstr "Activate comment for publication on website:"
 
-#: views.py:695
+#: views.py:699
 msgid "The following comment was activated for publication on website:"
 msgstr ""
 
-#: views.py:699
+#: views.py:703
 #, python-format
 msgid "Your comment on %s was published"
 msgstr ""
 
-#: views.py:701
+#: views.py:705
 #, fuzzy, python-format
 msgid "Hello %s,"
 msgstr "Hallo %(username),"
 
-#: views.py:702
+#: views.py:706
 msgid "thank you for your comment, which you can find under the following url:"
 msgstr ""
 
-#: views.py:705
+#: views.py:709
 msgid "You can use the url above to tell others about your comment."
 msgstr ""
 
-#: views.py:707
+#: views.py:711
 msgid "If you want to share your comment on a social network,"
 msgstr ""
 
-#: views.py:708
+#: views.py:712
 msgid "you can use the following share urls as a staring point:"
 msgstr ""
 
-#: views.py:715
+#: views.py:719
 msgid "Greetings"
 msgstr ""
 
-#: views.py:716
+#: views.py:720
 #, python-format
 msgid "Your %s team"
 msgstr ""
 
-#: views.py:726
+#: views.py:730
 #, fuzzy, python-format
 msgid "Comment already activated by user %s."
 msgstr "/events/"
@@ -1155,7 +1163,7 @@ msgstr "/events/"
 msgid "Associated Participants"
 msgstr "participants/"
 
-#: templates/participants.html:40
+#: templates/participants.html:68
 #, fuzzy
 msgid "New Participants"
 msgstr "participants/"
