@@ -52,7 +52,7 @@
   <div class="pull-right" style="margin-bottom:9px;">
   <select name="mpp_events_select" id="mpp_events_select">
   {% for mpp in main_project_part_list %}
-    <option value="{{ mpp.id }}"{% if forloop.first %} selected{% endif %}>{{ mpp }}</option>
+    <option value="{{ mpp.id }}"{% if forloop.first %} selected{% endif %}>{{ mpp }} ({{ mpp.get_events|length }})</option>
   {% endfor %}
   </select>
   </div>
