@@ -262,6 +262,11 @@ class Participant(models.Model):
         else:
             return 'icon-group'
     
+    def get_simple_entry(self):
+        html  = '<i class="' + self.get_icon_class() + '"></i> '
+        html += '<a href="' + self.get_absolute_url() +'">' + self.name + '</a>'
+        return html 
+    
     class Meta:
         ordering = ['type', 'order', 'name',]
         verbose_name = _('Participant')
@@ -321,6 +326,11 @@ class ProjectPart(models.Model):
             return 'icon-cog'
         else:
             return 'icon-cogs'
+    
+    def get_simple_entry(self):
+        html  = '<i class="' + self.get_icon_class() + '"></i> '
+        html += '<a href="' + self.get_absolute_url() +'">' + self.name + '</a>'
+        return html
     
     class Meta:
         ordering = ['order', 'name',]
@@ -410,6 +420,11 @@ class Event(models.Model):
     @classmethod
     def get_icon_class(cls):
         return 'icon-time'
+    
+    def get_simple_entry(self):
+        html  = '<i class="' + self.get_icon_class() + '"></i> '
+        html += '<a href="' + self.get_absolute_url() +'">' + self.title + '</a>'
+        return html
     
     def as_list(self):
         return [self,]

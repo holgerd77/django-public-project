@@ -1,12 +1,12 @@
 {% load i18n %}
   
   {% if sh_title %}
-  {% with sh_title=sh_title sh_ec_id="d_1" sh_icon="icon-inbox" sh_url_title="" %}
+  {% with sh_title=sh_title sh_ec_id=sh_ec_id sh_icon="icon-inbox" sh_url_title="" %}
     {% include "layout_elements/section_header.html" %}
   {% endwith %}
   {% endif %}
   
-  <div class="section" id="d_1">
+  <div class="section" id="{{ sh_ec_id }}">
     <div class="info_box">
       <div class="info_box_content">
       {% if document_list %}

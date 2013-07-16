@@ -2,7 +2,7 @@
 
 
 <div class="info_box" style="background-color: #f9f9f9;padding: 15px;margin-bottom:20px;">
-      <div class="info_box_content">
+      <div class="info_box_content" style="font-size:12px;">
         {% if qd_with_header %}
         <p style="font-size:16px;font-weight: bold;margin-bottom:15px;">
           <i class="icon-question-sign"></i> &nbsp;
@@ -13,21 +13,42 @@
         <p style="margin: 0 0 10px;background-color:#ebebeb;padding:15px;">
           {{ question.description|linebreaksbr }}
         </p>
+          
+        {% with project_part_list=question.project_parts.all size="small" %}
+        {% if project_part_list %}
+          <p style="margin: 0 0 5px 0;">
+          {% if project_part_list|length <= 4 %}
+              {% for pp in project_part_list %}{{ pp.get_simple_entry|safe }}<br>{% endfor %}
+          {% else %}
+            {% include "layout_elements/menu_project_parts.html" %}
+          {% endif %}
+          </p>
+        {% endif %}
+        {% endwith %}
         
-        <p>
-        {% with size="small" %}
-          {% include "layout_elements/menu_documents.html" %}
+        {% with participant_list=question.participants.all %}
+        {% if participant_list %}
+          <p style="margin: 0 0 5px 0;">
+          {% if participant_list|length <= 4 %}
+              {% for p in participant_list %}{{ p.get_simple_entry|safe }}<br>{% endfor %}
+          {% else %}
+            {% include "layout_elements/menu_participants.html" %}
+          {% endif %}
+          </p>
+        {% endif %}
         {% endwith %}
-        {% with project_part_list=question.project_parts.all size="small" %}  
-          {% include "layout_elements/menu_project_parts.html" %}
-        {% endwith %}
-        {% with participant_list=question.participants.all size="small" %}  
-          {% include "layout_elements/menu_participants.html" %}
-        {% endwith %}
+        
         {% with event_list=question.events.all size="small" %}  
-          {% include "layout_elements/menu_events.html" %}
+        {% if event_list %}
+          <p style="margin: 0 0 5px 0;">
+          {% if event_list|length <= 4 %}
+              {% for e in event_list %}{{ e.get_simple_entry|safe }}<br>{% endfor %}
+          {% else %}
+            {% include "layout_elements/menu_events.html" %}
+          {% endif %}
+          </p>
+        {% endif %}
         {% endwith %}
-        </p>
         
       </div>
     </div>
