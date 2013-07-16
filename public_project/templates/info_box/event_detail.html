@@ -15,7 +15,6 @@
         </p>
         {{ event.description|safe }}
         <div style="clear:both;height:1px;"></div>
-        <p>
         
         {% with project_part_list=event.project_parts.all size="small" %}
         {% if project_part_list %}
@@ -40,8 +39,6 @@
           </p>
         {% endif %}
         {% endwith %}
-        
-        </p>
 
       </div>
     </div>
