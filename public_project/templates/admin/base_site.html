@@ -57,6 +57,8 @@
     height: 350,
     plugins: "link image code",
     menubar: false,
+    valid_elements: "p[style],br,strong/b,em,blockquote,ul,ol,li,a[href|target|style],img[src|alt|width|height|style],h3[style],h4[style]",
+    //valid_elements : "a[href|target=_blank,style],strong/b,div[align,style],br",
     toolbar: "undo redo | bold italic | alignleft aligncenter alignright alignjustify blockquote | bullist numlist | link image | code",
     image_list: [
     {% for image in uploaded_images_list %}
