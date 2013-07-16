@@ -29,7 +29,7 @@
         {% endif %}
         {% endwith %}
         
-        {% with participant_list=event.participants.all %}
+        {% with participant_list=event.participants.all size="small" %}
         {% if participant_list %}
           <p style="margin: 0 0 5px 0;">
           {% if participant_list|length <= 4 %}
