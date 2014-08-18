@@ -2,6 +2,30 @@
 Users
 =====
 
+.. image:: images/screenshot_main_page.png 
+
+Features
+--------
+DPP provides an **admin interface** for entering/updating:
+
+* A general project description
+* The goals of a project
+* The project structure
+* A timeline of events
+* The various actors and stakehoders
+* Project documents
+* Questions around the project
+* Web sources wherever possible
+
+On the **frontend side**, it lays out the project data in a clearly represented way, 
+interlinks between the different project elements and provides:
+
+* A dashboard on the main page bringing together the most relevant, current information
+* Universal search
+* A document viewer for pdfs
+* User comments interlinking different project elements
+* Relevant tag clouds for document content
+* Supported languages: English (beta), German
 
 Introduction and Basic Concepts
 ===============================
