@@ -126,35 +126,36 @@ Release Notes
 
 **Changes in version 0.6-beta** (no date yet!)
 
-* ATTENTION! UPDATE WILL REMOVE THE WEB_SOURCES OF YOUR PROJECT OBJECT (ADMIN).
-  PLEASE BACKUP THEM AND ADD THEM TO APPROPRIATE SITECATEGORY OBJECTS AFTER UPDATE!
 * Replaced structuring of participants by participant type with a more flexible concept allowing the
-  grouping participants to other participants (groups) by a new attribute ``belongs_to`` in admin and
+  **grouping participants to other participants (groups)** by a new attribute ``belongs_to`` in admin and
   a new many-to-many model ``Membership``. A membership is described by a ``function`` and a boolean field
   ``active``, connecting two participants. This is replacing the former concept ``responsible_participants``
   and ``former_responsible_participants``, which could be found in ``Project`` tabe. Both fields were
   removed. 
   DB changes: migrations ``0002_auto__del_field_participant_type.py``, ``0003_auto.py``, ``0008_auto_add_membership.py``.
-* Project Parts (Topics) can now also be hierarchically structured, every project part object now has a new
+* **Project Parts (Topics) can now also be hierarchically structured**, every project part object now has a new
   attribute ``main_project_part`` allowing to connect project parts to a main topic. This new structure
   (as well as the participant grouping) will be visible in the frontend as well.
   DB changes: migration ``0004_auto_add_field_projectpart_main_project_part.py``
-* New ``SiteCategory`` model for providing intro texts to the website categories ("Home", "Questions", ...)
-  and connecting documents and websites with categories, replacing the old model ``Project`` (deleted).
+* **New SiteCategory model** for providing intro texts to the website categories ("Home", "Questions", ...)
+  and connecting documents and websites with categories, **replacing the old model Project (deleted)**.
   DB changes: migrations ``0005_auto_add_sitecategory.py``, ``0006_intro_texts_to_site_category.py``
   (for automatic data transfer from ``Project`` instance) and ``0007_auto_del_project.py``.
-* NOTE TO SELF: ADD INFORMATION ABOUT THE REST OF THE MIGRATIONS, IF POSSIBLE ENHANCE MIGRATION ABOVE,
-  LOOK THROUGH COMMITS
-* Direct integration of TinyMCE as HTML editor for descriptive admin fields by overwriting Django admin
+* **Direct integration of TinyMCE as HTML editor** for descriptive admin fields by overwriting Django admin
   templates. ``public_project`` app in ``INSTALLED_APPS`` in ``settings.py`` now has to be placed before (!)
-  Django admin app, new ``TEMPLATE_CONTEXT_PROCESSOR`` (also has to be added to ``settings.py``) for loading
-  images in Admin to be selectable by TinyMCE editor
-  
+  Django admin app, new ``TEMPLATE_CONTEXT_PROCESSOR`` ``public_project.context_processors.uploaded_images_list``
+  (also has to be added to ``settings.py``) for loading images in Admin to be selectable by TinyMCE editor
+* Introduction of new **main category for goals**
+* Restructuring, icons and help text for admin, more information on overview pages
+* Translation of admin interface
+* Many **layout improvements**, overhaul of overview all overview pages with expand/collapse boxes and displaying
+  number of sub elements
+* New **universal search box**
 
 **Changes in version 0.5-alpha (Renaming Release)** (2013-05-27)
 
 This release is just for renaming the Django app. Due to the development of the software it came up,
-that the focus of the software is broader than actually thought, so the name ``django-public-project`` (DPP)
+that the focus of the software is broader than actually thought, so the name ``django-big-projects-watch`` (BPW)
 is misleading and the software was renamed to ``django-public-project`` (DPP). This comes with a lot of
 hassle and won't happen again in the lifecyle of this software, but I felt, that in this early stage
 of the software, it is the only chance to make such a step.
