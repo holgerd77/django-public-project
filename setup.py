@@ -20,7 +20,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'Django>=1.5,<1.6',
-        'pdfminer',
+        'pdfminer==20110515',
         'Pillow',
         'django-tastypie>=0.9,<1.0',
         'South',

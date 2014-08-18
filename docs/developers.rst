@@ -124,7 +124,7 @@ Then translate the missing identifier strings and compile the message files with
 Release Notes
 =============
 
-**Changes in version 0.6-alpha** (no date yet!)
+**Changes in version 0.6-beta** (no date yet!)
 
 * ATTENTION! UPDATE WILL REMOVE THE WEB_SOURCES OF YOUR PROJECT OBJECT (ADMIN).
   PLEASE BACKUP THEM AND ADD THEM TO APPROPRIATE SITECATEGORY OBJECTS AFTER UPDATE!

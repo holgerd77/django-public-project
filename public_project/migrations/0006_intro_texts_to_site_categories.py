@@ -14,46 +14,62 @@ class Migration(DataMigration):
         
         if orm.Project.objects.count() > 0:
             p = orm.Project.objects.all()[0]
+            print "Content from old model Project will be distributed to new SiteCategory models..."
             web_sources = orm.WebSource.objects.filter(content_type__name='project')
-            print "These web sources from your  Project object couldn't be transfered."
-            print "Please add them manually to your category objects."
-            for ws in web_sources:
-                print ws.title + " " + str(ws.order) + " " + str(ws.url) + " " + str(ws.date)
             sc = orm.SiteCategory(
                 category = 'home',
                 intro_text = p.desc_project,
             )
             sc.save()
+            print "Added new SiteCatory %s object with id %d." % ("home", sc.id) 
             sc = orm.SiteCategory(
                 category = 'project_parts',
                 intro_text = p.desc_project_parts,
             )
             sc.save()
+            print "Added new SiteCatory %s object with id %d." % ("project_parts", sc.id)
             sc = orm.SiteCategory(
                 category = 'goals',
                 intro_text = p.desc_goal_groups,
             )
             sc.save()
+            print "Added new SiteCatory %s object with id %d." % ("goals", sc.id)
             sc = orm.SiteCategory(
                 category = 'questions',
                 intro_text = p.desc_questions,
             )
             sc.save()
+            print "Added new SiteCatory %s object with id %d." % ("questions", sc.id)
             sc = orm.SiteCategory(
                 category = 'participants',
                 intro_text = p.desc_participants,
             )
             sc.save()
+            print "Added new SiteCatory %s object with id %d." % ("participants", sc.id)
             sc = orm.SiteCategory(
                 category = 'events',
                 intro_text = p.desc_process,
             )
             sc.save()
+            print "Added new SiteCatory %s object with id %d." % ("events", sc.id)
             sc = orm.SiteCategory(
                 category = 'documents',
                 intro_text = p.desc_documents,
             )
             sc.save()
+            print "Added new SiteCatory %s object with id %d." % ("documents", sc.id)
+            print "Please assign web sources from Project object to a fitting SiteCategory object"
+            print "by providing the id of the SiteCateogry object."
+            site_categories = orm.SiteCategory.objects.all()
+            for ws in web_sources:
+                print ws.title + " " + str(ws.order) + " " + str(ws.url) + " " + str(ws.date)
+                id = input("Assign to SiteCategory object with id:")
+                for sc in site_categories:
+                    if sc.id == id:
+                        ws.content_object = sc
+                        ws.save()
+                
+            
 
     def backwards(self, orm):
         "Write your backwards methods here."
