@@ -4,8 +4,8 @@ import os
 
 setup(
     name='django-public-project',
-    version='0.5.0',
-    description='CMS for building an information website around big projects',
+    version='0.6.0',
+    description='CMS for building an information website around public projects',
     author='Holger Drewes',
     author_email='Holger.Drewes@googlemail.com',
     url='https://github.com/holgerd77/django-public-project',
@@ -21,12 +21,12 @@ setup(
     install_requires=[
         'Django>=1.5,<1.6',
         'pdfminer',
-        'PIL',
+        'Pillow',
         'django-tastypie>=0.9,<1.0',
         'South',
     ],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
