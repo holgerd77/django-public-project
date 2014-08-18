@@ -66,7 +66,14 @@ class Migration(DataMigration):
                 id = input("Assign to SiteCategory object with id:")
                 for sc in site_categories:
                     if sc.id == int(id):
-                        ws.content_object = sc
+                        ws = orm.WebSource(
+                            title = ws.title,
+                            date = ws.date,
+                            url = ws.url,
+                            order = ws.order,
+                            content_type = orm['contenttypes.ContentType'].objects.get(app_label="public_project", model="sitecategory"),
+                            object_id = sc.id,
+                        )
                         ws.save()
                 
             

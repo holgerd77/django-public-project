@@ -2,7 +2,10 @@
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
+from django.contrib.contenttypes.management import update_contenttypes
+from django.contrib.auth.management import create_permissions
 from django.db import models
+from django.db.models import get_app, get_models
 
 
 class Migration(SchemaMigration):
@@ -26,6 +29,10 @@ class Migration(SchemaMigration):
             ('document', models.ForeignKey(orm[u'public_project.document'], null=False))
         ))
         db.create_unique(m2m_table_name, ['sitecategory_id', 'document_id'])
+        
+        #Update content types (necessary for migration 0006)
+        update_contenttypes(get_app('public_project'), get_models())
+        create_permissions(get_app('public_project'), get_models(), 0)
 
 
     def backwards(self, orm):
