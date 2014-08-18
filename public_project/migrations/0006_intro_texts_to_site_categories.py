@@ -65,7 +65,7 @@ class Migration(DataMigration):
                 print ws.title + " " + str(ws.order) + " " + str(ws.url) + " " + str(ws.date)
                 id = input("Assign to SiteCategory object with id:")
                 for sc in site_categories:
-                    if sc.id == id:
+                    if sc.id == int(id):
                         ws.content_object = sc
                         ws.save()
                 
