@@ -82,11 +82,41 @@ class ExampleData:
         )
         self.pp1.save()
         
+        self.pp1_spp1 = ProjectPart(
+            name = 'Stone Acquisition',
+            description = 'Management of stone acquistion.',
+        )
+        self.pp1_spp1.save()
+        self.pp1_spp1.main_project_parts.add(self.pp1)
+        self.pp1_spp1.save()
+        
+        self.pp1_spp2 = ProjectPart(
+            name = 'Quality management',
+            description = 'Observation of stone format, material density.',
+        )
+        self.pp1_spp2.save()
+        self.pp1_spp2.main_project_parts.add(self.pp1)
+        self.pp1_spp2.save()
+        
+        self.pp1_spp3 = ProjectPart(
+            name = 'Stone Deposition',
+            description = 'Deposition of stones.',
+        )
+        self.pp1_spp3.save()
+        self.pp1_spp3.main_project_parts.add(self.pp1)
+        self.pp1_spp3.save()
+        
         self.pp2 = ProjectPart(
             name = 'Certification',
             description = 'Certificates for stone measures, stone hole size compliance and stone authenticity.'
         )
         self.pp2.save()
+        
+        self.pp3 = ProjectPart(
+            name = 'Construction Work',
+            description = 'Construction work taking place, floor management.'
+        )
+        self.pp3.save()
         #pp2.main_project_parts = [pp1,],
         #pp2.save()
     
@@ -104,6 +134,12 @@ class ExampleData:
             order = 200,
         )
         self.pt2.save()
+        
+        self.pt3 = ParticipantType(
+            name = 'Working Groups',
+            order = 300,
+        )
+        self.pt3.save()
         
         self.p1 = Participant(
             name             = 'Tower of Babel International',
@@ -126,11 +162,37 @@ class ExampleData:
         )
         self.p3.save()
         
+        self.st2 = SearchTag(
+            name = 'DOFSTON',
+            content_object = self.p3,
+        )
+        self.st2.save()
+        
+        self.st3 = SearchTag(
+            name = 'Department of Stone Measurement',
+            content_object = self.p3,
+        )
+        self.st3.save()
+        
         self.p4 = Participant(
             name = 'Mrs. Smith',
             description = 'Very geeky lady from the DOFSTON, but kind of nice.',
         )
         self.p4.save()
+        
+        self.p5 = Participant(
+            name = 'Working Group "The Working Wombats"',
+            description = 'Working group.',
+            type = self.pt3,
+        )
+        self.p5.save()
+        
+        self.p6 = Participant(
+            name = 'Working Group "The Building Bees"',
+            description = 'Another working group.',
+            type = self.pt3,
+        )
+        self.p6.save()
         
         self.ws1 = WebSource(
             title = 'Official Website',
@@ -184,9 +246,22 @@ class ExampleData:
         self.e1.participants = [self.p2,]
         self.e1.save()
         
+        self.e3 = Event(
+            title = 'Mrs. Smith made a telephone call',
+            event_type = 'IN',
+            description = "On this day Mrs. Smith made a telephone call. Normally this woman never answers " + \
+                          "the phone so this is obviously quite dubious.",
+            date = '2005-03-22',
+        )
+        self.e3.save()
+        self.e3.participants = [self.p4,]
+        self.e3.project_parts = [self.pp1,]
+        self.e3.save()
+        
         self.e2 = Event(
             title = 'No DOFSTON certificate, rebuilding of 500 first floors',
             event_type = 'IN',
+            important   = True,
             description = "The Department of Stone Measurements doesn't give us the certificate for the first " + \
                           "500 floors due to irregularities in stone dimensions, we are forced to rebuild.",
             date = '2005-07-15',
@@ -195,12 +270,41 @@ class ExampleData:
         self.e2.participants = [self.p2, self.p3,]
         self.e2.project_parts = [self.pp2,]
         self.e2.save()
+        
+        
+        self.e4 = Event(
+            title = 'Milestone of first 2.500 floors reached, big party',
+            event_type = 'IN',
+            important   = True,
+            description = "The first 2.500 floors are finally build. Everything looks very solid and stable. " + \
+                          "There was a big party on floor 1.745.",
+            date = '2007-04-18',
+        )
+        self.e4.save()
+        self.e4.participants = [self.p2, self.p3,]
+        self.e4.project_parts = [self.pp3,]
+        self.e4.save()
+        
+        self.e5 = Event(
+            title = 'Language problems, rebuilding floors 1.000-2.5000',
+            event_type = 'IN',
+            important   = True,
+            description = 'Some misunderstandings  between "The Working Wombats" and "The Building Bees" ' + \
+                          'led to floor 2.500 (luxury apartments) beeing build on ' + \
+                          'floor 1.000. Rebuilding of floors 1.000-2.500 necessary.',
+            date = '2007-06-24',
+        )
+        self.e5.save()
+        self.e5.participants = [self.p5, self.p6,]
+        self.e5.project_parts = [self.pp3,]
+        self.e5.save()
     
     
     def create_project_goals(self):
         self.pgg1 = ProjectGoalGroup(
             title       = 'Initial Goals',
             event       = self.e1,
+            is_current = False,
             description = 'We want to build a really high tower, the sky is the limit, at lease 5000 floors tall',
         )
         self.pgg1.save()
@@ -220,7 +324,54 @@ class ExampleData:
             order = 200,
         )
         self.pgg1_pg2.save()
-    
+        
+        self.pgg2 = ProjectGoalGroup(
+            title       = 'Adopted Goals',
+            event       = self.e2,
+            is_current = False,
+            description = 'Adoption of goal after stone dimension certificate issues.',
+        )
+        self.pgg2.save()
+
+        self.pgg2_pg1 = ProjectGoal(
+            project_goal_group = self.pgg2,
+            name  = 'Floors',
+            performance_figure = '4000+',
+            order = 100,
+        )
+        self.pgg2_pg1.save()
+        
+        self.pgg2_pg2 = ProjectGoal(
+            project_goal_group = self.pgg2,
+            name = 'Beautiness',
+            performance_figure = 'rather beautiful',
+            order = 200,
+        )
+        self.pgg2_pg2.save()
+        
+        self.pgg3 = ProjectGoalGroup(
+            title       = 'Adopted Goals (2nd time)',
+            event       = self.e5,
+            is_current = True,
+            description = 'Adoption of goal after language issues.',
+        )
+        self.pgg3.save()
+
+        self.pgg3_pg1 = ProjectGoal(
+            project_goal_group = self.pgg3,
+            name  = 'Floors',
+            performance_figure = '3000+',
+            order = 100,
+        )
+        self.pgg3_pg1.save()
+        
+        self.pgg3_pg2 = ProjectGoal(
+            project_goal_group = self.pgg3,
+            name = 'Beautiness',
+            performance_figure = 'not too shabby',
+            order = 200,
+        )
+        self.pgg3_pg2.save()
     
     def create_documents(self):
         self.d1 = Document(
@@ -234,7 +385,22 @@ class ExampleData:
         self.d1.project_parts = [self.pp2,]
         self.d1.participants = [self.p3,]
         self.d1.save()
-
+        
+        self.d2 = Document(
+            title =       'Transcript of telephone call Mrs. Smith',
+            date =        '2005-03-25',
+            description = 'Mrs. Smith made a phone call. Transcript was sent by anonymous caller.', 
+        )
+        pdf = File(open('ep_setup_app/docs/phonecall_mrs_smith.pdf', 'rw'))
+        self.d2.document = pdf
+        self.d2.save()
+        self.d2.project_parts = [self.pp1,]
+        self.d2.events = [self.e3,]
+        self.d2.participants = [self.p4,]
+        self.d2.save()
+    
+    
+    def create_questions(self):
         self.q1 = Question(
             title = 'Available stone deposits in the area',
             description = 'Due to the necessary rebuilding of the first 500 floors we are in need of stone ' + \
@@ -254,31 +420,6 @@ class ExampleData:
         self.q2.project_parts = [self.pp2,]
         self.q2.participants = [self.p4,]
         self.q2.save()
-        
-        self.e3 = Event(
-            title = 'Mrs. Smith made a telephone call',
-            event_type = 'IN',
-            description = "On this day Mrs. Smith made a telephone call. Normally this woman never answers " + \
-                          "the phone so this is obviously quite dubious.",
-            date = '2005-03-22',
-        )
-        self.e3.save()
-        self.e3.participants = [self.p4,]
-        self.e3.project_parts = [self.pp1,]
-        self.e3.save()
-        
-        self.d2 = Document(
-            title =       'Transcript of telephone call Mrs. Smith',
-            date =        '2005-03-25',
-            description = 'Mrs. Smith made a phone call. Transcript was sent by anonymous caller.', 
-        )
-        pdf = File(open('ep_setup_app/docs/phonecall_mrs_smith.pdf', 'rw'))
-        self.d2.document = pdf
-        self.d2.save()
-        self.d2.project_parts = [self.pp1,]
-        self.d2.events = [self.e3,]
-        self.d2.participants = [self.p4,]
-        self.d2.save()
     
     
     def create(self):
@@ -289,3 +430,4 @@ class ExampleData:
         self.create_events()
         self.create_project_goals()
         self.create_documents()
+        self.create_questions()
