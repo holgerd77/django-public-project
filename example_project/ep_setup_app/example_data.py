@@ -7,6 +7,16 @@ from public_project.models import *
 
 class ExampleData:
 
+    def create_images(self):
+        self.i1 = Image(
+            title = 'Bruegel - Tower of Babel',
+            attribution = 'Pieter Bruegel the Elder - The Tower of Babel (Vienna) - PD Licence, Wikimedia Commons',
+            attribution_url = 'http://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project.jpg', 
+        )
+        img = File(open('ep_setup_app/imgs/Bruegel_Tower_of_Babel.jpg', 'rw'))
+        self.i1.image = img
+        self.i1.save()
+
     def create_site_config(self):
         self.site = Site.objects.all()[0]
         self.site.domain = '127.0.0.1:8075'
@@ -16,8 +26,11 @@ class ExampleData:
         self.sc = SiteConfig(
             title          = 'Tower of Babel',
             short_title    = 'Tower of Babel',
-            intro_text     = "<p><b>We will finish. Someday.</b></p>This project is taking a litte longer than expected. Having some language problems " + \
-                             " as well. But we will finish. We promise.",
+            intro_text     = '<p><strong>We will finish. Someday.</strong></p>\r\n<p>' + \
+                             '<img src="../../../../media/images/Bruegel_Tower_of_Babel_1.jpg" ' + \
+                             'alt="Bruegel - Tower of Babel" /></p>\r\n<p>This project is taking a litte ' + \
+                             'longer than expected. Having some language problems as well. ' + \
+                             'But we will finish. We promise.</p>',
             about_text     = "This project website is run by Tower of Babel International, London, " + \
                              "but is not at all associated with the Babel Tower Coorporation, Antalya or the " + \
                              "Babel Tower Group, Jamaica.",
@@ -423,6 +436,7 @@ class ExampleData:
     
     
     def create(self):
+        self.create_images()
         self.create_site_config()
         self.create_site_categories()
         self.create_project_parts()

@@ -136,8 +136,9 @@ The urlpatterns for your project are completely coming from DPP, with an excepti
 which should be adoptable for security reasons. So your minimal urls.py should look similar to this,
 importing the main url patterns from ``public_project.urls``::
 
+    from django.conf import settings
     from django.conf.urls import patterns, include, url
-
+    
     from django.contrib import admin
     admin.autodiscover()
     
@@ -146,6 +147,13 @@ importing the main url patterns from ``public_project.urls``::
     urlpatterns += patterns('',
         url(r'^admin/', include(admin.site.urls)),
     )
+
+    # Necessary for being able to use image upload in DEBUG mode
+    if settings.DEBUG:
+        urlpatterns += patterns('',
+            (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT})
+        )
 
 Now you should be able to enter both the admin view and an emtpy front-end dashboard site 
 when you start a dev server. The site itself is not yet ready for prime time at this moment.
