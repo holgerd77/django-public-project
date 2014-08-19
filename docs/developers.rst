@@ -151,6 +151,7 @@ Release Notes
 * Many **layout improvements**, overhaul of overview all overview pages with expand/collapse boxes and displaying
   number of sub elements
 * New **universal search box**
+* Completely revamped documentation
 
 **Changes in version 0.5-alpha (Renaming Release)** (2013-05-27)
 

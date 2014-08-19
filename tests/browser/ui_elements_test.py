@@ -64,7 +64,7 @@ class UIElementsTest(LiveServerTestCase):
         self.selenium.find_element_by_xpath('//button[@id="bg_expand"]').click()
         time.sleep(SELENIUM_SLEEP_TIME)
         try:
-            self.selenium.find_element_by_xpath('//div[@id="ec_box_1" and contains(@style,"display: block")]')
+            self.selenium.find_element_by_xpath('//div[@id="pt_ec_box_1" and contains(@style,"display: block")]')
         except NoSuchElementException:
             self.assertTrue(0, "Expand/collapse UI element not working!")
     

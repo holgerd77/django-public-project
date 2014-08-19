@@ -181,14 +181,6 @@ add them to the ``settings.py`` file::
         "public_project.context_processors.uploaded_images_list",
     )
 
-The next one is a restriction from ``Grappelli``, used for the admin interface: make sure, ``AppDirectoriesFinder``
-is first within your ``STATICFILES_FINDERS``::
-
-    STATICFILES_FINDERS = (
-        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-        'django.contrib.staticfiles.finders.FileSystemFinder',
-    )
-
 Language Selection
 ------------------
 At the moment DPP supports the following languages:
