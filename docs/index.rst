@@ -24,6 +24,7 @@ Manual
    :maxdepth: 2
    
    getting_started
+   tutorial
    developers
 
 

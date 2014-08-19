@@ -147,10 +147,10 @@ importing the main url patterns from ``public_project.urls``::
         url(r'^admin/', include(admin.site.urls)),
     )
 
-Now you should be able to enter the admin view when you start a dev server. The site itself is not yet
-ready for prime time at this moment.
+Now you should be able to enter both the admin view and an emtpy front-end dashboard site 
+when you start a dev server. The site itself is not yet ready for prime time at this moment.
 
-.. image:: images/screenshot_admin_overview.png
+.. image:: images/screenshots/v06/example_project_admin.png
 
 
 Basic settings
@@ -221,13 +221,6 @@ the MSIE and another browser.
 .. note:: The conversion process of a pdf document takes place in the background and may take a while
           for large documents.
 
-
-Admin Interface and initial project data
------------------------------------------
-The admin interface should now be accessible through the path you defined in your ``urls.py``.
-Start by adding/changing some configuration parameters and introductory texts in the SiteConfig
-and SiteCategory menu.
-
 Site Domain
 -----------
 For urls in comment emails to work properly, you have to edit the ``Site`` object, which Django
@@ -258,4 +251,18 @@ When the API is working there will be an extra link in the footer leading to to 
 
 .. note:: The API is still in an experimental/early stage, many features are missing and
           usage params will probably change in the future.
+
+
+Where to go from here?
+----------------------
+The main set-up process for your project website is now finished and the site is ready to be filled
+with some data.
+
+**Congratulations! :-)** 
+
+Start by adding/changing some configuration parameters and introductory texts in the SiteConfig
+and SiteCategory menu.
+
+In the next chapter you will learn how to use the admin interface and how to build up an information
+website around your project.
 
