@@ -1,5 +1,5 @@
 # Django settings for example_project project.
-import os
+import os, sys
 from django.conf import global_settings
 
 
@@ -9,6 +9,8 @@ TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+# Adding root folder to sys path to have public_project app included
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "../.."))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
