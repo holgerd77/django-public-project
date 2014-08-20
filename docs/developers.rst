@@ -4,24 +4,6 @@
 Developers
 ==========
 
-
-Backing up the Database
-=======================
-
-When backing up the database of a DPP installation, it works best to use the ``-n`` option for
-saving content type and some ohter references as natural keys and at the same time ommit backing up the 
-contenttypes app and the auth.Permission model. This makes it easier to recover an installation
-after DB data loss, since Django is automatically generating the content type objects (used in DPP
-for comments) which could lead to problems with IDs if not using natural keys::
-
-    python manage.py dumpdata -n -e contenttypes -e auth.Permission > dpp_dump.json
-
-When loading the data from a generated dump it is important to comment out the ``post_save`` signals
-from the ``models.py`` file, otherwise an error will occur::
-
-    python manage.py loaddata dpp_dump.json
-
-
 Running the Test Suite
 ======================
 

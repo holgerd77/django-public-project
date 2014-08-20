@@ -425,15 +425,33 @@ class ExampleData:
         self.q1.save()
         
         self.q2 = Question(
-            title = 'What is the role of Mrs. Smith?',
-            description = 'Mrs. Smith plays a really dubious role in all this. ' + \
-                          'We want to figure out what her role really is and why she did what she did.',
+            title = 'Investigation of misunderstandings',
+            description = 'Misunderstandings between two working groups lead to the necessity to rebuild ' + \
+                          'more than 1.000 floors. We want to figure out more about the circumstances.',
         )
         self.q2.save()
-        self.q2.project_parts = [self.pp2,]
-        self.q2.participants = [self.p4,]
+        self.q2.project_parts = [self.pp3,]
+        self.q2.participants = [self.p5, self.p6,]
+        self.q2.events = [self.e5,]
         self.q2.save()
     
+    
+    def create_research_requests(self):
+        self.rr1 = ResearchRequest(
+            nr = 'R1',
+            title = 'PDF downloads of worker group protocols',
+            open = True,
+            description = 'Until the end of 2006 the protocols of worker group meetings were publicly ' + \
+                          'available on worker group websites but were taken down afterwards. If someone ' + \
+                          'still has PDF downloads of the protocols please get in touch with us.',
+        )
+        self.rr1.save()
+        
+        self.rrr1 = ResearchRequestRelation(
+            research_request = self.rr1,
+            content_object = self.q2,
+        )
+        self.rrr1.save()
     
     def create(self):
         self.create_images()
@@ -445,3 +463,4 @@ class ExampleData:
         self.create_project_goals()
         self.create_documents()
         self.create_questions()
+        self.create_research_requests()

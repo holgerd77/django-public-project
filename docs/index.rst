@@ -25,6 +25,7 @@ Manual
    
    getting_started
    tutorial
+   administration
    developers
 
 
