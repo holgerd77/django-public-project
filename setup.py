@@ -1,7 +1,7 @@
 from setuptools import setup
 
 import os
-
+ 
 setup(
     name='django-public-project',
     version='0.6.0',
