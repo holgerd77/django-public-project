@@ -106,7 +106,7 @@ Then translate the missing identifier strings and compile the message files with
 Release Notes
 =============
 
-**Changes in version 0.6-beta** (no date yet!)
+**Changes in version 0.6-beta** (2014-08-21)
 
 * Replaced structuring of participants by participant type with a more flexible concept allowing the
   **grouping participants to other participants (groups)** by a new attribute ``belongs_to`` in admin and

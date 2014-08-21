@@ -50,7 +50,7 @@ a short ``intro text`` for the main page and some other generic texts like conta
 
 .. image:: images/screenshots/v06/admin_website_configuration_form.png
 
-Enter/edit some text and have a look, how your text is formatted at the front-end website.
+Enter/edit some text and have a look how your text is formatted on the front-end website.
 
 Website Categories
 ------------------
@@ -139,7 +139,7 @@ a ``name``, choosing one of the ``participant types`` you entered before and pro
 
 .. image:: images/screenshots/v06/admin_participant_form.png
 
-Participants can be organized very flexibly and can both both institutions (companies, organizations and so on)
+Participants can be organized very flexibly and can both be institutions (companies, organizations and so on)
 or human beings. A particiant can have a ``membership`` relation to another participant. Normally this will mean
 a person beeing a ``Member`` of a company or organization beeing deployed there, but this can also be 
 a ministry being part of a government, depending on what you want to describe.
@@ -162,7 +162,7 @@ The following ``Search Tags`` for the "Department of Stone Measurement" particip
 
 For particpants it makes sense use synonyms or abbreviations of a participants name as a ``Search Tag``,
 for a topic tags describing the content of the topic might be useful. Just experiment with this a bit.
-Note that you can't see the effects of a search tag before you entered some documents.
+Note that you can't see the effects of a search tag before you added some documents.
 
 Events
 ======
@@ -216,7 +216,7 @@ Side Quest: Managing User Comments
 ==================================
 
 Beside from working out the structures and interdependencies of a project yourself you can rely on interested
-users visiting your side and encourage them to participate with their knowledge. For that ``DPP`` comes
+users visiting your site and encourage them to participate with their knowledge. For that ``DPP`` comes
 with an advanced commenting system.
 
 Users are able to comment on every item of the project and connect their comment with additional participants,
@@ -241,7 +241,7 @@ Goals
 .. image:: images/screenshots/v06/example_goals_overview_detail.png
 
 For entering/editing a goal go to the ``Goals`` menu in the ``admin``. Each ``Goal`` is a set of ``performance
-figures`` which where agreed on in some point in time and may be still current or not. 
+figures`` which were agreed on in some point in time and may be still current or not. 
 
 In our example ``performance figures`` are "floors" and "beautiness", but this can be anything you like
 and you want to focus on depending on your project, like "costs", "capacity" and so on.

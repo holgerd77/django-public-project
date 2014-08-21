@@ -12,7 +12,7 @@ users in the ``User`` menu in the admin:
 
 .. image:: images/screenshots/v06/admin_user_form.png
 
-If you leave the ``Receive new comment emails`` checkbox the user will get emails on new comments
+If you leave the ``Receive new comment emails`` checkbox checked the user will get emails on new comments
 and will be able to publish them. After clicking ``save`` be sure to activate ``Staff status`` on the
 following ``Change User`` form so that the user is able to log into the ``admin``.
 

@@ -268,8 +268,8 @@ with some data.
 
 **Congratulations! :-)** 
 
-Start by adding/changing some configuration parameters and introductory texts in the SiteConfig
-and SiteCategory menu.
+Start by adding/changing some configuration parameters and introductory texts in the ``SiteConfig``
+and ``SiteCategory`` menu.
 
 In the next chapter you will learn how to use the admin interface and how to build up an information
 website around your project.
