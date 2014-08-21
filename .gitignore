@@ -18,4 +18,4 @@ example_project/static/
 tests/media/
 tests/static/
 dist
-django_big_projects_watch.egg-info
+django_public_project.egg-info/
