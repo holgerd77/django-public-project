@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import include, patterns, url
 from django.utils.translation import ugettext as _
+from django.views.generic import TemplateView
 from tastypie.api import Api
 from public_project.api import *
 from public_project.feeds import *
@@ -22,6 +23,7 @@ if getattr(settings, 'DPP_PUBLIC_API', False):
     urlpatterns = patterns('',
         url(r'^api/$', 'public_project.views.api'),
         (r'^api/', include(v01_api.urls)),
+        url(r'^dev/logo/$', TemplateView.as_view(template_name="dev/logo.html")),
     )
 
 urlpatterns += patterns('',
