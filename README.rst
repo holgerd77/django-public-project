@@ -23,3 +23,11 @@ Documentation
 Read more about DPP in the ReadTheDocs documentation:
 
 * http://django-public-project.readthedocs.org/
+
+Getting Help/Contact
+====================
+
+
+Feel free to get in touch on Twitter or follow for updates on new releases:
+
+* https://twitter.com/DjPublicProject
