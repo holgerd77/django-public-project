@@ -5,5 +5,10 @@ include requirements.txt
 recursive-include public_project/locale *
 recursive-include public_project/static *
 recursive-include public_project/templates *
+
+include example_project/*.sh
+recursive-include example_project/ep_setup_app/docs  *
+recursive-include example_project/ep_setup_app/imgs  *
+
 recursive-include docs *
 prune docs/_build
