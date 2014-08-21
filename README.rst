@@ -26,7 +26,9 @@ Read more about DPP in the ReadTheDocs documentation:
 
 Getting Help/Contact
 ====================
+There is a Google Group you can use for asking questions or giving suggestions:
 
+* http://groups.google.com/d/forum/django-public-project
 
 Feel free to get in touch on Twitter or follow for updates on new releases:
 
