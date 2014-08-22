@@ -13,7 +13,7 @@ class ExampleData:
             attribution = 'Pieter Bruegel the Elder - The Tower of Babel (Vienna) - PD Licence, Wikimedia Commons',
             attribution_url = 'http://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project.jpg', 
         )
-        img = File(open('ep_setup_app/imgs/Bruegel_Tower_of_Babel.jpg', 'rw'))
+        img = File(open('ep_setup_app/imgs/Bruegel_Tower_of_Babel_1.jpg', 'rw'))
         self.i1.image = img
         self.i1.save()
 
