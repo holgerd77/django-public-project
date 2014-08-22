@@ -22,6 +22,12 @@ MANAGERS = ADMINS
 DPP_IE_COMPATIBLE_PDF_VIEWER = False
 DPP_PUBLIC_API = True
 
+EMAIL_FROM = 'admin@yourmailaccount.com.example'
+EMAIL_HOST = 'smtp.yoursmtpserver.com.example'
+EMAIL_HOST_USER =  'YOURUSERNAME'
+EMAIL_HOST_PASSWORD = 'YOURSECUREPASSWORD'
+#Dummy backend, everything email related disabled for example project
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 DATABASES = {
     'default': {
