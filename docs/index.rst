@@ -17,6 +17,10 @@ North Rhine-Westphalia for their projects
 `BERwatch (german) <https://ber.piratenfraktion-berlin.de/>`_ and 
 `BLBwatch (german) <https://blb.piratenfraktion-nrw.de/>`_.
 
+.. note:: There is now a **Live-Demo installation** to test the software:
+          `Website <http://demo.django-public-project.org>`_ | 
+          `Admin <http://demo.django-public-project.org/admin/>`_ (User: ``dpp`` / ``demo``)
+
 Manual
 ------
 
