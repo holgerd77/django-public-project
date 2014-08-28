@@ -7,7 +7,7 @@ django-public-project - Documentation
 =====================================
 
 **Django Public Project (DPP)** is an open source software 
-(`GitHub <https://github.com/holgerd77/django-public-project>`_)
+(`Website <http://django-public-project.org>`_ | `GitHub <https://github.com/holgerd77/django-public-project>`_)
 for **creating/maintaining an information website 
 around a public project** (building of a new opera house or an airport, long-term preparations for a big sports event,...)
 bringing transparency to the roles of stakeholders, important events as well as the overall project progress.
