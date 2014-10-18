@@ -205,7 +205,7 @@ def project_parts(request):
     only_mpps = len(main_project_parts) == ProjectPart.objects.count()
     middle = int(math.floor(float(len(main_project_parts))/float(2)))
     
-    if only_mpps and len(main_project_parts) >= 4:
+    if len(main_project_parts) >= 4:
         middle -= 2
     
     context = RequestContext(request, {
@@ -267,7 +267,7 @@ def questions(request):
     for mpp in all_mpps:
         if mpp.get_num_questions() > 0:
             main_project_parts.append(mpp)
-    middle = int(math.ceil(float(len(main_project_parts))/float(2)))
+    middle = int(math.floor(float(len(main_project_parts))/float(2)))
     
     research_request_list = ResearchRequest.objects.all()
     
@@ -425,7 +425,10 @@ def documents(request):
     for mpp in all_mpps:
         if mpp.get_num_documents() > 0:
             main_project_parts.append(mpp)
-    middle = int(math.ceil(float(len(main_project_parts))/float(2)))
+    middle = int(math.floor(float(len(main_project_parts))/float(2)))
+    
+    if len(main_project_parts) >= 4:
+        middle -= 2
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
