@@ -108,7 +108,7 @@ Release Notes
 
 **Changes in version 0.6.1-beta** (2014-10-18)
 
-* Layout improvements for sites not using all customizations from new DDS version
+* Layout improvements for sites not using all customizations from new DPP version
 
 **Changes in version 0.6-beta** (2014-08-21)
 
