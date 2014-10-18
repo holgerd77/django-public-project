@@ -202,11 +202,16 @@ def project_parts(request):
     site_category = SiteCategory.objects.get_or_create(category='project_parts')[0]
     
     main_project_parts = ProjectPart.objects.annotate(count=Count('main_project_parts')).filter(count=0)
-    middle = int(math.ceil(float(len(main_project_parts))/float(2)))
+    only_mpps = len(main_project_parts) == ProjectPart.objects.count()
+    middle = int(math.floor(float(len(main_project_parts))/float(2)))
+    
+    if only_mpps and len(main_project_parts) >= 4:
+        middle -= 2
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
         'site_category': site_category,
+        'only_mpps': only_mpps,
         'main_project_part_list_left': main_project_parts[0:middle],
         'main_project_part_list_right': main_project_parts[middle:],
     })

@@ -26,7 +26,9 @@
     {% include "info_box/site_category_detail.html" %}
   </div>
   
-  {% include "layout_elements/ec_button_group.html" %}
+  {% if not only_mpps %}
+    {% include "layout_elements/ec_button_group.html" %}
+  {% endif %}
   
   {% for mpp in main_project_part_list_left %}
     {% with ec_title=mpp ec_id=mpp.id ec_url=mpp.get_absolute_url ec_count=mpp.projectpart_set.count project_part_list=mpp.projectpart_set.all with_detail_page_url="yes" ec_box_include="info_box/project_parts.html" %}
