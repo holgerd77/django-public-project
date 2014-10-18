@@ -249,7 +249,7 @@ def goals(request):
     for main_pp in all_main_project_parts:
         if main_pp.projectgoalgroup_set.count() > 0:
             main_project_parts.append(main_pp)
-    middle = int(math.ceil(float(len(main_project_parts))/float(2)))
+    middle = int(math.floor(float(len(main_project_parts))/float(2)))
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
@@ -314,16 +314,13 @@ def participants(request):
     site_category = SiteCategory.objects.get_or_create(category='participants')[0]
     participant_types = ParticipantType.objects.all()
     middle = int(math.ceil(float(len(participant_types))/float(2)))
-    #groups = Participant.objects.annotate(count=Count('belongs_to')).filter(count=0)
-    #middle = int(math.ceil(float(len(groups))/float(2)))
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
         'site_category': site_category,
+        'common_participant_list': Participant.objects.filter(belongs_to=None).filter(type=None),
         'participant_type_list_left': participant_types[0:middle],
         'participant_type_list_right': participant_types[middle:],
-        #'group_list_left': groups[0:middle],
-        #'group_list_right': groups[middle:],
     })
     return render_to_response('participants.html', context)
 

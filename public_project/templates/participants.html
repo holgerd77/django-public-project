@@ -28,6 +28,37 @@
     {% include "layout_elements/ec_button_group.html" %}
   {% endwith %}
   
+  {% if common_participant_list|length > 0 %} 
+  
+    <div style="background-color:#f3f3f3;padding:10px;margin-top:15px;margin-bottom: 5px;">
+      <div>
+      <div style="float:right;">
+        <a href="#" style="font-size:18px;color:#000;text-decoration: none;" id="pt_ec_btn_common">
+          {{ common_participant_list|length }} <i class="icon-circle-arrow-down"></i></a>
+      </div>
+      <h4 style="margin:0px;font-weight: normal;">{% trans "Common" %}</h4>
+      </div>
+    </div>
+    
+    <div style="display: none;" id="pt_ec_box_common" class="ec_box_main">
+    {% for group in common_participant_list %}
+      {% with ec_title=group ec_id=group.id ec_url=group.get_absolute_url ec_count=group.to_memberships.count membership_list=group.to_memberships.all ec_box_include="info_box/memberships.html" %}
+        {% include "layout_elements/ec_header_box.html" %}
+      {% endwith %}
+    {% endfor %}
+    </div>
+    
+    <script>
+      $(document).ready(function() {    
+        $('#pt_ec_btn_common').click(function(e) {
+          e.preventDefault();
+          $('#pt_ec_box_common').toggle();
+        });  
+      });
+    </script>
+
+  {% endif %}
+  
   {% for pt in participant_type_list_left %}
   
     <div style="background-color:#f3f3f3;padding:10px;margin-top:15px;margin-bottom: 5px;">

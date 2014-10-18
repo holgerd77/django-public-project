@@ -106,6 +106,10 @@ Then translate the missing identifier strings and compile the message files with
 Release Notes
 =============
 
+**Changes in version 0.6.1-beta** (2014-10-18)
+
+* Layout improvements for sites not using all customizations from new DDS version
+
 **Changes in version 0.6-beta** (2014-08-21)
 
 * Replaced structuring of participants by participant type with a more flexible concept allowing the
