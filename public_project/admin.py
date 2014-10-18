@@ -192,7 +192,7 @@ class CustomParticipantAdminForm(forms.ModelForm):
 class ParticipantAdmin(admin.ModelAdmin):
     actions = ['delete_selected',]
     list_display = ('name', 'type', 'order', 'is_group', 'in_num_groups', 'num_search_tags', 'num_web_sources',)
-    list_editable = ('order',)
+    list_editable = ('type', 'order',)
     list_filter = ('type', IsGroupFilter, GroupMembersFilter,)
     search_fields = ['name', 'description',]
     save_on_top = True

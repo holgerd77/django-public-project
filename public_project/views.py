@@ -313,7 +313,10 @@ def question(request, question_id):
 def participants(request):
     site_category = SiteCategory.objects.get_or_create(category='participants')[0]
     participant_types = ParticipantType.objects.all()
-    middle = int(math.ceil(float(len(participant_types))/float(2)))
+    middle = int(math.floor(float(len(participant_types))/float(2)))
+    
+    if len(participant_types) >= 4:
+        middle -= 2
     
     context = RequestContext(request, {
         'site_config': SiteConfig.objects.get_site_config(request),
