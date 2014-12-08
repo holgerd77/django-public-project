@@ -496,6 +496,8 @@ def xhr_universal_search(request):
         
         mimetype = 'application/javascript'
         return HttpResponse(json.dumps(res), mimetype)
+    else:
+        raise Http404
 
 
 def xhr_document_tags(request):
@@ -541,6 +543,8 @@ def xhr_document_tags(request):
         
         mimetype = 'application/javascript'
         return HttpResponse(data, mimetype)
+    else:
+        raise Http404
 
 
 def document(request, document_id):

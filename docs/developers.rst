@@ -105,6 +105,13 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
+**Changes in version 0.6.3-beta** (2014-12-08)
+
+* Fixed some unnecessary error messages caused by crawlers
+
+**Changes in version 0.6.2-beta** (2014-10-18)
+
+* Minor layout and admin improvements
 
 **Changes in version 0.6.1-beta** (2014-10-18)
 
