@@ -1,4 +1,4 @@
-import time
+import time, unittest
 from django.test import LiveServerTestCase
 from django.utils.translation import ugettext as _  
 from selenium.common.exceptions import NoSuchElementException
@@ -25,6 +25,7 @@ class UIElementsTest(LiveServerTestCase):
         cls.selenium.quit()
         super(UIElementsTest, cls).tearDownClass()
     
+    @unittest.skip("Test is unreliable - eventually some timing issue - no solution found yet")
     def test_search_box_autocomplete_universal_search(self):
         PF.create_base_project()
         self.selenium.get('%s/' % (self.live_server_url))
