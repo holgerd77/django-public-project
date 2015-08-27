@@ -107,6 +107,12 @@ Release Notes
 =============
 **Changes in version 0.7.0-beta** (Not yet released)
 
+* Switched to ``Django`` internal migrations. South dependencies are removed, but you can still find the
+  old ``South`` migration files in the ``south_migrations`` folder. To make sure the update runs smoothly
+  make sure you have applied all ``South`` migrations from the previous releases. In doubt update to the
+  latest ``0.6`` release first and run the ``migrate`` command within ``South`` context before switching
+  to this release. Then from ``0.7`` run the ``migrate`` command with the ``--fake-initial`` flag: ``python manage.py migrate --fake-initial``.
+
 
 * Updated requirements of various library dependencies
 

@@ -1,673 +1,445 @@
 # -*- coding: utf-8 -*-
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
-
-
-class Migration(SchemaMigration):
-
-    def forwards(self, orm):
-        # Adding model 'UserProfile'
-        db.create_table(u'public_project_userprofile', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('receive_new_comment_emails', self.gf('django.db.models.fields.BooleanField')(default=True)),
-        ))
-        db.send_create_signal(u'public_project', ['UserProfile'])
-
-        # Adding model 'Image'
-        db.create_table(u'public_project_image', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
-            ('attribution_html', self.gf('django.db.models.fields.CharField')(max_length=250)),
-        ))
-        db.send_create_signal(u'public_project', ['Image'])
-
-        # Adding model 'SiteConfig'
-        db.create_table(u'public_project_siteconfig', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(default=u'ProjectWatch', max_length=250)),
-            ('short_title', self.gf('django.db.models.fields.CharField')(default=u'ProjectWatch', max_length=250)),
-            ('title_color', self.gf('django.db.models.fields.CharField')(default='#990000', max_length=7)),
-            ('sub_title', self.gf('django.db.models.fields.CharField')(default=u'Project Website Subtitle', max_length=250)),
-            ('sub_title_color', self.gf('django.db.models.fields.CharField')(default='#444444', max_length=7)),
-            ('intro_text', self.gf('django.db.models.fields.TextField')(default=u'This is a project watch website.')),
-            ('header_image', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.Image'], null=True, blank=True)),
-            ('header_bg_color', self.gf('django.db.models.fields.CharField')(default='#EEEEEE', max_length=7)),
-            ('navi_link_color', self.gf('django.db.models.fields.CharField')(default='#FFFFFF', max_length=7)),
-            ('navi_bg_color', self.gf('django.db.models.fields.CharField')(default='#333333', max_length=7)),
-            ('important_bg_color', self.gf('django.db.models.fields.CharField')(default='#990000', max_length=7)),
-            ('desc_about', self.gf('django.db.models.fields.TextField')()),
-            ('footer_html', self.gf('django.db.models.fields.TextField')(default=u'This text will be shown in the footer of the site.')),
-            ('contact_html', self.gf('django.db.models.fields.TextField')(default=u'This text will be shown on the contact page.')),
-            ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['SiteConfig'])
-
-        # Adding model 'WebSource'
-        db.create_table(u'public_project_websource', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'])),
-            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('order', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
-            ('date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['WebSource'])
-
-        # Adding model 'Participant'
-        db.create_table(u'public_project_participant', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('participant_type', self.gf('django.db.models.fields.CharField')(max_length=2)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['Participant'])
-
-        # Adding model 'Project'
-        db.create_table(u'public_project_project', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('desc_project', self.gf('django.db.models.fields.TextField')()),
-            ('desc_project_parts', self.gf('django.db.models.fields.TextField')()),
-            ('desc_questions', self.gf('django.db.models.fields.TextField')()),
-            ('desc_participants', self.gf('django.db.models.fields.TextField')()),
-            ('desc_goal_groups', self.gf('django.db.models.fields.TextField')()),
-            ('desc_process', self.gf('django.db.models.fields.TextField')()),
-            ('desc_documents', self.gf('django.db.models.fields.TextField')()),
-            ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['Project'])
-
-        # Adding M2M table for field responsible_participants on 'Project'
-        db.create_table(u'public_project_project_responsible_participants', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('project', models.ForeignKey(orm[u'public_project.project'], null=False)),
-            ('participant', models.ForeignKey(orm[u'public_project.participant'], null=False))
-        ))
-        db.create_unique(u'public_project_project_responsible_participants', ['project_id', 'participant_id'])
-
-        # Adding M2M table for field former_responsible_participants on 'Project'
-        db.create_table(u'public_project_project_former_responsible_participants', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('project', models.ForeignKey(orm[u'public_project.project'], null=False)),
-            ('participant', models.ForeignKey(orm[u'public_project.participant'], null=False))
-        ))
-        db.create_unique(u'public_project_project_former_responsible_participants', ['project_id', 'participant_id'])
-
-        # Adding model 'ProjectPart'
-        db.create_table(u'public_project_projectpart', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('order', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['ProjectPart'])
-
-        # Adding model 'Event'
-        db.create_table(u'public_project_event', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('event_type', self.gf('django.db.models.fields.CharField')(max_length=2)),
-            ('important', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('date', self.gf('django.db.models.fields.DateField')()),
-            ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['Event'])
-
-        # Adding M2M table for field participants on 'Event'
-        db.create_table(u'public_project_event_participants', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('event', models.ForeignKey(orm[u'public_project.event'], null=False)),
-            ('participant', models.ForeignKey(orm[u'public_project.participant'], null=False))
-        ))
-        db.create_unique(u'public_project_event_participants', ['event_id', 'participant_id'])
-
-        # Adding M2M table for field project_parts on 'Event'
-        db.create_table(u'public_project_event_project_parts', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('event', models.ForeignKey(orm[u'public_project.event'], null=False)),
-            ('projectpart', models.ForeignKey(orm[u'public_project.projectpart'], null=False))
-        ))
-        db.create_unique(u'public_project_event_project_parts', ['event_id', 'projectpart_id'])
-
-        # Adding model 'Question'
-        db.create_table(u'public_project_question', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('answered', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('explanations', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('answer', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['Question'])
-
-        # Adding M2M table for field project_parts on 'Question'
-        db.create_table(u'public_project_question_project_parts', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('question', models.ForeignKey(orm[u'public_project.question'], null=False)),
-            ('projectpart', models.ForeignKey(orm[u'public_project.projectpart'], null=False))
-        ))
-        db.create_unique(u'public_project_question_project_parts', ['question_id', 'projectpart_id'])
-
-        # Adding M2M table for field participants on 'Question'
-        db.create_table(u'public_project_question_participants', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('question', models.ForeignKey(orm[u'public_project.question'], null=False)),
-            ('participant', models.ForeignKey(orm[u'public_project.participant'], null=False))
-        ))
-        db.create_unique(u'public_project_question_participants', ['question_id', 'participant_id'])
-
-        # Adding M2M table for field events on 'Question'
-        db.create_table(u'public_project_question_events', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('question', models.ForeignKey(orm[u'public_project.question'], null=False)),
-            ('event', models.ForeignKey(orm[u'public_project.event'], null=False))
-        ))
-        db.create_unique(u'public_project_question_events', ['question_id', 'event_id'])
-
-        # Adding M2M table for field documents on 'Question'
-        db.create_table(u'public_project_question_documents', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('question', models.ForeignKey(orm[u'public_project.question'], null=False)),
-            ('document', models.ForeignKey(orm[u'public_project.document'], null=False))
-        ))
-        db.create_unique(u'public_project_question_documents', ['question_id', 'document_id'])
-
-        # Adding model 'ProjectGoalGroup'
-        db.create_table(u'public_project_projectgoalgroup', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('event', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.Event'])),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['ProjectGoalGroup'])
-
-        # Adding model 'ProjectGoal'
-        db.create_table(u'public_project_projectgoal', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('project_goal_group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.ProjectGoalGroup'])),
-            ('performance_figure', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('order', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['ProjectGoal'])
-
-        # Adding model 'Document'
-        db.create_table(u'public_project_document', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('document', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
-            ('date', self.gf('django.db.models.fields.DateField')()),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('comments', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('pdf_images_generated', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['Document'])
-
-        # Adding M2M table for field participants on 'Document'
-        db.create_table(u'public_project_document_participants', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('document', models.ForeignKey(orm[u'public_project.document'], null=False)),
-            ('participant', models.ForeignKey(orm[u'public_project.participant'], null=False))
-        ))
-        db.create_unique(u'public_project_document_participants', ['document_id', 'participant_id'])
-
-        # Adding M2M table for field project_parts on 'Document'
-        db.create_table(u'public_project_document_project_parts', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('document', models.ForeignKey(orm[u'public_project.document'], null=False)),
-            ('projectpart', models.ForeignKey(orm[u'public_project.projectpart'], null=False))
-        ))
-        db.create_unique(u'public_project_document_project_parts', ['document_id', 'projectpart_id'])
-
-        # Adding M2M table for field events on 'Document'
-        db.create_table(u'public_project_document_events', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('document', models.ForeignKey(orm[u'public_project.document'], null=False)),
-            ('event', models.ForeignKey(orm[u'public_project.event'], null=False))
-        ))
-        db.create_unique(u'public_project_document_events', ['document_id', 'event_id'])
-
-        # Adding model 'Page'
-        db.create_table(u'public_project_page', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('document', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.Document'])),
-            ('number', self.gf('django.db.models.fields.IntegerField')()),
-            ('content', self.gf('django.db.models.fields.TextField')(blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['Page'])
-
-        # Adding model 'SearchTag'
-        db.create_table(u'public_project_searchtag', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'])),
-            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('order', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['SearchTag'])
-
-        # Adding model 'SearchTagCacheEntry'
-        db.create_table(u'public_project_searchtagcacheentry', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('tag', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.SearchTag'])),
-            ('document', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.Document'])),
-            ('num_results', self.gf('django.db.models.fields.IntegerField')()),
-        ))
-        db.send_create_signal(u'public_project', ['SearchTagCacheEntry'])
-
-        # Adding model 'ResearchRequestRelation'
-        db.create_table(u'public_project_researchrequestrelation', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('research_request', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.ResearchRequest'])),
-            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'])),
-            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('page', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['ResearchRequestRelation'])
-
-        # Adding model 'ResearchRequest'
-        db.create_table(u'public_project_researchrequest', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('nr', self.gf('django.db.models.fields.CharField')(max_length=8)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('open', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['ResearchRequest'])
-
-        # Adding model 'CommentRelation'
-        db.create_table(u'public_project_commentrelation', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('comment', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['public_project.Comment'])),
-            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'])),
-            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('page', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['CommentRelation'])
-
-        # Adding model 'Comment'
-        db.create_table(u'public_project_comment', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('username', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=250)),
-            ('feedback_allowed', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('comment', self.gf('django.db.models.fields.TextField')()),
-            ('published', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('published_by', self.gf('django.db.models.fields.CharField')(max_length=250, blank=True)),
-            ('activation_hash', self.gf('django.db.models.fields.CharField')(max_length=250, blank=True)),
-            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['Comment'])
-
-        # Adding model 'ActivityLog'
-        db.create_table(u'public_project_activitylog', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('content_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contenttypes.ContentType'])),
-            ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('type', self.gf('django.db.models.fields.CharField')(max_length=2)),
-            ('info', self.gf('django.db.models.fields.CharField')(max_length=250, blank=True)),
-            ('date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'public_project', ['ActivityLog'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'UserProfile'
-        db.delete_table(u'public_project_userprofile')
-
-        # Deleting model 'Image'
-        db.delete_table(u'public_project_image')
-
-        # Deleting model 'SiteConfig'
-        db.delete_table(u'public_project_siteconfig')
-
-        # Deleting model 'WebSource'
-        db.delete_table(u'public_project_websource')
-
-        # Deleting model 'Participant'
-        db.delete_table(u'public_project_participant')
-
-        # Deleting model 'Project'
-        db.delete_table(u'public_project_project')
-
-        # Removing M2M table for field responsible_participants on 'Project'
-        db.delete_table('public_project_project_responsible_participants')
-
-        # Removing M2M table for field former_responsible_participants on 'Project'
-        db.delete_table('public_project_project_former_responsible_participants')
-
-        # Deleting model 'ProjectPart'
-        db.delete_table(u'public_project_projectpart')
-
-        # Deleting model 'Event'
-        db.delete_table(u'public_project_event')
-
-        # Removing M2M table for field participants on 'Event'
-        db.delete_table('public_project_event_participants')
-
-        # Removing M2M table for field project_parts on 'Event'
-        db.delete_table('public_project_event_project_parts')
-
-        # Deleting model 'Question'
-        db.delete_table(u'public_project_question')
-
-        # Removing M2M table for field project_parts on 'Question'
-        db.delete_table('public_project_question_project_parts')
-
-        # Removing M2M table for field participants on 'Question'
-        db.delete_table('public_project_question_participants')
-
-        # Removing M2M table for field events on 'Question'
-        db.delete_table('public_project_question_events')
-
-        # Removing M2M table for field documents on 'Question'
-        db.delete_table('public_project_question_documents')
-
-        # Deleting model 'ProjectGoalGroup'
-        db.delete_table(u'public_project_projectgoalgroup')
-
-        # Deleting model 'ProjectGoal'
-        db.delete_table(u'public_project_projectgoal')
-
-        # Deleting model 'Document'
-        db.delete_table(u'public_project_document')
-
-        # Removing M2M table for field participants on 'Document'
-        db.delete_table('public_project_document_participants')
-
-        # Removing M2M table for field project_parts on 'Document'
-        db.delete_table('public_project_document_project_parts')
-
-        # Removing M2M table for field events on 'Document'
-        db.delete_table('public_project_document_events')
-
-        # Deleting model 'Page'
-        db.delete_table(u'public_project_page')
-
-        # Deleting model 'SearchTag'
-        db.delete_table(u'public_project_searchtag')
-
-        # Deleting model 'SearchTagCacheEntry'
-        db.delete_table(u'public_project_searchtagcacheentry')
-
-        # Deleting model 'ResearchRequestRelation'
-        db.delete_table(u'public_project_researchrequestrelation')
-
-        # Deleting model 'ResearchRequest'
-        db.delete_table(u'public_project_researchrequest')
-
-        # Deleting model 'CommentRelation'
-        db.delete_table(u'public_project_commentrelation')
-
-        # Deleting model 'Comment'
-        db.delete_table(u'public_project_comment')
-
-        # Deleting model 'ActivityLog'
-        db.delete_table(u'public_project_activitylog')
-
-
-    models = {
-        u'auth.group': {
-            'Meta': {'object_name': 'Group'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
-            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
-        },
-        u'auth.permission': {
-            'Meta': {'ordering': "(u'content_type__app_label', u'content_type__model', u'codename')", 'unique_together': "((u'content_type', u'codename'),)", 'object_name': 'Permission'},
-            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        u'auth.user': {
-            'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
-        u'contenttypes.contenttype': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        u'public_project.activitylog': {
-            'Meta': {'ordering': "['-date']", 'object_name': 'ActivityLog'},
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            'date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'info': ('django.db.models.fields.CharField', [], {'max_length': '250', 'blank': 'True'}),
-            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'type': ('django.db.models.fields.CharField', [], {'max_length': '2'})
-        },
-        u'public_project.comment': {
-            'Meta': {'ordering': "['-date_added']", 'object_name': 'Comment'},
-            'activation_hash': ('django.db.models.fields.CharField', [], {'max_length': '250', 'blank': 'True'}),
-            'comment': ('django.db.models.fields.TextField', [], {}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '250'}),
-            'feedback_allowed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'published_by': ('django.db.models.fields.CharField', [], {'max_length': '250', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'public_project.commentrelation': {
-            'Meta': {'object_name': 'CommentRelation'},
-            'comment': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.Comment']"}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'page': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
-        },
-        u'public_project.document': {
-            'Meta': {'ordering': "['-date_added']", 'object_name': 'Document'},
-            'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'date': ('django.db.models.fields.DateField', [], {}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'document': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
-            'events': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_documents'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.Event']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'participants': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_documents'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.Participant']"}),
-            'pdf_images_generated': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'project_parts': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_documents'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.ProjectPart']"}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'public_project.event': {
-            'Meta': {'ordering': "['-date']", 'object_name': 'Event'},
-            'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'date': ('django.db.models.fields.DateField', [], {}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'event_type': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'important': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'participants': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_events'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.Participant']"}),
-            'project_parts': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_events'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.ProjectPart']"}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'public_project.image': {
-            'Meta': {'ordering': "['title']", 'object_name': 'Image'},
-            'attribution_html': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'public_project.page': {
-            'Meta': {'ordering': "['number']", 'object_name': 'Page'},
-            'content': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'document': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.Document']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'number': ('django.db.models.fields.IntegerField', [], {})
-        },
-        u'public_project.participant': {
-            'Meta': {'ordering': "['name']", 'object_name': 'Participant'},
-            'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            'participant_type': ('django.db.models.fields.CharField', [], {'max_length': '2'})
-        },
-        u'public_project.project': {
-            'Meta': {'object_name': 'Project'},
-            'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'desc_documents': ('django.db.models.fields.TextField', [], {}),
-            'desc_goal_groups': ('django.db.models.fields.TextField', [], {}),
-            'desc_participants': ('django.db.models.fields.TextField', [], {}),
-            'desc_process': ('django.db.models.fields.TextField', [], {}),
-            'desc_project': ('django.db.models.fields.TextField', [], {}),
-            'desc_project_parts': ('django.db.models.fields.TextField', [], {}),
-            'desc_questions': ('django.db.models.fields.TextField', [], {}),
-            'former_responsible_participants': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'formerly_responsible_for_project'", 'symmetrical': 'False', 'to': u"orm['public_project.Participant']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            'responsible_participants': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'responsible_for_project'", 'symmetrical': 'False', 'to': u"orm['public_project.Participant']"})
-        },
-        u'public_project.projectgoal': {
-            'Meta': {'ordering': "['order']", 'object_name': 'ProjectGoal'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            'order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'performance_figure': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            'project_goal_group': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.ProjectGoalGroup']"})
-        },
-        u'public_project.projectgoalgroup': {
-            'Meta': {'object_name': 'ProjectGoalGroup'},
-            'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'event': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.Event']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'public_project.projectpart': {
-            'Meta': {'ordering': "['order']", 'object_name': 'ProjectPart'},
-            'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            'order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
-        },
-        u'public_project.question': {
-            'Meta': {'ordering': "['title']", 'object_name': 'Question'},
-            'answer': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'answered': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'documents': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_documents'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.Document']"}),
-            'events': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_questions'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.Event']"}),
-            'explanations': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'participants': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_questions'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.Participant']"}),
-            'project_parts': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_questions'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['public_project.ProjectPart']"}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'public_project.researchrequest': {
-            'Meta': {'ordering': "['-date_added']", 'object_name': 'ResearchRequest'},
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'nr': ('django.db.models.fields.CharField', [], {'max_length': '8'}),
-            'open': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'public_project.researchrequestrelation': {
-            'Meta': {'object_name': 'ResearchRequestRelation'},
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'page': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'research_request': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.ResearchRequest']"})
-        },
-        u'public_project.searchtag': {
-            'Meta': {'ordering': "['order']", 'object_name': 'SearchTag'},
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
-        },
-        u'public_project.searchtagcacheentry': {
-            'Meta': {'ordering': "['-num_results']", 'object_name': 'SearchTagCacheEntry'},
-            'document': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.Document']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'num_results': ('django.db.models.fields.IntegerField', [], {}),
-            'tag': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.SearchTag']"})
-        },
-        u'public_project.siteconfig': {
-            'Meta': {'object_name': 'SiteConfig'},
-            'comments': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'contact_html': ('django.db.models.fields.TextField', [], {'default': "u'This text will be shown on the contact page.'"}),
-            'desc_about': ('django.db.models.fields.TextField', [], {}),
-            'footer_html': ('django.db.models.fields.TextField', [], {'default': "u'This text will be shown in the footer of the site.'"}),
-            'header_bg_color': ('django.db.models.fields.CharField', [], {'default': "'#EEEEEE'", 'max_length': '7'}),
-            'header_image': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['public_project.Image']", 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'important_bg_color': ('django.db.models.fields.CharField', [], {'default': "'#990000'", 'max_length': '7'}),
-            'intro_text': ('django.db.models.fields.TextField', [], {'default': "u'This is a project watch website.'"}),
-            'navi_bg_color': ('django.db.models.fields.CharField', [], {'default': "'#333333'", 'max_length': '7'}),
-            'navi_link_color': ('django.db.models.fields.CharField', [], {'default': "'#FFFFFF'", 'max_length': '7'}),
-            'short_title': ('django.db.models.fields.CharField', [], {'default': "u'ProjectWatch'", 'max_length': '250'}),
-            'sub_title': ('django.db.models.fields.CharField', [], {'default': "u'Project Website Subtitle'", 'max_length': '250'}),
-            'sub_title_color': ('django.db.models.fields.CharField', [], {'default': "'#444444'", 'max_length': '7'}),
-            'title': ('django.db.models.fields.CharField', [], {'default': "u'ProjectWatch'", 'max_length': '250'}),
-            'title_color': ('django.db.models.fields.CharField', [], {'default': "'#990000'", 'max_length': '7'})
-        },
-        u'public_project.userprofile': {
-            'Meta': {'object_name': 'UserProfile'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'receive_new_comment_emails': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
-        },
-        u'public_project.websource': {
-            'Meta': {'ordering': "['order']", 'object_name': 'WebSource'},
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            'date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
-        }
-    }
-
-    complete_apps = ['public_project']
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+from django.conf import settings
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('contenttypes', '0001_initial'),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='ActivityLog',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('object_id', models.PositiveIntegerField()),
+                ('type', models.CharField(max_length=2, verbose_name='Type', choices=[(b'NA', 'New Subject Area'), (b'NQ', 'New Question'), (b'PA', 'New Participant'), (b'NE', 'Event'), (b'ND', 'New Document'), (b'RR', 'Research Request'), (b'NC', 'Comment')])),
+                ('info', models.CharField(max_length=250, verbose_name='Info', blank=True)),
+                ('date', models.DateTimeField(auto_now_add=True, verbose_name='Date')),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+            ],
+            options={
+                'ordering': ['-date'],
+                'verbose_name': 'Activity Log Entry',
+                'verbose_name_plural': 'Activity Log',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Comment',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('username', models.CharField(max_length=250, verbose_name='Username')),
+                ('email', models.EmailField(max_length=250, verbose_name='Email')),
+                ('feedback_allowed', models.BooleanField(default=False, help_text='User has given permission to get in contact via email.', verbose_name='Feedback allowed')),
+                ('comment', models.TextField(verbose_name='Comment text')),
+                ('published', models.BooleanField(default=False, help_text='Comment is only shown on page if published is true.', verbose_name='Published')),
+                ('published_by', models.CharField(max_length=250, verbose_name='Published by', blank=True)),
+                ('activation_hash', models.CharField(max_length=250, verbose_name='Activation hash', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+            ],
+            options={
+                'ordering': ['-date_added'],
+                'verbose_name': 'Comment',
+                'verbose_name_plural': 'Comments',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='CommentRelation',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('object_id', models.PositiveIntegerField(help_text='The id of the related object (you can find the id of an object in the url of the object change form in the admin).')),
+                ('page', models.IntegerField(help_text='Page number in document', null=True, verbose_name='Page', blank=True)),
+                ('comment', models.ForeignKey(to='public_project.Comment')),
+                ('content_type', models.ForeignKey(help_text='Type of the related object (ProjectPart, Question, Participant, Event, Document).', to='contenttypes.ContentType')),
+            ],
+            options={
+                'verbose_name': 'Relation with Project Element',
+                'verbose_name_plural': 'Relations with Project Elements',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Document',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(help_text='Title of the document', max_length=250, verbose_name='Title')),
+                ('document', models.FileField(help_text='Document in pdf format', upload_to=b'documents', verbose_name='Document')),
+                ('date', models.DateField(help_text='Date of creation of the document', verbose_name='Date')),
+                ('description', models.TextField(help_text='Short description.', verbose_name='Description')),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+                ('pdf_images_generated', models.BooleanField(default=False)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+            ],
+            options={
+                'ordering': ['-date_added'],
+                'verbose_name': 'Document',
+                'verbose_name_plural': 'Documents',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Event',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=250, verbose_name='Title')),
+                ('event_type', models.CharField(max_length=2, verbose_name='Type', choices=[(b'ME', 'Meeting / Gathering / Session'), (b'IN', 'New Information / Decision / Statement'), (b'MI', 'Project Progress / Execution / Milestone'), (b'CI', 'Action by Civil Society'), (b'UE', 'Unplanned Event'), (b'SE', 'Miscellaneous')])),
+                ('important', models.BooleanField(help_text='Event being of central importance for the project.', verbose_name='Main Event')),
+                ('description', models.TextField(verbose_name='Description')),
+                ('date', models.DateField(verbose_name='Date')),
+                ('not_exact', models.BooleanField(default=False, help_text='Date is not exact (e.g. if a source refers only to the month)', verbose_name='Date not exact')),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+            ],
+            options={
+                'ordering': ['-date'],
+                'verbose_name': 'Event',
+                'verbose_name_plural': 'Events',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Image',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=250, verbose_name='Title')),
+                ('image', models.ImageField(help_text='400px max width, 200px for images used with floating texts', upload_to=b'images', verbose_name='Image')),
+                ('attribution', models.CharField(help_text="Attribution to the original image source or alternatively something like 'Own image'.", max_length=250, verbose_name='Attribution')),
+                ('attribution_url', models.URLField(help_text='Link to the original image source (if available)', null=True, verbose_name='Attribution URL', blank=True)),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+            ],
+            options={
+                'ordering': ['title'],
+                'verbose_name': 'Image',
+                'verbose_name_plural': 'Images',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Membership',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('function', models.CharField(help_text='Type or function of the membership or task or position of the participant.', max_length=50, null=True, verbose_name='Function', blank=True)),
+                ('active', models.BooleanField(default=True, verbose_name='Active')),
+            ],
+            options={
+                'verbose_name': 'Membership',
+                'verbose_name_plural': 'Memberships',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Page',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('number', models.IntegerField()),
+                ('content', models.TextField(blank=True)),
+                ('document', models.ForeignKey(to='public_project.Document')),
+            ],
+            options={
+                'ordering': ['number'],
+                'verbose_name': 'Page',
+                'verbose_name_plural': 'Pages',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Participant',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(help_text='Person, group or institution acting in some way in the context of the project or being affected by the process or the result of the project execution.', unique=True, max_length=250, verbose_name='Name')),
+                ('order', models.IntegerField(default=500, help_text="Use integer numbers for ordering (e.g. '100', '200', '300').", null=True, verbose_name='Order', blank=True)),
+                ('description', models.TextField(help_text='Role/tasks as well as interests/goals of the participant regarding the project.', verbose_name='Description')),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+                ('belongs_to', models.ManyToManyField(to='public_project.Participant', verbose_name='Belongs to', through='public_project.Membership')),
+            ],
+            options={
+                'ordering': ['type', 'order', 'name'],
+                'verbose_name': 'Participant',
+                'verbose_name_plural': 'Participants',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ParticipantType',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(help_text='Type or category for sorting of participants', max_length=250, verbose_name='Title')),
+                ('order', models.IntegerField(default=100, verbose_name='Order')),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+            ],
+            options={
+                'ordering': ['order'],
+                'verbose_name': 'Type Participants',
+                'verbose_name_plural': 'Types Participants',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ProjectGoal',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(help_text="Name, e.g. 'Project budget', 'Target date', 'Noise level'", max_length=250, verbose_name='Name')),
+                ('performance_figure', models.CharField(help_text="Single performance figure describing the project goal, e.g. '1.000.000 Euro', 'January 25th 2020', ...", max_length=250, verbose_name='Performance figure')),
+                ('order', models.IntegerField(default=100, help_text="Use integer numbers for ordering (e.g. '100', '200', '300').", null=True, verbose_name='Order', blank=True)),
+            ],
+            options={
+                'ordering': ['order'],
+                'verbose_name': 'Goal Value',
+                'verbose_name_plural': 'Goal Values',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ProjectGoalGroup',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(help_text='Group of project goals being determined at a certain point in time.', max_length=250, verbose_name='Title')),
+                ('is_current', models.BooleanField(default=True, verbose_name='Is current')),
+                ('description', models.TextField(help_text='Description of the group of project goals.', verbose_name='Description')),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+                ('event', models.ForeignKey(verbose_name='Associated event', to='public_project.Event')),
+            ],
+            options={
+                'verbose_name': 'Goal',
+                'verbose_name_plural': 'Goals',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ProjectPart',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(help_text='Name of the topic', max_length=250, verbose_name='Name')),
+                ('order', models.IntegerField(default=500, help_text="Use integer numbers for ordering (e.g. '100', '200', '300').", null=True, verbose_name='Order', blank=True)),
+                ('description', models.TextField(help_text='Website (if existant).', verbose_name='Description')),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+                ('main_project_parts', models.ManyToManyField(help_text="If you select another project part here, you'll make this a sub project part.", to='public_project.ProjectPart', null=True, verbose_name='Main Topic', blank=True)),
+            ],
+            options={
+                'ordering': ['order', 'name'],
+                'verbose_name': 'Project Part',
+                'verbose_name_plural': 'Project Parts',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Question',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(help_text='Title/short version of the question. Use prefix (e.g. 1,2,3 or A1,A2,A3) to sort questions', max_length=250, verbose_name='Title')),
+                ('answered', models.BooleanField(verbose_name='Answered')),
+                ('description', models.TextField(help_text='Description/long version of the question.', verbose_name='Description')),
+                ('explanations', models.TextField(help_text='Optional explanations or remarks around the question', verbose_name='Explanations', blank=True)),
+                ('answer', models.TextField(help_text='Optional answer (summary) of a question', verbose_name='Answer', blank=True)),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+                ('documents', models.ManyToManyField(related_name='related_documents', null=True, verbose_name='Documents', to='public_project.Document', blank=True)),
+                ('events', models.ManyToManyField(related_name='related_questions', null=True, verbose_name='Events', to='public_project.Event', blank=True)),
+                ('participants', models.ManyToManyField(related_name='related_questions', null=True, verbose_name='Participants', to='public_project.Participant', blank=True)),
+                ('project_parts', models.ManyToManyField(related_name='related_questions', null=True, verbose_name='Topics', to='public_project.ProjectPart', blank=True)),
+            ],
+            options={
+                'ordering': ['title'],
+                'verbose_name': 'Question',
+                'verbose_name_plural': 'Questions',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ResearchRequest',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('nr', models.CharField(help_text='Give a unique number to your request so that people can reference it (e.g. "R1", "R2",...)', max_length=8, verbose_name='Nr')),
+                ('title', models.CharField(max_length=250, verbose_name='Title')),
+                ('open', models.BooleanField(default=True, verbose_name='Open')),
+                ('description', models.TextField(verbose_name='Description')),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+            ],
+            options={
+                'ordering': ['-date_added'],
+                'verbose_name': 'Research Request',
+                'verbose_name_plural': 'Research Requests',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ResearchRequestRelation',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('object_id', models.PositiveIntegerField(help_text='The id of the related object (you can find the id of an object in the url of the object change form in the admin).')),
+                ('page', models.IntegerField(help_text='Page number in document', null=True, verbose_name='Page', blank=True)),
+                ('content_type', models.ForeignKey(help_text='Type of the related object (ProjectPart, Question, Participant, Event, Document).', to='contenttypes.ContentType')),
+                ('research_request', models.ForeignKey(to='public_project.ResearchRequest')),
+            ],
+            options={
+                'verbose_name': 'Relation with Project Element',
+                'verbose_name_plural': 'Relations with Project Elements',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='SearchTag',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(help_text='Documents containing these search tags are shown on the detail page of this object.', max_length=250, verbose_name='Name')),
+                ('object_id', models.PositiveIntegerField()),
+                ('order', models.IntegerField(default=100, null=True, verbose_name='Order', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+            ],
+            options={
+                'ordering': ['order'],
+                'verbose_name': 'Search Tag',
+                'verbose_name_plural': 'Search Tags',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='SearchTagCacheEntry',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('num_results', models.IntegerField()),
+                ('document', models.ForeignKey(to='public_project.Document')),
+                ('tag', models.ForeignKey(to='public_project.SearchTag')),
+            ],
+            options={
+                'ordering': ['-num_results'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='SiteCategory',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('category', models.CharField(unique=True, max_length=50, verbose_name='Category', choices=[(b'home', b'Home'), (b'project_parts', 'Topics'), (b'goals', 'Goals'), (b'questions', 'Questions'), (b'participants', 'Participants'), (b'events', 'Events'), (b'documents', 'Documents')])),
+                ('intro_text', models.TextField(null=True, verbose_name='Intro text', blank=True)),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+                ('documents', models.ManyToManyField(related_name='related_site_categories', null=True, verbose_name='Documents', to='public_project.Document', blank=True)),
+            ],
+            options={
+                'verbose_name': 'Website Category',
+                'verbose_name_plural': 'Website Categories',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='SiteConfig',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(default='ProjectWatch', help_text='Main title, shown in the header navi.', max_length=250, verbose_name='Title')),
+                ('short_title', models.CharField(default='ProjectWatch', help_text='Short version of the title, used e.g. in emails.', max_length=250, verbose_name='Short title')),
+                ('title_color', models.CharField(default=b'#990000', help_text="Color for the page title (Format: '#990000').", max_length=7, verbose_name='Title color')),
+                ('intro_text', models.TextField(default='This is a project watch website.', help_text='Short intro text to describe your page (HTML possible), not too long, use about text for detailed information.', verbose_name='Intro text')),
+                ('about_text', models.TextField(default='About text', help_text='Short intro text about this site, what is the purpose, who is running it.', verbose_name='About text')),
+                ('footer', models.TextField(default='This text will be shown in the footer of the site.', help_text='Some html text you want to use in the footer of the page, you can e.g. provide a link to your email adress or associated social media sites.', verbose_name='Footer')),
+                ('contact_text', models.TextField(default='This text will be shown on the contact page.', help_text='Html to be displayed on the contact page, provide at least an adress there and some contact information.', verbose_name='Contact')),
+                ('comments', models.TextField(verbose_name='Comments (internal)', blank=True)),
+            ],
+            options={
+                'verbose_name': 'Website Configuration',
+                'verbose_name_plural': 'Website Configuration',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='UserProfile',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('receive_new_comment_emails', models.BooleanField(default=True)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='WebSource',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=250, verbose_name='Title')),
+                ('object_id', models.PositiveIntegerField()),
+                ('order', models.IntegerField(default=100, help_text="Use integer numbers for ordering (e.g. '100', '200', '300').", null=True, verbose_name='Order', blank=True)),
+                ('url', models.URLField(verbose_name='URL')),
+                ('date', models.DateField(null=True, verbose_name='Date', blank=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+            ],
+            options={
+                'ordering': ['order'],
+                'verbose_name': 'Web-Source',
+                'verbose_name_plural': 'Web-Sources',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='projectgoalgroup',
+            name='project_part',
+            field=models.ForeignKey(verbose_name='Topic', blank=True, to='public_project.ProjectPart', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='projectgoal',
+            name='project_goal_group',
+            field=models.ForeignKey(to='public_project.ProjectGoalGroup'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='participant',
+            name='type',
+            field=models.ForeignKey(blank=True, to='public_project.ParticipantType', help_text='Type for sorting, only for groups/institutions, necessary for participant to be visible on site', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='membership',
+            name='from_participant',
+            field=models.ForeignKey(related_name='from_memberships', verbose_name='From participant', to='public_project.Participant'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='membership',
+            name='to_participant',
+            field=models.ForeignKey(related_name='to_memberships', verbose_name='To participant', to='public_project.Participant', help_text='Association with a group or institution'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='event',
+            name='participants',
+            field=models.ManyToManyField(related_name='related_events', null=True, verbose_name='Participants', to='public_project.Participant', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='event',
+            name='project_parts',
+            field=models.ManyToManyField(related_name='related_events', null=True, verbose_name='Topics', to='public_project.ProjectPart', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='document',
+            name='events',
+            field=models.ManyToManyField(related_name='related_documents', null=True, verbose_name='Events', to='public_project.Event', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='document',
+            name='participants',
+            field=models.ManyToManyField(related_name='related_documents', null=True, verbose_name='Participants', to='public_project.Participant', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='document',
+            name='project_parts',
+            field=models.ManyToManyField(related_name='related_documents', null=True, verbose_name='Topics', to='public_project.ProjectPart', blank=True),
+            preserve_default=True,
+        ),
+    ]
