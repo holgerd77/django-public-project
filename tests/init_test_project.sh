@@ -8,7 +8,6 @@ while true; do
             rm -f bpw_tests/sqlite3.db;
             rm -Rf media/;
             rm -Rf static/;
-            python manage.py syncdb --noinput;
             python manage.py migrate;
             echo "Creating superuser with username 'admin'...";
             python manage.py createsuperuser --username=admin --email=d@d.de;
