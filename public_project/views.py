@@ -564,7 +564,7 @@ def document(request, document_id):
     comment_list = []
     for comment in tmp_comment_list:
         print type(comment)
-        cr = comment.commentrelation_set.filter(document=document)[0]
+        cr = comment.commentrelation_set.filter(content_type=content_type, object_id=document.id)[0]
         comment.page = cr.page
         comment_list.append(comment)
     comment_list.sort(key=lambda x:x.page)
