@@ -8,7 +8,7 @@ from itertools import chain
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.sites.models import Site
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
@@ -135,7 +135,7 @@ class SiteCategory(models.Model):
     category = models.CharField(_("Category"), max_length=50, choices=NAME_CHOICES, unique=True)
     intro_text = models.TextField(_("Intro text"), blank=True, null=True)
     documents = models.ManyToManyField('Document', related_name="related_site_categories", blank=True, verbose_name=_("Documents"))
-    web_sources = generic.GenericRelation('WebSource', verbose_name=_("Web Sources"))
+    web_sources = GenericRelation('WebSource', verbose_name=_("Web Sources"))
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
@@ -170,7 +170,7 @@ class WebSource(models.Model):
     title = models.CharField(_("Title"), max_length=250)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey("content_type", "object_id")
+    content_object = GenericForeignKey("content_type", "object_id")
     help_text = _("Use integer numbers for ordering (e.g. '100', '200', '300').")
     order = models.IntegerField(_("Order"), help_text=help_text, default=100, blank=True, null=True)
     url = models.URLField(_("URL"))
@@ -215,14 +215,14 @@ class Participant(models.Model):
     order = models.IntegerField(_("Order"), help_text=help_text, default=500, blank=True, null=True)
     help_text = _("The participant belongs to another participant (often an institution or group), leave blank if participant itself is institution/group.")
     belongs_to = models.ManyToManyField('self', symmetrical=False, through='Membership', verbose_name=_("Belongs to"))
-    search_tags = generic.GenericRelation('SearchTag')
+    search_tags = GenericRelation('SearchTag')
     help_text = _("Role/tasks as well as interests/goals of the participant regarding the project.")
     description = models.TextField(_("Description"), help_text=help_text)
-    web_sources = generic.GenericRelation(WebSource)
-    comment_relations = generic.GenericRelation('CommentRelation')
+    web_sources = GenericRelation(WebSource)
+    comment_relations = GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    activities = generic.GenericRelation('ActivityLog')
+    activities = GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.name
@@ -280,14 +280,14 @@ class ProjectPart(models.Model):
     order = models.IntegerField(_("Order"), help_text=help_text, default=500, blank=True, null=True)
     help_text = _("If you select another project part here, you'll make this a sub project part.")
     main_project_parts = models.ManyToManyField('self', symmetrical=False, help_text=help_text, blank=True, verbose_name=_("Main Topic"))
-    search_tags = generic.GenericRelation('SearchTag')
+    search_tags = GenericRelation('SearchTag')
     help_text = _("Website (if existant).")
     description = models.TextField(_("Description"), help_text=help_text)
-    web_sources = generic.GenericRelation(WebSource)
-    comment_relations = generic.GenericRelation('CommentRelation')
+    web_sources = GenericRelation(WebSource)
+    comment_relations = GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    activities = generic.GenericRelation('ActivityLog')
+    activities = GenericRelation('ActivityLog')
 
     def __unicode__(self):
         return self.name
@@ -359,18 +359,18 @@ class Event(models.Model):
     event_type = models.CharField(_("Type"), max_length=2, choices=EVENT_TYPE_CHOICES)
     help_text = _("Event being of central importance for the project.")
     important = models.BooleanField(_("Main Event"), default=False, help_text=help_text)
-    search_tags = generic.GenericRelation('SearchTag')
+    search_tags = GenericRelation('SearchTag')
     description = models.TextField(_("Description"))
     date = models.DateField(_("Date"))
     help_text = _("Date is not exact (e.g. if a source refers only to the month)")
     not_exact = models.BooleanField(_("Date not exact"), default=False, help_text=help_text)
     participants = models.ManyToManyField(Participant, related_name="related_events", blank=True, verbose_name=_("Participants"))
     project_parts = models.ManyToManyField(ProjectPart, related_name="related_events", blank=True, verbose_name=_("Topics"))
-    web_sources = generic.GenericRelation(WebSource)
-    comment_relations = generic.GenericRelation('CommentRelation')
+    web_sources = GenericRelation(WebSource)
+    comment_relations = GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    activities = generic.GenericRelation('ActivityLog')
+    activities = GenericRelation('ActivityLog')
     
     def __unicode__(self):
         str  = self.title + ", "
@@ -449,11 +449,11 @@ class Question(models.Model):
     help_text = _("Optional answer (summary) of a question")
     answer = models.TextField(_("Answer"), blank=True, help_text=help_text)
     documents = models.ManyToManyField('Document', related_name="related_documents", blank=True, verbose_name=_("Documents"))
-    web_sources = generic.GenericRelation(WebSource)
-    comment_relations = generic.GenericRelation('CommentRelation')
+    web_sources = GenericRelation(WebSource)
+    comment_relations = GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    activities = generic.GenericRelation('ActivityLog')
+    activities = GenericRelation('ActivityLog')
     
     def get_feed_description(self):
         html  = self.description
@@ -528,7 +528,7 @@ class ProjectGoalGroup(models.Model):
     comments = models.TextField(_("Comments (internal)"), blank=True)
     objects = ProjectGoalGroupManager()
     date_added = models.DateTimeField(auto_now_add=True)
-    activities = generic.GenericRelation('ActivityLog')
+    activities = GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.title
@@ -568,11 +568,11 @@ class Document(models.Model):
     participants = models.ManyToManyField(Participant, related_name="related_documents", blank=True, verbose_name=_("Participants"))
     project_parts = models.ManyToManyField(ProjectPart, related_name="related_documents", blank=True, verbose_name=_("Topics"))
     events = models.ManyToManyField(Event, related_name="related_documents", blank=True, verbose_name=_("Events"))
-    comment_relations = generic.GenericRelation('CommentRelation')
+    comment_relations = GenericRelation('CommentRelation')
     comments = models.TextField(_("Comments (internal)"), blank=True)
     pdf_images_generated = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now_add=True)
-    activities = generic.GenericRelation('ActivityLog')
+    activities = GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.title + " (" + datetime.strftime(self.date, '%d.%m.%Y') + ")"
@@ -710,7 +710,7 @@ class SearchTag(models.Model):
     name = models.CharField(_("Name"), max_length=250, help_text=help_text)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey("content_type", "object_id")
+    content_object = GenericForeignKey("content_type", "object_id")
     order = models.IntegerField(_("Order"), default=100, blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     
@@ -756,7 +756,7 @@ class ResearchRequestRelation(models.Model):
     help_text = _('The id of the related object (you can find the id of an object in the url \
 of the object change form in the admin).')
     object_id = models.PositiveIntegerField(help_text=help_text)
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     help_text = _("Page number in document")
     page = models.IntegerField(_("Page"), blank=True, null=True, help_text=help_text)
     
@@ -775,7 +775,7 @@ class ResearchRequest(models.Model):
     open = models.BooleanField(_("Open"), default=True)
     description = models.TextField(_("Description"))
     date_added = models.DateTimeField(auto_now_add=True)
-    activities = generic.GenericRelation('ActivityLog')
+    activities = GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return unicode(self.nr) + ': ' + self.title
@@ -858,7 +858,7 @@ class CommentRelation(models.Model):
     help_text = _('The id of the related object (you can find the id of an object in the url \
 of the object change form in the admin).')
     object_id = models.PositiveIntegerField(help_text=help_text)
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     help_text = _("Page number in document")
     page = models.IntegerField(_("Page"), blank=True, null=True, help_text=help_text)
     
@@ -880,7 +880,7 @@ class Comment(models.Model):
     published_by = models.CharField(_("Published by"), max_length=250, blank=True)
     activation_hash = models.CharField(_("Activation hash"), max_length=250, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    activities = generic.GenericRelation('ActivityLog')
+    activities = GenericRelation('ActivityLog')
     
     def __unicode__(self):
         return self.username + ", " + datetime.strftime(self.date_added, '%d.%m.%Y')
@@ -962,7 +962,7 @@ class ActivityLog(models.Model):
     )
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     type = models.CharField(_("Type"), max_length=2, choices=TYPE_CHOICES)
     info = models.CharField(_("Info"), max_length=250, blank=True)
     date = models.DateTimeField(_("Date"), auto_now_add=True)

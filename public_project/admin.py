@@ -5,7 +5,7 @@ from django.contrib.admin import SimpleListFilter
 from django.contrib.admin.actions import delete_selected
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 from public_project.models import *
@@ -81,7 +81,7 @@ class ImageAdmin(admin.ModelAdmin):
     attribution_with_url.short_description = _('Attribution')
 
 
-class WebSourceInline(generic.GenericTabularInline):
+class WebSourceInline(GenericTabularInline):
     model = WebSource
 
 
@@ -125,7 +125,7 @@ class ParticipantTypeAdmin(admin.ModelAdmin):
     list_editable = ('order',)
 
 
-class SearchTagInline(generic.GenericTabularInline):
+class SearchTagInline(GenericTabularInline):
     model = SearchTag
 
 
