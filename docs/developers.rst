@@ -105,6 +105,10 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
+**Changes in version 0.7.0-beta** (Not yet released)
+
+* TODO
+
 **Changes in version 0.6.3-beta** (2014-12-08)
 
 * Fixed some unnecessary error messages caused by crawlers
