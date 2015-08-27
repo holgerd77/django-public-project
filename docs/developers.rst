@@ -107,7 +107,8 @@ Release Notes
 =============
 **Changes in version 0.7.0-beta** (Not yet released)
 
-* TODO
+
+* Updated requirements of various library dependencies
 
 **Changes in version 0.6.3-beta** (2014-12-08)
 

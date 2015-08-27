@@ -137,7 +137,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'public_project',
     'django.contrib.admin',
-    'south',
     'tastypie',
     'fixtures',
     'browser',

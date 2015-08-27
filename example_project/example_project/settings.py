@@ -143,7 +143,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'tastypie',
     'ep_setup_app', #only for example project, don't use in a real deployment
-    'south',
 )
 
 # A sample logging configuration. The only tangible logging
