@@ -10,8 +10,8 @@ Running the Test Suite
 Tests for ``DPP`` are organized in an own django project called ``bpw_tests`` located under the
 folder ``tests``. For running the test suite the following libraries are required:
 
-* `Selenium <http://selenium-python.readthedocs.org/en/latest/>`_ 2.3+
-* `django-dynamic-fixture <https://github.com/paulocheque/django-dynamic-fixture>`_ 1.6+
+* `Selenium <http://selenium-python.readthedocs.org/en/latest/>`_ 2.45+
+* `django-dynamic-fixture <https://github.com/paulocheque/django-dynamic-fixture>`_ 1.8+
 
 The following types of tests are implemented:
 
@@ -105,7 +105,7 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
-**Changes in version 0.7.0-beta** (Not yet released)
+**Changes in version 0.7.0-beta** (2015-08-27)
 
 * Support for ``Django 1.8`` (support for older versions dropped)
 * Switched to ``Django`` internal migrations. South dependencies are removed, but you can still find the
@@ -114,6 +114,7 @@ Release Notes
   latest ``0.6`` release first and run the ``migrate`` command within ``South`` context before switching
   to this release. Then from ``0.7`` run the ``migrate`` command with the ``--fake-initial`` flag: ``python manage.py migrate --fake-initial``.
 * Updated requirements of various library dependencies
+* Fixed a bug for document comments
 
 **Changes in version 0.6.3-beta** (2014-12-08)
 
