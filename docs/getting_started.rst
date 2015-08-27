@@ -66,12 +66,11 @@ Requirements
 For installing DPP you need the following ``Python/Django`` libraries, probably best installed in 
 an own ``virtualenv`` environment:
 
-* Python 2.7+ (earlier versions untested)
-* `Django <https://www.djangoproject.com/>`_ 1.5 (1.6+ not yet supported)
+* Python 2.7+ (Python 3.x not yet supported)
+* `Django <https://www.djangoproject.com/>`_ 1.8 (1.9+ not yet supported)
 * `PDFMiner <http://www.unixuser.org/~euske/python/pdfminer/index.html>`_ (Version 20110515 to avoid dependency errors!)
 * Pillow 2.5.2+ (Replacing PIL, for Django ImageField type)
-* `Tastypie <http://tastypieapi.org/>`_ 0.9+ (for API access)
-* `South <http://south.aeracode.org/>`_ 0.7.6+ (to keep track with DB changes)
+* `Tastypie <http://tastypieapi.org/>`_ 0.12+ (for API access)
 
 For PDF conversion to jpg files for having an IE compatible PDF viewer, you need to have the 
 ``ImageMagick`` library with the ``convert`` command installed in your shell environment:
@@ -114,7 +113,6 @@ is essential for DPP)::
         'public_project', # Since DPP changes some admin templates, app has to be placed before admin
         'django.contrib.admin',
         'tastypie',
-        'south',
     )
 
 Sync your database respectively use migrations for DPP::
