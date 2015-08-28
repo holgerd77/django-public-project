@@ -18,4 +18,5 @@ example_project/static/
 tests/media/
 tests/static/
 dist
+build
 django_public_project.egg-info/
