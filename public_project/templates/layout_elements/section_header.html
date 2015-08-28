@@ -1,5 +1,5 @@
   
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs" style="margin-bottom:20px;">
   <li class="active">
     <a href="#" style="font-weight:bold;">
     {% if sh_icon %}
@@ -7,7 +7,7 @@
       {% endif %}
       {{ sh_title }}
       {% if rss_url %}
-        &nbsp;<button class="btn btn-mini" id="rss_btn{{ rss_btn_id }}">RSS <i class="icon-rss"></i></button>
+        &nbsp;<button class="btn btn-default btn-xs" id="rss_btn{{ rss_btn_id }}">RSS <i class="icon-rss"></i></button>
         <script>
           $('#rss_btn{{ rss_btn_id }}').click(function() {
             location.href = '{{ rss_url }}';
@@ -16,7 +16,7 @@
       {% endif %}
       
       {% if sh_ec_id %}&nbsp;
-      <button class="btn btn-mini" style="font-size:16px;text-decoration: none;" id="sh_ec_btn_{{ sh_ec_id }}">
+      <button class="btn btn-default btn-xs" style="font-size:16px;text-decoration: none;" id="sh_ec_btn_{{ sh_ec_id }}">
         <i class="icon-circle-arrow-down"></i></button>
       {% endif %}
       </a>

@@ -1,6 +1,6 @@
 {% load i18n %}
 
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs" style="margin-bottom:20px;">
   <li class="active">
     <a href="#" style="font-weight:bold;">
       {% if sh_icon %}
@@ -8,7 +8,7 @@
       {% endif %}
       {{ sh_title }}
       {% if rss_url %}
-        &nbsp;<button class="btn btn-mini" id="rss_btn{{ rss_btn_id }}">RSS <i class="icon-rss"></i></button>
+        &nbsp;<button class="btn btn-default btn-xs" id="rss_btn{{ rss_btn_id }}">RSS <i class="icon-rss"></i></button>
         <script>
           $('#rss_btn{{ rss_btn_id }}').click(function() {
             location.href = '{{ rss_url }}';
@@ -20,8 +20,8 @@
   </li>
     <li style="float:right;">
       <div class="btn-group" id="ome_btn_group_{{ id_addon }}" data-toggle="buttons-radio">
-      <button class="btn btn-small{% if not only_main %} active{% endif %}" id="ome_all">{% trans "All" %}</button>
-      <button class="btn btn-small{% if only_main %} active{% endif %}" id="ome_selected">{% trans "Only main events" %}</button>
+      <button class="btn btn-default btn-sm{% if not only_main %} active{% endif %}" id="ome_all">{% trans "All" %}</button>
+      <button class="btn btn-default btn-sm{% if only_main %} active{% endif %}" id="ome_selected">{% trans "Only main events" %}</button>
     </div>
     </li>
 </ul>
