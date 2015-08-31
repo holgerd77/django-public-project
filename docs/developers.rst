@@ -105,6 +105,11 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
+**Changes in version 0.7.1-beta** (2015-08-31)
+
+* Updated ``Bootstrap`` from ``2.3`` to ``3.3``
+* Improved menu navigation on mobile devices
+
 **Changes in version 0.7.0-beta** (2015-08-27)
 
 * Support for ``Django 1.8`` (support for older versions dropped)
