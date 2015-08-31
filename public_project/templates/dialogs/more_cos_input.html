@@ -5,9 +5,9 @@
       <div style="margin-bottom:10px;">
         <b>{% trans "Optional" %}:</b> {% trans "Relation to further project elements" %}
       </div>
-            <div class="input-prepend">
-              <span class="add-on"><i class="icon-search"></i></span>
-              <input class="col-md-2" id="more_cos_input" data-provide="typeahead" type="text" placeholder="{% trans 'Search via autocompletion (Project Part, Question, Participant, Event, Document)' %}" style="width: 650px;" autocomplete="off">
+            <div class="input-group">
+              <input id="more_cos_input" class="form-control" data-provide="typeahead" type="text" placeholder="{% trans 'Search via autocompletion (Project Part, Question, Participant, Event, Document)' %}" autocomplete="off">
+              <span class="input-group-addon"><i class="icon-search"></i></span>
             </div>
             
             <div id="more_cos_select" style="margin-top:8px;font-weight:normal;">

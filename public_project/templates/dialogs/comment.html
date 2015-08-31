@@ -34,7 +34,7 @@
     <div style="padding:15px;">
     <div style="margin-top:10px;">
       <div style="float:left;margin-right:20px;">
-      <textarea id="id_comment" style="width: 400px;height: 160px;" rows="10" cols="40" name="comment"></textarea>
+      <textarea id="id_comment" class="form-control" style="width: 400px;height: 160px;" rows="10" cols="40" name="comment"></textarea>
       </div>
       <div>
         <fieldset>
@@ -43,7 +43,7 @@
             {% trans "Name" %}
           </div>
           <div style="float:right;width:280px;">
-            <input id="id_username" type="text" name="username" maxlength="50">
+            <input id="id_username" class="form-control" type="text" name="username" maxlength="50">
             <span style="font-size:12px;">({% trans "required" %})</span>
           </div>
         </div>
@@ -54,7 +54,7 @@
             {% trans "E-Mail" %}
           </div>
           <div style="float:right;width:280px;">
-            <input id="id_email" type="text" name="email" maxlength="50">
+            <input id="id_email" class="form-control" type="text" name="email" maxlength="50">
             <span style="font-size:12px;">({% trans "required" %}) ({% trans "will not be published" %})</span>
           </div>
         </div>
@@ -62,7 +62,7 @@
         <div style="clear:both;height:10px;"></div>
         <div style="margin-bottom:10px;clear:both;">
           <div style="float:left;">
-            <input type="checkbox" id="id_feedback_allowed" name="feedback_allowed">
+            <input type="checkbox" class="form-control" id="id_feedback_allowed" name="feedback_allowed">
           </div>
           <div style="float:right;width:280px;font-size:12px;">
             {% trans "The operator of this website is allowed to inquire via email on questions about this comment" %}
