@@ -10,9 +10,12 @@
   {% include "dialogs/generic_confirm.html" %}   
 {% endif %}
 
-<div class="modal hide fade" id="CommentModal" style="background-color:#222;position:absolute;width:800px;height:850px;margin-left:-400px;">
+<div class="modal fade" id="CommentModal">
   
-  <div class="modal-header" style="background-color:#f9f9f9;">
+  <div class="modal-dialog">
+  <div class="modal-content" style="width:800px;">
+
+  <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3>{% trans "My Comment on" %}</h3>
     <h4><i class="{{ commented_object1.get_icon_class }}"></i> {{ commented_object1 }}<span id="co1_header_page"></span></h4>
@@ -89,6 +92,9 @@
     
   </div>
   </form>
+
+  </div>
+  </div>
   
 </div>
 

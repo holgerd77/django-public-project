@@ -27,71 +27,74 @@
   }
   
   $("#{{ dialog }} #more_cos_input").typeahead({
-  minLength: 4,
-  items: 10,
-  source: function(query, process) {
-        return $.ajax({
-           url: '/xhr/universal_search/',
-           type: 'get',
-           data: {
-              query: query,
-              ommit_content_type: '{{ commented_object1|modelname }}',
-              ommit_id: {{ commented_object1.id }},
-           },
-           dataType: 'json',
-           success: function(json) {
-              co_input_values = json.values
-              return typeof json.options == 'undefined' ? false : process(json.options);
-           }
-        });
-  }
-  ,updater: function (item) {
-     $('#{{ dialog }} #more_cos_nothing_selected').css('display', 'none');
-     for (var num_id=2;num_id<=counter_more_cos+1;num_id++) {
-        var id = '#{{ dialog }} #co' + num_id + '_select';
-        if($(id).length != 0) {
-           if ((co_input_values[item].content_type == $('#{{ dialog }} #id_co' + num_id + '_content_type').val()) &&
-               (co_input_values[item].id == parseInt($('#{{ dialog }} #id_co' + num_id + '_id').val()))) {
-                 return;
-           }
-        }
-     }
-     
-     if(num_more_cos >= 9) {
-       var html = '';
-       html += '<div class="well well-small" style="margin-bottom:2px;">';
-       html += '{% trans "Maximum number of additional project elements reached" %}</div>';
-       $('#{{ dialog }} #more_cos_select').append(html);
-       return;
-     }
-     
-     num_more_cos += 1;
-     counter_more_cos += 1;
-     $('#{{ dialog }} #id_counter_more_cos').val(counter_more_cos);
-     var id = counter_more_cos + 1;
-     
-     var div = $('<div id="co' + id + '_select" class="well well-small" style="margin-bottom:2px;"></div>'); 
-     var btn = $('<button type="button" class="close co_close" data-dismiss="alert">&times;</button>');
-     btn.click(function(event) {
-        num_more_cos -= 1;
-        if(num_more_cos == 0) {
-          $('#{{ dialog }} #more_cos_nothing_selected').css('display', 'block');
-        }
-     });
-     div.append(btn);
-     html = '<span style="font-weight: bold;">' + item + '</span>';
-     
-     if (co_input_values[item].content_type == 'document') {
-        html += ', {% trans "Page" %} <input size="3" style="width:30px;" maxlength="10" ';
-        html += 'type="text" id="id_co' + id + '_page" name="co' + id + '_page"> ({% trans "required" %})';
-     }
-     html += '<input type="hidden" id="id_co' + id + '_content_type" name="co' + id + '_content_type" ';
-     html += 'value="' + co_input_values[item].content_type + '">';
-     html += '<input type="hidden" id="id_co' + id + '_id" name="co' + id + '_id" ';
-     html += 'value="' + co_input_values[item].id + '">';
-     div.append(html);
-     $('#{{ dialog }} #more_cos_select').append(div);
-  }
+    minLength: 4,
+    items: 10,
+    source: function(query, process) {
+          return $.ajax({
+             url: '/xhr/universal_search/',
+             type: 'get',
+             data: {
+                query: query,
+                ommit_content_type: '{{ commented_object1|modelname }}',
+                ommit_id: {{ commented_object1.id }},
+             },
+             dataType: 'json',
+             success: function(json) {
+                co_input_values = json.values
+                return typeof json.options == 'undefined' ? false : process(json.options);
+             }
+          });
+    },
+    highlighter: function(item) {
+      return item;
+    },
+    updater: function (item) {
+       $('#{{ dialog }} #more_cos_nothing_selected').css('display', 'none');
+       for (var num_id=2;num_id<=counter_more_cos+1;num_id++) {
+          var id = '#{{ dialog }} #co' + num_id + '_select';
+          if($(id).length != 0) {
+             if ((co_input_values[item].content_type == $('#{{ dialog }} #id_co' + num_id + '_content_type').val()) &&
+                 (co_input_values[item].id == parseInt($('#{{ dialog }} #id_co' + num_id + '_id').val()))) {
+                   return;
+             }
+          }
+       }
+       
+       if(num_more_cos >= 9) {
+         var html = '';
+         html += '<div class="well well-small" style="margin-bottom:2px;">';
+         html += '{% trans "Maximum number of additional project elements reached" %}</div>';
+         $('#{{ dialog }} #more_cos_select').append(html);
+         return;
+       }
+       
+       num_more_cos += 1;
+       counter_more_cos += 1;
+       $('#{{ dialog }} #id_counter_more_cos').val(counter_more_cos);
+       var id = counter_more_cos + 1;
+       
+       var div = $('<div id="co' + id + '_select" class="well well-small" style="margin-bottom:2px;"></div>'); 
+       var btn = $('<button type="button" class="close co_close" data-dismiss="alert">&times;</button>');
+       btn.click(function(event) {
+          num_more_cos -= 1;
+          if(num_more_cos == 0) {
+            $('#{{ dialog }} #more_cos_nothing_selected').css('display', 'block');
+          }
+       });
+       div.append(btn);
+       html = '<span style="font-weight: bold;">' + item + '</span>';
+       
+       if (co_input_values[item].content_type == 'document') {
+          html += ', {% trans "Page" %} <input size="3" style="width:30px;" maxlength="10" ';
+          html += 'type="text" id="id_co' + id + '_page" name="co' + id + '_page"> ({% trans "required" %})';
+       }
+       html += '<input type="hidden" id="id_co' + id + '_content_type" name="co' + id + '_content_type" ';
+       html += 'value="' + co_input_values[item].content_type + '">';
+       html += '<input type="hidden" id="id_co' + id + '_id" name="co' + id + '_id" ';
+       html += 'value="' + co_input_values[item].id + '">';
+       div.append(html);
+       $('#{{ dialog }} #more_cos_select').append(div);
+    }
   });
   
 </script>  
