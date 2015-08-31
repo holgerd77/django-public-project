@@ -37,6 +37,7 @@
   </style>
   <script src="/static/js/lib/jquery-1.11.3.min.js" type="text/javascript"></script>
   <script src="/static/bootstrap-335/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="/static/js/lib/bootstrap3-typeahead-3.1.1.min.js" type="text/javascript"></script>
   <script src="/static/js/lib/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
   <script src="/static/js/lib/d3.v3.min.js" type="text/javascript"></script>
   <script src="/static/js/lib/d3.layout.cloud.js" type="text/javascript"></script>
@@ -180,27 +181,31 @@
     var counter_more_cos = 0; //For ids, can be higher than num_more_cos if cos are deleted in between
   }
   
+
   $("#q").typeahead({
-  minLength: 1,
-  items: 10,
-  source: function(query, process) {
-        return $.ajax({
-           url: '/xhr/universal_search/',
-           type: 'get',
-           data: {
-              query: query,
-              with_query_search: "yes",
-           },
-           dataType: 'json',
-           success: function(json) {
-              co_input_values = json.values
-              return typeof json.options == 'undefined' ? false : process(json.options);
-           }
-        });
-  }
-  ,updater: function (item) {
-    location.href = co_input_values[item].absolute_url;
-  }
+    minLength: 1,
+    items: 10,
+    source: function(query, process) {
+          return $.ajax({
+             url: '/xhr/universal_search/',
+             type: 'get',
+             data: {
+                query: query,
+                with_query_search: "yes",
+             },
+             dataType: 'json',
+             success: function(json) {
+                co_input_values = json.values
+                return typeof json.options == 'undefined' ? false : process(json.options);
+             }
+          });
+    },
+    highlighter: function(item) {
+      return item;
+    },
+    updater: function (item) {
+      location.href = co_input_values[item].absolute_url;
+    }
   });
   
 </script> 
