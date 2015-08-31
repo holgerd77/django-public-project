@@ -110,3 +110,40 @@ a {
 	padding-bottom: 15px;
 	color: #666;
 }
+
+/* Bootstrap Overrides */
+.carousel-caption {
+    position: absolute !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    padding: 15px !important;
+    background: #333 !important;
+    background: rgba(0, 0, 0, 0.75) !important;
+}
+.carousel-control {
+    background: #222 none repeat scroll 0 0 !important;
+    border: 3px solid #fff !important;
+    border-radius: 23px !important;
+    color: #fff !important;
+    font-size: 60px !important;
+    font-weight: 100 !important;
+    height: 40px !important;
+    left: 15px !important;
+    line-height: 30px !important;
+    margin-top: -20px !important;
+    opacity: 0.5 !important;
+    position: absolute !important;
+    text-align: center !important;
+    top: 40% !important;
+    width: 40px !important;
+}
+.carousel-control.right {
+    left: auto !important;
+    right: 15px !important;
+}
+.carousel-control:hover, .carousel-control:focus {
+    color: #fff !important;
+    opacity: 0.9 !important;
+    text-decoration: none !important;
+}
