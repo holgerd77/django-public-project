@@ -105,6 +105,10 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
+**Changes in version 0.7.2-beta** (2017-02-11)
+
+* TODO
+
 **Changes in version 0.7.1-beta** (2015-08-31)
 
 * Updated ``Bootstrap`` from ``2.3`` to ``3.3``
