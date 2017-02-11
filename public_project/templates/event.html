@@ -39,7 +39,7 @@
 
 <div class="col-md-6">
   
-  {% if question_list.count > 0 %}
+  {% if site_config.show_questions_category and question_list.count > 0 %}
     
     {% include "info_box/questions.html" %}
   {% endif %}
@@ -51,17 +51,19 @@
     {% endwith %}
   {% endif %}
   
-  {% trans "Comments" as sh_title %}
-  {% trans "New" as sh_url_title %}
-  {% trans "comments_url" as comments_url %}
-  {% with sh_title=sh_title sh_icon="icon-comments" sh_url_title=sh_url_title sh_url="#CommentModal" modal_url="yes" rss_url=comments_url|add:"rss/" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  {% with form=comment_form form_valid=comment_form_valid commented_object1=event %}
-  {% include "dialogs/comment.html" %}
-  {% endwith %}
-  
-  {% include "info_box/comments.html" %}
+  {% if site_config.activate_comments %}
+    {% trans "Comments" as sh_title %}
+    {% trans "New" as sh_url_title %}
+    {% trans "comments_url" as comments_url %}
+    {% with sh_title=sh_title sh_icon="icon-comments" sh_url_title=sh_url_title sh_url="#CommentModal" modal_url="yes" rss_url=comments_url|add:"rss/" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
+    {% with form=comment_form form_valid=comment_form_valid commented_object1=event %}
+    {% include "dialogs/comment.html" %}
+    {% endwith %}
+    
+    {% include "info_box/comments.html" %}
+  {% endif %}
   
 </div>
 

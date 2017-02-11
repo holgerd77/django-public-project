@@ -110,6 +110,8 @@ Release Notes
 * Slugified/more meaningful URLs for topics, questions, events and participants
 * New ``DPP_CUSTOM_JS`` and ``DPP_CUSTOM_CSS`` settings to include custom Javscript code or 
   CSS styles in the project (see: :ref:`custom_js_css`)
+* Added admin website configuration settings for optionally not showing goals and questions categories and
+  deactivating user comments, new migration ``0004_activation_flags_for_goals_questions_comments``
 
 **Changes in version 0.7.1-beta** (2015-08-31)
 

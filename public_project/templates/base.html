@@ -69,8 +69,12 @@
         <ul class="nav navbar-nav">
           <li><a href="/" style="{% if site_category.category == 'home' %}font-weight:bold;{% endif %}"><i class="icon-home"></i> Home</a></li>
           <li><a href="/{% trans "project_parts_url" %}" style="{% if site_category.category == 'project_parts' %}font-weight:bold;{% endif %}"><i class="icon-cogs"></i> {% trans "Topics" %}</a></li>
-          <li><a href="/{% trans "goals_url" %}" style="{% if site_category.category == 'goals' %}font-weight:bold;{% endif %}"><i class="icon-bullseye"></i> {% trans "Goals" %}</a></li>
-          <li><a href="/{% trans "questions_url" %}" style="{% if site_category.category == 'questions' %}font-weight:bold;{% endif %}"><i class="icon-question-sign"></i> {% trans "Questions" %}</a></li>
+          {% if site_config.show_goals_category %}
+            <li><a href="/{% trans "goals_url" %}" style="{% if site_category.category == 'goals' %}font-weight:bold;{% endif %}"><i class="icon-bullseye"></i> {% trans "Goals" %}</a></li>
+          {% endif %}
+          {% if site_config.show_questions_category %}
+            <li><a href="/{% trans "questions_url" %}" style="{% if site_category.category == 'questions' %}font-weight:bold;{% endif %}"><i class="icon-question-sign"></i> {% trans "Questions" %}</a></li>
+          {% endif %}
           <li><a href="/{% trans "participants_url" %}" style="{% if site_category.category == 'participants' %}font-weight:bold;{% endif %}"><i class="icon-group"></i> {% trans "Participants" %}</a></li>
           <li><a href="/{% trans "events_url" %}" style="{% if site_category.category == 'events' %}font-weight:bold;{% endif %}"><i class="icon-time"></i> {% trans "Events" %}</a></li>
           <li><a href="/{% trans "documents_url" %}" style="{% if site_category.category == 'documents' %}font-weight:bold;{% endif %}"><i class="icon-inbox"></i> {% trans "Documents" %}</a></li>

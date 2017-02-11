@@ -102,6 +102,7 @@
     </div>
   </div>
   
+  {% if site_config.show_questions_category %}
   {% trans "New Research Requests" as sh_title %}
   {% with sh_title=sh_title sh_icon="icon-eye-open" sh_url_title="" %}
     {% include "layout_elements/section_header.html" %}
@@ -111,6 +112,7 @@
   {% with rr_with_ec="yes" %}
     {% include "info_box/research_requests.html" %}
   {% endwith %}
+  {% endif %}
   
   
   {% trans "Frequent Document Contents" as sh_title %}
@@ -139,15 +141,16 @@
 </script>
 
   
-  
-  {% trans "Last Comment" as sh_title %}
-  {% with sh_title=sh_title sh_icon="icon-comments" sh_url_title="" %}
-    {% include "layout_elements/section_header.html" %}
-  {% endwith %}
-  
-  {% with show_commented_object="yes" %}
-  {% include "info_box/comments.html" %}
-  {% endwith %} 
+  {% if site_config.activate_comments %}
+    {% trans "Last Comment" as sh_title %}
+    {% with sh_title=sh_title sh_icon="icon-comments" sh_url_title="" %}
+      {% include "layout_elements/section_header.html" %}
+    {% endwith %}
+    
+    {% with show_commented_object="yes" %}
+    {% include "info_box/comments.html" %}
+    {% endwith %}
+  {% endif %}
 
 </div>
 

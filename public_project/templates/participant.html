@@ -57,7 +57,7 @@
 
 <div class="col-md-6">
   
-  {% if question_list.count > 0 %}
+  {% if site_config.show_questions_category and question_list.count > 0 %}
     {% include "info_box/questions.html" %}
   {% endif %}
 

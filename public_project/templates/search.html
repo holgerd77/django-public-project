@@ -37,8 +37,9 @@
       {% include "info_box/participants.html" %}
     </div>
   </div>
-  
-  {% include "info_box/questions.html" %}
+  {% if site_config.show_questions_category %}
+    {% include "info_box/questions.html" %}
+  {% endif %}
   
   
   {% trans "Events" as sh_title %}
