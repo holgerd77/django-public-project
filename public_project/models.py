@@ -13,6 +13,7 @@ from django.contrib.sites.models import Site
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
+from django.utils.text import slugify
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.utils.http import urlquote
 from public_project.doc_scanner import DocScanner
@@ -241,7 +242,7 @@ class Participant(models.Model):
         return  html
     
     def get_absolute_url(self):
-        return "/" + ugettext("participants_url") + unicode(self.id) + "/"
+        return "/" + ugettext("participants_url") + slugify(self.name) + '-' + unicode(self.id) + "/"
     
     def get_comments_url(self):
         return "/" + ugettext("participants_url") + unicode(self.id) + "/" + ugettext("comments_url")
@@ -315,7 +316,7 @@ class ProjectPart(models.Model):
         return  html
     
     def get_absolute_url(self):
-        return "/" + ugettext("project_parts_url") + unicode(self.id) + "/"
+        return "/" + ugettext("project_parts_url") + slugify(self.name) + '-' + unicode(self.id) + "/"
     
     @classmethod
     def get_color(cls):
@@ -399,7 +400,7 @@ class Event(models.Model):
         return  html
     
     def get_absolute_url(self):
-        return "/" + ugettext("events_url") + unicode(self.id) + "/"
+        return "/" + ugettext("events_url") + slugify(self.date.strftime('%Y-%m-%d') + '-' + self.title) + '-' + unicode(self.id) + "/"
     
     def get_event_type_icon(self):
         return self.EVENT_TYPE_CHOICES_ICONS[self.event_type]
@@ -479,7 +480,7 @@ class Question(models.Model):
         return  html
     
     def get_absolute_url(self):
-        return "/" + ugettext("questions_url") + unicode(self.id) + "/"
+        return "/" + ugettext("questions_url") + slugify(self.title) + '-' + unicode(self.id) + "/"
     
     def get_comments_url(self):
         return "/" + ugettext("questions_url") + unicode(self.id) + "/" + ugettext("comments_url")
@@ -601,7 +602,7 @@ class Document(models.Model):
         return  html
     
     def get_absolute_url(self):
-        return "/" + ugettext("documents_url") + unicode(self.id) + "/"
+        return "/" + ugettext("documents_url") + slugify(self.title) + '-' + unicode(self.id) + "/"
     
     def get_comments_url(self):
         return "/" + ugettext("documents_url") + unicode(self.id) + "/" + ugettext("comments_url")
