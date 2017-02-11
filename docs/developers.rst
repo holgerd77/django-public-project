@@ -105,7 +105,7 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
-**Changes in version 0.7.2-beta** (2017-02-11)
+**Changes in version 0.7.2-beta** (2017-02-11) 
 
 * Slugified/more meaningful URLs for topics, questions, events and participants
 * New ``DPP_CUSTOM_JS`` and ``DPP_CUSTOM_CSS`` settings to include custom Javscript code or 
