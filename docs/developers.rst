@@ -107,7 +107,9 @@ Release Notes
 =============
 **Changes in version 0.7.2-beta** (2017-02-11)
 
-* TODO
+* Slugified/more meaningful URLs for topics, questions, events and participants
+* New ``DPP_CUSTOM_JS`` and ``DPP_CUSTOM_CSS`` settings to include custom Javscript code or 
+  CSS styles in the project (see: :ref:`custom_js_css`)
 
 **Changes in version 0.7.1-beta** (2015-08-31)
 

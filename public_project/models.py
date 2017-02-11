@@ -87,6 +87,16 @@ class SiteConfigManager(models.Manager):
         else:
             site_config.public_api = False
         
+        if getattr(settings, 'DPP_CUSTOM_JS', False):
+            site_config.custom_js = settings.DPP_CUSTOM_JS
+        else:
+            site_config.custom_js = ''    
+        
+        if getattr(settings, 'DPP_CUSTOM_CSS', False):
+            site_config.custom_css = settings.DPP_CUSTOM_CSS
+        else:
+            site_config.custom_css = ''
+        
         return site_config
     
 

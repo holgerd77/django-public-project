@@ -32,6 +32,7 @@
       background-color:rgba(200, 255, 0, 0.2);
     }
 
+    {{ site_config.custom_css|safe }}
     
     -->
   </style>
@@ -225,6 +226,9 @@
         $(this).attr("title", title);
      }); 
   });
+  
+  {{ site_config.custom_js|safe }}
+  
 </script>
 
 

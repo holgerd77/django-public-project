@@ -227,6 +227,17 @@ the MSIE and another browser.
 .. note:: The conversion process of a pdf document takes place in the background and may take a while
           for large documents.
 
+.. _custom_js_css:
+
+Custom JS/CSS Code
+------------------
+If you want to include custom Javascript code or CSS styles into your project - e.g. to add analytics
+to the site or customize the layout, you can use the following settings::
+
+  DPP_CUSTOM_JS = 'alert("This should show up on every page!")' #Example JS Code
+  
+  DPP_CUSTOM_CSS = 'body { margin: 20px; }' #Example CSS Style
+
 Site Domain
 -----------
 For urls in comment emails to work properly, you have to edit the ``Site`` object, which Django
