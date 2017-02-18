@@ -105,6 +105,10 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
+**Changes in version 0.7.3-beta** (2017-02-18)
+
+* TODO
+
 **Changes in version 0.7.2-beta** (2017-02-11) 
 
 * Slugified/more meaningful URLs for topics, questions, events and participants

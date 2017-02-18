@@ -4,7 +4,7 @@ import os
 
 setup(
     name='django-public-project',
-    version='0.7.2',
+    version='0.7.3',
     description='Custom CMS for making public projects, political processes or enquiry commission work more transparent',
     author='Holger Drewes',
     author_email='Holger.Drewes@gmail.com',
