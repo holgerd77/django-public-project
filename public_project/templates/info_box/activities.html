@@ -12,7 +12,7 @@
             <div style="border:1px solid #ddd;margin-bottom:3px;font-size:12px;">
               <div style="padding:7px 12px 7px 12px;background-color: #f9f9f9;" class="comment_header">
                 <span style="font-size:13px;font-weight:bold;">{{ activity.get_type_display }}</span>&nbsp; 
-                <span style="font-size:11px;">{{ activity.date|date:"d.m.Y H:i" }}</span>
+                <span style="font-size:11px;">{{ activity.date|date }}</span>
                 <br>
                 <i class="{{ activity.content_object.get_icon_class }}"></i> 
                 <a href="{{ activity.content_object.get_absolute_url }}">{{ activity.content_object }}</a>

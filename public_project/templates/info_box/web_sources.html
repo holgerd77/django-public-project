@@ -16,7 +16,7 @@
                 <td><i class="icon-external-link"></i> 
                   <a href="{{ ws.url }}" target="_blank">{{ ws.title }}</a>
                 </td>
-                <td style="text-align: center;width:70px;">{{ ws.date|date:"d.m.Y"}}</td>
+                <td style="text-align: center;width:70px;">{% if ws.date %}{{ ws.date }}{% endif %}</td>
                 {% if user.is_authenticated %}
                   <td><a href="{{ ws.get_absolute_url }}">A</a></td>
                 {% endif %}

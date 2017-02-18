@@ -8,7 +8,7 @@
     {% for ws in web_source_list %}
       <li>
         <a href="{{ ws.url}}" target="_blank"><i class="{{ ws.get_icon_class }}"></i> {{ ws.title }}
-          {% if ws.date %} ({{ ws.date|date:"d.m.Y" }}){% endif %}</a>
+          {% if ws.date %} ({{ ws.date }}){% endif %}</a>
       </li>
     {% endfor %}
   </ul>

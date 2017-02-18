@@ -11,7 +11,7 @@
             <tr class="{% if not event.important %}tr_normal_event{% endif %}">
               <td 
                 style="width:72px;text-align:center;">
-                {% if event.not_exact %}({% endif %}{{ event.date|date:"d.m.Y" }}{% if event.not_exact %}){% endif %}
+                {% if event.not_exact %}({% endif %}{{ event.date|date:"m/d/Y" }}{% if event.not_exact %}){% endif %}
               </td>
               <td style="text-align: center; width:15px;">
                 <i class="{{ event.get_event_type_icon }}"></i>
