@@ -592,7 +592,7 @@ class Document(models.Model):
     activities = GenericRelation('ActivityLog')
     
     def __unicode__(self):
-        return self.title + " (" + datetime.strftime(self.date, '%d.%m.%Y') + ")"
+        return self.title + " (" + datetime.strftime(self.date, '%m/%d/%Y') + ")"
     
     def get_feed_description(self):
         html  = self.description

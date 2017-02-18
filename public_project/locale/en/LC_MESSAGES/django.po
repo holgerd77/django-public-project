@@ -139,7 +139,7 @@ msgstr "questions/"
 #: feeds.py:18 models.py:376 models.py:439 models.py:567
 #: templates/search.html:19
 msgid "Subject Areas"
-msgstr ""
+msgstr "Topics"
 
 #: feeds.py:19
 #, python-format
@@ -1456,9 +1456,8 @@ msgid "Agreement at"
 msgstr ""
 
 #: templates/info_box/project_parts.html:18
-#, fuzzy
 msgid "No project_parts available."
-msgstr "documents/"
+msgstr "No topics available."
 
 #: templates/info_box/questions.html:81
 #, fuzzy

@@ -105,6 +105,10 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
+**Changes in version 0.7.4-beta** (2017-02-18)
+
+* Bugfixes
+
 **Changes in version 0.7.3-beta** (2017-02-18)
 
 * Fix tag cloud links on start page for english version
