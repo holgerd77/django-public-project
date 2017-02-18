@@ -128,15 +128,15 @@
   <div id="tag_cloud" style="border:1px solid #ddd;margin-bottom: 5px;height:180px;">
   </div>
   <div style="margin-bottom:20px;">
-    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, null, '/suche/', 200);">{% trans "All" %}</a>
-    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'projectpart', '/suche/', 200);" style="background-color:#0d9434;">&nbsp;&nbsp;&nbsp;</a>
-    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'participant', '/suche/', 200);" style="background-color:#3e3ec7;">&nbsp;&nbsp;&nbsp;</a>
-    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'event', '/suche/', 200);" style="background-color:#c91a1a;">&nbsp;&nbsp;&nbsp;</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, null, '/{% trans 'search_url' %}', 200);">{% trans "All" %}</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'projectpart', '/{% trans 'search_url' %}', 200);" style="background-color:#0d9434;">&nbsp;&nbsp;&nbsp;</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'participant', '/{% trans 'search_url' %}', 200);" style="background-color:#3e3ec7;">&nbsp;&nbsp;&nbsp;</a>
+    <a class="label" href="javascript:load_tag_cloud('#tag_cloud', null, 'event', '/{% trans 'search_url' %}', 200);" style="background-color:#c91a1a;">&nbsp;&nbsp;&nbsp;</a>
   </div>
   
 <script>
   $(document).ready(function() {
-    load_tag_cloud('#tag_cloud', null, null, '/suche/', 180);
+    load_tag_cloud('#tag_cloud', null, null, '/{% trans 'search_url' %}', 180);
   });
 </script>
 
