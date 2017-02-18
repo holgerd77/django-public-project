@@ -1111,6 +1111,9 @@ msgstr "/events/"
 msgid "About the Project"
 msgstr ""
 
+msgid "About"
+msgstr "About"
+
 #: templates/index.html:23 templates/index.html.py:35 templates/index.html:76
 msgid "Go to page"
 msgstr ""

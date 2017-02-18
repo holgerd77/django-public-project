@@ -1118,6 +1118,9 @@ msgstr "Allgemein"
 msgid "About the Project"
 msgstr "Über das Projekt"
 
+msgid "About"
+msgstr "Über"
+
 #: templates/index.html:23 templates/index.html.py:35 templates/index.html:76
 msgid "Go to page"
 msgstr "Zur Rubrik"

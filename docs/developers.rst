@@ -107,7 +107,7 @@ Release Notes
 =============
 **Changes in version 0.7.3-beta** (2017-02-18)
 
-* TODO
+* Fix tag cloud links on start page for english version
 
 **Changes in version 0.7.2-beta** (2017-02-11) 
 

@@ -19,10 +19,10 @@
     </div>
 
 
-  {% trans "About the Project" as sh_title %}
+  {% trans "About" as sh_title %}
   {% trans "Go to page" as sh_url_title %}
   {% trans "project_parts_url" as sh_url %}
-  {% with sh_title=sh_title sh_icon="icon-cogs" sh_url_title=sh_url_title sh_url=sh_url %}
+  {% with sh_title=sh_title|add:" "|add:site_config.title sh_icon="icon-cogs" sh_url_title=sh_url_title sh_url=sh_url %}
     {% include "layout_elements/section_header.html" %}
   {% endwith %}
   
