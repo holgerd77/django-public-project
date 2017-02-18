@@ -108,6 +108,7 @@ Release Notes
 **Changes in version 0.7.3-beta** (2017-02-18)
 
 * Fix tag cloud links on start page for english version
+* Removed language-specific (german) date formats for better i18n compatibility
 
 **Changes in version 0.7.2-beta** (2017-02-11) 
 
