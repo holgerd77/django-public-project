@@ -67,7 +67,7 @@ For installing DPP you need the following ``Python/Django`` libraries, probably 
 an own ``virtualenv`` environment:
 
 * Python 2.7+ (Python 3.x not yet supported)
-* `Django <https://www.djangoproject.com/>`_ 1.9 (1.10+ not yet supported)
+* `Django <https://www.djangoproject.com/>`_ 1.10 (1.11+ not yet supported)
 * `PDFMiner <http://www.unixuser.org/~euske/python/pdfminer/index.html>`_ (Version 20110515 to avoid dependency errors!)
 * Pillow 2.5.2+ (Replacing PIL, for Django ImageField type)
 * `Tastypie <http://tastypieapi.org/>`_ 0.13.3+ (for API access)
