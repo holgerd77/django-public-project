@@ -66,11 +66,11 @@
 
 <div class="col-md-6">
   
-  {% if site_config.browser = 'MSIE' %}
+  {% ifequal site_config.browser 'MSIE' %}
     <div class="alert alert-error">
       {% trans "This software is using features not supported by Internet Explorer. Please use another browser if possible." %}
     </div>
-  {% endif %}
+  {% endifequal %}
   
   {% trans "Current Event" as sh_title %}
   {% trans "Go to page" as sh_url_title %}

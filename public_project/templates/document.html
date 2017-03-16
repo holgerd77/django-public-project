@@ -49,11 +49,11 @@
 </div>
 
 <div class="col-md-4">
-  {% if site_config.browser = 'MSIE' %}
+  {% ifequal site_config.browser 'MSIE' %}
     <div class="alert alert-error">
       {% trans "The Internet Explorer is supporting only a basic version of the pdf viewer. Please use one of the following browsers for full functionality: Firefox, Chrome, Safari, Opera" %}
     </div>
-  {% endif %}
+  {% endifequal %}
   
   <div class="alert alert-info" style="margin-bottom: 10px;">
     {% trans "Click on the tags for searching the document." %}

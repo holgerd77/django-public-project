@@ -67,10 +67,10 @@ For installing DPP you need the following ``Python/Django`` libraries, probably 
 an own ``virtualenv`` environment:
 
 * Python 2.7+ (Python 3.x not yet supported)
-* `Django <https://www.djangoproject.com/>`_ 1.8 (1.9+ not yet supported)
+* `Django <https://www.djangoproject.com/>`_ 1.9 (1.10+ not yet supported)
 * `PDFMiner <http://www.unixuser.org/~euske/python/pdfminer/index.html>`_ (Version 20110515 to avoid dependency errors!)
 * Pillow 2.5.2+ (Replacing PIL, for Django ImageField type)
-* `Tastypie <http://tastypieapi.org/>`_ 0.12+ (for API access)
+* `Tastypie <http://tastypieapi.org/>`_ 0.13.3+ (for API access)
 
 For PDF conversion to jpg files for having an IE compatible PDF viewer, you need to have the 
 ``ImageMagick`` library with the ``convert`` command installed in your shell environment:
@@ -108,12 +108,12 @@ Create your ``Django`` project::
 Add the Django apps installed to your ``settings.py`` file (of course you also need the admin app which
 is essential for DPP)::
 
-    INSTALLED_APPS = (
+    INSTALLED_APPS = [
         ...
         'public_project', # Since DPP changes some admin templates, app has to be placed before admin
         'django.contrib.admin',
         'tastypie',
-    )
+    ]
 
 Sync your database respectively use migrations for DPP::
 
@@ -142,16 +142,16 @@ importing the main url patterns from ``public_project.urls``::
     
     from public_project.urls import urlpatterns
     
-    urlpatterns += patterns('',
+    urlpatterns += [
         url(r'^admin/', include(admin.site.urls)),
-    )
+    ]
 
     # Necessary for being able to use image upload in DEBUG mode
     if settings.DEBUG:
-        urlpatterns += patterns('',
-            (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        urlpatterns += [
+            url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT})
-        )
+        ]
 
 Now you should be able to enter both the admin view and an emtpy front-end dashboard site 
 when you start a dev server. The site itself is not yet ready for prime time at this moment.
@@ -177,15 +177,27 @@ the Django email settings properly::
    
 
 DPP uses the request template context processor in its views and adds its own context processors,
-add them to the ``settings.py`` file::
+add them to the ``TEMPLATES`` setting in your ``settings.py`` file::
    
-    from django.conf import global_settings
-    ...
-    
-    TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-        "django.core.context_processors.request",
-        "public_project.context_processors.uploaded_images_list",
-    )
+  TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'public_project.context_processors.uploaded_images_list',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+  ]
 
 Language Selection
 ------------------

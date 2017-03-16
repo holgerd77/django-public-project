@@ -1,4 +1,4 @@
-Django>=1.8,<1.9
+Django>=1.10,<1.11
 pdfminer==20110515
 Pillow
-django-tastypie>=0.12,<1.0
+django-tastypie>=0.13.3,<1.0

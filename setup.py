@@ -4,7 +4,7 @@ import os
 
 setup(
     name='django-public-project',
-    version='0.7.4',
+    version='0.7.5',
     description='Custom CMS for making public projects, political processes or enquiry commission work more transparent',
     author='Holger Drewes',
     author_email='Holger.Drewes@gmail.com',
@@ -25,10 +25,10 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'Django>=1.8,<1.9',
+        'Django>=1.10,<1.11',
         'pdfminer==20110515',
         'Pillow',
-        'django-tastypie>=0.12,<1.0',
+        'django-tastypie>=0.13.3,<1.0',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

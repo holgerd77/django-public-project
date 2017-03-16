@@ -105,6 +105,11 @@ Then translate the missing identifier strings and compile the message files with
 
 Release Notes
 =============
+**Changes in version 0.7.5-beta** (2017-03-16)
+
+* Support for ``Django 1.10`` (support for older versions dropped)
+
+
 **Changes in version 0.7.4-beta** (2017-02-18)
 
 * Bugfixes
